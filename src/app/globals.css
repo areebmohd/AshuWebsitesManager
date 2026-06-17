@@ -6,9 +6,9 @@
   --bg-secondary: #131a2c;
   --bg-tertiary: #1b243c;
   
-  --accent-primary: #6366f1; /* Electric Indigo */
-  --accent-hover: #4f46e5;
-  --accent-glow: rgba(99, 102, 241, 0.15);
+  --accent-primary: #4f46e5; /* Premium Indigo */
+  --accent-hover: #3f37c9;
+  --accent-glow: rgba(79, 70, 229, 0.15);
   
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -91,15 +91,17 @@ a:hover {
 .brand {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 40px;
-  padding-left: 8px;
+  gap: 10px;
+  margin-bottom: 36px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .brand-logo {
-  font-size: 24px;
-  font-weight: 800;
-  background: linear-gradient(135deg, #a5b4fc, #6366f1);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #f8fafc, #cbd5e1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: var(--font-display);
@@ -272,50 +274,162 @@ input:focus, select:focus, textarea:focus {
 
 /* Buttons */
 .btn {
-  background: var(--accent-primary);
-  color: var(--text-primary);
-  border: none;
-  border-radius: 10px;
-  padding: 12px 24px;
-  font-weight: 600;
-  font-size: 15px;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  border-radius: 6px;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: all 0.2s ease;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
+  transition: all 0.15s ease-in-out;
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btn:hover {
-  background: var(--accent-hover);
-  box-shadow: 0 0 16px 0 rgba(99, 102, 241, 0.4);
+  background-color: var(--accent-hover);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.1), 0 4px 8px 0 rgba(0, 0, 0, 0.35);
+  transform: translateY(-0.5px);
+}
+
+.btn:active {
+  transform: translateY(0.5px);
+  box-shadow: inset 0 1px 0 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 .btn:disabled {
-  background: var(--text-muted);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.02);
+  color: var(--text-muted);
   cursor: not-allowed;
+  transform: none;
   box-shadow: none;
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #e2e8f0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  transform: translateY(-0.5px);
 }
 
 .btn-danger {
-  background: var(--error);
+  background-color: rgba(239, 68, 68, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }
 
 .btn-danger:hover {
-  background: #dc2626;
-  box-shadow: 0 0 16px 0 rgba(239, 68, 68, 0.4);
+  background-color: #ef4444;
+  transform: translateY(-0.5px);
+}
+
+/* Custom Selected Outreach Button */
+.btn-selected-outreach {
+  background-color: var(--accent-primary);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: var(--font-body);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 2px 4px 0 rgba(0, 0, 0, 0.25);
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-selected-outreach:hover {
+  background-color: var(--accent-hover);
+  transform: translateY(-0.5px);
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.15), 0 4px 8px 0 rgba(0, 0, 0, 0.35);
+}
+
+.btn-selected-outreach:active {
+  transform: translateY(0.5px);
+}
+
+/* Custom Outline Action Buttons */
+.btn-success-outline {
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #34d399;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-success-outline:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px 0 rgba(16, 185, 129, 0.15);
+}
+
+.btn-danger-outline {
+  background: rgba(239, 68, 68, 0.06);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.btn-danger-outline:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px 0 rgba(239, 68, 68, 0.15);
+}
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.2);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.45);
 }
 
 /* Console Logger Box */
@@ -380,7 +494,7 @@ tr:hover td {
   text-transform: capitalize;
 }
 
-.badge.not-sent { background: var(--text-muted); color: var(--text-primary); }
+.badge.pending, .badge.not-sent { background: var(--text-muted); color: var(--text-primary); }
 .badge.sent { background: var(--accent-glow); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); }
 .badge.follow-up { background: var(--warning-glow); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); }
 
@@ -434,4 +548,105 @@ tr:hover td {
   font-size: 14px;
   width: auto;
   min-width: 140px;
+}
+
+/* Pulse Animation for Live Scraper Status */
+.pulse-indicator {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-ring 1.6s infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Animations & Colors Utility Helpers */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-warning {
+  color: var(--warning) !important;
+}
+
+.text-error {
+  color: var(--error) !important;
+}
+
+.text-accent {
+  color: var(--accent-primary) !important;
+}
+
+/* Custom Checkbox UI */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: rgba(15, 23, 42, 0.6);
+  margin: 0;
+  font: inherit;
+  color: var(--accent-primary);
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+}
+
+input[type="checkbox"]:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+input[type="checkbox"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  transform: scale(0);
+  transition: 100ms transform ease-in-out;
+  box-shadow: inset 1em 1em #ffffff;
+  transform-origin: center;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
+
+input[type="checkbox"]:checked {
+  border-color: var(--accent-primary);
+  background-color: var(--accent-primary);
 }

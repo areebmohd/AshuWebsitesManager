@@ -10,7 +10,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  * @param {function} onLog - Callback for real-time progress logging
  * @param {function} onLead - Callback when a lead is successfully saved
  */
-export async function runScraper(category, location, onLog, onLead) {
+export async function runScraper(category, location, options = {}, onLog, onLead) {
   const searchQuery = `${category} in ${location}`;
   onLog(`[Scraper] Starting scraper for: "${searchQuery}"`);
 
@@ -44,7 +44,7 @@ export async function runScraper(category, location, onLog, onLead) {
     onLog('[Scraper] Scrolling search results list to load items...');
     let previousHeight = 0;
     let scrollCount = 0;
-    const maxScrolls = 20; // Scrape about 40-80 listings max per query run for speed and safety
+    const maxScrolls = options.scrollDepth ? Number(options.scrollDepth) : 15; // Set dynamic scroll limit based on options
 
     while (scrollCount < maxScrolls) {
       const feedExists = await page.$(feedSelector);
@@ -167,6 +167,15 @@ export async function runScraper(category, location, onLog, onLead) {
 
         if (!details.phone) {
           onLog(`[Scraper] ❌ Skipped: "${details.name || item.title}" has no phone number listed.`);
+          continue;
+        }
+
+        const digits = details.phone.replace(/[^0-9]/g, '');
+        const last10 = digits.slice(-10);
+        const isMobile = /^[6-9]\d{9}$/.test(last10) && (digits.length === 10 || (digits.length === 11 && digits.startsWith('0')) || (digits.length === 12 && digits.startsWith('91')));
+        
+        if (!isMobile) {
+          onLog(`[Scraper] ❌ Skipped: "${details.name || item.title}" phone number (${details.phone}) is not a mobile number.`);
           continue;
         }
 

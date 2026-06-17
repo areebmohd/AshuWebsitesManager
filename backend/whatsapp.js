@@ -11,7 +11,7 @@ let clientStatus = 'disconnected'; // disconnected, connecting, qr, authenticate
  * @param {function} onQR - Callback when QR code is generated (data URI)
  * @param {function} onLog - Callback for general logging
  */
-export function initWhatsApp(onStatus, onQR, onLog) {
+export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
   if (client) {
     onLog('[WhatsApp] Client already exists. Returning status: ' + clientStatus);
     onStatus(clientStatus);
@@ -74,6 +74,13 @@ export function initWhatsApp(onStatus, onQR, onLog) {
     onStatus(clientStatus);
     onLog('[WhatsApp] Client disconnected: ' + reason);
     client = null;
+  });
+
+  client.on('message', async (msg) => {
+    if (msg.from && msg.from.endsWith('@c.us') && onMessage) {
+      const phone = msg.from.replace('@c.us', '');
+      onMessage(phone, msg.body);
+    }
   });
 
   // Start initialization

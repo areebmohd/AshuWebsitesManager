@@ -10,6 +10,7 @@ async function test() {
   await runScraper(
     category,
     location,
+    { mobileOnly: true, scrollDepth: 2 },
     (msg) => console.log(msg),
     (lead) => console.log('✅ TEST LEAD SCRAPED:', lead.name, lead.phone)
   );

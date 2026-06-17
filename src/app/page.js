@@ -5,6 +5,72 @@ import { io } from 'socket.io-client';
 
 const API_BASE = 'http://localhost:3001';
 
+const Icons = {
+  dashboard: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="10" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
+  ),
+  scraper: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+  ),
+  contacts: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+  ),
+  campaigns: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+  ),
+  edit: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+  ),
+  save: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+  ),
+  check: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 6 9 17 4 12"/></svg>
+  ),
+  x: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+  ),
+  phone: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+  ),
+  disconnect: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18.8 4A10 10 0 0 1 20 12c0 2.2-.7 4.3-2 6"/><path d="M14 10V5c0-1.1-.9-2-2-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8c1.1 0 2-.9 2-2v-5"/><path d="M18 10h4"/><path d="M12 10h-2"/><path d="M6 10H4"/></svg>
+  ),
+  sync: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.72 2.78L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
+  ),
+  link: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+  ),
+  logo: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <defs>
+        <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#ffffff" />
+          <stop offset="100%" stopColor="#94a3b8" />
+        </linearGradient>
+      </defs>
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>
+  ),
+  info: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+  ),
+  trophy: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a8 8 0 0 0-8 8h16a8 8 0 0 0-8-8z"/></svg>
+  ),
+  thumbsDown: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17 14V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4l3 3L17 14z"/><path d="M22 14a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/></svg>
+  ),
+  alertTriangle: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  ),
+  terminal: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+  )
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [leads, setLeads] = useState([]);
@@ -20,28 +86,36 @@ export default function Home() {
   // Scraper Tab State
   const [scrapeCategory, setScrapeCategory] = useState('restaurants');
   const [scrapeLocation, setScrapeLocation] = useState('Gurugram');
+  const [scrollDepth, setScrollDepth] = useState('15');
   const [isScraping, setIsScraping] = useState(false);
   const [logs, setLogs] = useState([]);
+  const [scraperStats, setScraperStats] = useState({
+    scanned: 0,
+    total: 0,
+    saved: 0,
+    skippedWebsite: 0,
+    skippedLandline: 0,
+    skippedDuplicate: 0,
+    noPhone: 0
+  });
   const consoleEndRef = useRef(null);
 
   // Contacts Tab State (Filters)
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
-  const [filterOutreach, setFilterOutreach] = useState('all');
-  const [filterReply, setFilterReply] = useState('all');
-  const [filterOutcome, setFilterOutcome] = useState('all');
+  const [filterStatus, setFilterStatus] = useState('all');
   const [selectedLeads, setSelectedLeads] = useState([]);
 
   // Campaign Tab State
   const [whatsappStatus, setWhatsappStatus] = useState('disconnected');
   const [whatsappQR, setWhatsappQR] = useState(null);
-  const [demoLink, setDemoLink] = useState('https://render.previews.site/demo-restaurant');
-  const [templateText, setTemplateText] = useState(
-    `Hey {{business_name}}!\n\nI saw your listing on Google Maps in {{location}} and noticed you don't have a website.\n\nWe build custom online-ordering and catalog websites for {{category}} shops that let you take direct orders on WhatsApp without paying Zomato/Swiggy commissions.\n\nCheck out our live preview demo here: {{demo_link}}\n\nReply back if you want to see a mockup built for your shop!`
-  );
-  const [followupText, setFollowupText] = useState(
-    `Hey {{business_name}}!\n\nJust following up on my previous message. We can build your direct-ordering website with a custom digital menu in just 2 days.\n\nHere is the demo link again: {{demo_link}}\n\nWould you be open to a quick call today or tomorrow?`
-  );
+  const [demoLink1, setDemoLink1] = useState('');
+  const [demoLink2, setDemoLink2] = useState('');
+  const [templateCategory, setTemplateCategory] = useState('restaurants');
+  const [templateText, setTemplateText] = useState('');
+  const [followupText, setFollowupText] = useState('');
+  const [allTemplates, setAllTemplates] = useState({ categories: {} });
+  const [outreachOperation, setOutreachOperation] = useState('Idle (Disconnected)');
   const [campaignProgress, setCampaignProgress] = useState(null);
 
   // ----------------------------------------------------------------------------
@@ -51,12 +125,40 @@ export default function Home() {
     // 1. Fetch initial leads
     fetchLeads();
     fetchStats();
+    fetchTemplates();
+    fetchOutreachStatus();
 
     // 2. Setup socket
     const socket = io(API_BASE);
 
     socket.on('status_log', (message) => {
       setLogs((prev) => [...prev, message]);
+      
+      // Parse real-time scraper stats from log text
+      if (message.includes('Inspecting [')) {
+        const match = message.match(/Inspecting \[(\d+)\/(\d+)\]/);
+        if (match) {
+          setScraperStats((prev) => ({
+            ...prev,
+            scanned: Number(match[1]),
+            total: Number(match[2])
+          }));
+        }
+      } else if (message.includes('already has a website')) {
+        setScraperStats((prev) => ({ ...prev, skippedWebsite: prev.skippedWebsite + 1 }));
+      } else if (message.includes('is not a mobile number')) {
+        setScraperStats((prev) => ({ ...prev, skippedLandline: prev.skippedLandline + 1 }));
+      } else if (message.includes('already exists in contacts database') || message.includes('Duplicate:')) {
+        setScraperStats((prev) => ({ ...prev, skippedDuplicate: prev.skippedDuplicate + 1 }));
+      } else if (message.includes('has no phone number listed')) {
+        setScraperStats((prev) => ({ ...prev, noPhone: prev.noPhone + 1 }));
+      } else if (message.includes('Lead Saved:') || message.includes('savedCount') || message.includes('Lead Saved')) {
+        setScraperStats((prev) => ({ ...prev, saved: prev.saved + 1 }));
+      }
+
+      if (message.includes('Scraping session completed') || message.includes('Fatal error') || message.includes('Scraping process idle.')) {
+        setIsScraping(false);
+      }
     });
 
     socket.on('lead_scraped', (newLead) => {
@@ -83,6 +185,10 @@ export default function Home() {
 
     socket.on('whatsapp_qr', (qrDataUri) => {
       setWhatsappQR(qrDataUri);
+    });
+
+    socket.on('outreach_operation', (status) => {
+      setOutreachOperation(status);
     });
 
     socket.on('campaign_progress', (progress) => {
@@ -129,13 +235,90 @@ export default function Home() {
     }
   };
 
+  const fetchOutreachStatus = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/outreach/status`);
+      const data = await res.json();
+      if (data.status) {
+        setOutreachOperation(data.status);
+      }
+    } catch (err) {
+      console.error('Error fetching outreach status:', err);
+    }
+  };
+
+  const fetchTemplates = async () => {
+    try {
+      const res = await fetch(`${API_BASE}/api/templates`);
+      const data = await res.json();
+      setAllTemplates(data);
+      
+      const categories = Object.keys(data.categories || {});
+      if (categories.length > 0) {
+        const firstCat = categories[0];
+        setTemplateCategory(firstCat);
+        setDemoLink1(data.categories[firstCat].demoLink1 || '');
+        setDemoLink2(data.categories[firstCat].demoLink2 || '');
+        setTemplateText(data.categories[firstCat].introTemplate || '');
+        setFollowupText(data.categories[firstCat].followupTemplate || '');
+      } else {
+        setTemplateCategory('restaurants');
+        setDemoLink1('');
+        setDemoLink2('');
+        setTemplateText(`Hey {{business_name}}!\n\nI noticed you have a great restaurant listing on Google Maps in {{location}} but don't have a website for direct online ordering.\n\nWe build custom ordering websites that let you take direct orders on WhatsApp without paying Zomato/Swiggy commissions.\n\nHere are some of our previews:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nReply back if you want to see a free mockup built for your restaurant!`);
+        setFollowupText(`Hey {{business_name}}!\n\nJust following up on my previous message. We can build your direct-ordering menu website in just 2 days.\n\nHere are the previews again:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nWould you be open to a quick call to check out a mockup?`);
+      }
+    } catch (err) {
+      console.error('Error fetching templates:', err);
+    }
+  };
+
+  const handleSaveTemplates = async () => {
+    const cleanCategory = templateCategory.toLowerCase().trim();
+    if (!cleanCategory) {
+      alert('Please enter a Category first.');
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE}/api/templates/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: cleanCategory,
+          introTemplate: templateText,
+          followupTemplate: followupText,
+          demoLink1,
+          demoLink2
+        })
+      });
+      if (res.ok) {
+        alert(`Templates for category "${cleanCategory}" saved successfully on the server!`);
+        fetchTemplates(); // Refresh template list
+      } else {
+        alert('Failed to save templates.');
+      }
+    } catch (err) {
+      console.error('Error saving templates:', err);
+    }
+  };
+
+  const handleEditTemplate = (cat) => {
+    setTemplateCategory(cat);
+    if (allTemplates.categories && allTemplates.categories[cat]) {
+      setDemoLink1(allTemplates.categories[cat].demoLink1 || '');
+      setDemoLink2(allTemplates.categories[cat].demoLink2 || '');
+      setTemplateText(allTemplates.categories[cat].introTemplate || '');
+      setFollowupText(allTemplates.categories[cat].followupTemplate || '');
+    }
+  };
+
   const updateLocalStats = () => {
     if (leads.length === 0) return;
     const totalLeads = leads.length;
-    const sentLeads = leads.filter((l) => l.outreachStatus === 'Sent' || l.outreachStatus === 'Follow-up Sent').length;
-    const repliedLeads = leads.filter((l) => l.replyStatus === 'Replied').length;
-    const wonLeads = leads.filter((l) => l.leadOutcome === 'Won').length;
-    const lostLeads = leads.filter((l) => l.leadOutcome === 'Lost').length;
+    const sentLeads = leads.filter((l) => ['Sent', 'Replied', 'Won', 'Lost'].includes(l.status)).length;
+    const repliedLeads = leads.filter((l) => ['Replied', 'Won', 'Lost'].includes(l.status)).length;
+    const wonLeads = leads.filter((l) => l.status === 'Won').length;
+    const lostLeads = leads.filter((l) => l.status === 'Lost').length;
 
     setStats({
       totalLeads,
@@ -151,16 +334,32 @@ export default function Home() {
   // Action Handlers
   // ----------------------------------------------------------------------------
   const handleStartScrape = async () => {
-    if (!scrapeCategory || !scrapeLocation) return;
+    if (!scrapeCategory || !scrapeLocation) {
+      alert('Please fill in both Category and Location before starting.');
+      return;
+    }
     setIsScraping(true);
     setLogs([]);
+    setScraperStats({
+      scanned: 0,
+      total: 0,
+      saved: 0,
+      skippedWebsite: 0,
+      skippedLandline: 0,
+      skippedDuplicate: 0,
+      noPhone: 0
+    });
     setLogs((prev) => [...prev, `[System] Search query requested: "${scrapeCategory} in ${scrapeLocation}"`]);
 
     try {
       const res = await fetch(`${API_BASE}/api/scrape/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ category: scrapeCategory, location: scrapeLocation })
+        body: JSON.stringify({ 
+          category: scrapeCategory, 
+          location: scrapeLocation,
+          scrollDepth: Number(scrollDepth)
+        })
       });
       if (!res.ok) {
         const err = await res.json();
@@ -194,28 +393,15 @@ export default function Home() {
     }
   };
 
-  const handleUpdateLeadOutcome = async (id, outcome) => {
+  const handleUpdateLeadStatus = async (id, status) => {
     try {
       await fetch(`${API_BASE}/api/leads/update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, updates: { leadOutcome: outcome } })
+        body: JSON.stringify({ id, updates: { status } })
       });
     } catch (err) {
-      console.error('Error updating lead outcome:', err);
-    }
-  };
-
-  const handleToggleReplyStatus = async (id, currentStatus) => {
-    const newStatus = currentStatus === 'Replied' ? 'No Reply' : 'Replied';
-    try {
-      await fetch(`${API_BASE}/api/leads/update`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, updates: { replyStatus: newStatus } })
-      });
-    } catch (err) {
-      console.error('Error updating reply status:', err);
+      console.error('Error updating lead status:', err);
     }
   };
 
@@ -238,13 +424,13 @@ export default function Home() {
     let isFollowup = false;
 
     if (type === 'intro') {
-      // Send to all 'Not Sent' leads in filtered category/list
-      targetIds = filteredLeads.filter((l) => l.outreachStatus === 'Not Sent').map((l) => l.id);
+      // Send to all 'Pending' leads in filtered category/list
+      targetIds = filteredLeads.filter((l) => l.status === 'Pending').map((l) => l.id);
       template = templateText;
       isFollowup = false;
     } else if (type === 'followup') {
-      // Send followups to all leads who are 'Sent' but have 'No Reply'
-      targetIds = filteredLeads.filter((l) => l.outreachStatus === 'Sent' && l.replyStatus === 'No Reply').map((l) => l.id);
+      // Send followups to all leads who are 'Sent'
+      targetIds = filteredLeads.filter((l) => l.status === 'Sent').map((l) => l.id);
       template = followupText;
       isFollowup = true;
     } else if (type === 'selected') {
@@ -277,28 +463,6 @@ export default function Home() {
     }
   };
 
-  const handleSingleResend = async (lead) => {
-    // Manually trigger single follow-up message to one contact
-    try {
-      const res = await fetch(`${API_BASE}/api/campaign/start`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-          leadIds: [lead.id], 
-          template: followupText, 
-          demoLink, 
-          isFollowup: true 
-        })
-      });
-      if (!res.ok) {
-        const err = await res.json();
-        alert(`Failed to resend: ${err.error}`);
-      }
-    } catch (err) {
-      console.error('Error launching single resend:', err);
-    }
-  };
-
   // ----------------------------------------------------------------------------
   // Filter & Search Logics
   // ----------------------------------------------------------------------------
@@ -306,6 +470,13 @@ export default function Home() {
     const cats = new Set(leads.map((l) => l.category));
     return ['all', ...Array.from(cats)];
   }, [leads]);
+
+  const scraperCategories = useMemo(() => {
+    const predefined = ['restaurants', 'salons', 'clinics', 'clothing shops', 'electronics shops'];
+    const customCats = allTemplates.categories ? Object.keys(allTemplates.categories) : [];
+    const union = new Set([...predefined, ...customCats]);
+    return Array.from(union);
+  }, [allTemplates]);
 
   const filteredLeads = useMemo(() => {
     return leads.filter((lead) => {
@@ -318,18 +489,12 @@ export default function Home() {
       // 2. Category Filter
       const matchesCategory = filterCategory === 'all' || lead.category === filterCategory;
 
-      // 3. Outreach Status Filter
-      const matchesOutreach = filterOutreach === 'all' || lead.outreachStatus === filterOutreach;
+      // 3. Status Filter
+      const matchesStatus = filterStatus === 'all' || lead.status === filterStatus;
 
-      // 4. Reply Status Filter
-      const matchesReply = filterReply === 'all' || lead.replyStatus === filterReply;
-
-      // 5. Outcome Filter
-      const matchesOutcome = filterOutcome === 'all' || lead.leadOutcome === filterOutcome;
-
-      return matchesSearch && matchesCategory && matchesOutreach && matchesReply && matchesOutcome;
+      return matchesSearch && matchesCategory && matchesStatus;
     });
-  }, [leads, searchQuery, filterCategory, filterOutreach, filterReply, filterOutcome]);
+  }, [leads, searchQuery, filterCategory, filterStatus]);
 
   const handleSelectLead = (id) => {
     setSelectedLeads((prev) =>
@@ -357,25 +522,25 @@ export default function Home() {
             className={`nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
             onClick={() => setActiveTab('dashboard')}
           >
-            <span className="nav-icon">📊</span> Dashboard
+            {Icons.dashboard()} Dashboard
           </li>
           <li
             className={`nav-item ${activeTab === 'scraper' ? 'active' : ''}`}
             onClick={() => setActiveTab('scraper')}
           >
-            <span className="nav-icon">🔍</span> Lead Scraper
+            {Icons.scraper()} Lead Scraper
           </li>
           <li
             className={`nav-item ${activeTab === 'contacts' ? 'active' : ''}`}
             onClick={() => setActiveTab('contacts')}
           >
-            <span className="nav-icon">🗂️</span> Contacts CRM
+            {Icons.contacts()} Contacts CRM
           </li>
           <li
             className={`nav-item ${activeTab === 'campaigns' ? 'active' : ''}`}
             onClick={() => setActiveTab('campaigns')}
           >
-            <span className="nav-icon">🚀</span> Campaigns
+            {Icons.campaigns()} Campaigns
           </li>
         </ul>
       </aside>
@@ -405,11 +570,11 @@ export default function Home() {
                 <span className="stat-value">{stats.repliedLeads}</span>
               </div>
               <div className="stat-card success">
-                <span className="stat-label">Leads Won 🎉</span>
+                <span className="stat-label">Leads Won</span>
                 <span className="stat-value">{stats.wonLeads}</span>
               </div>
               <div className="stat-card error">
-                <span className="stat-label">Leads Lost 🚫</span>
+                <span className="stat-label">Leads Lost</span>
                 <span className="stat-value">{stats.lostLeads}</span>
               </div>
               <div className="stat-card">
@@ -420,7 +585,9 @@ export default function Home() {
 
             {/* Quick Actions / Tips */}
             <div className="glass-card">
-              <h2 style={{ marginBottom: '16px', fontSize: '20px' }}>⚡ Quick Instructions</h2>
+              <h2 style={{ marginBottom: '16px', fontSize: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {Icons.info()} Quick Instructions
+              </h2>
               <ul style={{ paddingLeft: '20px', lineHeight: '1.8', color: '#94a3b8' }}>
                 <li>Go to the <strong>Lead Scraper</strong> tab to extract fresh restaurant or salon phone numbers in Gurugram.</li>
                 <li>Go to the <strong>Campaigns</strong> tab, launch your WhatsApp session, and scan the QR code to pair your device.</li>
@@ -448,14 +615,16 @@ export default function Home() {
                     value={scrapeCategory}
                     onChange={(e) => setScrapeCategory(e.target.value)}
                     disabled={isScraping}
+                    style={{ textTransform: 'capitalize' }}
                   >
-                    <option value="restaurants">Restaurants</option>
-                    <option value="salons">Salons / Parlors</option>
-                    <option value="clinics">Clinics / Doctors</option>
-                    <option value="clothing shops">Clothing & Apparel Shops</option>
-                    <option value="electronics shops">Electronics Shops</option>
+                    {scraperCategories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
                   </select>
                 </div>
+
                 <div className="form-group">
                   <label htmlFor="location">Target Location</label>
                   <input
@@ -468,15 +637,95 @@ export default function Home() {
                 </div>
               </div>
 
-              <div style={{ marginTop: '16px' }}>
+              <div className="form-row" style={{ marginTop: '16px' }}>
+                <div className="form-group">
+                  <label htmlFor="scroll-depth">Scroll Depth</label>
+                  <select
+                    id="scroll-depth"
+                    value={scrollDepth}
+                    onChange={(e) => setScrollDepth(e.target.value)}
+                    disabled={isScraping}
+                  >
+                    <option value="5">Fast Scan (approx. 10-20 leads)</option>
+                    <option value="15">Medium Scan (approx. 30-50 leads)</option>
+                    <option value="35">Deep Scan (approx. 70-100 leads)</option>
+                  </select>
+                </div>
+                {/* Spacer empty form-group to ensure Scroll Depth matches the 50% width of row elements */}
+                <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
+              </div>
+
+              <div style={{ marginTop: '24px' }}>
                 <button
                   className="btn"
                   onClick={handleStartScrape}
                   disabled={isScraping}
                 >
-                  {isScraping ? '🤖 Scraper Running...' : '🚀 Start Scraper'}
+                  {isScraping ? (
+                    <>
+                      {Icons.sync("animate-spin")} Scraper Running...
+                    </>
+                  ) : (
+                    <>
+                      {Icons.scraper()} Start Scraper
+                    </>
+                  )}
                 </button>
               </div>
+
+              {/* Scraper Live Analytics */}
+              {(isScraping || scraperStats.total > 0) && (
+                <div style={{ marginTop: '32px', padding: '20px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px' }}>
+                  <h3 style={{ fontSize: '16px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {isScraping ? Icons.sync("animate-spin") : Icons.check("text-success")}
+                    <span>{isScraping ? 'Active Scraper Progress' : 'Scraper Summary'}</span>
+                    {isScraping && <span className="pulse-indicator"></span>}
+                  </h3>
+                  
+                  {/* Progress bar */}
+                  {scraperStats.total > 0 && (
+                    <div style={{ marginBottom: '24px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
+                        <span>Inspecting Google Maps business details...</span>
+                        <span>{scraperStats.scanned} / {scraperStats.total} checked ({Math.round((scraperStats.scanned / scraperStats.total) * 100)}%)</span>
+                      </div>
+                      <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
+                        <div 
+                          style={{ 
+                            height: '100%', 
+                            background: 'linear-gradient(90deg, var(--accent-primary), var(--success))', 
+                            width: `${(scraperStats.scanned / scraperStats.total) * 100}%`,
+                            transition: 'width 0.4s ease' 
+                          }} 
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px' }}>
+                    <div style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Leads Saved</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--success)' }}>{scraperStats.saved}</div>
+                    </div>
+                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Has Website</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text-secondary)' }}>{scraperStats.skippedWebsite}</div>
+                    </div>
+                    <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Landline Skipped</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--error)' }}>{scraperStats.skippedLandline}</div>
+                    </div>
+                    <div style={{ background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Duplicate Leads</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#818cf8' }}>{scraperStats.skippedDuplicate}</div>
+                    </div>
+                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>No Phone</div>
+                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text-muted)' }}>{scraperStats.noPhone}</div>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {/* Console logs */}
               {logs.length > 0 && (
@@ -527,29 +776,12 @@ export default function Home() {
                 </div>
 
                 <div className="filter-group">
-                  <label style={{ fontSize: '12px' }}>Outreach:</label>
-                  <select value={filterOutreach} onChange={(e) => setFilterOutreach(e.target.value)}>
+                  <label style={{ fontSize: '12px' }}>Status:</label>
+                  <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
                     <option value="all">All</option>
-                    <option value="Not Sent">Not Sent</option>
+                    <option value="Pending">Pending</option>
                     <option value="Sent">Sent</option>
-                    <option value="Follow-up Sent">Follow-up Sent</option>
-                  </select>
-                </div>
-
-                <div className="filter-group">
-                  <label style={{ fontSize: '12px' }}>Reply:</label>
-                  <select value={filterReply} onChange={(e) => setFilterReply(e.target.value)}>
-                    <option value="all">All</option>
-                    <option value="No Reply">No Reply</option>
                     <option value="Replied">Replied</option>
-                  </select>
-                </div>
-
-                <div className="filter-group">
-                  <label style={{ fontSize: '12px' }}>Outcome:</label>
-                  <select value={filterOutcome} onChange={(e) => setFilterOutcome(e.target.value)}>
-                    <option value="all">All</option>
-                    <option value="Undecided">Undecided</option>
                     <option value="Won">Won</option>
                     <option value="Lost">Lost</option>
                   </select>
@@ -557,11 +789,10 @@ export default function Home() {
 
                 {selectedLeads.length > 0 && (
                   <button 
-                    className="btn btn-secondary" 
+                    className="btn-selected-outreach" 
                     onClick={() => handleLaunchCampaign('selected')}
-                    style={{ padding: '8px 16px', fontSize: '13px' }}
                   >
-                    💬 Message Selected ({selectedLeads.length})
+                    {Icons.campaigns()} Message Selected ({selectedLeads.length})
                   </button>
                 )}
               </div>
@@ -581,9 +812,7 @@ export default function Home() {
                       <th>Shop Name</th>
                       <th>Phone Number</th>
                       <th>Category</th>
-                      <th>Outreach Status</th>
-                      <th>Reply Status</th>
-                      <th>Lead Outcome</th>
+                      <th>Status</th>
                       <th style={{ textAlign: 'center' }}>Actions</th>
                     </tr>
                   </thead>
@@ -610,9 +839,9 @@ export default function Home() {
                               href={lead.url}
                               target="_blank"
                               rel="noreferrer"
-                              style={{ fontSize: '12px', color: '#64748b' }}
+                              style={{ fontSize: '12px', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}
                             >
-                              📍 View on Google Maps
+                              {Icons.link()} View on Google Maps
                             </a>
                           </td>
                           <td>{lead.phone}</td>
@@ -622,8 +851,8 @@ export default function Home() {
                             </span>
                           </td>
                           <td>
-                            <span className={`badge ${lead.outreachStatus === 'Not Sent' ? 'not-sent' : lead.outreachStatus === 'Sent' ? 'sent' : 'follow-up'}`}>
-                              {lead.outreachStatus}
+                            <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
+                              {lead.status}
                             </span>
                             {lead.lastSentDate && (
                               <div style={{ fontSize: '10px', color: '#64748b', marginTop: '4px' }}>
@@ -632,43 +861,26 @@ export default function Home() {
                             )}
                           </td>
                           <td>
-                            <span
-                              className={`badge ${lead.replyStatus === 'No Reply' ? 'no-reply' : 'replied'}`}
-                              onClick={() => handleToggleReplyStatus(lead.id, lead.replyStatus)}
-                              style={{ cursor: 'pointer' }}
-                              title="Click to toggle reply status"
-                            >
-                              {lead.replyStatus}
-                            </span>
-                          </td>
-                          <td>
-                            <span className={`badge ${lead.leadOutcome.toLowerCase()}`}>
-                              {lead.leadOutcome}
-                            </span>
-                          </td>
-                          <td>
                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
                               <button
-                                className="btn btn-secondary"
-                                style={{ padding: '6px 12px', fontSize: '12px' }}
-                                onClick={() => handleUpdateLeadOutcome(lead.id, 'Won')}
+                                className="btn-success-outline"
+                                onClick={() => {
+                                  if (window.confirm(`Are you sure you want to mark "${lead.name}" as WON?`)) {
+                                    handleUpdateLeadStatus(lead.id, 'Won');
+                                  }
+                                }}
                               >
-                                Won
+                                {Icons.check()} Won
                               </button>
                               <button
-                                className="btn btn-secondary"
-                                style={{ padding: '6px 12px', fontSize: '12px' }}
-                                onClick={() => handleUpdateLeadOutcome(lead.id, 'Lost')}
+                                className="btn-danger-outline"
+                                onClick={() => {
+                                  if (window.confirm(`Are you sure you want to mark "${lead.name}" as LOST?`)) {
+                                    handleUpdateLeadStatus(lead.id, 'Lost');
+                                  }
+                                }}
                               >
-                                Lost
-                              </button>
-                              <button
-                                className="btn btn-secondary"
-                                style={{ padding: '6px 12px', fontSize: '12px' }}
-                                onClick={() => handleSingleResend(lead)}
-                                title="Resend outreach / follow-up message"
-                              >
-                                🔄 Resend
+                                {Icons.x()} Lost
                               </button>
                             </div>
                             <div style={{ marginTop: '8px' }}>
@@ -699,30 +911,12 @@ export default function Home() {
               <p className="page-subtitle">Configure message templates and manage outreach actions</p>
             </header>
 
-            {/* Campaign progress indicator */}
-            {campaignProgress && (
-              <div className="glass-card" style={{ background: 'var(--success-glow)', borderColor: 'var(--success)' }}>
-                <h3 style={{ color: 'var(--success)', marginBottom: '8px' }}>🚀 Campaign Running</h3>
-                <div style={{ fontSize: '14px', marginBottom: '8px' }}>
-                  Progress: {campaignProgress.current} / {campaignProgress.total} messages processed.
-                </div>
-                <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
-                  <div 
-                    style={{ 
-                      height: '100%', 
-                      background: 'var(--success)', 
-                      width: `${(campaignProgress.current / campaignProgress.total) * 100}%`,
-                      transition: 'width 0.3s ease' 
-                    }} 
-                  />
-                </div>
-              </div>
-            )}
-
-            <div className="form-row">
-              {/* WhatsApp setup */}
-              <div className="glass-card" style={{ flex: '1', minWidth: '320px' }}>
-                <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>💬 WhatsApp Connection</h2>
+            <div>
+              {/* WhatsApp connection */}
+              <div className="glass-card" style={{ width: '100%' }}>
+                <h2 style={{ fontSize: '20px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {Icons.phone()} WhatsApp Connection
+                </h2>
                 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
                   <span 
@@ -739,13 +933,13 @@ export default function Home() {
                   
                   {whatsappStatus === 'disconnected' && (
                     <button className="btn" onClick={handleConnectWhatsApp}>
-                      Connect Phone
+                      {Icons.phone()} Connect Phone
                     </button>
                   )}
                   
                   {whatsappStatus !== 'disconnected' && (
                     <button className="btn btn-danger" onClick={handleLogoutWhatsApp}>
-                      Disconnect
+                      {Icons.disconnect()} Disconnect
                     </button>
                   )}
                 </div>
@@ -761,34 +955,75 @@ export default function Home() {
                 )}
 
                 {whatsappStatus === 'connecting' && (
-                  <div style={{ padding: '24px', textAlign: 'center', color: '#94a3b8' }}>
-                    🔄 Starting browser instance. Please wait a moment...
+                  <div style={{ padding: '24px', textAlign: 'center', color: '#94a3b8', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    {Icons.sync("animate-spin")} Starting browser instance. Please wait...
                   </div>
                 )}
 
                 {whatsappStatus === 'ready' && (
-                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--success)', fontWeight: '600' }}>
-                    ✅ Phone Connected! Ready to send automated campaigns.
+                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--success)', fontWeight: '600', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}>
+                    {Icons.check()} Phone Connected! Automatic campaign loop is active.
                   </div>
                 )}
+
+                {/* Live Campaign Queue Monitor */}
+                <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px' }}>
+                  <h3 style={{ fontSize: '14px', color: 'var(--text-secondary)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {Icons.terminal()}
+                    <span>Live Campaign Queue Monitor</span>
+                    {whatsappStatus === 'ready' && outreachOperation.includes('Sending') && <span className="pulse-indicator"></span>}
+                  </h3>
+                  <div style={{ fontFamily: 'var(--font-display)', fontSize: '14px', color: outreachOperation.includes('❌') ? 'var(--error)' : outreachOperation.includes('✅') ? 'var(--success)' : 'var(--text-primary)', wordBreak: 'break-word', minHeight: '40px', display: 'flex', alignItems: 'center' }}>
+                    {outreachOperation}
+                  </div>
+                </div>
               </div>
 
-              {/* Message Templates & Campaign runner */}
-              <div className="glass-card" style={{ flex: '2', minWidth: '400px' }}>
-                <h2 style={{ fontSize: '20px', marginBottom: '16px' }}>📝 Campaign Configuration</h2>
-
-                <div className="form-group">
-                  <label htmlFor="demo-link">Demo Site Preview Link</label>
-                  <input 
-                    type="text" 
-                    id="demo-link" 
-                    value={demoLink} 
-                    onChange={(e) => setDemoLink(e.target.value)} 
-                    placeholder="https://..."
-                  />
+              {/* Message Templates Configuration */}
+              <div className="glass-card" style={{ width: '100%', marginTop: '24px' }}>
+                <h2 style={{ fontSize: '20px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {Icons.edit()} Campaign Configuration
+                </h2>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label htmlFor="template-category-input">Category</label>
+                    <input 
+                      type="text" 
+                      id="template-category-input" 
+                      value={templateCategory} 
+                      onChange={(e) => setTemplateCategory(e.target.value)} 
+                      placeholder="e.g. restaurants, salons, clinics, gyms"
+                      style={{ textTransform: 'lowercase' }}
+                    />
+                  </div>
+                  <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
                 </div>
 
-                <div className="form-group">
+                <div className="form-row" style={{ marginTop: '16px' }}>
+                  <div className="form-group">
+                    <label htmlFor="demo-link-1">Demo Site Preview Link 1</label>
+                    <input 
+                      type="text" 
+                      id="demo-link-1" 
+                      value={demoLink1} 
+                      onChange={(e) => setDemoLink1(e.target.value)} 
+                      placeholder="https://..."
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="demo-link-2">Demo Site Preview Link 2</label>
+                    <input 
+                      type="text" 
+                      id="demo-link-2" 
+                      value={demoLink2} 
+                      onChange={(e) => setDemoLink2(e.target.value)} 
+                      placeholder="https://..."
+                    />
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginTop: '16px' }}>
                   <label htmlFor="intro-template">Intro Template (First Message)</label>
                   <textarea
                     id="intro-template"
@@ -798,7 +1033,7 @@ export default function Home() {
                     style={{ resize: 'vertical' }}
                   />
                   <span style={{ fontSize: '11px', color: '#64748b' }}>
-                    Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}, {'{{demo_link}}'}
+                    Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}, {'{{demo_link1}}'}, {'{{demo_link2}}'}
                   </span>
                 </div>
 
@@ -813,24 +1048,81 @@ export default function Home() {
                   />
                 </div>
 
-                <div style={{ marginTop: '24px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <div style={{ marginTop: '24px' }}>
                   <button
                     className="btn"
-                    onClick={() => handleLaunchCampaign('intro')}
-                    disabled={whatsappStatus !== 'ready' || campaignProgress !== null}
+                    onClick={handleSaveTemplates}
+                    style={{ background: 'var(--accent-primary)', color: '#fff' }}
                   >
-                    💬 Launch Intro Campaign
-                  </button>
-                  <button
-                    className="btn btn-secondary"
-                    onClick={() => handleLaunchCampaign('followup')}
-                    disabled={whatsappStatus !== 'ready' || campaignProgress !== null}
-                    style={{ border: '1px solid var(--warning)', color: '#fbbf24' }}
-                  >
-                    🔄 Launch Follow-up Campaign
+                    {Icons.save()} Save Category Template
                   </button>
                 </div>
               </div>
+            </div>
+
+            {/* SAVED TEMPLATES ROW */}
+            <div className="glass-card" style={{ marginTop: '24px' }}>
+              <h2 style={{ fontSize: '20px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                {Icons.contacts()} Configured Campaign Categories
+              </h2>
+              {(!allTemplates.categories || Object.keys(allTemplates.categories).length === 0) ? (
+                <div style={{ padding: '16px', color: 'var(--text-muted)', textAlign: 'center' }}>
+                  No categories configured. Create your first campaign template using the form above!
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
+                  {Object.keys(allTemplates.categories).map((cat) => (
+                    <div key={cat} style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
+                        <span style={{ fontWeight: '700', fontSize: '18px', textTransform: 'capitalize', color: 'var(--accent-primary)' }}>
+                          {cat}
+                        </span>
+                        <button 
+                          className="btn btn-secondary" 
+                          style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                          onClick={() => handleEditTemplate(cat)}
+                        >
+                          {Icons.edit()} Edit Template
+                        </button>
+                      </div>
+
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+                        {/* Left Column: Demo links */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                            <strong>Demo Link 1:</strong>
+                            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 12px', borderRadius: '6px', marginTop: '4px', fontFamily: 'monospace', color: allTemplates.categories[cat].demoLink1 ? 'var(--text-primary)' : 'var(--text-muted)', wordBreak: 'break-all' }}>
+                              {allTemplates.categories[cat].demoLink1 || 'No link provided'}
+                            </div>
+                          </div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                            <strong>Demo Link 2:</strong>
+                            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 12px', borderRadius: '6px', marginTop: '4px', fontFamily: 'monospace', color: allTemplates.categories[cat].demoLink2 ? 'var(--text-primary)' : 'var(--text-muted)', wordBreak: 'break-all' }}>
+                              {allTemplates.categories[cat].demoLink2 || 'No link provided'}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Column: Previews */}
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                            <strong>Intro Message:</strong>
+                            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', maxHeight: '100px', overflowY: 'auto', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                              {allTemplates.categories[cat].introTemplate || '(None)'}
+                            </div>
+                          </div>
+                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                            <strong>Follow-up Message:</strong>
+                            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', maxHeight: '100px', overflowY: 'auto', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                              {allTemplates.categories[cat].followupTemplate || '(None)'}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         )}
