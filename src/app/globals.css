@@ -50,8 +50,8 @@ body {
     radial-gradient(at 100% 100%, rgba(16, 185, 129, 0.06) 0px, transparent 50%);
   color: var(--text-primary);
   font-family: var(--font-body);
-  min-height: 100vh;
-  overflow-x: hidden;
+  height: 100vh;
+  overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -73,12 +73,15 @@ a:hover {
 /* App Container Layout */
 .app-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* Sidebar navigation */
 .sidebar {
   width: 260px;
+  height: 100%;
+  overflow-y: auto;
   background: var(--glass-bg);
   backdrop-filter: var(--glass-blur);
   border-right: 1px solid var(--glass-border);
@@ -98,12 +101,8 @@ a:hover {
 }
 
 .brand-logo {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 24px;
   letter-spacing: -0.02em;
-  background: linear-gradient(135deg, #f8fafc, #cbd5e1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-family: var(--font-display);
 }
 
@@ -148,6 +147,7 @@ a:hover {
   flex-grow: 1;
   padding: 40px;
   max-width: calc(100vw - 260px);
+  height: 100%;
   overflow-y: auto;
 }
 
@@ -180,9 +180,21 @@ a:hover {
 /* Grid Layouts */
 .grid-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .grid-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-stats {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Widget Cards */
@@ -614,6 +626,11 @@ input[type="checkbox"] {
   color: var(--accent-primary);
   width: 16px;
   height: 16px;
+  min-width: 16px;
+  min-height: 16px;
+  max-width: 16px;
+  max-height: 16px;
+  flex-shrink: 0;
   border: 1px solid var(--border-color);
   border-radius: 4px;
   display: inline-grid;
@@ -649,4 +666,15 @@ input[type="checkbox"]:checked::before {
 input[type="checkbox"]:checked {
   border-color: var(--accent-primary);
   background-color: var(--accent-primary);
+}
+
+/* Hide Next.js dev route announcer, indicators, and dev feedback indicators */
+next-route-announcer,
+.next-dev-portal,
+#__next-prerender-indicator,
+[data-nextjs-toast-wrapper],
+[data-next-dev-portal] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }

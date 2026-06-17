@@ -7,7 +7,7 @@ const API_BASE = 'http://localhost:3001';
 
 const Icons = {
   dashboard: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="10" rx="1"/><rect width="7" height="5" x="3" y="14" rx="1"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
   ),
   scraper: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -100,6 +100,13 @@ export default function Home() {
   });
   const consoleEndRef = useRef(null);
 
+  const adjustHeight = (el) => {
+    if (el) {
+      el.style.height = 'auto';
+      el.style.height = `${el.scrollHeight}px`;
+    }
+  };
+
   // Contacts Tab State (Filters)
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
@@ -111,9 +118,9 @@ export default function Home() {
   const [whatsappQR, setWhatsappQR] = useState(null);
   const [demoLink1, setDemoLink1] = useState('');
   const [demoLink2, setDemoLink2] = useState('');
-  const [templateCategory, setTemplateCategory] = useState('restaurants');
-  const [templateText, setTemplateText] = useState('');
-  const [followupText, setFollowupText] = useState('');
+  const [templateCategory, setTemplateCategory] = useState('');
+  const [templateText, setTemplateText] = useState(`Hey {{business_name}}! 👋\n\nI noticed you have a great {{category}} listing on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!`);
+  const [followupText, setFollowupText] = useState(`Hey {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!`);
   const [allTemplates, setAllTemplates] = useState({ categories: {} });
   const [outreachOperation, setOutreachOperation] = useState('Idle (Disconnected)');
   const [campaignProgress, setCampaignProgress] = useState(null);
@@ -215,6 +222,8 @@ export default function Home() {
     updateLocalStats();
   }, [leads]);
 
+
+
   const fetchLeads = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/leads`);
@@ -253,21 +262,8 @@ export default function Home() {
       const data = await res.json();
       setAllTemplates(data);
       
-      const categories = Object.keys(data.categories || {});
-      if (categories.length > 0) {
-        const firstCat = categories[0];
-        setTemplateCategory(firstCat);
-        setDemoLink1(data.categories[firstCat].demoLink1 || '');
-        setDemoLink2(data.categories[firstCat].demoLink2 || '');
-        setTemplateText(data.categories[firstCat].introTemplate || '');
-        setFollowupText(data.categories[firstCat].followupTemplate || '');
-      } else {
-        setTemplateCategory('restaurants');
-        setDemoLink1('');
-        setDemoLink2('');
-        setTemplateText(`Hey {{business_name}}!\n\nI noticed you have a great restaurant listing on Google Maps in {{location}} but don't have a website for direct online ordering.\n\nWe build custom ordering websites that let you take direct orders on WhatsApp without paying Zomato/Swiggy commissions.\n\nHere are some of our previews:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nReply back if you want to see a free mockup built for your restaurant!`);
-        setFollowupText(`Hey {{business_name}}!\n\nJust following up on my previous message. We can build your direct-ordering menu website in just 2 days.\n\nHere are the previews again:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nWould you be open to a quick call to check out a mockup?`);
-      }
+      // Keep configuration form input fields clean and empty on initial mount.
+      // Saved templates can be dynamically loaded into the form via the 'Edit Template' buttons below.
     } catch (err) {
       console.error('Error fetching templates:', err);
     }
@@ -393,27 +389,19 @@ export default function Home() {
     }
   };
 
-  const handleUpdateLeadStatus = async (id, status) => {
+  const handleUpdateLeadStatus = async (id, status, notes = undefined) => {
+    const updates = { status };
+    if (notes !== undefined) {
+      updates.notes = notes.trim();
+    }
     try {
       await fetch(`${API_BASE}/api/leads/update`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, updates: { status } })
+        body: JSON.stringify({ id, updates })
       });
     } catch (err) {
       console.error('Error updating lead status:', err);
-    }
-  };
-
-  const handleSaveNotes = async (id, notesText) => {
-    try {
-      await fetch(`${API_BASE}/api/leads/update`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, updates: { notes: notesText } })
-      });
-    } catch (err) {
-      console.error('Error saving notes:', err);
     }
   };
 
@@ -436,7 +424,7 @@ export default function Home() {
     } else if (type === 'selected') {
       // Send template to selected checkbox items
       targetIds = selectedLeads;
-      template = templateText;
+      template = ''; // Let backend dynamically resolve intro/followup template per-lead category
       isFollowup = false;
     }
 
@@ -449,7 +437,7 @@ export default function Home() {
       const res = await fetch(`${API_BASE}/api/campaign/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ leadIds: targetIds, template, demoLink, isFollowup })
+        body: JSON.stringify({ leadIds: targetIds, template, demoLink: demoLink1, isFollowup })
       });
       
       if (!res.ok) {
@@ -514,8 +502,11 @@ export default function Home() {
     <div className="app-container">
       {/* Sidebar Navigation */}
       <aside className="sidebar">
-        <div className="brand">
-          <span className="brand-logo">Ashu Websites</span>
+        <div className="brand" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
+          <div className="brand-logo" style={{ lineHeight: '1.1', display: 'flex', alignItems: 'center' }}>
+            <span style={{ fontSize: '20px', fontWeight: '600', color: 'var(--text-primary)', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-display)' }}>Ashu Websites</span>
+          </div>
+          <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-display)', marginTop: '4px' }}>Manager</span>
         </div>
         <ul className="nav-links">
           <li
@@ -754,47 +745,49 @@ export default function Home() {
             {/* Filter controls */}
             <div className="glass-card" style={{ padding: '16px' }}>
               <div className="filter-bar">
-                <div className="filter-group">
+                <div className="filter-group" style={{ flex: '1', maxWidth: '480px' }}>
                   <input
                     type="text"
                     placeholder="Search by name or number..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ padding: '8px 12px', fontSize: '14px', width: '220px' }}
+                    style={{ padding: '8px 12px', fontSize: '14px', width: '100%' }}
                   />
                 </div>
 
-                <div className="filter-group">
-                  <label style={{ fontSize: '12px' }}>Category:</label>
-                  <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
-                    {uniqueCategories.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: 'auto', flexWrap: 'wrap' }}>
+                  <div className="filter-group">
+                    <label style={{ fontSize: '12px' }}>Category:</label>
+                    <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
+                      {uniqueCategories.map((c) => (
+                        <option key={c} value={c}>
+                          {c}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
 
-                <div className="filter-group">
-                  <label style={{ fontSize: '12px' }}>Status:</label>
-                  <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
-                    <option value="all">All</option>
-                    <option value="Pending">Pending</option>
-                    <option value="Sent">Sent</option>
-                    <option value="Replied">Replied</option>
-                    <option value="Won">Won</option>
-                    <option value="Lost">Lost</option>
-                  </select>
-                </div>
+                  <div className="filter-group">
+                    <label style={{ fontSize: '12px' }}>Status:</label>
+                    <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
+                      <option value="all">All</option>
+                      <option value="Pending">Pending</option>
+                      <option value="Sent">Sent</option>
+                      <option value="Replied">Replied</option>
+                      <option value="Won">Won</option>
+                      <option value="Lost">Lost</option>
+                    </select>
+                  </div>
 
-                {selectedLeads.length > 0 && (
-                  <button 
-                    className="btn-selected-outreach" 
-                    onClick={() => handleLaunchCampaign('selected')}
-                  >
-                    {Icons.campaigns()} Message Selected ({selectedLeads.length})
-                  </button>
-                )}
+                  {selectedLeads.length > 0 && (
+                    <button 
+                      className="btn-selected-outreach" 
+                      onClick={() => handleLaunchCampaign('selected')}
+                    >
+                      {Icons.campaigns()} Message Selected ({selectedLeads.length})
+                    </button>
+                  )}
+                </div>
               </div>
 
               {/* Table list */}
@@ -865,8 +858,9 @@ export default function Home() {
                               <button
                                 className="btn-success-outline"
                                 onClick={() => {
-                                  if (window.confirm(`Are you sure you want to mark "${lead.name}" as WON?`)) {
-                                    handleUpdateLeadStatus(lead.id, 'Won');
+                                  const notesPrompt = window.prompt(`Are you sure you want to mark "${lead.name}" as WON?\n\nEnter notes for this lead (optional):`, lead.notes || '');
+                                  if (notesPrompt !== null) {
+                                    handleUpdateLeadStatus(lead.id, 'Won', notesPrompt);
                                   }
                                 }}
                               >
@@ -875,23 +869,20 @@ export default function Home() {
                               <button
                                 className="btn-danger-outline"
                                 onClick={() => {
-                                  if (window.confirm(`Are you sure you want to mark "${lead.name}" as LOST?`)) {
-                                    handleUpdateLeadStatus(lead.id, 'Lost');
+                                  const notesPrompt = window.prompt(`Are you sure you want to mark "${lead.name}" as LOST?\n\nEnter notes for this lead (optional):`, lead.notes || '');
+                                  if (notesPrompt !== null) {
+                                    handleUpdateLeadStatus(lead.id, 'Lost', notesPrompt);
                                   }
                                 }}
                               >
                                 {Icons.x()} Lost
                               </button>
                             </div>
-                            <div style={{ marginTop: '8px' }}>
-                              <input
-                                type="text"
-                                placeholder="Add notes..."
-                                defaultValue={lead.notes || ''}
-                                onBlur={(e) => handleSaveNotes(lead.id, e.target.value)}
-                                style={{ padding: '4px 8px', fontSize: '11px', borderRadius: '4px' }}
-                              />
-                            </div>
+                            {lead.notes && (
+                              <div style={{ marginTop: '8px', fontSize: '12px', color: 'var(--text-secondary)', fontStyle: 'italic', maxWidth: '200px', wordBreak: 'break-word', textAlign: 'left' }}>
+                                <strong>Note:</strong> {lead.notes}
+                              </div>
+                            )}
                           </td>
                         </tr>
                       ))
@@ -1027,10 +1018,11 @@ export default function Home() {
                   <label htmlFor="intro-template">Intro Template (First Message)</label>
                   <textarea
                     id="intro-template"
+                    ref={adjustHeight}
                     rows="5"
                     value={templateText}
                     onChange={(e) => setTemplateText(e.target.value)}
-                    style={{ resize: 'vertical' }}
+                    style={{ resize: 'none', overflowY: 'hidden' }}
                   />
                   <span style={{ fontSize: '11px', color: '#64748b' }}>
                     Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}, {'{{demo_link1}}'}, {'{{demo_link2}}'}
@@ -1041,10 +1033,11 @@ export default function Home() {
                   <label htmlFor="followup-template">Follow-up Template (Resends)</label>
                   <textarea
                     id="followup-template"
+                    ref={adjustHeight}
                     rows="4"
                     value={followupText}
                     onChange={(e) => setFollowupText(e.target.value)}
-                    style={{ resize: 'vertical' }}
+                    style={{ resize: 'none', overflowY: 'hidden' }}
                   />
                 </div>
 
@@ -1086,9 +1079,9 @@ export default function Home() {
                         </button>
                       </div>
 
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-                        {/* Left Column: Demo links */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        {/* Demo Link 1 and 2 in one line */}
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
                           <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
                             <strong>Demo Link 1:</strong>
                             <div style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 12px', borderRadius: '6px', marginTop: '4px', fontFamily: 'monospace', color: allTemplates.categories[cat].demoLink1 ? 'var(--text-primary)' : 'var(--text-muted)', wordBreak: 'break-all' }}>
@@ -1103,19 +1096,19 @@ export default function Home() {
                           </div>
                         </div>
 
-                        {/* Right Column: Previews */}
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                            <strong>Intro Message:</strong>
-                            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', maxHeight: '100px', overflowY: 'auto', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                              {allTemplates.categories[cat].introTemplate || '(None)'}
-                            </div>
+                        {/* Intro Message Preview */}
+                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                          <strong>Intro Message:</strong>
+                          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                            {allTemplates.categories[cat].introTemplate || '(None)'}
                           </div>
-                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                            <strong>Follow-up Message:</strong>
-                            <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', maxHeight: '100px', overflowY: 'auto', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                              {allTemplates.categories[cat].followupTemplate || '(None)'}
-                            </div>
+                        </div>
+
+                        {/* Follow-up Message Preview */}
+                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                          <strong>Follow-up Message:</strong>
+                          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                            {allTemplates.categories[cat].followupTemplate || '(None)'}
                           </div>
                         </div>
                       </div>

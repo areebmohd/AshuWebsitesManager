@@ -238,9 +238,9 @@ app.post('/api/campaign/start', async (req, res) => {
   if (!leadIds || !Array.isArray(leadIds) || leadIds.length === 0) {
     return res.status(400).json({ error: 'No lead IDs provided for campaign' });
   }
-  if (!template) {
-    return res.status(400).json({ error: 'Message template is required' });
-  }
+
+  // If template is empty or falsy, we resolve templates dynamically per-lead from the database
+  const useDynamicTemplates = !template;
 
   if (getWhatsAppStatus() !== 'ready') {
     return res.status(400).json({ error: 'WhatsApp client must be connected first' });
@@ -265,11 +265,45 @@ app.post('/api/campaign/start', async (req, res) => {
       logProgress(`[Campaign] [${i+1}/${targets.length}] Processing message to: ${lead.name} (${lead.phone})`);
 
       const catTemplates = templates.categories ? templates.categories[lead.category] : null;
+      let activeTemplateText = template;
+      let targetStatus = lead.status;
+      let nextStatus = 'Sent';
+
+      if (useDynamicTemplates) {
+        if (!catTemplates) {
+          logProgress(`[Campaign] ❌ No saved templates available for category "${lead.category}"`);
+          io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No templates for category: ${lead.category}` });
+          continue;
+        }
+
+        if (targetStatus === 'Pending') {
+          activeTemplateText = catTemplates.introTemplate;
+          if (!activeTemplateText) {
+            logProgress(`[Campaign] ❌ No saved intro template available for category "${lead.category}"`);
+            io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No intro template for category: ${lead.category}` });
+            continue;
+          }
+          nextStatus = 'Sent';
+        } else if (targetStatus === 'Sent') {
+          activeTemplateText = catTemplates.followupTemplate;
+          if (!activeTemplateText) {
+            logProgress(`[Campaign] ❌ No saved follow-up template available for category "${lead.category}"`);
+            io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No follow-up template for category: ${lead.category}` });
+            continue;
+          }
+          nextStatus = 'Sent';
+        } else {
+          logProgress(`[Campaign] ⚠️ Lead is in status "${targetStatus}". Skipping.`);
+          io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `Lead status is ${targetStatus}` });
+          continue;
+        }
+      }
+
       const dLink1 = catTemplates ? (catTemplates.demoLink1 || '') : '';
       const dLink2 = catTemplates ? (catTemplates.demoLink2 || '') : '';
 
       // Compile template placeholders
-      let compiledMessage = template
+      let compiledMessage = activeTemplateText
         .replace(/{{business_name}}/gi, lead.name)
         .replace(/{{category}}/gi, lead.category)
         .replace(/{{location}}/gi, lead.location)
@@ -283,7 +317,7 @@ app.post('/api/campaign/start', async (req, res) => {
         
         if (sent) {
           const updated = updateLead(lead.id, {
-            status: 'Sent',
+            status: nextStatus,
             lastSentDate: new Date().toISOString()
           });
 
