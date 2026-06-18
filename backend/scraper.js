@@ -160,6 +160,48 @@ export async function runScraper(category, location, options = {}, onLog, onLead
           return { name, hasWebsite, websiteUrl, phone };
         });
 
+        // Verify if website is actually functional or if it redirects to Google/Social
+        if (details.hasWebsite && details.websiteUrl) {
+          try {
+            onLog(`[Scraper] 🔍 Checking website status for "${details.name || item.title}": ${details.websiteUrl}`);
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => {
+              try { controller.abort(); } catch(e){}
+            }, 4000); // 4s timeout
+            
+            const response = await fetch(details.websiteUrl, {
+              method: 'GET',
+              signal: controller.signal,
+              headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+              }
+            });
+            clearTimeout(timeoutId);
+            
+            const finalUrl = response.url || details.websiteUrl;
+            const isRedirectedToGoogleOrSocial = 
+              finalUrl.includes('google.com') || 
+              finalUrl.includes('google.co') || 
+              finalUrl.includes('gstatic.com') ||
+              finalUrl.includes('facebook.com') || 
+              finalUrl.includes('instagram.com');
+
+            if (isRedirectedToGoogleOrSocial) {
+              onLog(`[Scraper] ℹ️ Website redirects to Google/Social (${finalUrl}). Treating as no real website.`);
+              details.hasWebsite = false;
+              details.notes = `Website redirects to Google/Social: ${details.websiteUrl}`;
+            } else if (!response.ok && response.status >= 400) {
+              onLog(`[Scraper] ⚠️ Website responded with status ${response.status}. Treating as broken.`);
+              details.hasWebsite = false;
+              details.notes = `Broken/Offline website (Status ${response.status}): ${details.websiteUrl}`;
+            }
+          } catch (err) {
+            onLog(`[Scraper] ⚠️ Website check failed (${err.message}). Treating as broken.`);
+            details.hasWebsite = false;
+            details.notes = `Broken/Offline website: ${details.websiteUrl}`;
+          }
+        }
+
         if (details.hasWebsite) {
           onLog(`[Scraper] ❌ Skipped: "${details.name || item.title}" already has a website (${details.websiteUrl || 'listed'}).`);
           continue;
@@ -185,7 +227,8 @@ export async function runScraper(category, location, options = {}, onLog, onLead
           phone: details.phone,
           category: category,
           location: location,
-          url: item.url
+          url: item.url,
+          notes: details.notes || ''
         };
 
         const savedLead = addLead(leadData);

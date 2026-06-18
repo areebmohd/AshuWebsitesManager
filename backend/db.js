@@ -87,6 +87,7 @@ export function addLead(newLead) {
     location: newLead.location ? newLead.location.trim() : 'Gurugram',
     url: newLead.url || '',
     status: 'Pending',
+    notes: newLead.notes || '',
     lastSentDate: null,
     createdAt: new Date().toISOString()
   };

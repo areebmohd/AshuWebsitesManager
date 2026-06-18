@@ -25,26 +25,20 @@ const io = new Server(httpServer, {
 
 const PORT = 3001;
 let activeScraper = false;
-let activeCampaign = false;
 let activeOutreachLoop = false;
-let currentOutreachStatus = "Idle (Disconnected)";
+let currentOutreachStatus = "Idle (Stop automatic messages button not clicked)";
 
 // Socket.io Connection
 io.on('connection', (socket) => {
   console.log('Client connected to socket');
   
-  // Send current WhatsApp status and outreach status immediately on connect
+  // Send current status immediately on connect
   socket.emit('whatsapp_status', getWhatsAppStatus());
   socket.emit('outreach_operation', currentOutreachStatus);
 
   socket.on('disconnect', () => {
     console.log('Client disconnected from socket');
   });
-});
-
-// Endpoint to query current outreach status
-app.get('/api/outreach/status', (req, res) => {
-  res.json({ status: currentOutreachStatus });
 });
 
 // Helper to log message to both server console and stream to frontend
@@ -74,6 +68,9 @@ app.post('/api/leads/update', (req, res) => {
     return res.status(400).json({ error: 'Missing lead ID' });
   }
   try {
+    if (updates && (updates.status === 'Sent' || updates.status === 'Failed')) {
+      updates.lastSentDate = new Date().toISOString();
+    }
     const updated = updateLead(id, updates);
     if (!updated) {
       return res.status(404).json({ error: 'Lead not found' });
@@ -171,16 +168,14 @@ app.post('/api/scrape/start', async (req, res) => {
   }
 });
 
+
+
 // 5. Connect WhatsApp Client
 app.post('/api/whatsapp/connect', (req, res) => {
   try {
     initWhatsApp(
       (status) => {
         io.emit('whatsapp_status', status);
-        if (status === 'ready') {
-          logProgress('[WhatsApp] Status is READY. Starting automatic campaign engine...');
-          runAutomaticOutreachLoop();
-        }
       },
       (qrCode) => {
         io.emit('whatsapp_qr', qrCode);
@@ -222,6 +217,7 @@ app.get('/api/whatsapp/status', (req, res) => {
 // 7. Disconnect WhatsApp
 app.post('/api/whatsapp/logout', async (req, res) => {
   try {
+    activeOutreachLoop = false;
     await logoutWhatsApp(
       (status) => io.emit('whatsapp_status', status),
       (logMsg) => logProgress(logMsg)
@@ -232,119 +228,29 @@ app.post('/api/whatsapp/logout', async (req, res) => {
   }
 });
 
-// 8. Start WhatsApp Message Campaign
-app.post('/api/campaign/start', async (req, res) => {
-  const { leadIds, template, demoLink, isFollowup } = req.body;
-  if (!leadIds || !Array.isArray(leadIds) || leadIds.length === 0) {
-    return res.status(400).json({ error: 'No lead IDs provided for campaign' });
-  }
-
-  // If template is empty or falsy, we resolve templates dynamically per-lead from the database
-  const useDynamicTemplates = !template;
-
+// 8. Start Automated Outreach Campaign
+app.post('/api/outreach/start', (req, res) => {
   if (getWhatsAppStatus() !== 'ready') {
-    return res.status(400).json({ error: 'WhatsApp client must be connected first' });
+    return res.status(400).json({ error: 'WhatsApp client must be connected and ready first.' });
   }
-
-  if (activeCampaign) {
-    return res.status(400).json({ error: 'Another campaign is already in progress' });
+  if (activeOutreachLoop) {
+    return res.json({ message: 'Automatic outreach is already running.' });
   }
+  
+  // Start the background loop
+  runAutomaticOutreachLoop();
+  res.json({ message: 'Automatic campaign outreach loop started.' });
+});
 
-  activeCampaign = true;
-  res.json({ message: `Campaign launched targeting ${leadIds.length} leads.` });
-  logProgress(`[Campaign] Launched campaign targeting ${leadIds.length} leads.`);
-
-  // Process in background
-  try {
-    const leads = getLeads();
-    const targets = leads.filter(l => leadIds.includes(l.id));
-    const templates = getTemplates();
-
-    for (let i = 0; i < targets.length; i++) {
-      const lead = targets[i];
-      logProgress(`[Campaign] [${i+1}/${targets.length}] Processing message to: ${lead.name} (${lead.phone})`);
-
-      const catTemplates = templates.categories ? templates.categories[lead.category] : null;
-      let activeTemplateText = template;
-      let targetStatus = lead.status;
-      let nextStatus = 'Sent';
-
-      if (useDynamicTemplates) {
-        if (!catTemplates) {
-          logProgress(`[Campaign] ❌ No saved templates available for category "${lead.category}"`);
-          io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No templates for category: ${lead.category}` });
-          continue;
-        }
-
-        if (targetStatus === 'Pending') {
-          activeTemplateText = catTemplates.introTemplate;
-          if (!activeTemplateText) {
-            logProgress(`[Campaign] ❌ No saved intro template available for category "${lead.category}"`);
-            io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No intro template for category: ${lead.category}` });
-            continue;
-          }
-          nextStatus = 'Sent';
-        } else if (targetStatus === 'Sent') {
-          activeTemplateText = catTemplates.followupTemplate;
-          if (!activeTemplateText) {
-            logProgress(`[Campaign] ❌ No saved follow-up template available for category "${lead.category}"`);
-            io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `No follow-up template for category: ${lead.category}` });
-            continue;
-          }
-          nextStatus = 'Sent';
-        } else {
-          logProgress(`[Campaign] ⚠️ Lead is in status "${targetStatus}". Skipping.`);
-          io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: `Lead status is ${targetStatus}` });
-          continue;
-        }
-      }
-
-      const dLink1 = catTemplates ? (catTemplates.demoLink1 || '') : '';
-      const dLink2 = catTemplates ? (catTemplates.demoLink2 || '') : '';
-
-      // Compile template placeholders
-      let compiledMessage = activeTemplateText
-        .replace(/{{business_name}}/gi, lead.name)
-        .replace(/{{category}}/gi, lead.category)
-        .replace(/{{location}}/gi, lead.location)
-        .replace(/{{demo_link1}}/gi, dLink1)
-        .replace(/{{demo_link2}}/gi, dLink2)
-        .replace(/{{demo_link}}/gi, demoLink || '');
-
-      try {
-        logProgress(`[Campaign] Sending message...`);
-        const sent = await sendMessage(lead.phone, compiledMessage);
-        
-        if (sent) {
-          const updated = updateLead(lead.id, {
-            status: nextStatus,
-            lastSentDate: new Date().toISOString()
-          });
-
-          io.emit('lead_updated', updated);
-          io.emit('campaign_progress', { current: i + 1, total: targets.length, success: true, leadId: lead.id });
-          logProgress(`[Campaign] ✅ Sent successfully to ${lead.name}`);
-        }
-      } catch (err) {
-        logProgress(`[Campaign] ❌ Failed to send to ${lead.name}: ${err.message}`);
-        io.emit('campaign_progress', { current: i + 1, total: targets.length, success: false, leadId: lead.id, error: err.message });
-      }
-
-      // Add a random delay (e.g. 20 - 45 seconds) to avoid WhatsApp ban block, except for the last message
-      if (i < targets.length - 1) {
-        const delay = Math.floor(Math.random() * (45 - 20 + 1) + 20);
-        logProgress(`[Campaign] Waiting for ${delay} seconds to safeguard account...`);
-        await new Promise(resolve => setTimeout(resolve, delay * 1000));
-      }
-    }
-
-    logProgress('[Campaign] Outreach campaign completed.');
-
-  } catch (error) {
-    logProgress(`[Campaign Error] ${error.message}`);
-  } finally {
-    activeCampaign = false;
+// 9. Stop Automated Outreach Campaign
+app.post('/api/outreach/stop', (req, res) => {
+  if (!activeOutreachLoop) {
+    return res.json({ message: 'Automatic outreach is not active.' });
   }
+  activeOutreachLoop = false;
+  currentOutreachStatus = "Idle (Stop automatic messages button clicked)";
+  io.emit('outreach_operation', currentOutreachStatus);
+  res.json({ message: 'Automatic campaign outreach stopped.' });
 });
 
 // ----------------------------------------------------------------------------
@@ -358,7 +264,7 @@ async function runAutomaticOutreachLoop() {
   currentOutreachStatus = "Active (Initializing outreach queue...)";
   io.emit('outreach_operation', currentOutreachStatus);
   
-  while (getWhatsAppStatus() === 'ready') {
+  while (getWhatsAppStatus() === 'ready' && activeOutreachLoop) {
     try {
       const leads = getLeads();
       const templates = getTemplates();
@@ -429,12 +335,19 @@ async function runAutomaticOutreachLoop() {
           logProgress(`[Auto-Campaign] ❌ Failed to send to ${targetLead.name}: ${err.message}`);
           currentOutreachStatus = `❌ Failed for ${targetLead.name}: ${err.message}`;
           io.emit('outreach_operation', currentOutreachStatus);
+          
+          const updated = updateLead(targetLead.id, {
+            status: 'Failed',
+            notes: 'Outreach failed: ' + err.message,
+            lastSentDate: new Date().toISOString()
+          });
+          io.emit('lead_updated', updated);
         }
         
         // Anti-ban security delay: wait random duration between 20 to 45 seconds
         const delaySec = Math.floor(Math.random() * (45 - 20 + 1) + 20);
         for (let d = delaySec; d > 0; d--) {
-          if (getWhatsAppStatus() !== 'ready') break;
+          if (getWhatsAppStatus() !== 'ready' || !activeOutreachLoop) break;
           currentOutreachStatus = `Waiting ${d}s before next send (Anti-ban security delay...)`;
           io.emit('outreach_operation', currentOutreachStatus);
           await new Promise(resolve => setTimeout(resolve, 1000));
@@ -453,7 +366,7 @@ async function runAutomaticOutreachLoop() {
   }
   
   activeOutreachLoop = false;
-  currentOutreachStatus = "Idle (WhatsApp disconnected)";
+  currentOutreachStatus = "Idle (WhatsApp disconnected or loop stopped)";
   io.emit('outreach_operation', currentOutreachStatus);
   logProgress('[System] Automatic outreach loop stopped.');
 }

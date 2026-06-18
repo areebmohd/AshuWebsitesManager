@@ -1,16 +1,16 @@
 {
   "categories": {
     "restaurants": {
-      "demoLink1": "",
-      "demoLink2": "",
-      "introTemplate": "Hey {{business_name}}!\n\nI noticed you have a great restaurant listing on Google Maps in {{location}} but don't have a website for direct online ordering.\n\nWe build custom ordering websites that let you take direct orders on WhatsApp without paying Zomato/Swiggy commissions.\n\nHere are some of our previews:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nReply back if you want to see a free mockup built for your restaurant!",
-      "followupTemplate": "Hey {{business_name}}!\n\nJust following up on my previous message. We can build your direct-ordering menu website in just 2 days.\n\nHere are the previews again:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nWould you be open to a quick call to check out a mockup?"
+      "introTemplate": "Hey {{business_name}}! 🍔\n\nI noticed you have a great Restaurant listing on Google in {{location}}, but you don't have a website to showcase your menu and take direct online orders.\n\nToday, everyone is ordering food online. If you don't have a website, you are losing loyal customers to competitors and also paying 25% to 30% commission to Swiggy and Zomato on every order. So, having your own website is essential to showcase your dishes beautifully, build your online presence, and receive direct online orders on your own website—where you keep 100% of your profits!\n\nWe build premium, custom restaurant websites starting at just ₹999! 🚀\n\nSee how your online menu and ordering website could look in these demo sites:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime to get your website ready!",
+      "followupTemplate": "Hey {{business_name}}! 🍔\n\nJust following up on my previous message.\n\nIncrease your online presence and don't let Swiggy and Zomato eat up your profits any longer. We can launch your custom, direct-ordering menu website—in just 2 days starting at just ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime to get your website ready!",
+      "demoLink1": "https://themewagon.github.io/sarab/",
+      "demoLink2": "https://themewagon.github.io/feane/"
     },
     "clinics": {
-      "demoLink1": "",
-      "demoLink2": "",
       "introTemplate": "Hello {{business_name}}!\n\nI saw your medical clinic profile on Google Maps in {{location}} and noticed you don't have a website for direct appointment booking.\n\nWe build custom booking websites for clinics that let patients schedule appointments easily and receive updates on WhatsApp.\n\nHere are some of our previews:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nReply back if you'd like a free booking page mockup for your clinic!",
-      "followupTemplate": "Hello {{business_name}}!\n\nJust following up. We can set up your online booking assistant and patient portal in just 2 days.\n\nCheck out the demo pages here:\n- Demo 1: {{demo_link1}}\n- Demo 2: {{demo_link2}}\n\nLet me know if we can show you a quick mockup."
+      "followupTemplate": "Hello {{business_name}}!\n\nJust following up. We can set up your online booking assistant and patient portal in just 2 days.\n\nCheck out the demo pages here:\n- Demo 1: {{demo_link1}}\n- Demo 2: {{demo_link2}}\n\nLet me know if we can show you a quick mockup.",
+      "demoLink1": "",
+      "demoLink2": ""
     },
     "salons": {
       "demoLink1": "",

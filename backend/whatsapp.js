@@ -133,7 +133,12 @@ export async function sendMessage(phone, message) {
 
   const jid = formatPhoneNumber(phone);
   try {
-    const response = await client.sendMessage(jid, message);
+    // Resolve the official JID/LID from WhatsApp to prevent "No LID for user" errors
+    const numberId = await client.getNumberId(jid);
+    if (!numberId) {
+      throw new Error('Number is not registered on WhatsApp');
+    }
+    const response = await client.sendMessage(numberId._serialized, message);
     return !!response.id;
   } catch (err) {
     console.error(`Error sending message to ${jid}:`, err);
