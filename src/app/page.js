@@ -30,6 +30,9 @@ const Icons = {
   x: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
   ),
+  trash: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+  ),
   phone: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
   ),
@@ -78,13 +81,9 @@ const DEFAULT_INTRO = `Hey {{business_name}}! 👋
 
 I noticed you have a great {{category}} listing on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.
 
-Since everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀
+Since everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions to Swiggy/Zomato. We can help you build a custom website starting at just ₹999! 🚀
 
-Here are some of our demo previews:
-🌐 {{demo_link1}}
-🌐 {{demo_link2}}
-
-Call or message anytime if you want to see a website like this built specifically for your business!`;
+If you are interested, we can send you some of our demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.`;
 
 const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 👋
 
@@ -92,11 +91,7 @@ Just following up on my previous message.
 
 Since everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀
 
-Here are the previews again for you to check out:
-🌐 {{demo_link1}}
-🌐 {{demo_link2}}
-
-Call or message anytime if you want to see a website like this built specifically for your business!`;
+If you'd be interested to see how it looks, we can share some demo previews with you. If you like what you see, we can create a custom site specifically for your business!`;
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -160,8 +155,10 @@ export default function Home() {
   const [manualOutreachType, setManualOutreachType] = useState('all');
 
   // Campaign Tab State
-  const [demoLink1, setDemoLink1] = useState('');
-  const [demoLink2, setDemoLink2] = useState('');
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [inlineIntroText, setInlineIntroText] = useState('');
+  const [inlineFollowupText, setInlineFollowupText] = useState('');
   const [templateCategory, setTemplateCategory] = useState('');
   const [templateText, setTemplateText] = useState(DEFAULT_INTRO);
   const [followupText, setFollowupText] = useState(DEFAULT_FOLLOWUP);
@@ -340,18 +337,17 @@ export default function Home() {
           category: cleanCategory,
           introTemplate: templateText,
           followupTemplate: followupText,
-          demoLink1,
-          demoLink2
+          demoLink1: '',
+          demoLink2: ''
         })
       });
       if (res.ok) {
         alert(`Templates for category "${cleanCategory}" saved successfully on the server!`);
         fetchTemplates(); // Refresh template list
         setTemplateCategory('');
-        setDemoLink1('');
-        setDemoLink2('');
         setTemplateText(DEFAULT_INTRO);
         setFollowupText(DEFAULT_FOLLOWUP);
+        setIsCreateOpen(false); // Hide creation section after successful save
       } else {
         alert('Failed to save templates.');
       }
@@ -361,12 +357,60 @@ export default function Home() {
   };
 
   const handleEditTemplate = (cat) => {
-    setTemplateCategory(cat);
+    setEditingCategory(cat);
     if (allTemplates.categories && allTemplates.categories[cat]) {
-      setDemoLink1(allTemplates.categories[cat].demoLink1 || '');
-      setDemoLink2(allTemplates.categories[cat].demoLink2 || '');
-      setTemplateText(allTemplates.categories[cat].introTemplate || '');
-      setFollowupText(allTemplates.categories[cat].followupTemplate || '');
+      setInlineIntroText(allTemplates.categories[cat].introTemplate || '');
+      setInlineFollowupText(allTemplates.categories[cat].followupTemplate || '');
+    }
+  };
+
+  const handleSaveInlineTemplate = async (cat) => {
+    try {
+      const res = await fetch(`${API_BASE}/api/templates/save`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category: cat,
+          introTemplate: inlineIntroText,
+          followupTemplate: inlineFollowupText,
+          demoLink1: '',
+          demoLink2: ''
+        })
+      });
+      if (res.ok) {
+        alert(`Template for category "${cat}" updated successfully!`);
+        fetchTemplates();
+        setEditingCategory(null);
+      } else {
+        alert('Failed to save template changes.');
+      }
+    } catch (err) {
+      console.error('Error saving inline template:', err);
+    }
+  };
+
+  const handleDeleteTemplate = async (cat) => {
+    if (!confirm(`Are you sure you want to delete the template for category "${cat}"?`)) {
+      return;
+    }
+    try {
+      const res = await fetch(`${API_BASE}/api/templates/delete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ category: cat })
+      });
+      if (res.ok) {
+        alert(`Template for category "${cat}" deleted successfully!`);
+        fetchTemplates();
+        if (editingCategory === cat) {
+          setEditingCategory(null);
+        }
+      } else {
+        const data = await res.json();
+        alert(data.error || 'Failed to delete template.');
+      }
+    } catch (err) {
+      console.error('Error deleting template:', err);
     }
   };
 
@@ -1268,7 +1312,7 @@ export default function Home() {
                     onClick={() => handleStartGuidedCampaign('manual')}
                     style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}
                   >
-                    {Icons.campaigns()} Send manual messages
+                    {Icons.campaigns()} Send Manual Messages
                   </button>
                 </div>
               </div>
@@ -1338,86 +1382,98 @@ export default function Home() {
             </header>
 
             <div>
-              {/* Message Templates Configuration */}
-              <div className="glass-card" style={{ width: '100%' }}>
-                <h2 style={{ fontSize: '20px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {Icons.edit()} Campaign Configuration
-                </h2>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label htmlFor="template-category-input">Category</label>
-                    <input 
-                      type="text" 
-                      id="template-category-input" 
-                      value={templateCategory} 
-                      onChange={(e) => setTemplateCategory(e.target.value)} 
-                      placeholder="e.g. restaurants, salons, clinics, gyms"
-                      style={{ textTransform: 'lowercase' }}
-                    />
+              {/* Collapsible Message Templates Configuration */}
+              <div className="glass-card" style={{ width: '100%', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '20px', padding: '24px' }}>
+                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
+                  <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                    {Icons.edit()} Campaign Configuration
+                  </h2>
+                </div>
+                {!isCreateOpen && (
+                  <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
+                    Create and manage customized outreach copy templates for different business categories.
+                  </p>
+                )}
+
+                {!isCreateOpen && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '8px' }}>
+                    <button
+                      className="btn"
+                      onClick={() => setIsCreateOpen(true)}
+                      style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--accent-primary)', color: '#fff' }}
+                    >
+                      {Icons.edit()} Create Template
+                    </button>
                   </div>
-                  <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
-                </div>
+                )}
 
-                <div className="form-row" style={{ marginTop: '16px' }}>
-                  <div className="form-group">
-                    <label htmlFor="demo-link-1">Demo Site Preview Link 1</label>
-                    <input 
-                      type="text" 
-                      id="demo-link-1" 
-                      value={demoLink1} 
-                      onChange={(e) => setDemoLink1(e.target.value)} 
-                      placeholder="https://..."
-                    />
+                {isCreateOpen && (
+                  <div>
+                    <div className="form-row">
+                      <div className="form-group">
+                        <label htmlFor="template-category-input">Category</label>
+                        <input 
+                          type="text" 
+                          id="template-category-input" 
+                          value={templateCategory} 
+                          onChange={(e) => setTemplateCategory(e.target.value)} 
+                          placeholder="e.g. restaurants, salons, clinics, gyms"
+                          style={{ textTransform: 'lowercase' }}
+                        />
+                      </div>
+                      <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
+                    </div>
+
+                    <div className="form-group" style={{ marginTop: '16px' }}>
+                      <label htmlFor="intro-template">Intro Template (First Message)</label>
+                      <textarea
+                        id="intro-template"
+                        ref={adjustHeight}
+                        rows="5"
+                        value={templateText}
+                        onChange={(e) => {
+                          setTemplateText(e.target.value);
+                          adjustHeight(e.target);
+                        }}
+                        style={{ resize: 'none', overflowY: 'hidden' }}
+                      />
+                      <span style={{ fontSize: '11px', color: '#64748b' }}>
+                        Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}
+                      </span>
+                    </div>
+
+                    <div className="form-group" style={{ marginTop: '16px' }}>
+                      <label htmlFor="followup-template">Follow-up Template (Resends)</label>
+                      <textarea
+                        id="followup-template"
+                        ref={adjustHeight}
+                        rows="4"
+                        value={followupText}
+                        onChange={(e) => {
+                          setFollowupText(e.target.value);
+                          adjustHeight(e.target);
+                        }}
+                        style={{ resize: 'none', overflowY: 'hidden' }}
+                      />
+                    </div>
+
+                    <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
+                      <button
+                        className="btn"
+                        onClick={handleSaveTemplates}
+                        style={{ background: 'var(--accent-primary)', color: '#fff' }}
+                      >
+                        {Icons.save()} Save Category Template
+                      </button>
+                      <button
+                        className="btn btn-secondary"
+                        onClick={() => setIsCreateOpen(false)}
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
-
-                  <div className="form-group">
-                    <label htmlFor="demo-link-2">Demo Site Preview Link 2</label>
-                    <input 
-                      type="text" 
-                      id="demo-link-2" 
-                      value={demoLink2} 
-                      onChange={(e) => setDemoLink2(e.target.value)} 
-                      placeholder="https://..."
-                    />
-                  </div>
-                </div>
-
-                <div className="form-group" style={{ marginTop: '16px' }}>
-                  <label htmlFor="intro-template">Intro Template (First Message)</label>
-                  <textarea
-                    id="intro-template"
-                    ref={adjustHeight}
-                    rows="5"
-                    value={templateText}
-                    onChange={(e) => setTemplateText(e.target.value)}
-                    style={{ resize: 'none', overflowY: 'hidden' }}
-                  />
-                  <span style={{ fontSize: '11px', color: '#64748b' }}>
-                    Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}, {'{{demo_link1}}'}, {'{{demo_link2}}'}
-                  </span>
-                </div>
-
-                <div className="form-group" style={{ marginTop: '16px' }}>
-                  <label htmlFor="followup-template">Follow-up Template (Resends)</label>
-                  <textarea
-                    id="followup-template"
-                    ref={adjustHeight}
-                    rows="4"
-                    value={followupText}
-                    onChange={(e) => setFollowupText(e.target.value)}
-                    style={{ resize: 'none', overflowY: 'hidden' }}
-                  />
-                </div>
-
-                <div style={{ marginTop: '24px' }}>
-                  <button
-                    className="btn"
-                    onClick={handleSaveTemplates}
-                    style={{ background: 'var(--accent-primary)', color: '#fff' }}
-                  >
-                    {Icons.save()} Save Category Template
-                  </button>
-                </div>
+                )}
               </div>
             </div>
 
@@ -1428,60 +1484,131 @@ export default function Home() {
               </h2>
               {(!allTemplates.categories || Object.keys(allTemplates.categories).length === 0) ? (
                 <div style={{ padding: '16px', color: 'var(--text-muted)', textAlign: 'center' }}>
-                  No categories configured. Create your first campaign template using the form above!
+                  No categories configured. Create your first campaign template using the button above!
                 </div>
               ) : (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
-                  {Object.keys(allTemplates.categories).map((cat) => (
-                    <div key={cat} style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
-                        <span style={{ fontWeight: '700', fontSize: '18px', textTransform: 'capitalize', color: 'var(--accent-primary)' }}>
-                          {cat}
-                        </span>
-                        <button 
-                          className="btn btn-secondary" 
-                          style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                          onClick={() => handleEditTemplate(cat)}
-                        >
-                          {Icons.edit()} Edit Template
-                        </button>
-                      </div>
+                  {Object.keys(allTemplates.categories).map((cat) => {
+                    const isEditing = editingCategory === cat;
+                    return (
+                      <div key={cat} style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
+                          <span style={{ fontWeight: '700', fontSize: '18px', textTransform: 'capitalize', color: 'var(--accent-primary)' }}>
+                            {cat}
+                          </span>
+                          <div style={{ display: 'flex', gap: '8px' }}>
+                            {isEditing ? null : (
+                              <>
+                                <button 
+                                  className="btn btn-secondary" 
+                                  style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                                  onClick={() => handleEditTemplate(cat)}
+                                >
+                                  {Icons.edit()} Edit
+                                </button>
+                                <button 
+                                  className="btn btn-secondary" 
+                                  style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--error)', borderColor: 'rgba(239, 68, 68, 0.2)' }}
+                                  onClick={() => handleDeleteTemplate(cat)}
+                                >
+                                  {Icons.trash()} Delete
+                                </button>
+                              </>
+                            )}
+                          </div>
+                        </div>
 
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        {/* Demo Link 1 and 2 in one line */}
-                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '16px' }}>
-                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                            <strong>Demo Link 1:</strong>
-                            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 12px', borderRadius: '6px', marginTop: '4px', fontFamily: 'monospace', color: allTemplates.categories[cat].demoLink1 ? 'var(--text-primary)' : 'var(--text-muted)', wordBreak: 'break-all' }}>
-                              {allTemplates.categories[cat].demoLink1 || 'No link provided'}
+                        {isEditing ? (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            <div className="form-group">
+                              <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px', display: 'block' }}>
+                                Intro Template (First Message)
+                              </label>
+                              <textarea
+                                ref={adjustHeight}
+                                rows="5"
+                                value={inlineIntroText}
+                                onChange={(e) => {
+                                  setInlineIntroText(e.target.value);
+                                  adjustHeight(e.target);
+                                }}
+                                style={{ 
+                                  width: '100%', 
+                                  background: 'rgba(0,0,0,0.2)', 
+                                  color: 'var(--text-primary)', 
+                                  border: '1px solid var(--border-color)', 
+                                  borderRadius: '6px', 
+                                  padding: '10px', 
+                                  fontSize: '13px', 
+                                  resize: 'none', 
+                                  overflowY: 'hidden' 
+                                }}
+                              />
+                            </div>
+                            <div className="form-group">
+                              <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px', display: 'block' }}>
+                                Follow-up Template (Resends)
+                              </label>
+                              <textarea
+                                ref={adjustHeight}
+                                rows="4"
+                                value={inlineFollowupText}
+                                onChange={(e) => {
+                                  setInlineFollowupText(e.target.value);
+                                  adjustHeight(e.target);
+                                }}
+                                style={{ 
+                                  width: '100%', 
+                                  background: 'rgba(0,0,0,0.2)', 
+                                  color: 'var(--text-primary)', 
+                                  border: '1px solid var(--border-color)', 
+                                  borderRadius: '6px', 
+                                  padding: '10px', 
+                                  fontSize: '13px', 
+                                  resize: 'none', 
+                                  overflowY: 'hidden' 
+                                }}
+                              />
+                            </div>
+                            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
+                              <button 
+                                className="btn" 
+                                style={{ padding: '8px 16px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--success)', color: '#fff' }}
+                                onClick={() => handleSaveInlineTemplate(cat)}
+                              >
+                                {Icons.check()} Save Template
+                              </button>
+                              <button 
+                                className="btn btn-secondary" 
+                                style={{ padding: '8px 16px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
+                                onClick={() => setEditingCategory(null)}
+                              >
+                                Cancel
+                              </button>
                             </div>
                           </div>
-                          <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                            <strong>Demo Link 2:</strong>
-                            <div style={{ background: 'rgba(0,0,0,0.15)', padding: '8px 12px', borderRadius: '6px', marginTop: '4px', fontFamily: 'monospace', color: allTemplates.categories[cat].demoLink2 ? 'var(--text-primary)' : 'var(--text-muted)', wordBreak: 'break-all' }}>
-                              {allTemplates.categories[cat].demoLink2 || 'No link provided'}
+                        ) : (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                            {/* Intro Message Preview */}
+                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                              <strong>Intro Message:</strong>
+                              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                                {allTemplates.categories[cat].introTemplate || '(None)'}
+                              </div>
+                            </div>
+
+                            {/* Follow-up Message Preview */}
+                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
+                              <strong>Follow-up Message:</strong>
+                              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
+                                {allTemplates.categories[cat].followupTemplate || '(None)'}
+                              </div>
                             </div>
                           </div>
-                        </div>
-
-                        {/* Intro Message Preview */}
-                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                          <strong>Intro Message:</strong>
-                          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                            {allTemplates.categories[cat].introTemplate || '(None)'}
-                          </div>
-                        </div>
-
-                        {/* Follow-up Message Preview */}
-                        <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                          <strong>Follow-up Message:</strong>
-                          <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                            {allTemplates.categories[cat].followupTemplate || '(None)'}
-                          </div>
-                        </div>
+                        )}
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

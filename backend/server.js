@@ -135,6 +135,32 @@ app.post('/api/templates/save', (req, res) => {
   }
 });
 
+// 3d. Delete templates configuration
+app.post('/api/templates/delete', (req, res) => {
+  const { category } = req.body;
+  if (!category) {
+    return res.status(400).json({ error: 'Category is required' });
+  }
+
+  try {
+    const templates = getTemplates();
+    const cleanCategory = category.toLowerCase().trim();
+    if (templates.categories && templates.categories[cleanCategory]) {
+      delete templates.categories[cleanCategory];
+      const saved = saveTemplates(templates);
+      if (saved) {
+        res.json({ message: `Templates for category "${cleanCategory}" deleted successfully` });
+      } else {
+        res.status(500).json({ error: 'Failed to delete templates' });
+      }
+    } else {
+      res.status(404).json({ error: 'Category not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // 4. Start Google Maps Scraping
 app.post('/api/scrape/start', async (req, res) => {
   const { category, location, mobileOnly, scrollDepth } = req.body;
