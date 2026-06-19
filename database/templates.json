@@ -7,10 +7,10 @@
       "demoLink2": "https://themewagon.github.io/feane/"
     },
     "clinics": {
-      "introTemplate": "Hello {{business_name}}!\n\nI saw your medical clinic profile on Google Maps in {{location}} and noticed you don't have a website for direct appointment booking.\n\nWe build custom booking websites for clinics that let patients schedule appointments easily and receive updates on WhatsApp.\n\nHere are some of our previews:\n- Preview 1: {{demo_link1}}\n- Preview 2: {{demo_link2}}\n\nReply back if you'd like a free booking page mockup for your clinic!",
-      "followupTemplate": "Hello {{business_name}}!\n\nJust following up. We can set up your online booking assistant and patient portal in just 2 days.\n\nCheck out the demo pages here:\n- Demo 1: {{demo_link1}}\n- Demo 2: {{demo_link2}}\n\nLet me know if we can show you a quick mockup.",
-      "demoLink1": "",
-      "demoLink2": ""
+      "introTemplate": "Hello {{business_name}}! 🩺\n\nI noticed you have a great medical clinic profile on Google Maps in {{location}}, but you don't have a website for direct patient appointment booking.\n\nToday, most patients look up doctors online before visiting. Having your own professional website is essential to showcase your medical services, build trust, and manage appointments smoothly on your own website—reducing heavy phone calls at your front desk.\n\nWe build premium, custom clinic booking websites starting at just ₹999! 🚀\n\nSee how your digital clinic and booking system could look in these demo sites:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime to get your website ready!",
+      "followupTemplate": "Hello {{business_name}}! 🩺\n\nJust following up on my previous message.\n\nGive your patients a seamless way to book visits while keeping your reception organized. We can launch your custom appointment-booking website—in just 2 days for only ₹999! 🚀\n\nHere are the demo pages again:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime to get your website ready!",
+      "demoLink1": "https://htmlcodex.com/demo/?item=2296",
+      "demoLink2": "https://htmlcodex.com/demo/?item=1609"
     },
     "salons": {
       "demoLink1": "",

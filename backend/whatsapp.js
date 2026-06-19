@@ -1,6 +1,8 @@
 import pkg from 'whatsapp-web.js';
 const { Client, LocalAuth } = pkg;
 import qrcode from 'qrcode';
+import fs from 'fs';
+import path from 'path';
 
 let client = null;
 let clientStatus = 'disconnected'; // disconnected, connecting, qr, authenticated, ready
@@ -16,6 +18,17 @@ export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
     onLog('[WhatsApp] Client already exists. Returning status: ' + clientStatus);
     onStatus(clientStatus);
     return;
+  }
+
+  // Clear any stale SingletonLock files left by previous crashes to prevent startup lock errors
+  try {
+    const lockPath = path.join(process.cwd(), '.wwebjs_auth', 'session', 'SingletonLock');
+    if (fs.existsSync(lockPath)) {
+      onLog('[WhatsApp] Stale lock file found. Deleting SingletonLock to prevent startup blocks...');
+      fs.unlinkSync(lockPath);
+    }
+  } catch (err) {
+    onLog('[WhatsApp] Failed to clean stale lock file: ' + err.message);
   }
 
   onLog('[WhatsApp] Initializing client...');
@@ -56,10 +69,17 @@ export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
     onLog('[WhatsApp] Client authenticated successfully.');
   });
 
-  client.on('auth_failure', (msg) => {
+  client.on('auth_failure', async (msg) => {
     clientStatus = 'disconnected';
     onStatus(clientStatus);
     onLog('[WhatsApp] Auth failure: ' + msg);
+    try {
+      if (client) {
+        await client.destroy();
+      }
+    } catch (err) {
+      onLog('[WhatsApp] Error destroying client on auth failure: ' + err.message);
+    }
     client = null;
   });
 
@@ -69,10 +89,17 @@ export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
     onLog('[WhatsApp] Client is ready and connected!');
   });
 
-  client.on('disconnected', (reason) => {
+  client.on('disconnected', async (reason) => {
     clientStatus = 'disconnected';
     onStatus(clientStatus);
     onLog('[WhatsApp] Client disconnected: ' + reason);
+    try {
+      if (client) {
+        await client.destroy();
+      }
+    } catch (err) {
+      onLog('[WhatsApp] Error destroying client on disconnect: ' + err.message);
+    }
     client = null;
   });
 
@@ -84,10 +111,17 @@ export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
   });
 
   // Start initialization
-  client.initialize().catch(err => {
+  client.initialize().catch(async (err) => {
     clientStatus = 'disconnected';
     onStatus(clientStatus);
     onLog('[WhatsApp] Initialization failed: ' + err.message);
+    try {
+      if (client) {
+        await client.destroy();
+      }
+    } catch (e) {
+      onLog('[WhatsApp] Error destroying client after init failure: ' + e.message);
+    }
     client = null;
   });
 }
