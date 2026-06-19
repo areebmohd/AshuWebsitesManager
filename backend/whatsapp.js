@@ -39,14 +39,23 @@ export function initWhatsApp(onStatus, onQR, onLog, onMessage) {
     authStrategy: new LocalAuth({
       dataPath: './.wwebjs_auth'
     }),
+    webVersionCache: {
+      type: 'remote',
+      remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+      strict: false
+    },
     puppeteer: {
       headless: true,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
-        '--disable-gpu'
-      ]
+        '--disable-gpu',
+        '--window-size=1920,1080',
+        '--disable-blink-features=AutomationControlled',
+        '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
+      ],
+      userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36'
     }
   });
 
@@ -200,4 +209,56 @@ export async function logoutWhatsApp(onStatus, onLog) {
     clientStatus = 'disconnected';
     onStatus(clientStatus);
   }
+}
+
+/**
+ * Check recent chats for replies
+ * @param {Array} sentLeads - Array of leads that have status 'Sent'
+ * @param {function} onReplied - Callback when a lead is found to have replied
+ * @param {function} onLog - Callback for progress logging
+ */
+export async function checkReplies(sentLeads, onReplied, onLog) {
+  if (!client || clientStatus !== 'ready') {
+    throw new Error('WhatsApp client is not ready. Status: ' + clientStatus);
+  }
+
+  onLog('[WhatsApp] Starting scan for replies...');
+  let repliedCount = 0;
+
+  for (let i = 0; i < sentLeads.length; i++) {
+    const lead = sentLeads[i];
+    const jid = formatPhoneNumber(lead.phone);
+    onLog(`[WhatsApp] Checking chat [${i + 1}/${sentLeads.length}] for "${lead.name}"...`);
+
+    try {
+      const numberId = await client.getNumberId(jid);
+      if (!numberId) {
+        onLog(`[WhatsApp] ⚠️ Number not registered on WhatsApp: ${lead.phone}`);
+        continue;
+      }
+
+      const chat = await client.getChatById(numberId._serialized);
+      if (chat) {
+        const messages = await chat.fetchMessages({ limit: 15 });
+        if (messages && messages.length > 0) {
+          // Simply check if any message in the fetched history is from the contact
+          const hasReplied = messages.some(m => !m.fromMe);
+
+          if (hasReplied) {
+            repliedCount++;
+            onLog(`[WhatsApp] 💬 Found reply from "${lead.name}".`);
+            await onReplied(lead.id);
+          }
+        }
+      }
+    } catch (err) {
+      onLog(`[WhatsApp] Error checking chat for "${lead.name}": ${err.message}`);
+    }
+
+    // Small delay to prevent rate limits
+    await new Promise(resolve => setTimeout(resolve, 300));
+  }
+
+  onLog(`[WhatsApp] Reply scan complete. Found ${repliedCount} new replies.`);
+  return repliedCount;
 }

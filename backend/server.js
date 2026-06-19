@@ -4,7 +4,7 @@ import { Server } from 'socket.io';
 import cors from 'cors';
 import { getLeads, updateLead, getStats, getTemplates, saveTemplates } from './db.js';
 import { runScraper } from './scraper.js';
-import { initWhatsApp, getWhatsAppStatus, sendMessage, logoutWhatsApp } from './whatsapp.js';
+import { initWhatsApp, getWhatsAppStatus, sendMessage, logoutWhatsApp, checkReplies } from './whatsapp.js';
 
 const app = express();
 const httpServer = createServer(app);
@@ -184,14 +184,15 @@ app.post('/api/whatsapp/connect', (req, res) => {
         logProgress(logMsg);
       },
       async (fromPhone, messageBody) => {
-        logProgress(`[WhatsApp] Inbound message from ${fromPhone}: "${messageBody.substring(0, 60)}"`);
+        const cleanFrom = fromPhone.replace(/[^0-9]/g, '');
+        const last10From = cleanFrom.slice(-10);
+        logProgress(`[WhatsApp] Inbound message from ${cleanFrom} (ending in ${last10From}): "${messageBody.substring(0, 60)}"`);
         
         const leads = getLeads();
-        const cleanFrom = fromPhone.slice(-10); // Check last 10 digits
-        
         const matchingLead = leads.find(l => {
-          const cleanLeadPhone = l.phone.slice(-10);
-          return cleanLeadPhone === cleanFrom && l.status === 'Sent';
+          const cleanLeadPhone = l.phone.replace(/[^0-9]/g, '');
+          const last10Lead = cleanLeadPhone.slice(-10);
+          return last10Lead === last10From && (l.status === 'Sent' || l.status === 'Pending');
         });
         
         if (matchingLead) {
@@ -200,6 +201,8 @@ app.post('/api/whatsapp/connect', (req, res) => {
             status: 'Replied'
           });
           io.emit('lead_updated', updated);
+        } else {
+          logProgress(`[System] No matching 'Sent' or 'Pending' lead found in database for number ending in ${last10From}.`);
         }
       }
     );
@@ -251,6 +254,53 @@ app.post('/api/outreach/stop', (req, res) => {
   currentOutreachStatus = "Idle (Stop automatic messages button clicked)";
   io.emit('outreach_operation', currentOutreachStatus);
   res.json({ message: 'Automatic campaign outreach stopped.' });
+});
+
+// 9b. Check Replies
+let isCheckingReplies = false;
+app.post('/api/outreach/check-replies', (req, res) => {
+  if (getWhatsAppStatus() !== 'ready') {
+    return res.status(400).json({ error: 'WhatsApp client must be connected and ready first.' });
+  }
+  if (isCheckingReplies) {
+    return res.json({ message: 'Reply check is already in progress.' });
+  }
+  
+  isCheckingReplies = true;
+  res.json({ message: 'Check replies process started.' });
+
+  // Run async check loop
+  (async () => {
+    try {
+      currentOutreachStatus = "Active (Scanning chats for replies...)";
+      io.emit('outreach_operation', currentOutreachStatus);
+
+      const leads = getLeads();
+      const sentLeads = leads.filter(l => l.status === 'Sent');
+
+      if (sentLeads.length === 0) {
+        logProgress('[System] No leads with status "Sent" found in database.');
+        return;
+      }
+
+      await checkReplies(
+        sentLeads,
+        async (leadId) => {
+          const updated = updateLead(leadId, { status: 'Replied' });
+          io.emit('lead_updated', updated);
+        },
+        (logMsg) => {
+          logProgress(logMsg);
+        }
+      );
+    } catch (err) {
+      logProgress(`[System] ❌ Check replies failed: ${err.message}`);
+    } finally {
+      isCheckingReplies = false;
+      currentOutreachStatus = "Idle (Scan completed)";
+      io.emit('outreach_operation', currentOutreachStatus);
+    }
+  })();
 });
 
 // ----------------------------------------------------------------------------

@@ -141,31 +141,31 @@ export function getTemplates() {
     "restaurants": {
       "demoLink1": "",
       "demoLink2": "",
-      "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!",
+      "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}, but you don't have a website. We build custom ordering websites starting at just ₹999. Are you open to seeing some design previews?",
       "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!"
     },
     "clinics": {
       "demoLink1": "",
       "demoLink2": "",
-      "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}, but you don't have a website to showcase your services and get direct online bookings.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!",
+      "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}, but you don't have a website. We build premium clinic booking websites starting at just ₹999. Are you open to seeing some design previews?",
       "followupTemplate": "Hello {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!"
     },
     "salons": {
       "demoLink1": "",
       "demoLink2": "",
-      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}, but you don't have a website to showcase your services and get direct online bookings.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!",
+      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}, but you don't have a website. We build salon booking and services websites starting at just ₹999. Are you open to seeing some design previews?",
       "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!"
     },
     "clothing shops": {
       "demoLink1": "",
       "demoLink2": "",
-      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing boutique listing on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!",
+      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing boutique listing on Google Maps in {{location}}, but you don't have a website. We build e-commerce product catalog websites starting at just ₹999. Are you open to seeing some design previews?",
       "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!"
     },
     "electronics shops": {
       "demoLink1": "",
       "demoLink2": "",
-      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.\n\nSince everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions. We can help you to build custom website starting at just ₹999! 🚀\n\nHere are some of our demo previews:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!",
+      "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}, but you don't have a website. We build catalog and ordering websites starting at just ₹999. Are you open to seeing some design previews?",
       "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nHere are the previews again for you to check out:\n🌐 {{demo_link1}}\n🌐 {{demo_link2}}\n\nCall or message anytime if you want to see a website like this built specifically for your business!"
     }
   };

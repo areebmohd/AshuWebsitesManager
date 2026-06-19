@@ -126,6 +126,20 @@ export default function Home() {
     noPhone: 0
   });
   const consoleEndRef = useRef(null);
+  const whatsappWindowRef = useRef(null);
+
+  const triggerWhatsApp = (url) => {
+    try {
+      if (whatsappWindowRef.current && !whatsappWindowRef.current.closed) {
+        whatsappWindowRef.current.location = url;
+      } else {
+        whatsappWindowRef.current = window.open(url, 'whatsapp_outreach_session');
+      }
+    } catch (err) {
+      console.warn('[WhatsApp] Re-routing error, falling back to window.open:', err);
+      whatsappWindowRef.current = window.open(url, 'whatsapp_outreach_session');
+    }
+  };
 
   const adjustHeight = (el) => {
     if (el) {
@@ -166,11 +180,11 @@ export default function Home() {
   const [whatsappQR, setWhatsappQR] = useState('');
   const [outreachOperation, setOutreachOperation] = useState('Idle (Stop automatic messages button not clicked)');
   const [isMessageOpened, setIsMessageOpened] = useState(false);
-  const [isAutoRunning, setIsAutoRunning] = useState(false);
+  const [isCheckingReplies, setIsCheckingReplies] = useState(false);
 
   useEffect(() => {
     if (whatsappStatus !== 'ready') {
-      setIsAutoRunning(false);
+      setIsCheckingReplies(false);
     }
   }, [whatsappStatus]);
 
@@ -243,6 +257,9 @@ export default function Home() {
 
     socket.on('outreach_operation', (operation) => {
       setOutreachOperation(operation);
+      if (operation.includes('Scan completed') || operation.includes('failed') || operation.includes('Idle')) {
+        setIsCheckingReplies(false);
+      }
     });
 
     return () => {
@@ -443,33 +460,21 @@ export default function Home() {
     }
   };
 
-  const handleStartAutoOutreach = async () => {
+  const handleCheckReplies = async () => {
+    if (isCheckingReplies) return;
     try {
-      const res = await fetch(`${API_BASE}/api/outreach/start`, { method: 'POST' });
+      setIsCheckingReplies(true);
+      const res = await fetch(`${API_BASE}/api/outreach/check-replies`, { method: 'POST' });
       const data = await res.json();
       if (!res.ok) {
-        alert(data.error || 'Failed to start automated campaign');
+        alert(data.error || 'Failed to start checking replies');
+        setIsCheckingReplies(false);
       } else {
         alert(data.message);
-        setIsAutoRunning(true);
       }
     } catch (err) {
-      console.error('Error starting automated outreach:', err);
-    }
-  };
-
-  const handleStopAutoOutreach = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/outreach/stop`, { method: 'POST' });
-      const data = await res.json();
-      if (!res.ok) {
-        alert(data.error || 'Failed to stop automated campaign');
-      } else {
-        alert(data.message);
-        setIsAutoRunning(false);
-      }
-    } catch (err) {
-      console.error('Error stopping automated outreach:', err);
+      console.error('Error checking replies:', err);
+      setIsCheckingReplies(false);
     }
   };
 
@@ -527,10 +532,17 @@ export default function Home() {
       return;
     }
     const cleanPhone = formatPhoneForWa(lead.phone);
-    const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`;
+    const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(message)}`;
     
-    // Open in a new tab
-    window.open(waUrl, '_blank');
+    // Copy to clipboard as backup to prevent any truncation/encoding issues in browser redirects
+    try {
+      await navigator.clipboard.writeText(message);
+    } catch (err) {
+      console.warn('Failed to copy to clipboard:', err);
+    }
+
+    // Open in a reused session tab to prevent multiple windows/tabs opening
+    triggerWhatsApp(waUrl);
 
     // Update status to 'Sent' and log note
     const outreachType = lead.status === 'Pending' ? 'Intro' : 'Follow-up';
@@ -1008,18 +1020,18 @@ export default function Home() {
                           </td>
                           <td>
                             <div style={{ fontWeight: '600' }}>{lead.name}</div>
-                            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '4px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px', marginTop: '4px' }}>
                               <a
                                 href={lead.url}
                                 target="_blank"
                                 rel="noreferrer"
-                                style={{ fontSize: '12px', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '4px', marginTop: '4px' }}
+                                style={{ fontSize: '12px', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontFamily: 'inherit', lineHeight: 'inherit' }}
                               >
-                                {Icons.link()} View on Google Maps
+                                {Icons.link()} {lead.location || 'View on Google Maps'}
                               </a>
                               {lead.notes && lead.notes.trim() && (
                                 <>
-                                  <span style={{ fontSize: '12px', color: '#475569', margin: '4px 4px 0 4px' }}>•</span>
+                                  <span style={{ fontSize: '12px', color: '#475569', display: 'inline-flex', alignItems: 'center' }}>•</span>
                                   <button
                                     onClick={() => alert(`Notes for ${lead.name}:\n\n${lead.notes}`)}
                                     style={{
@@ -1032,7 +1044,8 @@ export default function Home() {
                                       display: 'inline-flex',
                                       alignItems: 'center',
                                       gap: '4px',
-                                      marginTop: '4px'
+                                      fontFamily: 'inherit',
+                                      lineHeight: 'inherit'
                                     }}
                                   >
                                     {Icons.info()} View Notes
@@ -1129,11 +1142,11 @@ export default function Home() {
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
               
-              {/* SECTION 1: AUTOMATED OUTREACH ENGINE */}
+              {/* SECTION 1: AUTOMATED REPLY CHECKER */}
               <div className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
                   <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {Icons.phone()} Automated Outreach (via whatsapp-web.js)
+                    {Icons.phone()} Automated Reply Checker (via whatsapp-web.js)
                   </h2>
                 </div>
 
@@ -1141,7 +1154,7 @@ export default function Home() {
                   {/* Connection Control Block */}
                   <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6' }}>
-                      Connect your device by scanning the QR code, then start the automatic cold outreach campaign loops. 
+                      Connect your device by scanning the QR code, then click "Check replies" to automatically check for responses and update your CRM dashboard status.
                     </p>
 
                     <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -1157,17 +1170,17 @@ export default function Home() {
                           alignItems: 'center',
                           background: whatsappStatus === 'ready' 
                             ? 'var(--success-glow)' 
-                            : whatsappStatus === 'connecting' || whatsappStatus === 'qr' 
+                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
                               ? 'var(--warning-glow)' 
                               : 'var(--error-glow)',
                           color: whatsappStatus === 'ready' 
                             ? '#10b981' 
-                            : whatsappStatus === 'connecting' || whatsappStatus === 'qr' 
+                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
                               ? '#fbbf24' 
                               : '#f87171',
                           border: whatsappStatus === 'ready' 
                             ? '1px solid rgba(16, 185, 129, 0.3)' 
-                            : whatsappStatus === 'connecting' || whatsappStatus === 'qr' 
+                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
                               ? '1px solid rgba(245, 158, 11, 0.3)' 
                               : '1px solid rgba(239, 68, 68, 0.3)'
                         }}
@@ -1185,25 +1198,23 @@ export default function Home() {
                           </button>
 
                           {whatsappStatus === 'ready' && (
-                            <>
-                              {!isAutoRunning ? (
-                                <button 
-                                  className="btn" 
-                                  onClick={handleStartAutoOutreach} 
-                                  style={{ background: 'var(--success)', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}
-                                >
-                                  {Icons.campaigns()} Send automatic messages
-                                </button>
-                              ) : (
-                                <button 
-                                  className="btn-danger-outline" 
-                                  onClick={handleStopAutoOutreach}
-                                  style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
-                                >
-                                  {Icons.x()} Stop automatic messages
-                                </button>
-                              )}
-                            </>
+                            <button 
+                              className="btn" 
+                              onClick={handleCheckReplies} 
+                              disabled={isCheckingReplies}
+                              style={{ 
+                                background: isCheckingReplies ? 'rgba(255, 255, 255, 0.05)' : 'var(--success)', 
+                                color: isCheckingReplies ? 'var(--text-secondary)' : '#fff', 
+                                border: isCheckingReplies ? '1px solid var(--border-color)' : 'none',
+                                cursor: isCheckingReplies ? 'not-allowed' : 'pointer',
+                                display: 'flex', 
+                                alignItems: 'center', 
+                                gap: '8px' 
+                              }}
+                            >
+                              {isCheckingReplies ? Icons.sync("animate-spin") : Icons.check()}
+                              {isCheckingReplies ? 'Checking replies...' : 'Check replies'}
+                            </button>
                           )}
                         </>
                       )}
@@ -1488,11 +1499,19 @@ export default function Home() {
         // Auto-compile message for current lead
         const compiledMsg = getCompiledMessage(lead);
 
-        const handleWizardSend = () => {
+        const handleWizardSend = async () => {
           const cleanPhone = formatPhoneForWa(lead.phone);
           const textCopy = wizardCustomText || compiledMsg || '';
-          const waUrl = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(textCopy)}`;
-          window.open(waUrl, 'whatsapp_outreach_session');
+          const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(textCopy)}`;
+          
+          // Copy to clipboard as backup to prevent any truncation/encoding issues in browser redirects
+          try {
+            await navigator.clipboard.writeText(textCopy);
+          } catch (err) {
+            console.warn('Failed to copy to clipboard:', err);
+          }
+
+          triggerWhatsApp(waUrl);
           setIsMessageOpened(true);
         };
 

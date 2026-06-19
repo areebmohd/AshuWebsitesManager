@@ -559,11 +559,11 @@
     "category": "restaurants",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Sai%27s+kitchen/data=!4m7!3m6!1s0x390d19c1582c27db:0xc0e9c37380ca787!8m2!3d28.4357066!4d77.0816683!16s%2Fg%2F11xn3dd2pg!19sChIJ2ycsWMEZDTkRh6cMODecDgw?authuser=0&hl=en&rclk=1",
-    "status": "Sent",
+    "status": "Replied",
     "notes": "",
     "lastSentDate": "2026-06-18T08:29:57.844Z",
     "createdAt": "2026-06-18T08:06:16.637Z",
-    "updatedAt": "2026-06-18T08:29:57.845Z"
+    "updatedAt": "2026-06-19T11:05:35.061Z"
   },
   {
     "id": "lead_1781769991223_fd1hf",
@@ -767,11 +767,11 @@
     "category": "restaurants",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Two+Wholesome+Bakers+Kitchen+%28+a+unit+of+Wholesome+Foods%29/data=!4m7!3m6!1s0x390d1f2a4e866f49:0x76989e3f30000000!8m2!3d28.4366087!4d77.0862964!16s%2Fg%2F11p6sm16mw!19sChIJSW-GTiofDTkRAAAAMD-emHY?authuser=0&hl=en&rclk=1",
-    "status": "Sent",
+    "status": "Replied",
     "notes": "Broken/Offline website: https://linktr.ee/twowholesomebakers",
     "lastSentDate": "2026-06-18T08:39:54.735Z",
     "createdAt": "2026-06-18T08:08:26.400Z",
-    "updatedAt": "2026-06-18T08:39:54.736Z"
+    "updatedAt": "2026-06-19T10:51:42.650Z"
   },
   {
     "id": "lead_1781770109798_3ie07",
@@ -806,10 +806,11 @@
     "category": "restaurants",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Kebabs+%26+Curries+Company/data=!4m7!3m6!1s0x390d19778138e07f:0x37d24638268a5dc1!8m2!3d28.436721!4d77.05881!16s%2Fg%2F11vl40zdt6!19sChIJf-A4gXcZDTkRwV2KJjhG0jc?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: https://www.kebabscurries.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T08:08:58.530Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:20:40.987Z",
+    "createdAt": "2026-06-18T08:08:58.530Z",
+    "updatedAt": "2026-06-19T10:51:44.361Z"
   },
   {
     "id": "lead_1781790260623_iu2m6",
@@ -818,10 +819,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Mamta+Healthcare/data=!4m7!3m6!1s0x390d18a3c457d9d7:0xb46aaf12d531e394!8m2!3d28.4334155!4d77.0827989!16s%2Fg%2F12hmw5r0s!19sChIJ19lXxKMYDTkRlOMx1RKvarQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: http://mamta-himc.org/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:20.623Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:22:56.465Z",
+    "createdAt": "2026-06-18T13:44:20.623Z",
+    "updatedAt": "2026-06-19T10:51:45.109Z"
   },
   {
     "id": "lead_1781790270304_0hbti",
@@ -830,10 +832,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Doctor%27s+Healthcare/data=!4m7!3m6!1s0x390d19524cf5364d:0x4e1237b2aef3704d!8m2!3d28.4310397!4d77.0863951!16s%2Fg%2F11hz42786r!19sChIJTTb1TFIZDTkRTXDzrrI3Ek4?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:30.304Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:26:46.976Z",
+    "createdAt": "2026-06-18T13:44:30.304Z",
+    "updatedAt": "2026-06-19T10:51:45.845Z"
   },
   {
     "id": "lead_1781790272874_nvhrd",
@@ -842,10 +845,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/P.G+Clinic/data=!4m7!3m6!1s0x390d18a17524bea9:0x3ab2bbf5f504cd2b!8m2!3d28.4312556!4d77.0824958!16s%2Fg%2F11t55_kkzd!19sChIJqb4kdaEYDTkRK80E9fW7sjo?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:32.874Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:27:09.036Z",
+    "createdAt": "2026-06-18T13:44:32.874Z",
+    "updatedAt": "2026-06-19T10:51:46.689Z"
   },
   {
     "id": "lead_1781790279183_zugbr",
@@ -854,10 +858,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/CHILD+GLOW+CLINIC/data=!4m7!3m6!1s0x390d19cd3932a483:0x21ee7ce11dfaf03d!8m2!3d28.4306605!4d77.0867595!16s%2Fg%2F11tg5y6_pv!19sChIJg6QyOc0ZDTkRPfD6HeF87iE?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:39.183Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:27:19.051Z",
+    "createdAt": "2026-06-18T13:44:39.183Z",
+    "updatedAt": "2026-06-19T10:51:47.513Z"
   },
   {
     "id": "lead_1781790284832_xfbk2",
@@ -866,10 +871,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Kaushal+health+care/data=!4m7!3m6!1s0x390d19bf74e9a03d:0x9dc87814623f5a54!8m2!3d28.4337984!4d77.0841226!16s%2Fg%2F12llt76r0!19sChIJPaDpdL8ZDTkRVFo_YhR4yJ0?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:44.832Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:27:31.634Z",
+    "createdAt": "2026-06-18T13:44:44.832Z",
+    "updatedAt": "2026-06-19T10:51:48.337Z"
   },
   {
     "id": "lead_1781790287372_0bq0y",
@@ -878,10 +884,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Health+Care+Clinic,+sector+52,+near+indian+overseas+bank.wazirabad./data=!4m7!3m6!1s0x390d1f55dc2990e1:0xf03d7ee9c948814!8m2!3d28.4348214!4d77.0839526!16s%2Fg%2F11q_nhy_my!19sChIJ4ZAp3FUfDTkRFIiUnO7XAw8?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:47.372Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:27:42.659Z",
+    "createdAt": "2026-06-18T13:44:47.372Z",
+    "updatedAt": "2026-06-19T10:51:49.095Z"
   },
   {
     "id": "lead_1781790290087_l1d35",
@@ -890,10 +897,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Credence+Super+Specialty+Clinic,+Clinic+in+Gurgaon+sector+52/data=!4m7!3m6!1s0x390d19a559608867:0x1daebc034b4c56aa!8m2!3d28.4308773!4d77.0754879!16s%2Fg%2F11g18zkkrf!19sChIJZ4hgWaUZDTkRqlZMSwO8rh0?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:50.087Z"
+    "status": "Failed",
+    "notes": "Number unregistered or invalid on WhatsApp",
+    "lastSentDate": "2026-06-19T09:28:01.469Z",
+    "createdAt": "2026-06-18T13:44:50.087Z",
+    "updatedAt": "2026-06-19T09:28:01.498Z"
   },
   {
     "id": "lead_1781790292630_blzbx",
@@ -902,10 +910,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/SR.+Clinic/data=!4m7!3m6!1s0x390d2222767d1d51:0x85fc5082164f4848!8m2!3d28.4325331!4d77.0878038!16s%2Fg%2F11rqslx67n!19sChIJUR19diIiDTkRSEhPFoJQ_IU?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:52.630Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:28:12.397Z",
+    "createdAt": "2026-06-18T13:44:52.630Z",
+    "updatedAt": "2026-06-19T10:51:50.074Z"
   },
   {
     "id": "lead_1781790299014_7pkmq",
@@ -914,10 +923,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Doctor%27s+Clinic/data=!4m7!3m6!1s0x390d18a6c2e87afd:0x9c1335c1ed8d7221!8m2!3d28.4389629!4d77.0882595!16s%2Fg%2F12hk7zs91!19sChIJ_XrowqYYDTkRIXKN7cE1E5w?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:44:59.014Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:28:23.441Z",
+    "createdAt": "2026-06-18T13:44:59.014Z",
+    "updatedAt": "2026-06-19T10:51:50.756Z"
   },
   {
     "id": "lead_1781790301515_ruqhg",
@@ -926,10 +936,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/ANJANI+HOLISTIC+HEALTHCARE+CLINIC/data=!4m7!3m6!1s0x390d19ac9e82a353:0x72914bd27f246969!8m2!3d28.4313668!4d77.0822782!16s%2Fg%2F11ym1012jh!19sChIJU6OCnqwZDTkRaWkkf9JLkXI?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:01.515Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:28:37.883Z",
+    "createdAt": "2026-06-18T13:45:01.515Z",
+    "updatedAt": "2026-06-19T10:51:51.711Z"
   },
   {
     "id": "lead_1781790304869_x2dpu",
@@ -938,10 +949,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Laljit+Singh+%26+Dr.Shubhangi+Agrawal/data=!4m7!3m6!1s0x390d1896ed0fd01b:0xc7a80cfa4b9b469e!8m2!3d28.4418019!4d77.0758121!16s%2Fg%2F11d_2tpw2x!19sChIJG9AP7ZYYDTkRnkabS_oMqMc?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website (Status 404): https://embed.fbsbx.com/playables/view/774991265544579/?ext=1784887810&hash=Q92gDAGTNbx8LXjlH7LyQLjxHrMN",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:04.869Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:28:48.708Z",
+    "createdAt": "2026-06-18T13:45:04.869Z",
+    "updatedAt": "2026-06-19T11:05:48.822Z"
   },
   {
     "id": "lead_1781790307415_4lqxa",
@@ -950,10 +962,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Janta+Clinic/data=!4m7!3m6!1s0x390d18a68a022e9d:0xc362ddd1debdad1!8m2!3d28.4320673!4d77.0881858!16s%2Fg%2F1tf6vr9c!19sChIJnS4CiqYYDTkR0drrHd0tNgw?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:07.415Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:29:04.273Z",
+    "createdAt": "2026-06-18T13:45:07.415Z",
+    "updatedAt": "2026-06-19T10:51:53.342Z"
   },
   {
     "id": "lead_1781790309917_o38cq",
@@ -962,10 +975,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Shiv+Clinic/data=!4m7!3m6!1s0x390d189858b7a8d5:0x10493a006f0b61d6!8m2!3d28.4351588!4d77.0776583!16s%2Fg%2F11tdl6ycrc!19sChIJ1ai3WJgYDTkR1mELbwA6SRA?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:09.917Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:29:19.253Z",
+    "createdAt": "2026-06-18T13:45:09.917Z",
+    "updatedAt": "2026-06-19T10:51:54.271Z"
   },
   {
     "id": "lead_1781790315749_w1gqj",
@@ -974,10 +988,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Family+Care+Clinic/data=!4m7!3m6!1s0x390d18a667c31e77:0x540e0b386a579229!8m2!3d28.4318859!4d77.0887708!16s%2Fg%2F11vxjpcvkf!19sChIJdx7DZ6YYDTkRKZJXajgLDlQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:15.749Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:29:30.385Z",
+    "createdAt": "2026-06-18T13:45:15.749Z",
+    "updatedAt": "2026-06-19T10:51:55.192Z"
   },
   {
     "id": "lead_1781790318274_jg6n8",
@@ -986,10 +1001,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Skin+Clinic/data=!4m7!3m6!1s0x390d189baf656e63:0xac1df79560de6fcc!8m2!3d28.432797!4d77.0729428!16s%2Fg%2F11kb4cgxhy!19sChIJY25lr5sYDTkRzG_eYJX3Haw?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:18.274Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:29:40.769Z",
+    "createdAt": "2026-06-18T13:45:18.274Z",
+    "updatedAt": "2026-06-19T10:51:56.076Z"
   },
   {
     "id": "lead_1781790332445_yblku",
@@ -998,10 +1014,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Pooja+Clinic/data=!4m7!3m6!1s0x390d18ba9ee89a5b:0x1d22193bb37466d7!8m2!3d28.440716!4d77.0903955!16s%2Fg%2F12hlp10nh!19sChIJW5ronroYDTkR12Z0szsZIh0?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:32.445Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:29:51.007Z",
+    "createdAt": "2026-06-18T13:45:32.445Z",
+    "updatedAt": "2026-06-19T10:51:56.877Z"
   },
   {
     "id": "lead_1781790339048_5o2kk",
@@ -1010,10 +1027,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Pragya+Punj+%7C+MBBS,+MD+Dermatology+%7C+ECFMG+%28USA%29+%7C+Skin,+Hair,+Laser+and+Aesthetics+Specialist+%7C+Skin+Surgeon/data=!4m7!3m6!1s0x390d19fbcb3543df:0x778d1e24e08db1c4!8m2!3d28.44181!4d77.0795947!16s%2Fg%2F11sck8t9p7!19sChIJ30M1y_sZDTkRxLGN4CQejXc?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: https://www.drpragyapunj.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:39.048Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:30:03.658Z",
+    "createdAt": "2026-06-18T13:45:39.048Z",
+    "updatedAt": "2026-06-19T10:51:57.942Z"
   },
   {
     "id": "lead_1781790345538_vlcbb",
@@ -1022,10 +1040,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/SIGMA+ENT+CLINIC+%7C+ENT+Specialist+in+Gurugram/data=!4m7!3m6!1s0x390d195dc7d23b29:0x1d48cb99ad019c12!8m2!3d28.4366521!4d77.0680664!16s%2Fg%2F11lh3cm6mj!19sChIJKTvSx10ZDTkREpwBrZnLSB0?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: https://dramitabhmalik.in/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:45.538Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:30:19.927Z",
+    "createdAt": "2026-06-18T13:45:45.538Z",
+    "updatedAt": "2026-06-19T10:51:58.773Z"
   },
   {
     "id": "lead_1781790354010_7x7h3",
@@ -1034,10 +1053,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Preeti+Health+Care:+Gynecologist+in+Gurgaon/data=!4m7!3m6!1s0x390d199900f5096b:0x5d7b5914f17c8ccf!8m2!3d28.4389205!4d77.0834433!16s%2Fg%2F11kbc1cs4h!19sChIJawn1AJkZDTkRz4x88RRZe10?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:54.011Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:30:30.378Z",
+    "createdAt": "2026-06-18T13:45:54.011Z",
+    "updatedAt": "2026-06-19T10:51:59.697Z"
   },
   {
     "id": "lead_1781790357064_s6w4p",
@@ -1046,10 +1066,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Seba+Clinic/data=!4m7!3m6!1s0x390d18a6604ea849:0x2b29a6062b3eba90!8m2!3d28.4320912!4d77.0864571!16s%2Fg%2F12hvqql2d!19sChIJSahOYKYYDTkRkLo-KwamKSs?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:45:57.064Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:33:38.100Z",
+    "createdAt": "2026-06-18T13:45:57.064Z",
+    "updatedAt": "2026-06-19T10:52:00.603Z"
   },
   {
     "id": "lead_1781790369871_7y7ox",
@@ -1058,10 +1079,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Shivam+Clinic/data=!4m7!3m6!1s0x390d18a11725eba7:0x7d0fbe203d22204b!8m2!3d28.4306846!4d77.0835326!16s%2Fg%2F12hm6r3tm!19sChIJp-slF6EYDTkRSyAiPSC-D30?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:09.871Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:33:50.326Z",
+    "createdAt": "2026-06-18T13:46:09.871Z",
+    "updatedAt": "2026-06-19T10:52:01.798Z"
   },
   {
     "id": "lead_1781790375574_ife2d",
@@ -1070,10 +1092,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Mallick+Clinic/data=!4m7!3m6!1s0x390d18b0759aa809:0x69ab5840ca865a78!8m2!3d28.440827!4d77.090991!16s%2Fg%2F11jsjjhk6c!19sChIJCaiadbAYDTkReFqGykBYq2k?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:15.574Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:34:02.400Z",
+    "createdAt": "2026-06-18T13:46:15.574Z",
+    "updatedAt": "2026-06-19T10:52:02.931Z"
   },
   {
     "id": "lead_1781790388319_seh7h",
@@ -1082,10 +1105,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr.+Ajay%27s+Eye+Clinic/data=!4m7!3m6!1s0x390d1896cb446223:0xbc4a0c52efca684b!8m2!3d28.4412881!4d77.0735146!16s%2Fg%2F11kb4bfymx!19sChIJI2JEy5YYDTkRS2jK71IMSrw?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Website redirects to Google/Social: https://g.co/kgs/5Q8Hd3V",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:28.319Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:34:17.973Z",
+    "createdAt": "2026-06-18T13:46:28.319Z",
+    "updatedAt": "2026-06-19T10:52:03.998Z"
   },
   {
     "id": "lead_1781790390961_abxhg",
@@ -1094,10 +1118,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Mondal+Clinic/data=!4m7!3m6!1s0x390d189885950c29:0x5c57635b5c782ff5!8m2!3d28.434677!4d77.078834!16s%2Fg%2F12hsqs1s5!19sChIJKQyVhZgYDTkR9S94XFtjV1w?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:30.963Z"
+    "status": "Failed",
+    "notes": "Number unregistered or invalid on WhatsApp",
+    "lastSentDate": "2026-06-19T09:34:37.567Z",
+    "createdAt": "2026-06-18T13:46:30.963Z",
+    "updatedAt": "2026-06-19T09:34:37.598Z"
   },
   {
     "id": "lead_1781790393709_5j4ne",
@@ -1106,10 +1131,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Manoj+Vet+Care+Pet+Clinic/data=!4m7!3m6!1s0x390d19004463f6d5:0x969b1da323a5cee8!8m2!3d28.4349327!4d77.0713039!16s%2Fg%2F11wq9c8y27!19sChIJ1fZjRAAZDTkR6M6lI6Mdm5Y?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:33.709Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:35:19.631Z",
+    "createdAt": "2026-06-18T13:46:33.709Z",
+    "updatedAt": "2026-06-19T10:52:04.861Z"
   },
   {
     "id": "lead_1781790412598_n598r",
@@ -1118,10 +1144,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr.+Shalini+Jaiin-+Gynecologist+in+Gurgaon+%7C+Infertility+IVF+Specialist/data=!4m7!3m6!1s0x390d1959c616135b:0x839474d5ad428428!8m2!3d28.4424551!4d77.0729631!16s%2Fg%2F11ssjr4fs6!19sChIJWxMWxlkZDTkRKIRCrdV0lIM?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:52.598Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:35:31.387Z",
+    "createdAt": "2026-06-18T13:46:52.598Z",
+    "updatedAt": "2026-06-19T10:52:05.820Z"
   },
   {
     "id": "lead_1781790415353_22bb4",
@@ -1130,10 +1157,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Quality+Physio+%E2%80%93+Physiotherapy+%26+Rehab+Clinic/data=!4m7!3m6!1s0x390d19007818a477:0x4b75a03597bc3595!8m2!3d28.4371079!4d77.0801749!16s%2Fg%2F11mrwz1jjd!19sChIJd6QYeAAZDTkRlTW8lzWgdUs?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:55.353Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:40:25.869Z",
+    "createdAt": "2026-06-18T13:46:55.353Z",
+    "updatedAt": "2026-06-19T10:52:06.905Z"
   },
   {
     "id": "lead_1781790417975_su01k",
@@ -1142,10 +1170,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Tamanna+Clinic/data=!4m7!3m6!1s0x390d18a6e96cd4a7:0x348ce950df36816c!8m2!3d28.431157!4d77.086902!16s%2Fg%2F1pt_3z90p!19sChIJp9Rs6aYYDTkRbIE231DpjDQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:46:57.975Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:40:38.480Z",
+    "createdAt": "2026-06-18T13:46:57.975Z",
+    "updatedAt": "2026-06-19T10:52:07.798Z"
   },
   {
     "id": "lead_1781790424894_dp5h6",
@@ -1154,10 +1183,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Mata+Chanda+Devi+Dental+Clinic/data=!4m7!3m6!1s0x390d1feb90779919:0xc97e9adcab2942f6!8m2!3d28.4405741!4d77.09029!16s%2Fg%2F11xlk7khm9!19sChIJGZl3kOsfDTkR9kIpq9yafsk?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:47:04.894Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:42:02.539Z",
+    "createdAt": "2026-06-18T13:47:04.894Z",
+    "updatedAt": "2026-06-19T10:52:08.583Z"
   },
   {
     "id": "lead_1781790430406_ofpba",
@@ -1166,10 +1196,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Khan+Clinic/data=!4m7!3m6!1s0x390d18bac6f78835:0x25fc24cfda5288b9!8m2!3d28.4408728!4d77.0911634!16s%2Fg%2F1ptwbqxhc!19sChIJNYj3xroYDTkRuYhS2s8k_CU?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:47:10.407Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:42:11.788Z",
+    "createdAt": "2026-06-18T13:47:10.407Z",
+    "updatedAt": "2026-06-19T10:52:09.423Z"
   },
   {
     "id": "lead_1781790439270_q5x7i",
@@ -1178,10 +1209,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Global+Physiotherapy+Clinic-+Spine+Care+%7C+Sports+Rehab+%7C+Chiropractor+%7C+Physiotherapy+Centre+In+Gurgaon+Haryana/data=!4m7!3m6!1s0x390d19f19b447877:0x375f096a97544c04!8m2!3d28.4349315!4d77.0708495!16s%2Fg%2F11jx5ttc96!19sChIJd3hEm_EZDTkRBExUl2oJXzc?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: http://www.globalptclinic.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:47:19.270Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:42:24.729Z",
+    "createdAt": "2026-06-18T13:47:19.270Z",
+    "updatedAt": "2026-06-19T10:52:10.238Z"
   },
   {
     "id": "lead_1781790452591_q9yvh",
@@ -1190,10 +1222,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Prateek+Yadav+MD+%7C+Psychiatrist+%26+Psychotherapist+-+The+Humble+Space/data=!4m7!3m6!1s0x390d19743b14391b:0xa44933deeb326b46!8m2!3d28.437938!4d77.0787096!16s%2Fg%2F11t5b8h2z8!19sChIJGzkUO3QZDTkRRmsy694zSaQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website (Status 500): https://arhathealthcare.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:47:32.591Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:42:43.165Z",
+    "createdAt": "2026-06-18T13:47:32.591Z",
+    "updatedAt": "2026-06-19T10:52:11.004Z"
   },
   {
     "id": "lead_1781790475198_5q5w6",
@@ -1202,10 +1235,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Mata+Ji+Clinic/data=!4m7!3m6!1s0x390d19b4b5337c29:0x7043e6c82d270317!8m2!3d28.4362597!4d77.0768166!16s%2Fg%2F11rfb26xj5!19sChIJKXwztbQZDTkRFwMnLcjmQ3A?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:47:55.198Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:42:54.677Z",
+    "createdAt": "2026-06-18T13:47:55.198Z",
+    "updatedAt": "2026-06-19T10:52:11.800Z"
   },
   {
     "id": "lead_1781790480916_2hhl3",
@@ -1214,10 +1248,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Pain+Free+India+Physiotherapy+at+Home+%7C+Physiotherapy+Near+Me/data=!4m7!3m6!1s0x390d19613f387e33:0x4e99ec38cd226b53!8m2!3d28.4415281!4d77.0743578!16s%2Fg%2F11tn5fy761!19sChIJM344P2EZDTkRU2sizTjsmU4?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: https://www.painfreeindiaphysiotherapyathome.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:00.917Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:43:28.962Z",
+    "createdAt": "2026-06-18T13:48:00.917Z",
+    "updatedAt": "2026-06-19T10:52:12.734Z"
   },
   {
     "id": "lead_1781790483482_aspro",
@@ -1226,10 +1261,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Biswas+Clinic/data=!4m7!3m6!1s0x390d1935c7711551:0xc40d9e43df1973b0!8m2!3d28.437393!4d77.0684689!16s%2Fg%2F11sf5s2w34!19sChIJURVxxzUZDTkRsHMZ30OeDcQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:03.482Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:43:54.548Z",
+    "createdAt": "2026-06-18T13:48:03.482Z",
+    "updatedAt": "2026-06-19T10:52:13.556Z"
   },
   {
     "id": "lead_1781790486048_x81d7",
@@ -1238,10 +1274,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Yadav+Clinic/data=!4m7!3m6!1s0x390d18a2467b061f:0xa3d5a3e4462be4ea!8m2!3d28.4342106!4d77.0810761!16s%2Fg%2F11t6sb530y!19sChIJHwZ7RqIYDTkR6uQrRuSj1aM?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:06.048Z"
+    "status": "Failed",
+    "notes": "Number unregistered or invalid on WhatsApp",
+    "lastSentDate": "2026-06-19T09:44:18.038Z",
+    "createdAt": "2026-06-18T13:48:06.048Z",
+    "updatedAt": "2026-06-19T09:44:18.039Z"
   },
   {
     "id": "lead_1781790488606_0324z",
@@ -1250,10 +1287,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Preeta+Mathur/data=!4m7!3m6!1s0x390d193be5c6c655:0x5907180ec71cadbb!8m2!3d28.437909!4d77.078548!16s%2Fg%2F11h2n5gf48!19sChIJVcbG5TsZDTkRu60cxw4YB1k?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:08.606Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:44:30.873Z",
+    "createdAt": "2026-06-18T13:48:08.606Z",
+    "updatedAt": "2026-06-19T10:52:14.320Z"
   },
   {
     "id": "lead_1781790495387_56lob",
@@ -1262,10 +1300,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Khushi+Dental+Clinic/data=!4m7!3m6!1s0x390d18907aacfbed:0x71f5db79aa205bef!8m2!3d28.4378771!4d77.0701496!16s%2Fg%2F11sj8mv4f7!19sChIJ7fusepAYDTkR71sgqnnb9XE?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:15.387Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:44:49.579Z",
+    "createdAt": "2026-06-18T13:48:15.387Z",
+    "updatedAt": "2026-06-19T10:52:15.119Z"
   },
   {
     "id": "lead_1781790509734_lyfpq",
@@ -1274,10 +1313,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/HaiDent+Dental+Clinic/data=!4m7!3m6!1s0x390d199cad74d829:0x956a4c40e3fb184b!8m2!3d28.4344831!4d77.0718641!16s%2Fg%2F11h22jgt9b!19sChIJKdh0rZwZDTkRSxj740BMapU?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website (Status 404): https://www.haident.com/best-dental-clinics-top-dental-surgeons-in-gurgaon",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:29.734Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:49:48.032Z",
+    "createdAt": "2026-06-18T13:48:29.734Z",
+    "updatedAt": "2026-06-19T10:52:16.035Z"
   },
   {
     "id": "lead_1781790534883_onm1o",
@@ -1286,10 +1326,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Active+Motion+Physio+Clinic+and+Rehabilitation+Center/data=!4m7!3m6!1s0x390d39b6d791d01f:0x44dc338a339e54a2!8m2!3d28.4424757!4d77.0729152!16s%2Fg%2F11pkblfqgs!19sChIJH9CR17Y5DTkRolSeM4oz3EQ?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Website redirects to Google/Social: https://sites.google.com/view/active-motion-physiotherapy/home",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:54.883Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:49:58.771Z",
+    "createdAt": "2026-06-18T13:48:54.883Z",
+    "updatedAt": "2026-06-19T10:52:16.876Z"
   },
   {
     "id": "lead_1781790537411_2b6mf",
@@ -1298,10 +1339,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Dr+Sharma%27s+Specialty+Dental+Clinic/data=!4m7!3m6!1s0x390d18962b5d3461:0xee521153186d04b5!8m2!3d28.4402406!4d77.0792947!16s%2Fg%2F1tfph5yf!19sChIJYTRdK5YYDTkRtQRtGFMRUu4?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:48:57.411Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:50:13.702Z",
+    "createdAt": "2026-06-18T13:48:57.411Z",
+    "updatedAt": "2026-06-19T10:52:17.744Z"
   },
   {
     "id": "lead_1781790562717_afi12",
@@ -1310,10 +1352,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Thyrocare+Lab+Gurgaon/data=!4m7!3m6!1s0x390d19e1ce981839:0xfbf16739c8cdc913!8m2!3d28.4419181!4d77.0784176!16s%2Fg%2F11gl0znd4m!19sChIJORiYzuEZDTkRE8nNyDln8fs?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "Broken/Offline website: https://thyrocaregurgaon.justdial.com/",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:49:22.719Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:50:37.969Z",
+    "createdAt": "2026-06-18T13:49:22.719Z",
+    "updatedAt": "2026-06-19T10:52:18.461Z"
   },
   {
     "id": "lead_1781790584457_6wnyy",
@@ -1322,10 +1365,11 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/Nirmal+Clinic/data=!4m7!3m6!1s0x390d18a47e94f4d1:0x6f32185cb648b19!8m2!3d28.435523!4d77.085506!16s%2Fg%2F12hl3yvtm!19sChIJ0fSUfqQYDTkRGYtky4Uh8wY?authuser=0&hl=en&rclk=1",
-    "status": "Pending",
-    "notes": "",
-    "lastSentDate": null,
-    "createdAt": "2026-06-18T13:49:44.457Z"
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:53:48.561Z",
+    "createdAt": "2026-06-18T13:49:44.457Z",
+    "updatedAt": "2026-06-19T10:52:19.267Z"
   },
   {
     "id": "lead_1781790611738_48hys",
@@ -1334,9 +1378,244 @@
     "category": "clinics",
     "location": "Sector 52 Gurugram",
     "url": "https://www.google.com/maps/place/NU+LIFE+CARE+CLINIC+%28Dr+Swati+Rathee%29/data=!4m7!3m6!1s0x390d18a3979f653b:0x855727dcafb22329!8m2!3d28.4319791!4d77.086992!16s%2Fg%2F11c2pqg8qm!19sChIJO2Wfl6MYDTkRKSOyr9wnV4U?authuser=0&hl=en&rclk=1",
+    "status": "Replied",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T09:54:02.876Z",
+    "createdAt": "2026-06-18T13:50:11.739Z",
+    "updatedAt": "2026-06-19T10:52:20.303Z"
+  },
+  {
+    "id": "lead_1781867758048_f7m6j",
+    "name": "Pachouli Wellness Clinic",
+    "phone": "09560191717",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Pachouli+Wellness+Clinic/data=!4m7!3m6!1s0x390d232e4242375d:0xbd80e94f035427df!8m2!3d28.4225179!4d77.0664479!16s%2Fg%2F11t312g54g!19sChIJXTdCQi4jDTkR3ydUA0_pgL0?authuser=0&hl=en&rclk=1",
+    "status": "Sent",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T11:25:55.638Z",
+    "createdAt": "2026-06-19T11:15:58.049Z",
+    "updatedAt": "2026-06-19T11:25:55.644Z"
+  },
+  {
+    "id": "lead_1781867760712_k478v",
+    "name": "Arvind Clinic",
+    "phone": "09350032726",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Arvind+Clinic/data=!4m7!3m6!1s0x390d1883b1c5fdf9:0xf5b66e348b5a1eee!8m2!3d28.42854!4d77.0644413!16s%2Fg%2F12hk3vmnf!19sChIJ-f3FsYMYDTkR7h5aizRutvU?authuser=0&hl=en&rclk=1",
+    "status": "Sent",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T11:30:36.973Z",
+    "createdAt": "2026-06-19T11:16:00.712Z",
+    "updatedAt": "2026-06-19T11:30:36.976Z"
+  },
+  {
+    "id": "lead_1781867763232_atf25",
+    "name": "Niramay Ayurveda Skin Clinic",
+    "phone": "08059303459",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Niramay+Ayurveda+Skin+Clinic/data=!4m7!3m6!1s0x390d19007e24dcf7:0x547b861f24074c4f!8m2!3d28.43613!4d77.06735!16s%2Fg%2F11n9w9l50r!19sChIJ99wkfgAZDTkRT0wHJB-Ge1Q?authuser=0&hl=en&rclk=1",
+    "status": "Sent",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T11:30:49.634Z",
+    "createdAt": "2026-06-19T11:16:03.233Z",
+    "updatedAt": "2026-06-19T11:30:49.637Z"
+  },
+  {
+    "id": "lead_1781867769734_ryvl6",
+    "name": "Quick Walk Physio Care – Sector 51",
+    "phone": "07852808247",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Quick+Walk+Physio+Care+%E2%80%93+Sector+51/data=!4m7!3m6!1s0x390d23b61bc38eb5:0x70d05c31c52a7a04!8m2!3d28.4356473!4d77.0664137!16s%2Fg%2F11wmjgcj9h!19sChIJtY7DG7YjDTkRBHoqxTFc0HA?authuser=0&hl=en&rclk=1",
+    "status": "Sent",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T11:33:28.534Z",
+    "createdAt": "2026-06-19T11:16:09.734Z",
+    "updatedAt": "2026-06-19T11:33:28.537Z"
+  },
+  {
+    "id": "lead_1781867777342_9cak4",
+    "name": "WAD Clinic | Best Physiotherapy & Nursing Care Services in Gurugram",
+    "phone": "08130456591",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/WAD+Clinic+%7C+Best+Physiotherapy+%26+Nursing+Care+Services+in+Gurugram/data=!4m7!3m6!1s0x390d19c45ae96ac5:0x49440222979c16f0!8m2!3d28.4282302!4d77.0713045!16s%2Fg%2F11w355b9q1!19sChIJxWrpWsQZDTkR8BaclyICREk?authuser=0&hl=en&rclk=1",
+    "status": "Sent",
+    "notes": "Intro sent via Guided Wizard",
+    "lastSentDate": "2026-06-19T11:33:41.511Z",
+    "createdAt": "2026-06-19T11:16:17.342Z",
+    "updatedAt": "2026-06-19T11:33:41.513Z"
+  },
+  {
+    "id": "lead_1781867798653_cjqi3",
+    "name": "Patna Clinic",
+    "phone": "08292491869",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Patna+Clinic/data=!4m7!3m6!1s0x390d1883baa08cef:0x24293734aa309d96!8m2!3d28.4294523!4d77.0633975!16s%2Fg%2F11sb6pxc8q!19sChIJ74yguoMYDTkRlp0wqjQ3KSQ?authuser=0&hl=en&rclk=1",
+    "status": "Failed",
+    "notes": "Number unregistered or invalid on WhatsApp",
+    "lastSentDate": "2026-06-19T11:34:13.265Z",
+    "createdAt": "2026-06-19T11:16:38.654Z",
+    "updatedAt": "2026-06-19T11:34:13.272Z"
+  },
+  {
+    "id": "lead_1781867811177_cov4n",
+    "name": "India IVF Clinic - Best IVF Centre in Gurgaon | IVF Hospital in Gurgaon",
+    "phone": "07353873538",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/India+IVF+Clinic+-+Best+IVF+Centre+in+Gurgaon+%7C+IVF+Hospital+in+Gurgaon/data=!4m7!3m6!1s0x390d18f56e72ad37:0x19850d74a76a060a!8m2!3d28.435942!4d77.0666867!16s%2Fg%2F11dxdqhhh_!19sChIJN61ybvUYDTkRCgZqp3QNhRk?authuser=0&hl=en&rclk=1",
     "status": "Pending",
-    "notes": "Broken/Offline website: http://nulifecareclinic.com/",
+    "notes": "Broken/Offline website: https://www.indiaivf.in/best-ivf-centre-in-gurgaon/?utm_source=GMB&utm_medium=GMB_Organic&utm_campaign=IIC_GMB_Gurgaon",
     "lastSentDate": null,
-    "createdAt": "2026-06-18T13:50:11.739Z"
+    "createdAt": "2026-06-19T11:16:51.177Z"
+  },
+  {
+    "id": "lead_1781867815737_bxb4s",
+    "name": "Dr Vineeta Goel Get Well Homeopathic Clinic",
+    "phone": "09818124660",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Dr+Vineeta+Goel+Get+Well+Homeopathic+Clinic/data=!4m7!3m6!1s0x390d18820c65f0ef:0xccd966eadfe08920!8m2!3d28.42546!4d77.063395!16s%2Fg%2F1q645wx9p!19sChIJ7_BlDIIYDTkRIIng3-pm2cw?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: https://www.getwellhomeoclinic.com/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:16:55.737Z"
+  },
+  {
+    "id": "lead_1781867826722_db5s9",
+    "name": "Dr. Anand Lohiya Sector 51 Clinic",
+    "phone": "09891010294",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Dr.+Anand+Lohiya+Sector+51+Clinic/data=!4m7!3m6!1s0x390d18850f5486f1:0x93e6a1dbbbbe48d4!8m2!3d28.433212!4d77.0672337!16s%2Fg%2F11b6ywql7p!19sChIJ8YZUD4UYDTkR1Ei-u9uh5pM?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: http://www.anandlohiya.com/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:17:06.722Z"
+  },
+  {
+    "id": "lead_1781867837618_myury",
+    "name": "Samarth Clinic for Healthy Ageing | Elderly Care Service In Gurgaon | Arthritis Treatment & Osteoporosis treatment In Gurgaon",
+    "phone": "08800028313",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Samarth+Clinic+for+Healthy+Ageing+%7C+Elderly+Care+Service+In+Gurgaon+%7C+Arthritis+Treatment+%26+Osteoporosis+treatment+In+Gurgaon/data=!4m7!3m6!1s0x390d1939b86940c1:0x14ac55e4d9301e1c!8m2!3d28.4356386!4d77.0663941!16s%2Fg%2F11wqb53ddz!19sChIJwUBpuDkZDTkRHB4w2eRVrBQ?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: http://www.samarth.clinic/?utm_source=google&utm_medium=organic&utm_campaign=new_gmb",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:17:17.618Z"
+  },
+  {
+    "id": "lead_1781867854911_u7tfq",
+    "name": "OrthoPlus Care",
+    "phone": "09540307695",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/OrthoPlus+Care/data=!4m7!3m6!1s0x20172af57074f231:0x3b768a41f8a56c95!8m2!3d28.4251811!4d77.0680658!16s%2Fg%2F11lzr7fnzc!19sChIJMfJ0cPUqFyARlWyl-EGKdjs?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: https://www.orthoplus.in/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:17:34.911Z"
+  },
+  {
+    "id": "lead_1781867871167_xtc64",
+    "name": "Physio4U | Best Physiotherapy Clinic by Dr.Nalini Shukla (MPT)",
+    "phone": "06307210952",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Physio4U+%7C+Best+Physiotherapy+Clinic+by+Dr.Nalini+Shukla+%28MPT%29/data=!4m7!3m6!1s0x8be552ace8c91b8f:0x56d35ae69f96851e!8m2!3d28.428473!4d77.061709!16s%2Fg%2F11l74drfjz!19sChIJjxvJ6KxS5YsRHoWWn-Za01Y?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website (Status 404): https://www.physio4uclinic.com/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:17:51.167Z"
+  },
+  {
+    "id": "lead_1781867888493_35ecl",
+    "name": "Tri-Senses ENT Clinic",
+    "phone": "07503234757",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Tri-Senses+ENT+Clinic/data=!4m7!3m6!1s0x390d1920ad029b01:0xfdf42912a96305de!8m2!3d28.4328773!4d77.0639792!16s%2Fg%2F11s5s5v0l3!19sChIJAZsCrSAZDTkR3gVjqRIp9P0?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: https://www.practo.com/gurgaon/clinic/tri-senses-ent-clinic-gurgaon-sector-51/doctors?utm_source=google&utm_medium=reserve_with_google&utm_campaign=establishment_feed&rwg_token=AE37R_jr5N0cM0B7HqwE0hlzzdNGz58f3fjZKpHSLQvYGhq47a2hMBH43Zvqt_GGe769JnJQUWQYLjK8XRmg5_phZutDMLFb1A%3D%3D",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:18:08.493Z"
+  },
+  {
+    "id": "lead_1781867911666_7vm6x",
+    "name": "Umeed Cancer Care",
+    "phone": "09220877790",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Umeed+Cancer+Care/data=!4m7!3m6!1s0x390d194866681691:0xbc5b60a1fe2cd6a7!8m2!3d28.435977!4d77.066895!16s%2Fg%2F11z2xr8dtb!19sChIJkRZoZkgZDTkRp9Ys_qFgW7w?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:18:31.667Z"
+  },
+  {
+    "id": "lead_1781867917516_xp79b",
+    "name": "Dental Empire",
+    "phone": "08700994242",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Dental+Empire/data=!4m7!3m6!1s0x390d19ef7d3c1817:0xb2abecdac3111ef5!8m2!3d28.4307838!4d77.0624822!16s%2Fg%2F11j8mx7h3w!19sChIJFxg8fe8ZDTkR9R4Rw9rsq7I?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: http://www.dentalempire.co.in/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:18:37.516Z"
+  },
+  {
+    "id": "lead_1781867920027_3joaz",
+    "name": "Zeal Physiocare",
+    "phone": "08130405306",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Zeal+Physiocare/data=!4m7!3m6!1s0x390d2342bb052541:0x4200c7f62042ae2d!8m2!3d28.4250336!4d77.0682925!16s%2Fg%2F11jt653ygh!19sChIJQSUFu0IjDTkRLa5CIPbHAEI?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:18:40.027Z"
+  },
+  {
+    "id": "lead_1781867949697_8kv7m",
+    "name": "Katihar Clinic",
+    "phone": "08178267781",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Katihar+Clinic/data=!4m7!3m6!1s0x390d19ae27e5140d:0x928604c757081a34!8m2!3d28.4291669!4d77.0637126!16s%2Fg%2F11sv9y3p37!19sChIJDRTlJ64ZDTkRNBoIV8cEhpI?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:19:09.697Z"
+  },
+  {
+    "id": "lead_1781867958834_gjkj0",
+    "name": "Metacore Diagnostic",
+    "phone": "08750526058",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Metacore+Diagnostic/data=!4m7!3m6!1s0x390d196ab218029f:0x3942166a500bffb1!8m2!3d28.4323453!4d77.0747727!16s%2Fg%2F11twk9b965!19sChIJnwIYsmoZDTkRsf8LUGoWQjk?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:19:18.834Z"
+  },
+  {
+    "id": "lead_1781868037733_afz46",
+    "name": "Healing touch pet hospital",
+    "phone": "09530910564",
+    "category": "clinics",
+    "location": "Sector 51 Gurugram",
+    "url": "https://www.google.com/maps/place/Healing+touch+pet+hospital/data=!4m7!3m6!1s0x390d19a77a0f5d41:0x19ce7d6176699bdc!8m2!3d28.4344717!4d77.0654627!16s%2Fg%2F11s3cc3dbm!19sChIJQV0PeqcZDTkR3JtpdmF9zhk?authuser=0&hl=en&rclk=1",
+    "status": "Pending",
+    "notes": "Broken/Offline website: http://www.healingtouchpethospital.com/",
+    "lastSentDate": null,
+    "createdAt": "2026-06-19T11:20:37.736Z"
   }
 ]
