@@ -496,9 +496,28 @@ tr:hover td {
   background: rgba(255, 255, 255, 0.02);
 }
 
+/* PC View: Vertically center status badge and date inline in table cells */
+.table-wrapper table tbody td:nth-child(5) {
+  vertical-align: middle;
+}
+
+.status-col-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-col-cell .status-date {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
 /* Badges / Pill Tags */
 .badge {
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
   padding: 4px 10px;
   border-radius: 9999px;
   font-size: 12px;
@@ -669,6 +688,18 @@ input[type="checkbox"]:checked {
   background-color: var(--accent-primary);
 }
 
+/* Phone Link styling for direct calling */
+.phone-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.phone-link:hover {
+  color: var(--success);
+  text-decoration: none;
+}
+
 /* Hide Next.js dev route announcer, indicators, and dev feedback indicators */
 next-route-announcer,
 .next-dev-portal,
@@ -678,4 +709,300 @@ next-route-announcer,
   display: none !important;
   visibility: hidden !important;
   pointer-events: none !important;
+}
+
+/* Bottom Navigation Bar for Mobile Devices */
+.bottom-nav {
+  display: none;
+}
+
+/* Mobile Outreach View Optimization */
+@media (max-width: 768px) {
+  /* Hide the sidebar to prevent access to other tabs in mobile view */
+  .sidebar {
+    display: none !important;
+  }
+
+  /* Make main content occupy full width with compact spacing and bottom nav spacing */
+  .main-content {
+    max-width: 100% !important;
+    padding: 16px 16px 88px 16px !important; /* bottom nav spacing */
+  }
+
+  /* Physically hide all elements marked for mobile exclusion */
+  .mobile-hide {
+    display: none !important;
+  }
+
+  /* Bottom Navigation Bar styled with glassmorphism */
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 64px;
+    background: rgba(15, 23, 42, 0.92);
+    backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+  }
+
+  .bottom-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    height: 100%;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .bottom-nav-item:active {
+    transform: scale(0.95);
+  }
+
+  .bottom-nav-item.active {
+    color: var(--text-primary);
+  }
+
+  .bottom-nav-item.active .bottom-nav-icon {
+    color: var(--accent-primary) !important;
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  .bottom-nav-icon {
+    font-size: 20px;
+    color: var(--text-secondary);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  /* Optimize Filter Bar Layout */
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .filter-bar > div:first-child {
+    width: 100%;
+    max-width: 100% !important;
+  }
+
+  .filter-bar > div:last-child {
+    width: 100%;
+    margin-left: 0 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px !important;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .filter-group label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .filter-group select {
+    width: 100%;
+    min-width: unset;
+  }
+
+  /* Card Layout for CRM Table on Mobile */
+  .table-wrapper {
+    background: transparent;
+    border: none;
+  }
+
+  .table-wrapper table {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrapper table thead {
+    display: none; /* Hide header columns */
+  }
+
+  .table-wrapper table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrapper table tbody tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .table-wrapper table tbody td {
+    display: flex;
+    align-items: center;
+    padding: 2px 0 !important;
+    background: none !important;
+    border: none !important;
+    text-align: left !important;
+    font-size: 14px;
+  }
+
+  /* Fallback styling for empty table state cell */
+  .table-wrapper table tbody td[colSpan] {
+    display: block !important;
+    text-align: center !important;
+    padding: 32px 16px !important;
+    color: var(--text-muted) !important;
+    background: var(--bg-secondary) !important;
+    border: 1px dashed var(--border-color) !important;
+    border-radius: 12px;
+  }
+  .table-wrapper table tbody td[colSpan]::before {
+    display: none !important;
+  }
+
+  /* Column 1 (Shop Name) - Header representation */
+  .table-wrapper table tbody td:nth-child(2) {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: baseline !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    border-bottom: none !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0px;
+  }
+
+  .table-wrapper table tbody td:nth-child(2) > div:first-child {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .table-wrapper table tbody td:nth-child(2) > div:last-child {
+    margin-top: 0 !important;
+    display: inline-flex !important;
+    align-items: center;
+    flex-wrap: nowrap !important;
+    white-space: nowrap !important;
+  }
+
+  /* Column 2 (Phone Link) - Minimalist direct calling button */
+  .table-wrapper table tbody td:nth-child(3) {
+    width: 100% !important;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  /* Hide the Tap to Call header prefix */
+  .table-wrapper table tbody td:nth-child(3)::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  .table-wrapper table tbody td:nth-child(3) a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    color: var(--success) !important;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .table-wrapper table tbody td:nth-child(3) a::before {
+    content: "📞";
+    font-size: 13px;
+  }
+
+  .table-wrapper table tbody td:nth-child(3) a:active {
+    background: rgba(16, 185, 129, 0.18);
+  }
+
+  /* Group Category, Status, and Date on one line at the bottom without headings */
+  .table-wrapper table tbody td:nth-child(4),
+  .table-wrapper table tbody td:nth-child(5) {
+    display: inline-flex !important;
+    align-items: center;
+    vertical-align: middle !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: none !important;
+    border: none !important;
+  }
+
+  .table-wrapper table tbody td:nth-child(4) {
+    margin-right: 16px !important;
+    transform: translateY(-1px);
+  }
+
+  .table-wrapper table tbody td:nth-child(4)::before,
+  .table-wrapper table tbody td:nth-child(5)::before {
+    display: none !important;
+    content: none !important;
+  }
+
+  /* Add a separator dot after the Category name */
+  .table-wrapper table tbody td:nth-child(4)::after {
+    content: "•";
+    color: var(--text-muted);
+    margin-left: 8px;
+    font-size: 12px;
+  }
+
+  /* Align status and lastSentDate inline on the same row */
+  .status-col-cell {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .status-col-cell .badge {
+    margin-top: 1px !important;
+    padding: 2px 8px;
+    font-size: 11px;
+  }
+
+  .status-col-cell .status-date {
+    display: inline-flex !important;
+    align-items: center;
+    margin-top: 0 !important;
+    font-size: 11px !important;
+    color: var(--text-secondary) !important;
+  }
+
+  /* Add a separator dot before the date if present */
+  .status-col-cell .status-date::before {
+    content: "•";
+    color: var(--text-muted);
+    margin-right: 8px;
+  }
 }

@@ -16,6 +16,13 @@ export const metadata = {
   description: "Lead scraper, CRM, and automated WhatsApp outreach marketing pipeline portal.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html

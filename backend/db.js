@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const dbPath = path.join(process.cwd(), 'database', 'leads.json');
+const dbPath = path.join(process.cwd(), 'public', 'leads.json');
 
 // Ensure database file and directory exist
 export function initDb() {

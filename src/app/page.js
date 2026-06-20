@@ -3,7 +3,9 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { io } from 'socket.io-client';
 
-const API_BASE = 'http://localhost:3001';
+const API_BASE = typeof window !== 'undefined'
+  ? `${window.location.protocol}//${window.location.hostname}:3001`
+  : 'http://localhost:3001';
 
 const Icons = {
   dashboard: (className = "") => (
@@ -178,6 +180,7 @@ export default function Home() {
   const [outreachOperation, setOutreachOperation] = useState('Idle (Stop automatic messages button not clicked)');
   const [isMessageOpened, setIsMessageOpened] = useState(false);
   const [isCheckingReplies, setIsCheckingReplies] = useState(false);
+  const [isBackendOnline, setIsBackendOnline] = useState(false);
 
   useEffect(() => {
     if (whatsappStatus !== 'ready') {
@@ -191,6 +194,10 @@ export default function Home() {
   // Socket.io Connection & Data Fetching
   // ----------------------------------------------------------------------------
   useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+      setActiveTab('contacts');
+    }
+
     // 1. Fetch initial leads
     fetchLeads();
     fetchStats();
@@ -198,6 +205,14 @@ export default function Home() {
 
     // 2. Setup socket
     const socket = io(API_BASE);
+
+    socket.on('connect', () => {
+      setIsBackendOnline(true);
+    });
+
+    socket.on('disconnect', () => {
+      setIsBackendOnline(false);
+    });
 
     socket.on('status_log', (message) => {
       setLogs((prev) => [...prev, message]);
@@ -288,13 +303,40 @@ export default function Home() {
 
 
 
+  const mergeLocalUpdates = (leadsList) => {
+    if (typeof window === 'undefined') return leadsList;
+    try {
+      const localUpdatesRaw = localStorage.getItem('crm_local_updates');
+      if (!localUpdatesRaw) return leadsList;
+      const localUpdates = JSON.parse(localUpdatesRaw);
+      return leadsList.map(lead => {
+        if (localUpdates[lead.id]) {
+          return { ...lead, ...localUpdates[lead.id] };
+        }
+        return lead;
+      });
+    } catch (err) {
+      console.error('Error merging local updates:', err);
+      return leadsList;
+    }
+  };
+
   const fetchLeads = async () => {
     try {
       const res = await fetch(`${API_BASE}/api/leads`);
+      if (!res.ok) throw new Error('API error');
       const data = await res.json();
-      setLeads(data);
+      setLeads(mergeLocalUpdates(data));
     } catch (err) {
-      console.error('Error fetching leads:', err);
+      console.warn('Backend server offline, loading static leads.json copy:', err);
+      try {
+        const res = await fetch('/leads.json');
+        if (!res.ok) throw new Error('Static file missing');
+        const data = await res.json();
+        setLeads(mergeLocalUpdates(data));
+      } catch (staticErr) {
+        console.error('Failed to load static leads:', staticErr);
+      }
     }
   };
 
@@ -324,6 +366,10 @@ export default function Home() {
   };
 
   const handleSaveTemplates = async () => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Saving templates requires your laptop backend to be active.');
+      return;
+    }
     const cleanCategory = templateCategory.toLowerCase().trim();
     if (!cleanCategory) {
       alert('Please enter a Category first.');
@@ -365,6 +411,10 @@ export default function Home() {
   };
 
   const handleSaveInlineTemplate = async (cat) => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Saving templates requires your laptop backend to be active.');
+      return;
+    }
     try {
       const res = await fetch(`${API_BASE}/api/templates/save`, {
         method: 'POST',
@@ -390,6 +440,10 @@ export default function Home() {
   };
 
   const handleDeleteTemplate = async (cat) => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Deleting templates requires your laptop backend to be active.');
+      return;
+    }
     if (!confirm(`Are you sure you want to delete the template for category "${cat}"?`)) {
       return;
     }
@@ -436,6 +490,10 @@ export default function Home() {
   // Action Handlers
   // ----------------------------------------------------------------------------
   const handleStartScrape = async () => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Starting the scraper requires your laptop backend to be active.');
+      return;
+    }
     if (!scrapeCategory || !scrapeLocation) {
       alert('Please fill in both Category and Location before starting.');
       return;
@@ -479,6 +537,10 @@ export default function Home() {
   // For simplicity, we let the backend handle termination.
 
   const handleConnectWhatsApp = async () => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Connecting WhatsApp requires your laptop backend to be active.');
+      return;
+    }
     try {
       setWhatsappStatus('connecting');
       const res = await fetch(`${API_BASE}/api/whatsapp/connect`, { method: 'POST' });
@@ -493,6 +555,10 @@ export default function Home() {
   };
 
   const handleDisconnectWhatsApp = async () => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Disconnecting WhatsApp requires your laptop backend to be active.');
+      return;
+    }
     try {
       const res = await fetch(`${API_BASE}/api/whatsapp/logout`, { method: 'POST' });
       if (!res.ok) {
@@ -505,6 +571,10 @@ export default function Home() {
   };
 
   const handleCheckReplies = async () => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Checking replies requires your laptop backend to be active.');
+      return;
+    }
     if (isCheckingReplies) return;
     try {
       setIsCheckingReplies(true);
@@ -530,6 +600,35 @@ export default function Home() {
     if (notes !== undefined) {
       updates.notes = notes.trim();
     }
+
+    // Update local React state immediately for snappy UI
+    setLeads((prev) => prev.map((l) => {
+      if (l.id === id) {
+        const merged = { ...l, ...updates };
+        if (updates.status === 'Sent' || updates.status === 'Failed') {
+          merged.lastSentDate = new Date().toISOString();
+        }
+        return merged;
+      }
+      return l;
+    }));
+
+    // Update localStorage for offline mode persistence
+    try {
+      const localUpdatesRaw = localStorage.getItem('crm_local_updates') || '{}';
+      const localUpdates = JSON.parse(localUpdatesRaw);
+      localUpdates[id] = {
+        ...localUpdates[id],
+        ...updates
+      };
+      if (updates.status === 'Sent' || updates.status === 'Failed') {
+        localUpdates[id].lastSentDate = new Date().toISOString();
+      }
+      localStorage.setItem('crm_local_updates', JSON.stringify(localUpdates));
+    } catch (err) {
+      console.warn('Failed to save update to localStorage:', err);
+    }
+
     try {
       await fetch(`${API_BASE}/api/leads/update`, {
         method: 'POST',
@@ -537,7 +636,7 @@ export default function Home() {
         body: JSON.stringify({ id, updates })
       });
     } catch (err) {
-      console.error('Error updating lead status:', err);
+      console.warn('Backend offline, status change saved locally to phone:', err);
     }
   };
 
@@ -570,6 +669,10 @@ export default function Home() {
   };
 
   const handleManualSend = async (lead) => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. Sending outreach messages requires your laptop backend to be active.');
+      return;
+    }
     const message = getCompiledMessage(lead);
     if (!message) {
       alert(`No outreach template found for category "${lead.category}"! Please save a template for category "${lead.category}" in the Templates tab first.`);
@@ -599,6 +702,10 @@ export default function Home() {
 
   // Start Guided campaign wizard
   const handleStartGuidedCampaign = (type = 'intro') => {
+    if (!isBackendOnline) {
+      alert('Backend is offline. The Campaign Wizard requires your laptop backend to be active.');
+      return;
+    }
     let targetLeads = [];
     let msgType = 'intro';
 
@@ -1009,6 +1116,7 @@ export default function Home() {
                       <option value="all">All</option>
                       <option value="Pending">Pending</option>
                       <option value="Sent">Sent</option>
+                      <option value="Failed">Failed</option>
                       <option value="Replied">Replied</option>
                       <option value="Won">Won</option>
                       <option value="Lost">Lost</option>
@@ -1017,7 +1125,7 @@ export default function Home() {
 
                   {selectedLeads.length > 0 && (
                     <button 
-                      className="btn-selected-outreach" 
+                      className="btn-selected-outreach mobile-hide" 
                       onClick={() => handleStartGuidedCampaign('selected')}
                     >
                       {Icons.campaigns()} Message Selected ({selectedLeads.length})
@@ -1031,7 +1139,7 @@ export default function Home() {
                 <table>
                   <thead>
                     <tr>
-                      <th style={{ width: '40px', textAlign: 'center' }}>
+                      <th className="mobile-hide" style={{ width: '40px', textAlign: 'center' }}>
                         <input
                           type="checkbox"
                           onChange={handleSelectAll}
@@ -1042,7 +1150,7 @@ export default function Home() {
                       <th>Phone Number</th>
                       <th>Category</th>
                       <th>Status</th>
-                      <th style={{ textAlign: 'center' }}>Actions</th>
+                      <th className="mobile-hide" style={{ textAlign: 'center' }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1055,7 +1163,7 @@ export default function Home() {
                     ) : (
                       filteredLeads.map((lead) => (
                         <tr key={lead.id}>
-                          <td style={{ textAlign: 'center' }}>
+                          <td className="mobile-hide" style={{ textAlign: 'center' }}>
                             <input
                               type="checkbox"
                               checked={selectedLeads.includes(lead.id)}
@@ -1071,7 +1179,7 @@ export default function Home() {
                                 rel="noreferrer"
                                 style={{ fontSize: '12px', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontFamily: 'inherit', lineHeight: 'inherit' }}
                               >
-                                {Icons.link()} {lead.location || 'View on Google Maps'}
+                                {lead.location || 'View on Google Maps'}
                               </a>
                               {lead.notes && lead.notes.trim() && (
                                 <>
@@ -1092,29 +1200,33 @@ export default function Home() {
                                       lineHeight: 'inherit'
                                     }}
                                   >
-                                    {Icons.info()} View Notes
+                                    View Notes
                                   </button>
                                 </>
                               )}
                             </div>
                           </td>
-                          <td>{lead.phone}</td>
+                          <td>
+                            <a href={`tel:${lead.phone}`} className="phone-link">{lead.phone}</a>
+                          </td>
                           <td>
                             <span style={{ fontSize: '12px', textTransform: 'capitalize' }}>
                               {lead.category}
                             </span>
                           </td>
                           <td>
-                            <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
-                              {lead.status}
-                            </span>
-                            {lead.lastSentDate && (
-                              <div style={{ fontSize: '10px', color: '#64748b', marginTop: '4px' }}>
-                                {new Date(lead.lastSentDate).toLocaleDateString()}
-                              </div>
-                            )}
+                            <div className="status-col-cell">
+                              <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
+                                {lead.status}
+                              </span>
+                              {lead.lastSentDate && (
+                                <span className="status-date" style={{ fontSize: '10px', color: '#64748b' }}>
+                                  {new Date(lead.lastSentDate).toLocaleDateString()}
+                                </span>
+                              )}
+                            </div>
                           </td>
-                          <td>
+                          <td className="mobile-hide">
                             <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
                               <button
                                 className="btn-success-outline"
@@ -1349,7 +1461,9 @@ export default function Home() {
                                 {lead.name} {Icons.link()}
                               </a>
                             </td>
-                            <td>{lead.phone}</td>
+                            <td>
+                              <a href={`tel:${lead.phone}`} className="phone-link">{lead.phone}</a>
+                            </td>
                             <td>
                               <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
                                 {lead.status}
@@ -1739,7 +1853,7 @@ export default function Home() {
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
                   <label style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Phone Number</label>
-                  <div style={{ fontSize: '15px', fontFamily: 'monospace', color: 'var(--text-primary)', marginTop: '2px', fontWeight: '600' }}>{lead.phone}</div>
+                  <a href={`tel:${lead.phone}`} className="phone-link" style={{ fontSize: '15px', fontFamily: 'monospace', marginTop: '2px', fontWeight: '600' }}>{lead.phone}</a>
                 </div>
               </div>
 
@@ -1827,6 +1941,24 @@ export default function Home() {
           </div>
         );
       })()}
+
+      {/* Bottom Navigation for Mobile Outreach */}
+      <nav className="bottom-nav">
+        <div 
+          className={`bottom-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
+          onClick={() => setActiveTab('dashboard')}
+        >
+          {Icons.dashboard("bottom-nav-icon")}
+          <span>Dashboard</span>
+        </div>
+        <div 
+          className={`bottom-nav-item ${activeTab === 'contacts' ? 'active' : ''}`}
+          onClick={() => setActiveTab('contacts')}
+        >
+          {Icons.contacts("bottom-nav-icon")}
+          <span>Contacts</span>
+        </div>
+      </nav>
     </div>
   );
 }
