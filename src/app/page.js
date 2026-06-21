@@ -3,9 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import { io } from 'socket.io-client';
 
-const API_BASE = typeof window !== 'undefined'
-  ? `${window.location.protocol}//${window.location.hostname}:3001`
-  : 'http://localhost:3001';
+const API_BASE = 'http://localhost:3001';
 
 const Icons = {
   dashboard: (className = "") => (
