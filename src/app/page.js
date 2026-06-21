@@ -875,7 +875,7 @@ export default function Home() {
     return leads
       .filter((l) => ['Sent', 'Failed'].includes(l.status) && l.lastSentDate)
       .sort((a, b) => new Date(b.lastSentDate) - new Date(a.lastSentDate))
-      .slice(0, 8);
+      .slice(0, 4);
   }, [leads]);
 
   const handleSelectLead = (id) => {
@@ -1656,7 +1656,7 @@ export default function Home() {
               
               {/* Left Column: Start Campaign */}
               <div className="glass-card">
-                <h2 style={{ fontSize: '18px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                <h2 style={{ fontSize: '18px', marginBottom: '16px' }}>
                   Guided Manual Campaigns
                 </h2>
                 
@@ -1665,7 +1665,7 @@ export default function Home() {
                 </p>
 
                 <div className="campaign-setup-form">
-                  <div className="form-group">
+                  <div className="form-group" style={{ marginBottom: '12px' }}>
                     <label>Filter Target Category</label>
                     <select value={campaignCategory} onChange={(e) => setCampaignCategory(e.target.value)}>
                       {uniqueCategories.map(c => (
@@ -1674,7 +1674,7 @@ export default function Home() {
                     </select>
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group" style={{ marginBottom: '12px' }}>
                     <label>Filter Campaign Message Type</label>
                     <select value={campaignType} onChange={(e) => setCampaignType(e.target.value)}>
                       <option value="intro">Introductory Pitch</option>
@@ -1682,7 +1682,7 @@ export default function Home() {
                     </select>
                   </div>
 
-                  <div style={{ marginTop: '24px' }}>
+                  <div style={{ marginTop: '4px' }}>
                     <button className="btn" onClick={() => handleStartCampaign('filtered')} style={{ width: '100%', padding: '12px' }}>
                       {Icons.campaigns()} Start Outreach Queue Conveyor
                     </button>
@@ -1692,7 +1692,7 @@ export default function Home() {
 
               {/* Right Column: Dispatch logs */}
               <div className="glass-card">
-                <h2 style={{ fontSize: '18px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                <h2 style={{ fontSize: '18px', marginBottom: '16px' }}>
                   Recent Dispatch Activity
                 </h2>
 

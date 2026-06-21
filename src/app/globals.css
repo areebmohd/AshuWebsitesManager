@@ -1120,9 +1120,6 @@ tr:hover td {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 380px;
-  overflow-y: auto;
-  padding-right: 6px;
 }
 
 .dispatch-log-row {
