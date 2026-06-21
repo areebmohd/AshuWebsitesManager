@@ -1,5 +1,4 @@
 import puppeteer from 'puppeteer';
-import { addLead } from './db.js';
 
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -22,6 +21,9 @@ export async function runScraper(category, location, options = {}, onLog, onLead
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-audio-output',
+        '--disable-extensions',
         '--window-size=1280,800'
       ]
     });
@@ -47,6 +49,10 @@ export async function runScraper(category, location, options = {}, onLog, onLead
     const maxScrolls = options.scrollDepth ? Number(options.scrollDepth) : 15; // Set dynamic scroll limit based on options
 
     while (scrollCount < maxScrolls) {
+      if (options.checkCancelled && options.checkCancelled()) {
+        onLog('[Scraper] Stop signal received. Exiting scroll loop.');
+        break;
+      }
       const feedExists = await page.$(feedSelector);
       if (!feedExists) {
         onLog('[Scraper] Sidebar list not found. Scrolling page body instead...');
@@ -90,7 +96,16 @@ export async function runScraper(category, location, options = {}, onLog, onLead
     let scrapedCount = 0;
     let savedCount = 0;
 
+    // Create a Set of existing normalized phone numbers for fast duplicate checking
+    const existingPhoneSet = new Set(
+      (options.existingPhones || []).map(p => p.replace(/[^0-9]/g, ''))
+    );
+
     for (let i = 0; i < uniqueItems.length; i++) {
+      if (options.checkCancelled && options.checkCancelled()) {
+        onLog('[Scraper] Stop signal received. Exiting scrape details inspection.');
+        break;
+      }
       const item = uniqueItems[i];
       scrapedCount++;
       onLog(`[Scraper] Inspecting [${scrapedCount}/${uniqueItems.length}]: "${item.title}"`);
@@ -221,24 +236,29 @@ export async function runScraper(category, location, options = {}, onLog, onLead
           continue;
         }
 
-        // We have a lead! Save it
+        // Check duplicates against frontend state
+        if (existingPhoneSet.has(digits)) {
+          onLog(`[Scraper] ℹ️ Duplicate: "${details.name || item.title}" phone already exists in contacts list.`);
+          continue;
+        }
+
+        // We have a lead! Save it in memory and emit to frontend
         const leadData = {
-          name: details.name || item.title,
-          phone: details.phone,
-          category: category,
-          location: location,
-          url: item.url,
-          notes: details.notes || ''
+          id: `lead_${Date.now()}_${Math.random().toString(36).substr(2, 5)}`,
+          name: (details.name || item.title).trim(),
+          phone: digits,
+          category: category.toLowerCase().trim(),
+          location: location ? location.trim() : 'Gurugram',
+          url: item.url || '',
+          status: 'Pending',
+          notes: details.notes || '',
+          lastSentDate: null,
+          createdAt: new Date().toISOString()
         };
 
-        const savedLead = addLead(leadData);
-        if (savedLead) {
-          savedCount++;
-          onLog(`[Scraper]  Lead Saved: "${savedLead.name}" | Phone: ${savedLead.phone}`);
-          onLead(savedLead); // trigger real-time lead update to client
-        } else {
-          onLog(`[Scraper] ℹ️ Duplicate: "${leadData.name}" already exists in contacts database.`);
-        }
+        savedCount++;
+        onLog(`[Scraper]  Lead Found: "${leadData.name}" | Phone: ${leadData.phone}`);
+        onLead(leadData); // trigger real-time lead update to client
 
       } catch (err) {
         onLog(`[Scraper] Error loading details for "${item.title}": ${err.message}`);

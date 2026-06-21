@@ -9,7 +9,7 @@ const API_BASE = typeof window !== 'undefined'
 
 const Icons = {
   dashboard: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
   ),
   scraper: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
@@ -38,74 +38,129 @@ const Icons = {
   phone: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
   ),
-  disconnect: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91" />
-      <line x1="22" x2="2" y1="2" y2="22" />
-    </svg>
-  ),
-  sync: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.72 2.78L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
-  ),
-  link: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-  ),
-  logo: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="url(#logo-grad)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <defs>
-        <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#ffffff" />
-          <stop offset="100%" stopColor="#94a3b8" />
-        </linearGradient>
-      </defs>
-      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      <path d="m9 12 2 2 4-4"/>
-    </svg>
+  plus: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" x2="12" y1="5" y2="19"/><line x1="5" x2="19" y1="12" y2="12"/></svg>
   ),
   info: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
   ),
-  trophy: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.45 1-1 1H4v2h16v-2h-5c-.55 0-1-.45-1-1v-2.34"/><path d="M12 2a8 8 0 0 0-8 8h16a8 8 0 0 0-8-8z"/></svg>
-  ),
-  thumbsDown: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17 14V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h4l3 3L17 14z"/><path d="M22 14a2 2 0 0 1-2 2h-1v-6h1a2 2 0 0 1 2 2z"/></svg>
+  sync: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.72 2.78L21 8"/><polyline points="21 3 21 8 16 8"/></svg>
   ),
   alertTriangle: (className = "") => (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
   ),
-  terminal: (className = "") => (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+  link: (className = "") => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
   )
 };
 
-const DEFAULT_INTRO = `Hey {{business_name}}! 👋
+const DEFAULT_INTRO = `Hey {{business_name}}! 🍔
 
-I noticed you have a great {{category}} listing on Google Maps in {{location}}, but you don't have a website to showcase your products and get direct online orders.
+I noticed you have a great business listing on Google Maps in {{location}}, but you don't have a website to showcase your services and get direct orders/bookings.
 
-Since everyone is shopping online now, having your own website is essential to get direct orders without paying heavy commissions to Swiggy/Zomato. We can help you build a custom website starting at just ₹999! 🚀
+Having your own website is essential to get direct clients without paying heavy middleman commissions. We can help you build a custom website starting at just ₹999! 🚀
 
-If you are interested, we can send you some of our demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.`;
+If you are interested, we can send you some of our demo previews. Let us know if you'd like to check them out.`;
 
-const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 👋
+const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 🍔
 
 Just following up on my previous message.
 
-Since everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀
+We can launch your premium custom website—complete with an easy dashboard to track all your clients—in just 2 days for only ₹999! 🚀
 
-If you'd be interested to see how it looks, we can share some demo previews with you. If you like what you see, we can create a custom site specifically for your business!`;
+If you'd be interested to see how it looks, we can share some demo previews with you. Let us know if you want to take a look!`;
+
+const SEED_TEMPLATES = {
+  "restaurants": {
+    "introTemplate": "Hey {{business_name}}! 🍔\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}, but you don't have a website to showcase your menu and get direct online orders.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders without paying heavy commissions to Swiggy/Zomato. We can help you build a custom website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some of our demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
+    "followupTemplate": "Hey {{business_name}}! 🍔\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nIf you'd be interested to see how it looks, we can share some demo previews with you. If you like what you see, we can create a custom site specifically for your business!"
+  },
+  "clinics": {
+    "introTemplate": "Hello {{business_name}}! 🩺\n\nI saw your medical clinic profile on Google Maps in {{location}}, but you don't have a website for patients to book appointments directly.\n\nHaving your own professional website is essential to manage appointments smoothly and build trust. We can help you build a custom booking website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some of our clinic website demo previews. If you like them, we can create your very own booking site! Let us know if you'd like to check them out.",
+    "followupTemplate": "Hello {{business_name}}! 🩺\n\nJust following up on my previous message.\n\nGive your patients a seamless way to book appointments while keeping your reception organized. We can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can send you some demo booking layouts. If you like them, we can set up your own clinic booking site!"
+  },
+  "salons": {
+    "introTemplate": "Hey {{business_name}}! ✂️\n\nI saw your salon profile on Google Maps in {{location}}, but you don't have a website for direct client appointment booking.\n\nWe build custom booking websites for salons that let clients schedule appointments directly. We can set up a premium booking website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some salon website demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
+    "followupTemplate": "Hey {{business_name}}! ✂️\n\nJust following up on my previous message.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can share some demo scheduling pages. If you like what you see, we can build one specifically for your salon!"
+  },
+  "clothing shops": {
+    "introTemplate": "Hey {{business_name}}! 👗\n\nI saw your clothing shop listing on Google Maps in {{location}}, but you don't have a website to showcase your catalog and collection.\n\nWe build custom digital catalog websites for apparel shops that let customers browse your styles. We can help you build your custom catalog website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some boutique catalog demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
+    "followupTemplate": "Hey {{business_name}}! 👗\n\nJust following up on my previous message.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can send you some demo catalogs to browse. If you like them, we can create a custom site for your clothing shop!"
+  },
+  "electronics shops": {
+    "introTemplate": "Hey {{business_name}}! ⚡\n\nI saw your electronics shop profile on Google Maps in {{location}}, but you don't have a website to showcase your inventory.\n\nWe build custom product catalog websites for electronics shops that let clients browse spec sheets and request quotes. We can build your premium catalog website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some electronics shop demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
+    "followupTemplate": "Hey {{business_name}}! ⚡\n\nJust following up on my previous message.\n\nWe can launch your digital catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nIf you'd be interested to see, we can share some demo shop layouts. If you like them, we can build a custom site for your business!"
+  }
+};
+
+const SEED_SCRAPER_HISTORY = [
+  {
+    id: "hist_1781755067286",
+    category: "clinics",
+    location: "Sector 52 Gurugram",
+    timestamp: Date.now() - 172800000,
+    saved: 44,
+    total: 85,
+    skippedWebsite: 22,
+    skippedLandline: 10,
+    skippedDuplicate: 4,
+    noPhone: 5
+  },
+  {
+    id: "hist_1781755067287",
+    category: "restaurants",
+    location: "Sector 52 Gurugram",
+    timestamp: Date.now() - 259200000,
+    saved: 35,
+    total: 70,
+    skippedWebsite: 15,
+    skippedLandline: 12,
+    skippedDuplicate: 3,
+    noPhone: 5
+  },
+  {
+    id: "hist_1781755067288",
+    category: "clinics",
+    location: "Sector 51 Gurugram",
+    timestamp: Date.now() - 345600000,
+    saved: 19,
+    total: 45,
+    skippedWebsite: 12,
+    skippedLandline: 8,
+    skippedDuplicate: 3,
+    noPhone: 3
+  },
+  {
+    id: "hist_1781755067289",
+    category: "restaurants",
+    location: "Sector 14 Gurugram",
+    timestamp: Date.now() - 432000000,
+    saved: 16,
+    total: 40,
+    skippedWebsite: 10,
+    skippedLandline: 9,
+    skippedDuplicate: 2,
+    noPhone: 3
+  },
+  {
+    id: "hist_1781755067290",
+    category: "restaurants",
+    location: "Sector 51 Gurugram",
+    timestamp: Date.now() - 518400000,
+    saved: 12,
+    total: 30,
+    skippedWebsite: 8,
+    skippedLandline: 6,
+    skippedDuplicate: 2,
+    noPhone: 2
+  }
+];
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [leads, setLeads] = useState([]);
-  const [stats, setStats] = useState({
-    totalLeads: 0,
-    sentLeads: 0,
-    repliedLeads: 0,
-    wonLeads: 0,
-    lostLeads: 0,
-    conversionRate: '0.0'
-  });
+  const [allTemplates, setAllTemplates] = useState({ categories: {} });
 
   // Scraper Tab State
   const [scrapeCategory, setScrapeCategory] = useState('restaurants');
@@ -122,41 +177,18 @@ export default function Home() {
     skippedDuplicate: 0,
     noPhone: 0
   });
+
+  const [scraperHistory, setScraperHistory] = useState([]);
+
   const consoleEndRef = useRef(null);
-  const whatsappWindowRef = useRef(null);
 
-  const triggerWhatsApp = (url) => {
-    try {
-      if (whatsappWindowRef.current && !whatsappWindowRef.current.closed) {
-        whatsappWindowRef.current.location = url;
-      } else {
-        whatsappWindowRef.current = window.open(url, 'whatsapp_outreach_session');
-      }
-    } catch (err) {
-      console.warn('[WhatsApp] Re-routing error, falling back to window.open:', err);
-      whatsappWindowRef.current = window.open(url, 'whatsapp_outreach_session');
-    }
-  };
-
-  const adjustHeight = (el) => {
-    if (el) {
-      el.style.height = 'auto';
-      el.style.height = `${el.scrollHeight}px`;
-    }
-  };
-
-  // Contacts Tab State (Filters)
+  // Contacts Tab State (Filters & Modal)
   const [searchQuery, setSearchQuery] = useState('');
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
   const [selectedLeads, setSelectedLeads] = useState([]);
-
-  // Manual Outreach Queue Filters
-  const [manualSearchQuery, setManualSearchQuery] = useState('');
-  const [manualCategory, setManualCategory] = useState('all');
-  const [manualOutreachType, setManualOutreachType] = useState('all');
-
-  // Campaign Tab State
+  
+  // Templates Tab State
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingCategory, setEditingCategory] = useState(null);
   const [inlineIntroText, setInlineIntroText] = useState('');
@@ -164,46 +196,86 @@ export default function Home() {
   const [templateCategory, setTemplateCategory] = useState('');
   const [templateText, setTemplateText] = useState(DEFAULT_INTRO);
   const [followupText, setFollowupText] = useState(DEFAULT_FOLLOWUP);
-  const [allTemplates, setAllTemplates] = useState({ categories: {} });
+
+  // WhatsApp Tab Campaign Queue Filter
+  const [campaignCategory, setCampaignCategory] = useState('all');
+  const [campaignType, setCampaignType] = useState('intro'); // intro (Pending) vs followup (Sent)
 
   // Guided Campaign Wizard State
   const [isWizardOpen, setIsWizardOpen] = useState(false);
   const [wizardLeads, setWizardLeads] = useState([]);
   const [wizardIndex, setWizardIndex] = useState(0);
-  const [wizardCategory, setWizardCategory] = useState('all');
   const [wizardMessageType, setWizardMessageType] = useState('intro');
   const [wizardCustomText, setWizardCustomText] = useState('');
-
-  // WhatsApp Integration & Outreach State
-  const [whatsappStatus, setWhatsappStatus] = useState('disconnected');
-  const [whatsappQR, setWhatsappQR] = useState('');
-  const [outreachOperation, setOutreachOperation] = useState('Idle (Stop automatic messages button not clicked)');
   const [isMessageOpened, setIsMessageOpened] = useState(false);
-  const [isCheckingReplies, setIsCheckingReplies] = useState(false);
+
+  // Server Socket Status
   const [isBackendOnline, setIsBackendOnline] = useState(false);
 
-  useEffect(() => {
-    if (whatsappStatus !== 'ready') {
-      setIsCheckingReplies(false);
-    }
-  }, [whatsappStatus]);
-
-
-
   // ----------------------------------------------------------------------------
-  // Socket.io Connection & Data Fetching
+  // Data Lifecycle (Synchronization & Migration)
   // ----------------------------------------------------------------------------
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
-      setActiveTab('contacts');
-    }
+    // 1. Load leads from localStorage, fallback to public/leads.json
+    const loadLeads = async () => {
+      try {
+        const localLeads = localStorage.getItem('ashu_leads');
+        if (localLeads) {
+          setLeads(JSON.parse(localLeads));
+        } else {
+          const res = await fetch('/leads.json');
+          if (res.ok) {
+            const data = await res.json();
+            setLeads(data);
+            localStorage.setItem('ashu_leads', JSON.stringify(data));
+          } else {
+            setLeads([]);
+            localStorage.setItem('ashu_leads', JSON.stringify([]));
+          }
+        }
+      } catch (err) {
+        console.error('Error loading leads database:', err);
+        setLeads([]);
+      }
+    };
 
-    // 1. Fetch initial leads
-    fetchLeads();
-    fetchStats();
-    fetchTemplates();
+    // 2. Load templates from localStorage, fallback to seeding defaults
+    const loadTemplates = () => {
+      try {
+        const localTemplates = localStorage.getItem('ashu_templates');
+        if (localTemplates) {
+          setAllTemplates(JSON.parse(localTemplates));
+        } else {
+          const seeded = { categories: SEED_TEMPLATES };
+          setAllTemplates(seeded);
+          localStorage.setItem('ashu_templates', JSON.stringify(seeded));
+        }
+      } catch (err) {
+        console.error('Error loading templates:', err);
+      }
+    };
 
-    // 2. Setup socket
+    // 3. Load scraper history from localStorage
+    const loadScraperHistory = () => {
+      try {
+        const localHistory = localStorage.getItem('ashu_scraper_history');
+        const parsedHistory = localHistory ? JSON.parse(localHistory) : [];
+        if (parsedHistory && parsedHistory.length > 0) {
+          setScraperHistory(parsedHistory);
+        } else {
+          setScraperHistory(SEED_SCRAPER_HISTORY);
+          localStorage.setItem('ashu_scraper_history', JSON.stringify(SEED_SCRAPER_HISTORY));
+        }
+      } catch (err) {
+        console.error('Error loading scraper history:', err);
+      }
+    };
+
+    loadLeads();
+    loadTemplates();
+    loadScraperHistory();
+
+    // 3. Connect to backend websocket scraper
     const socket = io(API_BASE);
 
     socket.on('connect', () => {
@@ -235,7 +307,7 @@ export default function Home() {
         setScraperStats((prev) => ({ ...prev, skippedDuplicate: prev.skippedDuplicate + 1 }));
       } else if (message.includes('has no phone number listed')) {
         setScraperStats((prev) => ({ ...prev, noPhone: prev.noPhone + 1 }));
-      } else if (message.includes('Lead Saved:') || message.includes('savedCount') || message.includes('Lead Saved')) {
+      } else if (message.includes('Lead Saved:') || message.includes('Lead Found:') || message.includes('savedCount')) {
         setScraperStats((prev) => ({ ...prev, saved: prev.saved + 1 }));
       }
 
@@ -246,32 +318,13 @@ export default function Home() {
 
     socket.on('lead_scraped', (newLead) => {
       setLeads((prev) => {
-        // Prevent local double rendering if list already has it
-        if (prev.some((l) => l.id === newLead.id)) return prev;
-        return [newLead, ...prev];
+        // Prevent duplicates in real time
+        const cleanNewPhone = newLead.phone.replace(/[^0-9]/g, '');
+        if (prev.some((l) => l.phone.replace(/[^0-9]/g, '') === cleanNewPhone)) return prev;
+        const updated = [newLead, ...prev];
+        localStorage.setItem('ashu_leads', JSON.stringify(updated));
+        return updated;
       });
-      // Recalculate stats dynamically
-      updateLocalStats();
-    });
-
-    socket.on('lead_updated', (updatedLead) => {
-      setLeads((prev) => prev.map((l) => (l.id === updatedLead.id ? updatedLead : l)));
-      updateLocalStats();
-    });
-
-    socket.on('whatsapp_status', (status) => {
-      setWhatsappStatus(status);
-    });
-
-    socket.on('whatsapp_qr', (qrCode) => {
-      setWhatsappQR(qrCode);
-    });
-
-    socket.on('outreach_operation', (operation) => {
-      setOutreachOperation(operation);
-      if (operation.includes('Scan completed') || operation.includes('failed') || operation.includes('Idle')) {
-        setIsCheckingReplies(false);
-      }
     });
 
     return () => {
@@ -286,218 +339,117 @@ export default function Home() {
     }
   }, [logs]);
 
-  // Recalculate stats whenever leads state updates
+  // Handle mobile width activeTab protection (cannot use Scraper on mobile)
   useEffect(() => {
-    updateLocalStats();
-  }, [leads]);
+    if (typeof window === 'undefined') return;
+    const handleResize = () => {
+      if (window.innerWidth <= 768 && (activeTab === 'scraper' || activeTab === 'templates')) {
+        setActiveTab('contacts');
+      }
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [activeTab]);
 
   // Sync wizard message copy when index advances
   useEffect(() => {
     if (isWizardOpen && wizardLeads[wizardIndex]) {
       const lead = wizardLeads[wizardIndex];
-      const message = getCompiledMessage(lead);
+      const message = getCompiledMessage(lead, wizardMessageType);
       setWizardCustomText(message || '');
       setIsMessageOpened(false);
     }
   }, [wizardIndex, wizardLeads, isWizardOpen]);
 
-
-
-  const mergeLocalUpdates = (leadsList) => {
-    if (typeof window === 'undefined') return leadsList;
-    try {
-      const localUpdatesRaw = localStorage.getItem('crm_local_updates');
-      if (!localUpdatesRaw) return leadsList;
-      const localUpdates = JSON.parse(localUpdatesRaw);
-      return leadsList.map(lead => {
-        if (localUpdates[lead.id]) {
-          return { ...lead, ...localUpdates[lead.id] };
-        }
-        return lead;
-      });
-    } catch (err) {
-      console.error('Error merging local updates:', err);
-      return leadsList;
-    }
-  };
-
-  const fetchLeads = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/leads`);
-      if (!res.ok) throw new Error('API error');
-      const data = await res.json();
-      setLeads(mergeLocalUpdates(data));
-    } catch (err) {
-      console.warn('Backend server offline, loading static leads.json copy:', err);
-      try {
-        const res = await fetch('/leads.json');
-        if (!res.ok) throw new Error('Static file missing');
-        const data = await res.json();
-        setLeads(mergeLocalUpdates(data));
-      } catch (staticErr) {
-        console.error('Failed to load static leads:', staticErr);
-      }
-    }
-  };
-
-  const fetchStats = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/stats`);
-      const data = await res.json();
-      setStats(data);
-    } catch (err) {
-      console.error('Error fetching stats:', err);
-    }
-  };
-
-
-
-  const fetchTemplates = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/templates`);
-      const data = await res.json();
-      setAllTemplates(data);
+  // Save search query parameters to scraper history when run completes
+  const wasScrapingRef = useRef(false);
+  useEffect(() => {
+    if (isScraping) {
+      wasScrapingRef.current = true;
+    } else if (wasScrapingRef.current) {
+      wasScrapingRef.current = false;
       
-      // Keep configuration form input fields clean and empty on initial mount.
-      // Saved templates can be dynamically loaded into the form via the 'Edit Template' buttons below.
-    } catch (err) {
-      console.error('Error fetching templates:', err);
-    }
-  };
+      // Save history record
+      setScraperHistory((prevHistory) => {
+        // Prevent adding empty runs or runs where nothing was even scanned if it's aborted immediately
+        if (scraperStats.total === 0 && scraperStats.scanned === 0) return prevHistory;
 
-  const handleSaveTemplates = async () => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Saving templates requires your laptop backend to be active.');
-      return;
-    }
-    const cleanCategory = templateCategory.toLowerCase().trim();
-    if (!cleanCategory) {
-      alert('Please enter a Category first.');
-      return;
-    }
-    try {
-      const res = await fetch(`${API_BASE}/api/templates/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: cleanCategory,
-          introTemplate: templateText,
-          followupTemplate: followupText,
-          demoLink1: '',
-          demoLink2: ''
-        })
+        // Check if history already contains a run with exact same category and location within past 1 minute to prevent double recording
+        const isDuplicateRun = prevHistory.some(
+          (run) => 
+            run.category.toLowerCase().trim() === scrapeCategory.toLowerCase().trim() &&
+            run.location.toLowerCase().trim() === scrapeLocation.toLowerCase().trim() &&
+            (Date.now() - run.timestamp) < 60000
+        );
+        if (isDuplicateRun) return prevHistory;
+
+        const newRecord = {
+          id: Date.now().toString(),
+          category: scrapeCategory,
+          location: scrapeLocation,
+          timestamp: Date.now(),
+          saved: scraperStats.saved,
+          total: scraperStats.total,
+          skippedWebsite: scraperStats.skippedWebsite,
+          skippedLandline: scraperStats.skippedLandline,
+          skippedDuplicate: scraperStats.skippedDuplicate,
+          noPhone: scraperStats.noPhone
+        };
+        const updated = [newRecord, ...prevHistory];
+        localStorage.setItem('ashu_scraper_history', JSON.stringify(updated));
+        return updated;
       });
-      if (res.ok) {
-        alert(`Templates for category "${cleanCategory}" saved successfully on the server!`);
-        fetchTemplates(); // Refresh template list
-        setTemplateCategory('');
-        setTemplateText(DEFAULT_INTRO);
-        setFollowupText(DEFAULT_FOLLOWUP);
-        setIsCreateOpen(false); // Hide creation section after successful save
-      } else {
-        alert('Failed to save templates.');
-      }
-    } catch (err) {
-      console.error('Error saving templates:', err);
     }
-  };
+  }, [isScraping, scrapeCategory, scrapeLocation, scraperStats]);
 
-  const handleEditTemplate = (cat) => {
-    setEditingCategory(cat);
-    if (allTemplates.categories && allTemplates.categories[cat]) {
-      setInlineIntroText(allTemplates.categories[cat].introTemplate || '');
-      setInlineFollowupText(allTemplates.categories[cat].followupTemplate || '');
-    }
-  };
-
-  const handleSaveInlineTemplate = async (cat) => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Saving templates requires your laptop backend to be active.');
-      return;
-    }
-    try {
-      const res = await fetch(`${API_BASE}/api/templates/save`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          category: cat,
-          introTemplate: inlineIntroText,
-          followupTemplate: inlineFollowupText,
-          demoLink1: '',
-          demoLink2: ''
-        })
-      });
-      if (res.ok) {
-        alert(`Template for category "${cat}" updated successfully!`);
-        fetchTemplates();
-        setEditingCategory(null);
-      } else {
-        alert('Failed to save template changes.');
-      }
-    } catch (err) {
-      console.error('Error saving inline template:', err);
-    }
-  };
-
-  const handleDeleteTemplate = async (cat) => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Deleting templates requires your laptop backend to be active.');
-      return;
-    }
-    if (!confirm(`Are you sure you want to delete the template for category "${cat}"?`)) {
-      return;
-    }
-    try {
-      const res = await fetch(`${API_BASE}/api/templates/delete`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ category: cat })
-      });
-      if (res.ok) {
-        alert(`Template for category "${cat}" deleted successfully!`);
-        fetchTemplates();
-        if (editingCategory === cat) {
-          setEditingCategory(null);
-        }
-      } else {
-        const data = await res.json();
-        alert(data.error || 'Failed to delete template.');
-      }
-    } catch (err) {
-      console.error('Error deleting template:', err);
-    }
-  };
-
-  const updateLocalStats = () => {
-    if (leads.length === 0) return;
-    const totalLeads = leads.length;
-    const sentLeads = leads.filter((l) => ['Sent', 'Replied', 'Won', 'Lost'].includes(l.status)).length;
-    const repliedLeads = leads.filter((l) => ['Replied', 'Won', 'Lost'].includes(l.status)).length;
-    const wonLeads = leads.filter((l) => l.status === 'Won').length;
-    const lostLeads = leads.filter((l) => l.status === 'Lost').length;
-
-    setStats({
-      totalLeads,
-      sentLeads,
-      repliedLeads,
-      wonLeads,
-      lostLeads,
-      conversionRate: ((wonLeads / totalLeads) * 100).toFixed(1)
-    });
-  };
+  const alreadyScrapedRun = useMemo(() => {
+    if (!scrapeCategory || !scrapeLocation) return null;
+    const catSearch = scrapeCategory.toLowerCase().trim();
+    const locSearch = scrapeLocation.toLowerCase().trim();
+    return scraperHistory.find(
+      (run) => 
+        run.category.toLowerCase().trim() === catSearch &&
+        run.location.toLowerCase().trim() === locSearch
+    );
+  }, [scrapeCategory, scrapeLocation, scraperHistory]);
 
   // ----------------------------------------------------------------------------
-  // Action Handlers
+  // Local CRM Database Handlers (State + LocalStorage)
+  // ----------------------------------------------------------------------------
+  const handleUpdateLeadStatus = (id, status, notes = undefined) => {
+    const updated = leads.map((lead) => {
+      if (lead.id === id) {
+        const copy = { ...lead, status, updatedAt: new Date().toISOString() };
+        if (status === 'Sent' || status === 'Failed') {
+          copy.lastSentDate = new Date().toISOString();
+        }
+        if (notes !== undefined) {
+          copy.notes = notes.trim();
+        }
+        return copy;
+      }
+      return lead;
+    });
+    setLeads(updated);
+    localStorage.setItem('ashu_leads', JSON.stringify(updated));
+  };
+
+
+
+  // ----------------------------------------------------------------------------
+  // Scraper Actions
   // ----------------------------------------------------------------------------
   const handleStartScrape = async () => {
     if (!isBackendOnline) {
-      alert('Backend is offline. Starting the scraper requires your laptop backend to be active.');
+      alert('Backend scraping engine is offline. Please launch the backend server first.');
       return;
     }
     if (!scrapeCategory || !scrapeLocation) {
-      alert('Please fill in both Category and Location before starting.');
+      alert('Please enter both a Category and Location to scrape.');
       return;
     }
+
     setIsScraping(true);
     setLogs([]);
     setScraperStats({
@@ -518,7 +470,8 @@ export default function Home() {
         body: JSON.stringify({ 
           category: scrapeCategory, 
           location: scrapeLocation,
-          scrollDepth: Number(scrollDepth)
+          scrollDepth: Number(scrollDepth),
+          existingPhones: leads.map(l => l.phone)
         })
       });
       if (!res.ok) {
@@ -527,298 +480,249 @@ export default function Home() {
         setIsScraping(false);
       }
     } catch (err) {
-      setLogs((prev) => [...prev, `[Error] Failed to communicate with backend: ${err.message}`]);
+      setLogs((prev) => [...prev, `[Error] Failed to connect: ${err.message}`]);
       setIsScraping(false);
     }
   };
 
-  // Scraper finishes automatically, we listen to log feeds. When the browser finishes, it logs.
-  // We can let the user stop the scraper by closing browser via activeScraper flag backend.
-  // For simplicity, we let the backend handle termination.
-
-  const handleConnectWhatsApp = async () => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Connecting WhatsApp requires your laptop backend to be active.');
-      return;
-    }
+  const handleStopScrape = async () => {
+    if (!isScraping) return;
     try {
-      setWhatsappStatus('connecting');
-      const res = await fetch(`${API_BASE}/api/whatsapp/connect`, { method: 'POST' });
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.error || 'Failed to connect WhatsApp');
-      }
+      setLogs((prev) => [...prev, `[System] Requesting cancel signal...`]);
+      await fetch(`${API_BASE}/api/scrape/stop`, { method: 'POST' });
     } catch (err) {
-      console.error('Error connecting WhatsApp:', err);
-      alert('Error connecting WhatsApp: ' + err.message);
+      setLogs((prev) => [...prev, `[Error] Failed to stop scraper: ${err.message}`]);
     }
   };
 
-  const handleDisconnectWhatsApp = async () => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Disconnecting WhatsApp requires your laptop backend to be active.');
+  // ----------------------------------------------------------------------------
+  // Local Templates Handlers
+  // ----------------------------------------------------------------------------
+  const handleSaveNewTemplate = () => {
+    const cleanCat = templateCategory.toLowerCase().trim();
+    if (!cleanCat) {
+      alert('Category name is required.');
       return;
     }
-    try {
-      const res = await fetch(`${API_BASE}/api/whatsapp/logout`, { method: 'POST' });
-      if (!res.ok) {
-        const data = await res.json();
-        alert(data.error || 'Failed to disconnect WhatsApp');
-      }
-    } catch (err) {
-      console.error('Error disconnecting WhatsApp:', err);
-    }
-  };
 
-  const handleCheckReplies = async () => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Checking replies requires your laptop backend to be active.');
-      return;
-    }
-    if (isCheckingReplies) return;
-    try {
-      setIsCheckingReplies(true);
-      const res = await fetch(`${API_BASE}/api/outreach/check-replies`, { method: 'POST' });
-      const data = await res.json();
-      if (!res.ok) {
-        alert(data.error || 'Failed to start checking replies');
-        setIsCheckingReplies(false);
-      } else {
-        alert(data.message);
-      }
-    } catch (err) {
-      console.error('Error checking replies:', err);
-      setIsCheckingReplies(false);
-    }
-  };
-
-
-
-
-  const handleUpdateLeadStatus = async (id, status, notes = undefined) => {
-    const updates = { status };
-    if (notes !== undefined) {
-      updates.notes = notes.trim();
-    }
-
-    // Update local React state immediately for snappy UI
-    setLeads((prev) => prev.map((l) => {
-      if (l.id === id) {
-        const merged = { ...l, ...updates };
-        if (updates.status === 'Sent' || updates.status === 'Failed') {
-          merged.lastSentDate = new Date().toISOString();
+    const updated = {
+      ...allTemplates,
+      categories: {
+        ...allTemplates.categories,
+        [cleanCat]: {
+          introTemplate: templateText,
+          followupTemplate: followupText
         }
-        return merged;
       }
-      return l;
-    }));
+    };
 
-    // Update localStorage for offline mode persistence
-    try {
-      const localUpdatesRaw = localStorage.getItem('crm_local_updates') || '{}';
-      const localUpdates = JSON.parse(localUpdatesRaw);
-      localUpdates[id] = {
-        ...localUpdates[id],
-        ...updates
-      };
-      if (updates.status === 'Sent' || updates.status === 'Failed') {
-        localUpdates[id].lastSentDate = new Date().toISOString();
-      }
-      localStorage.setItem('crm_local_updates', JSON.stringify(localUpdates));
-    } catch (err) {
-      console.warn('Failed to save update to localStorage:', err);
-    }
+    setAllTemplates(updated);
+    localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    
+    // Reset Form
+    setTemplateCategory('');
+    setTemplateText(DEFAULT_INTRO);
+    setFollowupText(DEFAULT_FOLLOWUP);
+    setIsCreateOpen(false);
+  };
 
-    try {
-      await fetch(`${API_BASE}/api/leads/update`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, updates })
-      });
-    } catch (err) {
-      console.warn('Backend offline, status change saved locally to phone:', err);
+  const handleEditTemplate = (cat) => {
+    setEditingCategory(cat);
+    if (allTemplates.categories && allTemplates.categories[cat]) {
+      setInlineIntroText(allTemplates.categories[cat].introTemplate || '');
+      setInlineFollowupText(allTemplates.categories[cat].followupTemplate || '');
     }
   };
 
+  const handleSaveInlineTemplate = (cat) => {
+    const updated = {
+      ...allTemplates,
+      categories: {
+        ...allTemplates.categories,
+        [cat]: {
+          introTemplate: inlineIntroText,
+          followupTemplate: inlineFollowupText
+        }
+      }
+    };
+    setAllTemplates(updated);
+    localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    setEditingCategory(null);
+  };
+
+  const handleDeleteTemplate = (cat) => {
+    if (!confirm(`Are you sure you want to delete the outreach template for "${cat}"?`)) return;
+    const categoriesCopy = { ...allTemplates.categories };
+    delete categoriesCopy[cat];
+
+    const updated = { ...allTemplates, categories: categoriesCopy };
+    setAllTemplates(updated);
+    localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    if (editingCategory === cat) setEditingCategory(null);
+  };
+
+  // ----------------------------------------------------------------------------
+  // Guided Campaign Outreach Wizard
+  // ----------------------------------------------------------------------------
   const formatPhoneForWa = (phone) => {
-    let cleanNumber = phone.replace(/[^0-9]/g, '');
-    if (cleanNumber.length === 10) {
-      cleanNumber = '91' + cleanNumber;
-    }
-    if (cleanNumber.startsWith('0') && cleanNumber.length === 11) {
-      cleanNumber = '91' + cleanNumber.substring(1);
-    }
-    return cleanNumber;
+    let clean = phone.replace(/[^0-9]/g, '');
+    if (clean.length === 10) clean = '91' + clean;
+    if (clean.startsWith('0') && clean.length === 11) clean = '91' + clean.substring(1);
+    return clean;
   };
 
-  const getCompiledMessage = (lead) => {
-    const catTemplates = allTemplates.categories ? allTemplates.categories[lead.category] : null;
-    if (!catTemplates) return null;
-    const templateText = lead.status === 'Pending' ? catTemplates.introTemplate : catTemplates.followupTemplate;
-    if (!templateText) return null;
+  const getCompiledMessage = (lead, type) => {
+    const cat = lead.category.toLowerCase().trim();
+    const catTemplate = allTemplates.categories ? allTemplates.categories[cat] : null;
+    
+    // Fallback to defaults if no category-specific template exists
+    const templateText = catTemplate 
+      ? (type === 'intro' ? catTemplate.introTemplate : catTemplate.followupTemplate)
+      : (type === 'intro' ? DEFAULT_INTRO : DEFAULT_FOLLOWUP);
 
-    const dLink1 = catTemplates.demoLink1 || '';
-    const dLink2 = catTemplates.demoLink2 || '';
+    if (!templateText) return '';
 
     return templateText
       .replace(/{{business_name}}/gi, lead.name)
       .replace(/{{category}}/gi, lead.category)
-      .replace(/{{location}}/gi, lead.location)
-      .replace(/{{demo_link1}}/gi, dLink1)
-      .replace(/{{demo_link2}}/gi, dLink2);
+      .replace(/{{location}}/gi, lead.location || 'your area');
   };
 
-  const handleManualSend = async (lead) => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. Sending outreach messages requires your laptop backend to be active.');
-      return;
-    }
-    const message = getCompiledMessage(lead);
-    if (!message) {
-      alert(`No outreach template found for category "${lead.category}"! Please save a template for category "${lead.category}" in the Templates tab first.`);
-      return;
-    }
-    const cleanPhone = formatPhoneForWa(lead.phone);
-    const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(message)}`;
-    
-    // Copy to clipboard as backup to prevent any truncation/encoding issues in browser redirects
-    try {
-      await navigator.clipboard.writeText(message);
-    } catch (err) {
-      console.warn('Failed to copy to clipboard:', err);
-    }
+  const handleStartCampaign = (mode = 'filtered') => {
+    let targetList = [];
+    if (mode === 'selected') {
+      targetList = leads.filter(l => selectedLeads.includes(l.id));
+    } else {
+      // Gather active outreach queue from contacts matching the campaign type
+      targetList = leads.filter(lead => {
+        const catMatch = campaignCategory === 'all' || lead.category === campaignCategory;
+        if (!catMatch) return false;
 
-    // Open in a reused session tab to prevent multiple windows/tabs opening
-    triggerWhatsApp(waUrl);
-
-    // Update status to 'Sent' and log note
-    const outreachType = lead.status === 'Pending' ? 'Intro' : 'Follow-up';
-    await handleUpdateLeadStatus(
-      lead.id, 
-      'Sent', 
-      `${outreachType} sent manually via wa.me link`
-    );
-  };
-
-  // Start Guided campaign wizard
-  const handleStartGuidedCampaign = (type = 'intro') => {
-    if (!isBackendOnline) {
-      alert('Backend is offline. The Campaign Wizard requires your laptop backend to be active.');
-      return;
-    }
-    let targetLeads = [];
-    let msgType = 'intro';
-
-    if (type === 'intro') {
-      // All 'Pending' leads matching filter category
-      targetLeads = filteredLeads.filter((l) => l.status === 'Pending');
-      msgType = 'intro';
-    } else if (type === 'followup') {
-      // All 'Sent' leads matching filter category
-      targetLeads = filteredLeads.filter((l) => l.status === 'Sent');
-      msgType = 'followup';
-    } else if (type === 'selected') {
-      // Selected checkbox leads
-      targetLeads = leads.filter((l) => selectedLeads.includes(l.id) && (l.status === 'Pending' || l.status === 'Sent'));
-      msgType = 'intro'; // default to intro
-    } else if (type === 'manual') {
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-
-      targetLeads = leads.filter((l) => {
-        if (l.status === 'Pending') return true;
-        if (l.status === 'Sent' && l.lastSentDate && new Date(l.lastSentDate) < sevenDaysAgo) return true;
-        return false;
+        if (campaignType === 'intro') {
+          return lead.status === 'Pending';
+        } else {
+          // Followup needs to be Sent, and not updated/sent in the last 7 days
+          const sevenDaysAgo = new Date();
+          sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+          return lead.status === 'Sent' && lead.lastSentDate && new Date(lead.lastSentDate) < sevenDaysAgo;
+        }
       });
-      msgType = targetLeads[0]?.status === 'Pending' ? 'intro' : 'followup';
     }
 
-    if (targetLeads.length === 0) {
-      alert('No eligible target leads found for this campaign configuration!');
+    if (targetList.length === 0) {
+      alert('No contacts match the campaign filters or outreach criteria.');
       return;
     }
 
-    // Sort oldest first (or Pending first, then Sent for manual conveyor)
-    targetLeads.sort((a, b) => {
-      if (type === 'manual') {
-        if (a.status === 'Pending' && b.status !== 'Pending') return -1;
-        if (a.status !== 'Pending' && b.status === 'Pending') return 1;
-      }
-      return a.id.localeCompare(b.id);
-    });
+    // Sort oldest first
+    targetList.sort((a, b) => a.id.localeCompare(b.id));
 
-    setWizardLeads(targetLeads);
+    setWizardLeads(targetList);
     setWizardIndex(0);
-    setWizardMessageType(msgType);
+    setWizardMessageType(mode === 'selected' ? 'intro' : campaignType);
     setIsWizardOpen(true);
-    setSelectedLeads([]); // Clear CRM selection
+  };
+
+  const handleTriggerWhatsApp = () => {
+    const lead = wizardLeads[wizardIndex];
+    if (!lead) return;
+
+    const cleanPhone = formatPhoneForWa(lead.phone);
+    const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(wizardCustomText)}`;
+
+    // Copy as backup to clipboard
+    try {
+      navigator.clipboard.writeText(wizardCustomText);
+    } catch (e) {
+      console.warn('Clipboard write failed:', e);
+    }
+
+    window.open(waUrl, '_blank');
+    setIsMessageOpened(true);
+  };
+
+  const handleWizardSubmitResult = (status) => {
+    const lead = wizardLeads[wizardIndex];
+    if (!lead) return;
+
+    const notesMsg = status === 'Sent' 
+      ? `${wizardMessageType === 'intro' ? 'Intro' : 'Followup'} sent manually via Guided Campaign`
+      : 'WhatsApp number lookup failed or invalid JID';
+
+    handleUpdateLeadStatus(lead.id, status, notesMsg);
+
+    // Advance
+    if (wizardIndex < wizardLeads.length - 1) {
+      setWizardIndex(prev => prev + 1);
+    } else {
+      setIsWizardOpen(false);
+      alert('Cold outreach campaign conveyor complete!');
+    }
+  };
+
+  const handleWizardSkip = () => {
+    if (wizardIndex < wizardLeads.length - 1) {
+      setWizardIndex(prev => prev + 1);
+    } else {
+      setIsWizardOpen(false);
+      alert('Campaign queue processing finished.');
+    }
   };
 
   // ----------------------------------------------------------------------------
-  // Filter & Search Logics
+  // Dashboard & Metrics State (Derived Computations)
   // ----------------------------------------------------------------------------
+  const stats = useMemo(() => {
+    const total = leads.length;
+    const sent = leads.filter((l) => ['Sent', 'Won', 'Lost'].includes(l.status)).length;
+    const won = leads.filter((l) => l.status === 'Won').length;
+    const lost = leads.filter((l) => l.status === 'Lost').length;
+    
+    return {
+      total,
+      sent,
+      won,
+      lost,
+      pending: leads.filter(l => l.status === 'Pending').length,
+      failed: leads.filter(l => l.status === 'Failed').length,
+      conversionRate: total > 0 ? ((won / total) * 100).toFixed(1) : '0'
+    };
+  }, [leads]);
+
   const uniqueCategories = useMemo(() => {
     const cats = new Set(leads.map((l) => l.category));
     return ['all', ...Array.from(cats)];
   }, [leads]);
 
-  const scraperCategories = useMemo(() => {
+  const configCategories = useMemo(() => {
     const predefined = ['restaurants', 'salons', 'clinics', 'clothing shops', 'electronics shops'];
-    const customCats = allTemplates.categories ? Object.keys(allTemplates.categories) : [];
-    const union = new Set([...predefined, ...customCats]);
-    return Array.from(union);
+    const custom = allTemplates.categories ? Object.keys(allTemplates.categories) : [];
+    return Array.from(new Set([...predefined, ...custom]));
   }, [allTemplates]);
 
   const filteredLeads = useMemo(() => {
+    const cleanSearch = searchQuery.toLowerCase().trim();
+    if (!cleanSearch && filterCategory === 'all' && filterStatus === 'all') {
+      return leads;
+    }
     return leads.filter((lead) => {
-      // 1. Search Query (matches name, phone, location)
-      const matchesSearch =
-        lead.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        lead.phone.includes(searchQuery) ||
-        lead.location.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesSearch = !cleanSearch ||
+        lead.name.toLowerCase().includes(cleanSearch) ||
+        lead.phone.includes(cleanSearch) ||
+        (lead.location && lead.location.toLowerCase().includes(cleanSearch));
 
-      // 2. Category Filter
-      const matchesCategory = filterCategory === 'all' || lead.category === filterCategory;
-
-      // 3. Status Filter
+      const matchesCat = filterCategory === 'all' || lead.category === filterCategory;
       const matchesStatus = filterStatus === 'all' || lead.status === filterStatus;
 
-      return matchesSearch && matchesCategory && matchesStatus;
+      return matchesSearch && matchesCat && matchesStatus;
     });
   }, [leads, searchQuery, filterCategory, filterStatus]);
-
-  const manualOutreachLeads = useMemo(() => {
-    return leads.filter((lead) => {
-      // Must be eligible for outreach (Pending or Sent status)
-      const isEligible = lead.status === 'Pending' || lead.status === 'Sent';
-      if (!isEligible) return false;
-
-      // 1. Search Query (matches name, phone, location)
-      const matchesSearch =
-        lead.name.toLowerCase().includes(manualSearchQuery.toLowerCase()) ||
-        lead.phone.includes(manualSearchQuery) ||
-        lead.location.toLowerCase().includes(manualSearchQuery.toLowerCase());
-
-      // 2. Category Filter
-      const matchesCategory = manualCategory === 'all' || lead.category === manualCategory;
-
-      // 3. Outreach Type Filter
-      let matchesType = true;
-      if (manualOutreachType === 'intro') {
-        matchesType = lead.status === 'Pending';
-      } else if (manualOutreachType === 'followup') {
-        matchesType = lead.status === 'Sent';
-      }
-
-      return matchesSearch && matchesCategory && matchesType;
-    }).sort((a, b) => a.id.localeCompare(b.id)); // Sort oldest first
-  }, [leads, manualSearchQuery, manualCategory, manualOutreachType]);
 
   const recentDispatches = useMemo(() => {
     return leads
       .filter((l) => ['Sent', 'Failed'].includes(l.status) && l.lastSentDate)
       .sort((a, b) => new Date(b.lastSentDate) - new Date(a.lastSentDate))
-      .slice(0, 15);
+      .slice(0, 8);
   }, [leads]);
 
   const handleSelectLead = (id) => {
@@ -839,11 +743,11 @@ export default function Home() {
     <div className="app-container">
       {/* Sidebar Navigation */}
       <aside className="sidebar">
-        <div className="brand" style={{ flexDirection: 'column', alignItems: 'flex-start', gap: '2px' }}>
-          <div className="brand-logo" style={{ lineHeight: '1.1', display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontSize: '20px', fontWeight: '600', color: 'var(--text-primary)', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-display)' }}>Ashu Websites</span>
+        <div className="brand">
+          <div className="brand-logo-container">
+            <span className="logo-main">Ashu Websites</span>
+            <span className="logo-sub">Manager Pro</span>
           </div>
-          <span style={{ fontSize: '14px', fontWeight: '600', color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', fontFamily: 'var(--font-display)', marginTop: '4px' }}>Manager</span>
         </div>
         <ul className="nav-links">
           <li
@@ -874,60 +778,116 @@ export default function Home() {
             className={`nav-item ${activeTab === 'whatsapp' ? 'active' : ''}`}
             onClick={() => setActiveTab('whatsapp')}
           >
-            {Icons.phone()} WhatsApp
+            {Icons.campaigns()} Outreach Hub
           </li>
         </ul>
+
+        {/* Server Connection status */}
+        <div className="server-status-widget">
+          <div className="status-indicator-row">
+            <span className={`status-dot ${isBackendOnline ? 'online' : 'offline'}`} />
+            <span className="status-label">Scraper: {isBackendOnline ? 'ONLINE' : 'OFFLINE'}</span>
+          </div>
+          <span className="status-desc">
+            {isBackendOnline ? 'Scraper active.' : 'Start backend server.'}
+          </span>
+        </div>
       </aside>
 
       {/* Main Content Pane */}
       <main className="main-content">
+        
         {/* TAB 1: DASHBOARD */}
         {activeTab === 'dashboard' && (
           <div>
             <header className="page-header">
-              <h1 className="page-title">Outreach Dashboard</h1>
-              <p className="page-subtitle">Real-time status overview of your cold outreach pipelines</p>
+              <h1 className="page-title">Analytics Dashboard</h1>
+              <p className="page-subtitle">Outreach statistics and conversions</p>
             </header>
 
             {/* Metrics Row */}
             <div className="grid-stats">
               <div className="stat-card">
-                <span className="stat-label">Total Leads Scraped</span>
-                <span className="stat-value">{stats.totalLeads}</span>
+                <span className="stat-label">Total Leads</span>
+                <span className="stat-value">{stats.total}</span>
               </div>
               <div className="stat-card success">
-                <span className="stat-label">Messages Sent</span>
-                <span className="stat-value">{stats.sentLeads}</span>
-              </div>
-              <div className="stat-card warning">
-                <span className="stat-label">Total Replies</span>
-                <span className="stat-value">{stats.repliedLeads}</span>
+                <span className="stat-label">Outreach Sent</span>
+                <span className="stat-value">{stats.sent}</span>
               </div>
               <div className="stat-card success">
                 <span className="stat-label">Leads Won</span>
-                <span className="stat-value">{stats.wonLeads}</span>
+                <span className="stat-value text-success">{stats.won}</span>
               </div>
               <div className="stat-card error">
                 <span className="stat-label">Leads Lost</span>
-                <span className="stat-value">{stats.lostLeads}</span>
+                <span className="stat-value text-error">{stats.lost}</span>
               </div>
-              <div className="stat-card">
-                <span className="stat-label">Conversion Rate</span>
-                <span className="stat-value">{stats.conversionRate}%</span>
+              <div className="stat-card primary">
+                <span className="stat-label">Win Rate</span>
+                <span className="stat-value text-accent">{stats.conversionRate}%</span>
               </div>
             </div>
 
-            {/* Quick Actions / Tips */}
-            <div className="glass-card">
-              <h2 style={{ marginBottom: '16px', fontSize: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {Icons.info()} Quick Instructions
-              </h2>
-              <ul style={{ paddingLeft: '20px', lineHeight: '1.8', color: '#94a3b8' }}>
-                <li>Go to the <strong>Lead Scraper</strong> tab to extract fresh phone numbers for local business categories.</li>
-                <li>Go to the <strong>Templates</strong> tab to customize and save your category outreach copy with direct demo links.</li>
-                <li>Go to the <strong>WhatsApp</strong> tab and click <strong>Connect Phone</strong> to start the automated queue.</li>
-                <li>Check the <strong>Contacts CRM</strong> table to track client replies, log notes, and flag successful wins!</li>
-              </ul>
+            {/* Sub-distribution row */}
+            <div className="responsive-grid">
+              <div className="glass-card">
+                <h2 style={{ fontSize: '18px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  {Icons.info()} Campaign Progress Chart
+                </h2>
+                <div className="bar-chart-container">
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Pending ({stats.pending})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill pending" style={{ width: `${stats.total > 0 ? (stats.pending / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Sent ({stats.sent - stats.won - stats.lost})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill sent" style={{ width: `${stats.total > 0 ? ((stats.sent - stats.won - stats.lost) / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Failed ({stats.failed})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill failed" style={{ width: `${stats.total > 0 ? (stats.failed / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Won ({stats.won})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill won" style={{ width: `${stats.total > 0 ? (stats.won / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Lost ({stats.lost})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill lost" style={{ width: `${stats.total > 0 ? (stats.lost / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-card instruction-card">
+                <h2 style={{ fontSize: '18px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  Quick Start Guide
+                </h2>
+                <ul className="guide-list">
+                  <li>
+                    <span className="num">1</span>
+                    <div><strong>Google Maps Scraper:</strong> Pull active local listings without websites into your browser database.</div>
+                  </li>
+                  <li>
+                    <span className="num">2</span>
+                    <div><strong>Outreach Templates:</strong> Configure customized sales copy using dynamic placeholders.</div>
+                  </li>
+                  <li>
+                    <span className="num">3</span>
+                    <div><strong>WhatsApp campaigns:</strong> Launch the interactive deep link conveyor belt wizard.</div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         )}
@@ -936,14 +896,14 @@ export default function Home() {
         {activeTab === 'scraper' && (
           <div>
             <header className="page-header">
-              <h1 className="page-title">Lead Scraper</h1>
-              <p className="page-subtitle">Extract local businesses from Google Maps automatically</p>
+              <h1 className="page-title">Lead Scraper Engine</h1>
+              <p className="page-subtitle">Search listings on Google Maps and import leads</p>
             </header>
 
             <div className="glass-card">
               <div className="form-row">
                 <div className="form-group">
-                  <label htmlFor="category">Business Category</label>
+                  <label htmlFor="category">Business Keyword Category</label>
                   <select
                     id="category"
                     value={scrapeCategory}
@@ -951,45 +911,59 @@ export default function Home() {
                     disabled={isScraping}
                     style={{ textTransform: 'capitalize' }}
                   >
-                    {scraperCategories.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
+                    {configCategories.map((cat) => (
+                      <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="location">Target Location</label>
+                  <label htmlFor="location">Target Region Location</label>
                   <input
                     type="text"
                     id="location"
                     value={scrapeLocation}
                     onChange={(e) => setScrapeLocation(e.target.value)}
                     disabled={isScraping}
+                    placeholder="e.g. Sector 51 Gurugram"
                   />
                 </div>
               </div>
 
               <div className="form-row" style={{ marginTop: '16px' }}>
                 <div className="form-group">
-                  <label htmlFor="scroll-depth">Scroll Depth</label>
+                  <label htmlFor="scroll-depth">Scan Depth (Google Maps scrolling cycles)</label>
                   <select
                     id="scroll-depth"
                     value={scrollDepth}
                     onChange={(e) => setScrollDepth(e.target.value)}
                     disabled={isScraping}
                   >
-                    <option value="5">Fast Scan (approx. 10-20 leads)</option>
-                    <option value="15">Medium Scan (approx. 30-50 leads)</option>
-                    <option value="35">Deep Scan (approx. 70-100 leads)</option>
+                    <option value="5">Fast Scan (~10-20 leads)</option>
+                    <option value="15">Normal Scan (~30-50 leads)</option>
+                    <option value="35">Deep Scan (~70-100 leads)</option>
                   </select>
                 </div>
-                {/* Spacer empty form-group to ensure Scroll Depth matches the 50% width of row elements */}
                 <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
               </div>
 
-              <div style={{ marginTop: '24px' }}>
+              {alreadyScrapedRun && (
+                <div style={{
+                  background: 'rgba(245, 158, 11, 0.06)',
+                  border: '1px solid rgba(245, 158, 11, 0.2)',
+                  borderRadius: '8px',
+                  padding: '12px 16px',
+                  color: '#fbbf24',
+                  fontSize: '13px',
+                  marginTop: '16px'
+                }}>
+                  <div>
+                    <strong>Already scraped before:</strong> You scraped {alreadyScrapedRun.saved} contacts of "{alreadyScrapedRun.category}" in "{alreadyScrapedRun.location}" on {new Date(alreadyScrapedRun.timestamp).toLocaleDateString()}.
+                  </div>
+                </div>
+              )}
+
+              <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
                 <button
                   className="btn"
                   onClick={handleStartScrape}
@@ -997,65 +971,66 @@ export default function Home() {
                 >
                   {isScraping ? (
                     <>
-                      {Icons.sync("animate-spin")} Scraper Running...
+                      {Icons.sync("animate-spin")} Extracting Leads...
                     </>
                   ) : (
                     <>
-                      {Icons.scraper()} Start Scraper
+                      {Icons.scraper()} Start Crawl Search
                     </>
                   )}
                 </button>
+                {isScraping && (
+                  <button className="btn btn-secondary" onClick={handleStopScrape} style={{ color: 'var(--error)', borderColor: 'rgba(239, 68, 68, 0.2)' }}>
+                    Stop Scraper
+                  </button>
+                )}
               </div>
 
               {/* Scraper Live Analytics */}
               {(isScraping || scraperStats.total > 0) && (
-                <div style={{ marginTop: '32px', padding: '20px', background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px' }}>
-                  <h3 style={{ fontSize: '16px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {isScraping ? Icons.scraper() : Icons.check("text-success")}
-                    <span>{isScraping ? 'Active Scraper Progress' : 'Scraper Summary'}</span>
+                <div className="scraper-progress-hud">
+                  <h3 style={{ fontSize: '15px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    {isScraping ? Icons.sync("animate-spin") : Icons.check("text-success")}
+                    <span>{isScraping ? 'Active Maps Progress Monitor' : 'Scrape Run Summary'}</span>
                     {isScraping && <span className="pulse-indicator"></span>}
                   </h3>
                   
                   {/* Progress bar */}
                   {scraperStats.total > 0 && (
-                    <div style={{ marginBottom: '24px' }}>
+                    <div style={{ marginBottom: '20px' }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: 'var(--text-secondary)', marginBottom: '8px' }}>
-                        <span>Inspecting Google Maps business details...</span>
+                        <span>Analyzing search listings...</span>
                         <span>{scraperStats.scanned} / {scraperStats.total} checked ({Math.round((scraperStats.scanned / scraperStats.total) * 100)}%)</span>
                       </div>
-                      <div style={{ width: '100%', height: '6px', background: 'rgba(255,255,255,0.05)', borderRadius: '3px', overflow: 'hidden' }}>
+                      <div className="progress-track">
                         <div 
-                          style={{ 
-                            height: '100%', 
-                            background: 'linear-gradient(90deg, var(--accent-primary), var(--success))', 
-                            width: `${(scraperStats.scanned / scraperStats.total) * 100}%`,
-                            transition: 'width 0.4s ease' 
-                          }} 
+                          className="progress-fill" 
+                          style={{ width: `${(scraperStats.scanned / scraperStats.total) * 100}%` }} 
                         />
                       </div>
                     </div>
                   )}
 
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '12px' }}>
-                    <div style={{ background: 'rgba(16, 185, 129, 0.08)', border: '1px solid rgba(16, 185, 129, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Leads Saved</div>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--success)' }}>{scraperStats.saved}</div>
+                  <div className="stats-hud-grid">
+                    <div className="hud-card success">
+                      <div className="hud-label">Leads Saved</div>
+                      <div className="hud-value">{scraperStats.saved}</div>
                     </div>
-                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Has Website</div>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text-secondary)' }}>{scraperStats.skippedWebsite}</div>
+                    <div className="hud-card">
+                      <div className="hud-label">Has Website</div>
+                      <div className="hud-value">{scraperStats.skippedWebsite}</div>
                     </div>
-                    <div style={{ background: 'rgba(239, 68, 68, 0.08)', border: '1px solid rgba(239, 68, 68, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Landline Skipped</div>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--error)' }}>{scraperStats.skippedLandline}</div>
+                    <div className="hud-card error">
+                      <div className="hud-label">Landline (Skipped)</div>
+                      <div className="hud-value">{scraperStats.skippedLandline}</div>
                     </div>
-                    <div style={{ background: 'rgba(99, 102, 241, 0.08)', border: '1px solid rgba(99, 102, 241, 0.15)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>Duplicate Leads</div>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: '#818cf8' }}>{scraperStats.skippedDuplicate}</div>
+                    <div className="hud-card primary">
+                      <div className="hud-label">Duplicate Leads</div>
+                      <div className="hud-value">{scraperStats.skippedDuplicate}</div>
                     </div>
-                    <div style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '12px', textAlign: 'center' }}>
-                      <div style={{ fontSize: '11px', color: 'var(--text-secondary)', textTransform: 'uppercase', marginBottom: '4px' }}>No Phone</div>
-                      <div style={{ fontSize: '20px', fontWeight: 'bold', color: 'var(--text-muted)' }}>{scraperStats.noPhone}</div>
+                    <div className="hud-card">
+                      <div className="hud-label">No Phone</div>
+                      <div className="hud-value">{scraperStats.noPhone}</div>
                     </div>
                   </div>
                 </div>
@@ -1063,14 +1038,57 @@ export default function Home() {
 
               {/* Console logs */}
               {logs.length > 0 && (
-                <div>
-                  <h3 style={{ marginTop: '24px', fontSize: '16px' }}>Activity Logs</h3>
+                <div style={{ marginTop: '24px' }}>
+                  <h3 style={{ fontSize: '15px' }}>Live Crawler Socket Stream Logs</h3>
                   <div className="console-box">
                     {logs.map((log, index) => (
                       <div key={index}>{log}</div>
                     ))}
                     <div ref={consoleEndRef} />
                   </div>
+                </div>
+              )}
+            </div>
+
+            {/* Scraper History Section */}
+            <div className="glass-card" style={{ marginTop: '24px' }}>
+              <div style={{ marginBottom: '16px' }}>
+                <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
+                  Past Scraper Runs ({scraperHistory.length})
+                </h2>
+              </div>
+
+              {scraperHistory.length === 0 ? (
+                <div style={{ padding: '24px', color: 'var(--text-muted)', textAlign: 'center', fontSize: '14px' }}>
+                  No past search queries recorded. Run a scraper search to start tracking!
+                </div>
+              ) : (
+                <div style={{ overflowX: 'auto' }}>
+                  <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left', border: '1px solid var(--border-color)' }}>
+                    <thead>
+                      <tr style={{ background: 'rgba(255, 255, 255, 0.01)' }}>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '20%', border: '1px solid var(--border-color)' }}>Category</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '40%', border: '1px solid var(--border-color)' }}>Location</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '20%', border: '1px solid var(--border-color)' }}>Saved Contacts</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '20%', border: '1px solid var(--border-color)' }}>Searched Contacts</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {scraperHistory.map((run) => (
+                        <tr key={run.id}>
+                          <td style={{ padding: '12px 16px', textTransform: 'capitalize', fontSize: '13px', border: '1px solid var(--border-color)' }}>
+                            <span className="badge category-badge" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
+                              {run.category}
+                            </span>
+                          </td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>{run.location}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--success)', fontWeight: '700', border: '1px solid var(--border-color)' }}>{run.saved}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--text-secondary)', border: '1px solid var(--border-color)' }}>{run.total || 0}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
                 </div>
               )}
             </div>
@@ -1082,42 +1100,39 @@ export default function Home() {
           <div>
             <header className="page-header">
               <h1 className="page-title">Contacts CRM</h1>
-              <p className="page-subtitle">Manage, filter, and track leads outcome details</p>
+              <p className="page-subtitle">Inspect client listings, organize outreach status, and launch campaigns</p>
             </header>
 
             {/* Filter controls */}
-            <div className="glass-card" style={{ padding: '16px' }}>
+            <div className="glass-card">
               <div className="filter-bar">
-                <div className="filter-group" style={{ flex: '1', maxWidth: '480px' }}>
+                <div className="filter-group flex-1">
                   <input
                     type="text"
-                    placeholder="Search by name or number..."
+                    placeholder="Search by name, phone or location..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    style={{ padding: '8px 12px', fontSize: '14px', width: '100%' }}
+                    className="search-input"
                   />
                 </div>
 
-                <div style={{ display: 'flex', gap: '16px', alignItems: 'center', marginLeft: 'auto', flexWrap: 'wrap' }}>
+                <div className="filter-actions-row">
                   <div className="filter-group">
-                    <label style={{ fontSize: '12px' }}>Category:</label>
+                    <label>Category: </label>
                     <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)}>
                       {uniqueCategories.map((c) => (
-                        <option key={c} value={c}>
-                          {c}
-                        </option>
+                        <option key={c} value={c}>{c}</option>
                       ))}
                     </select>
                   </div>
 
                   <div className="filter-group">
-                    <label style={{ fontSize: '12px' }}>Status:</label>
+                    <label>Status: </label>
                     <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)}>
                       <option value="all">All</option>
                       <option value="Pending">Pending</option>
                       <option value="Sent">Sent</option>
                       <option value="Failed">Failed</option>
-                      <option value="Replied">Replied</option>
                       <option value="Won">Won</option>
                       <option value="Lost">Lost</option>
                     </select>
@@ -1125,10 +1140,10 @@ export default function Home() {
 
                   {selectedLeads.length > 0 && (
                     <button 
-                      className="btn-selected-outreach mobile-hide" 
-                      onClick={() => handleStartGuidedCampaign('selected')}
+                      className="btn btn-primary" 
+                      onClick={() => handleStartCampaign('selected')}
                     >
-                      {Icons.campaigns()} Message Selected ({selectedLeads.length})
+                      {Icons.campaigns()} Outreach Selected ({selectedLeads.length})
                     </button>
                   )}
                 </div>
@@ -1139,31 +1154,30 @@ export default function Home() {
                 <table>
                   <thead>
                     <tr>
-                      <th className="mobile-hide" style={{ width: '40px', textAlign: 'center' }}>
+                      <th style={{ width: '40px', textAlign: 'center' }}>
                         <input
                           type="checkbox"
                           onChange={handleSelectAll}
                           checked={selectedLeads.length === filteredLeads.length && filteredLeads.length > 0}
                         />
                       </th>
-                      <th>Shop Name</th>
-                      <th>Phone Number</th>
-                      <th>Category</th>
-                      <th>Status</th>
-                      <th className="mobile-hide" style={{ textAlign: 'center' }}>Actions</th>
+                      <th>Business Profile</th>
+                      <th style={{ width: '150px' }}>Phone Call</th>
+                      <th style={{ width: '130px' }}>Category</th>
+                      <th style={{ width: '160px', textAlign: 'center' }}>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     {filteredLeads.length === 0 ? (
                       <tr>
-                        <td colSpan="8" style={{ textAlign: 'center', padding: '32px', color: '#64748b' }}>
-                          No leads matched the current filters. Start scraping to acquire contacts!
+                        <td colSpan="5" style={{ textAlign: 'center', padding: '32px', color: 'var(--text-muted)' }}>
+                          No contacts matches the active filters. Run scraper to pull maps listing records!
                         </td>
                       </tr>
                     ) : (
                       filteredLeads.map((lead) => (
                         <tr key={lead.id}>
-                          <td className="mobile-hide" style={{ textAlign: 'center' }}>
+                          <td style={{ textAlign: 'center' }}>
                             <input
                               type="checkbox"
                               checked={selectedLeads.includes(lead.id)}
@@ -1171,85 +1185,44 @@ export default function Home() {
                             />
                           </td>
                           <td>
-                            <div style={{ fontWeight: '600' }}>{lead.name}</div>
-                            <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '6px', marginTop: '4px' }}>
-                              <a
-                                href={lead.url}
-                                target="_blank"
-                                rel="noreferrer"
-                                style={{ fontSize: '12px', color: '#64748b', display: 'inline-flex', alignItems: 'center', gap: '4px', textDecoration: 'none', fontFamily: 'inherit', lineHeight: 'inherit' }}
-                              >
-                                {lead.location || 'View on Google Maps'}
-                              </a>
-                              {lead.notes && lead.notes.trim() && (
-                                <>
-                                  <span style={{ fontSize: '12px', color: '#475569', display: 'inline-flex', alignItems: 'center' }}>•</span>
-                                  <button
-                                    onClick={() => alert(`Notes for ${lead.name}:\n\n${lead.notes}`)}
-                                    style={{
-                                      background: 'none',
-                                      border: 'none',
-                                      padding: 0,
-                                      fontSize: '12px',
-                                      color: '#64748b',
-                                      cursor: 'pointer',
-                                      display: 'inline-flex',
-                                      alignItems: 'center',
-                                      gap: '4px',
-                                      fontFamily: 'inherit',
-                                      lineHeight: 'inherit'
-                                    }}
-                                  >
-                                    View Notes
-                                  </button>
-                                </>
-                              )}
+                            <div className="business-name-row">
+                              <strong>{lead.name}</strong>
                             </div>
+                            {lead.url ? (
+                              <a href={lead.url} target="_blank" rel="noreferrer" className="location-txt-link" style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px', textDecoration: 'none' }}>
+                                {lead.location || 'Gurugram'}
+                              </a>
+                            ) : (
+                              <span className="location-txt">{lead.location || 'Gurugram'}</span>
+                            )}
                           </td>
                           <td>
-                            <a href={`tel:${lead.phone}`} className="phone-link">{lead.phone}</a>
+                            <a href={`tel:${lead.phone}`} className="phone-link-btn">
+                              {lead.phone}
+                            </a>
                           </td>
                           <td>
-                            <span style={{ fontSize: '12px', textTransform: 'capitalize' }}>
-                              {lead.category}
-                            </span>
+                            <span className="category-tag">{lead.category}</span>
                           </td>
-                          <td>
-                            <div className="status-col-cell">
-                              <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
-                                {lead.status}
-                              </span>
+                          <td style={{ textAlign: 'center' }}>
+                            <div className="status-select-container">
+                              <select 
+                                value={lead.status} 
+                                onChange={(e) => handleUpdateLeadStatus(lead.id, e.target.value)}
+                                className={`badge-select ${lead.status.toLowerCase().replace(' ', '-')}`}
+                                disabled={lead.status === 'Won' || lead.status === 'Lost'}
+                              >
+                                <option value="Pending">Pending</option>
+                                <option value="Sent">Sent</option>
+                                <option value="Failed">Failed</option>
+                                <option value="Won">Won</option>
+                                <option value="Lost">Lost</option>
+                              </select>
                               {lead.lastSentDate && (
-                                <span className="status-date" style={{ fontSize: '10px', color: '#64748b' }}>
+                                <span className="status-date">
                                   {new Date(lead.lastSentDate).toLocaleDateString()}
                                 </span>
                               )}
-                            </div>
-                          </td>
-                          <td className="mobile-hide">
-                            <div style={{ display: 'flex', gap: '8px', justifyContent: 'center' }}>
-                              <button
-                                className="btn-success-outline"
-                                onClick={() => {
-                                  const notesPrompt = window.prompt(`Are you sure you want to mark "${lead.name}" as WON?\n\nEnter notes for this lead (optional):`, lead.notes || '');
-                                  if (notesPrompt !== null) {
-                                    handleUpdateLeadStatus(lead.id, 'Won', notesPrompt);
-                                  }
-                                }}
-                              >
-                                {Icons.check()} Won
-                              </button>
-                              <button
-                                className="btn-danger-outline"
-                                onClick={() => {
-                                  const notesPrompt = window.prompt(`Are you sure you want to mark "${lead.name}" as LOST?\n\nEnter notes for this lead (optional):`, lead.notes || '');
-                                  if (notesPrompt !== null) {
-                                    handleUpdateLeadStatus(lead.id, 'Lost', notesPrompt);
-                                  }
-                                }}
-                              >
-                                {Icons.x()} Lost
-                              </button>
                             </div>
                           </td>
                         </tr>
@@ -1262,639 +1235,373 @@ export default function Home() {
           </div>
         )}
 
-        {/* TAB 4: WHATSAPP */}
+        {/* TAB 4: TEMPLATES */}
+        {activeTab === 'templates' && (
+          <div>
+            <header className="page-header">
+              <h1 className="page-title">Message Templates</h1>
+              <p className="page-subtitle">Manage outreach templates by category</p>
+            </header>
+
+            <div className="glass-card">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  Campaign Configuration
+                </h2>
+                {!isCreateOpen && (
+                  <button className="btn" onClick={() => setIsCreateOpen(true)}>
+                    {Icons.plus()} Create New Template
+                  </button>
+                )}
+              </div>
+
+              {isCreateOpen && (
+                <div className="template-form-container">
+                  <div className="form-group">
+                    <label htmlFor="new-cat">Business Category Name</label>
+                    <input 
+                      type="text" 
+                      id="new-cat" 
+                      value={templateCategory} 
+                      onChange={(e) => setTemplateCategory(e.target.value)} 
+                      placeholder="e.g. dentists, gyms, bakeries"
+                      style={{ textTransform: 'lowercase' }}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="intro-msg">Intro Template (First message to unsent leads)</label>
+                    <textarea
+                      id="intro-msg"
+                      value={templateText}
+                      onChange={(e) => setTemplateText(e.target.value)}
+                      placeholder="Enter intro cold copy..."
+                      className="auto-resize-textarea"
+                      ref={(el) => {
+                        if (el) {
+                          el.style.height = 'auto';
+                          el.style.height = el.scrollHeight + 'px';
+                        }
+                      }}
+                    />
+                    <span className="field-hint">Dynamic placeholders allowed: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}</span>
+                  </div>
+
+                  <div className="form-group">
+                    <label htmlFor="followup-msg">Followup Template (Message sent after 7 days delay)</label>
+                    <textarea
+                      id="followup-msg"
+                      value={followupText}
+                      onChange={(e) => setFollowupText(e.target.value)}
+                      placeholder="Enter weekly follow-up copy..."
+                      className="auto-resize-textarea"
+                      ref={(el) => {
+                        if (el) {
+                          el.style.height = 'auto';
+                          el.style.height = el.scrollHeight + 'px';
+                        }
+                      }}
+                    />
+                  </div>
+
+                  <div className="form-actions-row">
+                    <button className="btn" onClick={handleSaveNewTemplate}>
+                      {Icons.save()} Save Template
+                    </button>
+                    <button className="btn btn-secondary" onClick={() => setIsCreateOpen(false)}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* SAVED TEMPLATES ROW */}
+              <div className="saved-templates-section">
+                <h3 style={{ fontSize: '16px', marginBottom: '16px' }}>Configured Categories</h3>
+                
+                {Object.keys(allTemplates.categories).length === 0 ? (
+                  <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)' }}>
+                    No template categories defined. Create one above!
+                  </div>
+                ) : (
+                  <div className="templates-list-wrapper">
+                    {Object.keys(allTemplates.categories).map((cat) => {
+                      const isEditing = editingCategory === cat;
+                      const config = allTemplates.categories[cat];
+
+                      return (
+                        <div className="template-row-item" key={cat}>
+                          <div className="template-row-header">
+                            <span className="cat-name">{cat}</span>
+                            <div className="row-actions">
+                              {isEditing ? (
+                                <>
+                                  <button className="btn btn-success-outline" onClick={() => handleSaveInlineTemplate(cat)}>
+                                    {Icons.check()} Save
+                                  </button>
+                                  <button className="btn btn-danger-outline" onClick={() => setEditingCategory(null)}>
+                                    {Icons.x()} Cancel
+                                  </button>
+                                </>
+                              ) : (
+                                <>
+                                  <button className="btn btn-secondary btn-sm" onClick={() => handleEditTemplate(cat)}>
+                                    {Icons.edit()} Edit
+                                  </button>
+                                  <button className="btn btn-secondary btn-sm text-error" onClick={() => handleDeleteTemplate(cat)}>
+                                    {Icons.trash()} Delete
+                                  </button>
+                                </>
+                              )}
+                            </div>
+                          </div>
+
+                          {isEditing ? (
+                            <div className="template-inline-editor">
+                              <div className="form-group">
+                                <label>Intro Copy:</label>
+                                <textarea
+                                  value={inlineIntroText}
+                                  onChange={(e) => setInlineIntroText(e.target.value)}
+                                  className="auto-resize-textarea"
+                                  ref={(el) => {
+                                    if (el) {
+                                      el.style.height = 'auto';
+                                      el.style.height = el.scrollHeight + 'px';
+                                    }
+                                  }}
+                                />
+                              </div>
+                              <div className="form-group">
+                                <label>Followup Copy:</label>
+                                <textarea
+                                  value={inlineFollowupText}
+                                  onChange={(e) => setInlineFollowupText(e.target.value)}
+                                  className="auto-resize-textarea"
+                                  ref={(el) => {
+                                    if (el) {
+                                      el.style.height = 'auto';
+                                      el.style.height = el.scrollHeight + 'px';
+                                    }
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="template-views-grid">
+                              <div className="template-view-col">
+                                <strong>Intro Message Preview:</strong>
+                                <div className="preview-bubble">
+                                  {config.introTemplate || '(Empty Template)'}
+                                </div>
+                              </div>
+                              <div className="template-view-col">
+                                <strong>Followup Message Preview:</strong>
+                                <div className="preview-bubble">
+                                  {config.followupTemplate || '(Empty Template)'}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* TAB 5: OUTREACH HUB */}
         {activeTab === 'whatsapp' && (
           <div>
             <header className="page-header">
               <h1 className="page-title">WhatsApp Outreach Hub</h1>
-              <p className="page-subtitle">Manage the automated outreach loop or send messages manually via official deep links</p>
+              <p className="page-subtitle">Manage campaigns and launch guided outreach</p>
             </header>
 
-            {/* Outreach Analytics Cards */}
-            <div className="grid-stats" style={{ gridTemplateColumns: 'repeat(4, 1fr)', marginBottom: '24px' }}>
+            {/* Campaign analytics */}
+            <div className="grid-stats" style={{ marginBottom: '24px' }}>
               <div className="stat-card">
-                <span className="stat-label">Total Leads</span>
-                <span className="stat-value">{leads.length}</span>
+                <span className="stat-label">Queue Total</span>
+                <span className="stat-value">{leads.filter(l => l.status === 'Pending' || l.status === 'Sent').length}</span>
               </div>
-              <div className="stat-card">
-                <span className="stat-label">Pending Outreach</span>
-                <span className="stat-value" style={{ color: 'var(--text-secondary)' }}>
-                  {leads.filter(l => l.status === 'Pending').length}
+              <div className="stat-card success">
+                <span className="stat-label">Pending (Intros)</span>
+                <span className="stat-value text-accent">{leads.filter(l => l.status === 'Pending').length}</span>
+              </div>
+              <div className="stat-card warning">
+                <span className="stat-label">Awaiting Followup</span>
+                <span className="stat-value text-warning">
+                  {leads.filter(l => {
+                    const sevenDaysAgo = new Date();
+                    sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                    return l.status === 'Sent' && l.lastSentDate && new Date(l.lastSentDate) < sevenDaysAgo;
+                  }).length}
                 </span>
               </div>
               <div className="stat-card success">
-                <span className="stat-label">Sent Messages</span>
-                <span className="stat-value text-success">
-                  {leads.filter(l => ['Sent', 'Replied', 'Won', 'Lost'].includes(l.status)).length}
-                </span>
-              </div>
-              <div className="stat-card error">
-                <span className="stat-label">Failed Delivery</span>
-                <span className="stat-value text-error">
-                  {leads.filter(l => l.status === 'Failed').length}
-                </span>
+                <span className="stat-label">Outreach Complete</span>
+                <span className="stat-value text-success">{leads.filter(l => l.status === 'Won' || l.status === 'Lost').length}</span>
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div className="responsive-grid">
               
-              {/* SECTION 1: AUTOMATED REPLY CHECKER */}
-              <div className="glass-card" style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {Icons.phone()} Automated Reply Checker (via whatsapp-web.js)
-                  </h2>
-                </div>
-
-                <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', alignItems: 'flex-start' }}>
-                  {/* Connection Control Block */}
-                  <div style={{ flex: '1 1 300px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6' }}>
-                      Connect your device by scanning the QR code, then click "Check replies" to automatically check for responses and update your CRM dashboard status.
-                    </p>
-
-                    <div style={{ display: 'flex', gap: '12px', alignItems: 'center', flexWrap: 'wrap' }}>
-                      <span 
-                        className="badge" 
-                        style={{ 
-                          textTransform: 'uppercase', 
-                          padding: '10px 16px', 
-                          borderRadius: '8px', 
-                          fontSize: '13px', 
-                          height: '40px', 
-                          display: 'inline-flex', 
-                          alignItems: 'center',
-                          background: whatsappStatus === 'ready' 
-                            ? 'var(--success-glow)' 
-                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
-                              ? 'var(--warning-glow)' 
-                              : 'var(--error-glow)',
-                          color: whatsappStatus === 'ready' 
-                            ? '#10b981' 
-                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
-                              ? '#fbbf24' 
-                              : '#f87171',
-                          border: whatsappStatus === 'ready' 
-                            ? '1px solid rgba(16, 185, 129, 0.3)' 
-                            : ['connecting', 'qr', 'authenticated'].includes(whatsappStatus)
-                              ? '1px solid rgba(245, 158, 11, 0.3)' 
-                              : '1px solid rgba(239, 68, 68, 0.3)'
-                        }}
-                      >
-                        Status: {whatsappStatus}
-                      </span>
-                      {whatsappStatus === 'disconnected' ? (
-                        <button className="btn" onClick={handleConnectWhatsApp} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                          {Icons.phone()} Connect Device
-                        </button>
-                      ) : (
-                        <>
-                          <button className="btn btn-secondary" onClick={handleDisconnectWhatsApp} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            {Icons.disconnect()} Disconnect Device
-                          </button>
-
-                          {whatsappStatus === 'ready' && (
-                            <button 
-                              className="btn" 
-                              onClick={handleCheckReplies} 
-                              disabled={isCheckingReplies}
-                              style={{ 
-                                background: isCheckingReplies ? 'rgba(255, 255, 255, 0.05)' : 'var(--success)', 
-                                color: isCheckingReplies ? 'var(--text-secondary)' : '#fff', 
-                                border: isCheckingReplies ? '1px solid var(--border-color)' : 'none',
-                                cursor: isCheckingReplies ? 'not-allowed' : 'pointer',
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                gap: '8px' 
-                              }}
-                            >
-                              {isCheckingReplies ? Icons.sync("animate-spin") : Icons.check()}
-                              {isCheckingReplies ? 'Checking replies...' : 'Check replies'}
-                            </button>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* QR Code Block */}
-                  {whatsappStatus === 'qr' && whatsappQR && (
-                    <div style={{ flex: '0 0 200px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '10px', background: '#fff', padding: '16px', borderRadius: '12px', border: '1px solid var(--border-color)', boxShadow: 'var(--glass-shadow)' }}>
-                      <img src={whatsappQR} alt="WhatsApp QR Code" style={{ width: '180px', height: '180px' }} />
-                      <span style={{ fontSize: '11px', color: '#1e293b', fontWeight: 'bold' }}>Scan with WhatsApp</span>
-                    </div>
-                  )}
-
-                  {whatsappStatus === 'connecting' && (
-                    <div style={{ flex: '0 0 200px', height: '212px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '12px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px solid var(--border-color)' }}>
-                      {Icons.sync("animate-spin")}
-                      <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>Initializing WhatsApp...</span>
-                    </div>
-                  )}
-                </div>
-
-                {/* Active Outreach Logger Feed */}
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', background: 'rgba(15, 23, 42, 0.4)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '16px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <span style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-secondary)', fontWeight: 'bold' }}>
-                      Operation Monitor logs
-                    </span>
-                    <span className="pulse-indicator" style={{ display: outreachOperation.toLowerCase().includes('active') || outreachOperation.toLowerCase().includes('sending') || outreachOperation.toLowerCase().includes('waiting') ? 'inline-block' : 'none' }}></span>
-                  </div>
-                  <div style={{ fontFamily: 'monospace', fontSize: '13px', color: outreachOperation.includes('❌') ? 'var(--error)' : outreachOperation.includes('✅') ? 'var(--success)' : 'var(--text-primary)', wordBreak: 'break-all' }}>
-                    {outreachOperation}
-                  </div>
-                </div>
-              </div>
-
-              {/* SECTION 2: MANUAL OUTREACH CAMPAIGNS */}
-              <div className="glass-card" style={{ display: 'flex', flexDirection: 'column', gap: '20px', padding: '24px' }}>
-                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {Icons.campaigns()} Manual Outreach (via Deep Links)
-                  </h2>
-                </div>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6' }}>
-                  Launch the Guided Campaign Wizard modal overlay to cycle through pending and sent leads sequentially in a reusable WhatsApp tab.
-                </p>
-
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '8px' }}>
-                  <button 
-                    className="btn" 
-                    onClick={() => handleStartGuidedCampaign('manual')}
-                    style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}
-                  >
-                    {Icons.campaigns()} Send Manual Messages
-                  </button>
-                </div>
-              </div>
-
-              {/* Outreach Dispatch History */}
+              {/* Left Column: Start Campaign */}
               <div className="glass-card">
-                <h2 style={{ fontSize: '18px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {Icons.contacts()} Recent Dispatch History & Logs
+                <h2 style={{ fontSize: '18px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                  Guided Manual Campaigns
                 </h2>
                 
-                <div className="table-wrapper">
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Business Name</th>
-                        <th>Phone Number</th>
-                        <th>Status</th>
-                        <th>Date & Time</th>
-                        <th>Details</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {recentDispatches.length === 0 ? (
-                        <tr>
-                          <td colSpan="5" style={{ textAlign: 'center', padding: '32px', color: 'var(--text-secondary)' }}>
-                            No outreach history logged yet. Send your first message above to see history here!
-                          </td>
-                        </tr>
-                      ) : (
-                        recentDispatches.map((lead) => (
-                          <tr key={lead.id}>
-                            <td style={{ fontWeight: '600' }}>
-                              <a href={lead.url} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
-                                {lead.name} {Icons.link()}
-                              </a>
-                            </td>
-                            <td>
-                              <a href={`tel:${lead.phone}`} className="phone-link">{lead.phone}</a>
-                            </td>
-                            <td>
-                              <span className={`badge ${lead.status.toLowerCase().replace(' ', '-')}`}>
-                                {lead.status}
-                              </span>
-                            </td>
-                            <td>
-                              {lead.lastSentDate ? new Date(lead.lastSentDate).toLocaleString() : 'N/A'}
-                            </td>
-                            <td style={{ fontSize: '13px', color: lead.status === 'Failed' ? 'var(--error)' : 'var(--text-secondary)' }}>
-                              {lead.notes || 'No notes available'}
-                            </td>
-                          </tr>
-                        ))
-                      )}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+                <p className="outreach-desc-para">
+                  Wizard compiles templates, copies messages to clipboard, and opens WhatsApp chat.
+                </p>
 
-            </div>
-          </div>
-        )}
+                <div className="campaign-setup-form">
+                  <div className="form-group">
+                    <label>Filter Target Category</label>
+                    <select value={campaignCategory} onChange={(e) => setCampaignCategory(e.target.value)}>
+                      {uniqueCategories.map(c => (
+                        <option key={c} value={c}>{c}</option>
+                      ))}
+                    </select>
+                  </div>
 
-        {/* TAB 5: TEMPLATES */}
-        {activeTab === 'templates' && (
-          <div>
-            <header className="page-header">
-              <h1 className="page-title">Outreach Templates</h1>
-              <p className="page-subtitle">Configure outreach message templates per business category</p>
-            </header>
+                  <div className="form-group">
+                    <label>Filter Campaign Message Type</label>
+                    <select value={campaignType} onChange={(e) => setCampaignType(e.target.value)}>
+                      <option value="intro">Introductory Pitch (Unsent leads)</option>
+                      <option value="followup">Weekly Follow-up (Sent leads &gt; 7 days old)</option>
+                    </select>
+                  </div>
 
-            <div>
-              {/* Collapsible Message Templates Configuration */}
-              <div className="glass-card" style={{ width: '100%', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '20px', padding: '24px' }}>
-                <div style={{ borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
-                  <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                    {Icons.edit()} Campaign Configuration
-                  </h2>
-                </div>
-                {!isCreateOpen && (
-                  <p style={{ color: 'var(--text-secondary)', fontSize: '13px', lineHeight: '1.6', margin: 0 }}>
-                    Create and manage customized outreach copy templates for different business categories.
-                  </p>
-                )}
-
-                {!isCreateOpen && (
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '8px' }}>
-                    <button
-                      className="btn"
-                      onClick={() => setIsCreateOpen(true)}
-                      style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--accent-primary)', color: '#fff' }}
-                    >
-                      {Icons.edit()} Create Template
+                  <div style={{ marginTop: '24px' }}>
+                    <button className="btn" onClick={() => handleStartCampaign('filtered')} style={{ width: '100%', padding: '12px' }}>
+                      {Icons.campaigns()} Start Outreach Queue Conveyor
                     </button>
                   </div>
-                )}
-
-                {isCreateOpen && (
-                  <div>
-                    <div className="form-row">
-                      <div className="form-group">
-                        <label htmlFor="template-category-input">Category</label>
-                        <input 
-                          type="text" 
-                          id="template-category-input" 
-                          value={templateCategory} 
-                          onChange={(e) => setTemplateCategory(e.target.value)} 
-                          placeholder="e.g. restaurants, salons, clinics, gyms"
-                          style={{ textTransform: 'lowercase' }}
-                        />
-                      </div>
-                      <div className="form-group" style={{ visibility: 'hidden', pointerEvents: 'none' }} />
-                    </div>
-
-                    <div className="form-group" style={{ marginTop: '16px' }}>
-                      <label htmlFor="intro-template">Intro Template (First Message)</label>
-                      <textarea
-                        id="intro-template"
-                        ref={adjustHeight}
-                        rows="5"
-                        value={templateText}
-                        onChange={(e) => {
-                          setTemplateText(e.target.value);
-                          adjustHeight(e.target);
-                        }}
-                        style={{ resize: 'none', overflowY: 'hidden' }}
-                      />
-                      <span style={{ fontSize: '11px', color: '#64748b' }}>
-                        Available tags: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}
-                      </span>
-                    </div>
-
-                    <div className="form-group" style={{ marginTop: '16px' }}>
-                      <label htmlFor="followup-template">Follow-up Template (Resends)</label>
-                      <textarea
-                        id="followup-template"
-                        ref={adjustHeight}
-                        rows="4"
-                        value={followupText}
-                        onChange={(e) => {
-                          setFollowupText(e.target.value);
-                          adjustHeight(e.target);
-                        }}
-                        style={{ resize: 'none', overflowY: 'hidden' }}
-                      />
-                    </div>
-
-                    <div style={{ marginTop: '24px', display: 'flex', gap: '12px' }}>
-                      <button
-                        className="btn"
-                        onClick={handleSaveTemplates}
-                        style={{ background: 'var(--accent-primary)', color: '#fff' }}
-                      >
-                        {Icons.save()} Save Category Template
-                      </button>
-                      <button
-                        className="btn btn-secondary"
-                        onClick={() => setIsCreateOpen(false)}
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
-            </div>
 
-            {/* SAVED TEMPLATES ROW */}
-            <div className="glass-card" style={{ marginTop: '24px' }}>
-              <h2 style={{ fontSize: '20px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                {Icons.contacts()} Configured Campaign Categories
-              </h2>
-              {(!allTemplates.categories || Object.keys(allTemplates.categories).length === 0) ? (
-                <div style={{ padding: '16px', color: 'var(--text-muted)', textAlign: 'center' }}>
-                  No categories configured. Create your first campaign template using the button above!
-                </div>
-              ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', width: '100%' }}>
-                  {Object.keys(allTemplates.categories).map((cat) => {
-                    const isEditing = editingCategory === cat;
-                    return (
-                      <div key={cat} style={{ background: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '20px', display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '12px' }}>
-                          <span style={{ fontWeight: '700', fontSize: '18px', textTransform: 'capitalize', color: 'var(--accent-primary)' }}>
-                            {cat}
-                          </span>
-                          <div style={{ display: 'flex', gap: '8px' }}>
-                            {isEditing ? null : (
-                              <>
-                                <button 
-                                  className="btn btn-secondary" 
-                                  style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                                  onClick={() => handleEditTemplate(cat)}
-                                >
-                                  {Icons.edit()} Edit
-                                </button>
-                                <button 
-                                  className="btn btn-secondary" 
-                                  style={{ padding: '6px 14px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--error)', borderColor: 'rgba(239, 68, 68, 0.2)' }}
-                                  onClick={() => handleDeleteTemplate(cat)}
-                                >
-                                  {Icons.trash()} Delete
-                                </button>
-                              </>
-                            )}
-                          </div>
+              {/* Right Column: Dispatch logs */}
+              <div className="glass-card">
+                <h2 style={{ fontSize: '18px', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px', marginBottom: '20px' }}>
+                  Recent Dispatch Activity
+                </h2>
+
+                <div className="recent-dispatches-list">
+                  {recentDispatches.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '24px', color: 'var(--text-muted)', fontSize: '13px' }}>
+                      No recent dispatches. Start outreach above to log sends.
+                    </div>
+                  ) : (
+                    recentDispatches.map(lead => (
+                      <div className="dispatch-log-row" key={lead.id}>
+                        <div className="dispatch-row-title">
+                          <strong>{lead.name}</strong>
+                          <span className={`badge-pill ${lead.status.toLowerCase()}`}>{lead.status}</span>
                         </div>
-
-                        {isEditing ? (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            <div className="form-group">
-                              <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px', display: 'block' }}>
-                                Intro Template (First Message)
-                              </label>
-                              <textarea
-                                ref={adjustHeight}
-                                rows="5"
-                                value={inlineIntroText}
-                                onChange={(e) => {
-                                  setInlineIntroText(e.target.value);
-                                  adjustHeight(e.target);
-                                }}
-                                style={{ 
-                                  width: '100%', 
-                                  background: 'rgba(0,0,0,0.2)', 
-                                  color: 'var(--text-primary)', 
-                                  border: '1px solid var(--border-color)', 
-                                  borderRadius: '6px', 
-                                  padding: '10px', 
-                                  fontSize: '13px', 
-                                  resize: 'none', 
-                                  overflowY: 'hidden' 
-                                }}
-                              />
-                            </div>
-                            <div className="form-group">
-                              <label style={{ fontSize: '13px', fontWeight: '600', color: 'var(--text-secondary)', marginBottom: '6px', display: 'block' }}>
-                                Follow-up Template (Resends)
-                              </label>
-                              <textarea
-                                ref={adjustHeight}
-                                rows="4"
-                                value={inlineFollowupText}
-                                onChange={(e) => {
-                                  setInlineFollowupText(e.target.value);
-                                  adjustHeight(e.target);
-                                }}
-                                style={{ 
-                                  width: '100%', 
-                                  background: 'rgba(0,0,0,0.2)', 
-                                  color: 'var(--text-primary)', 
-                                  border: '1px solid var(--border-color)', 
-                                  borderRadius: '6px', 
-                                  padding: '10px', 
-                                  fontSize: '13px', 
-                                  resize: 'none', 
-                                  overflowY: 'hidden' 
-                                }}
-                              />
-                            </div>
-                            <div style={{ display: 'flex', gap: '12px', marginTop: '8px' }}>
-                              <button 
-                                className="btn" 
-                                style={{ padding: '8px 16px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px', background: 'var(--success)', color: '#fff' }}
-                                onClick={() => handleSaveInlineTemplate(cat)}
-                              >
-                                {Icons.check()} Save Template
-                              </button>
-                              <button 
-                                className="btn btn-secondary" 
-                                style={{ padding: '8px 16px', fontSize: '13px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}
-                                onClick={() => setEditingCategory(null)}
-                              >
-                                Cancel
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                            {/* Intro Message Preview */}
-                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                              <strong>Intro Message:</strong>
-                              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                                {allTemplates.categories[cat].introTemplate || '(None)'}
-                              </div>
-                            </div>
-
-                            {/* Follow-up Message Preview */}
-                            <div style={{ fontSize: '13px', color: 'var(--text-secondary)' }}>
-                              <strong>Follow-up Message:</strong>
-                              <div style={{ background: 'rgba(0,0,0,0.2)', padding: '10px', borderRadius: '6px', marginTop: '4px', whiteSpace: 'pre-line', fontStyle: 'italic', fontSize: '12px', border: '1px solid rgba(255,255,255,0.03)' }}>
-                                {allTemplates.categories[cat].followupTemplate || '(None)'}
-                              </div>
-                            </div>
-                          </div>
-                        )}
+                        <div className="dispatch-row-sub">
+                          <span>{lead.phone}</span>
+                          <span>{lead.lastSentDate ? new Date(lead.lastSentDate).toLocaleTimeString() : ''}</span>
+                        </div>
                       </div>
-                    );
-                  })}
+                    ))
+                  )}
                 </div>
-              )}
+              </div>
             </div>
           </div>
         )}
+
       </main>
 
-      {/* GUIDED CAMPAIGN WIZARD MODAL OVERLAY */}
+      {/* (Modal 1: Add Contact Manually removed) */}
+
+      {/* MODAL 2: GUIDED CAMPAIGN WIZARD */}
       {isWizardOpen && wizardLeads.length > 0 && (() => {
         const lead = wizardLeads[wizardIndex];
-        const hasNext = wizardIndex < wizardLeads.length - 1;
+        const isLast = wizardIndex === wizardLeads.length - 1;
         const currentCount = wizardIndex + 1;
         const totalCount = wizardLeads.length;
 
-        // Auto-compile message for current lead
-        const compiledMsg = getCompiledMessage(lead);
-
-        const handleWizardSend = async () => {
-          const cleanPhone = formatPhoneForWa(lead.phone);
-          const textCopy = wizardCustomText || compiledMsg || '';
-          const waUrl = `https://api.whatsapp.com/send?phone=${cleanPhone}&text=${encodeURIComponent(textCopy)}`;
-          
-          // Copy to clipboard as backup to prevent any truncation/encoding issues in browser redirects
-          try {
-            await navigator.clipboard.writeText(textCopy);
-          } catch (err) {
-            console.warn('Failed to copy to clipboard:', err);
-          }
-
-          triggerWhatsApp(waUrl);
-          setIsMessageOpened(true);
-        };
-
-        const handleWizardSkip = () => {
-          setIsMessageOpened(false);
-          if (hasNext) {
-            setWizardIndex((prev) => prev + 1);
-          } else {
-            setIsWizardOpen(false);
-            alert('Campaign completed.');
-          }
-        };
-
-        const handleWizardSentStatus = async (status) => {
-          if (status === 'Sent') {
-            await handleUpdateLeadStatus(
-              lead.id,
-              'Sent',
-              `${wizardMessageType === 'intro' ? 'Intro' : 'Follow-up'} sent via Guided Wizard`
-            );
-          } else {
-            await handleUpdateLeadStatus(
-              lead.id,
-              'Failed',
-              'Number unregistered or invalid on WhatsApp'
-            );
-          }
-
-          setIsMessageOpened(false);
-          if (hasNext) {
-            setWizardIndex((prev) => prev + 1);
-          } else {
-            setIsWizardOpen(false);
-            alert('Campaign complete!');
-          }
-        };
-
         return (
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(5, 8, 16, 0.85)',
-            backdropFilter: 'blur(12px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 9999,
-            padding: '20px'
-          }}>
-            <div className="glass-card" style={{
-              width: '100%',
-              maxWidth: '650px',
-              padding: '32px',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.5)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px'
-            }}>
+          <div className="modal-overlay wizard-overlay">
+            <div className="modal-content glass-card wizard-card">
               
               {/* Wizard Header Progress */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-color)', paddingBottom: '16px' }}>
+              <div className="wizard-header">
                 <div>
-                  <h3 style={{ fontSize: '20px', color: 'var(--text-primary)', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {Icons.campaigns()} Guided Outreach Campaign
-                  </h3>
-                  <span style={{ fontSize: '12px', color: 'var(--text-secondary)' }}>
-                    TYPE: {wizardMessageType.toUpperCase()} | CATEGORY: {lead.category.toUpperCase()}
+                  <h3>Guided Campaign Conveyor Belt</h3>
+                  <span className="wizard-meta">
+                    QUEUE TYPE: {wizardMessageType.toUpperCase()} | CATEGORY: {lead.category.toUpperCase()}
                   </span>
                 </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '18px', fontWeight: '800', fontFamily: 'var(--font-display)', color: 'var(--accent-primary)' }}>
-                    {currentCount} / {totalCount}
-                  </div>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Leads Processed</span>
+                <div className="wizard-progress-counter">
+                  <div className="counter-val">{currentCount} / {totalCount}</div>
+                  <span className="counter-lbl">Leads Processed</span>
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div style={{ width: '100%', height: '6px', background: 'rgba(255, 255, 255, 0.05)', borderRadius: '999px', overflow: 'hidden', marginTop: '-8px' }}>
-                <div style={{
-                  width: `${(currentCount / totalCount) * 100}%`,
-                  height: '100%',
-                  background: 'var(--accent-primary)',
-                  transition: 'width 0.3s ease'
-                }} />
+              <div className="wizard-progress-bar-container">
+                <div 
+                  className="wizard-progress-bar-fill" 
+                  style={{ width: `${(currentCount / totalCount) * 100}%` }} 
+                />
               </div>
 
               {/* Active Lead Details */}
-              <div style={{ background: 'rgba(255,255,255,0.02)', border: '1px solid var(--border-color)', borderRadius: '10px', padding: '16px', display: 'grid', gridTemplateColumns: '1.2fr 0.8fr', gap: '16px' }}>
+              <div className="wizard-lead-detail-box">
                 <div>
-                  <label style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Target Business</label>
-                  <div style={{ fontSize: '18px', fontWeight: '700', color: 'var(--text-primary)', marginTop: '2px' }}>{lead.name}</div>
-                  <div style={{ fontSize: '13px', color: 'var(--text-secondary)', marginTop: '4px' }}>📍 {lead.location}</div>
+                  <span className="lbl">Target Client</span>
+                  <div className="name-row">
+                    <strong>{lead.name}</strong>
+                  </div>
+                  {lead.url ? (
+                    <a href={lead.url} target="_blank" rel="noreferrer" className="location-row" style={{ display: 'block', color: 'var(--text-secondary)', textDecoration: 'none' }}>
+                      {lead.location || 'Gurugram'}
+                    </a>
+                  ) : (
+                    <div className="location-row">{lead.location || 'Gurugram'}</div>
+                  )}
                 </div>
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end' }}>
-                  <label style={{ fontSize: '11px', textTransform: 'uppercase', color: 'var(--text-muted)', fontWeight: '700' }}>Phone Number</label>
-                  <a href={`tel:${lead.phone}`} className="phone-link" style={{ fontSize: '15px', fontFamily: 'monospace', marginTop: '2px', fontWeight: '600' }}>{lead.phone}</a>
+                <div className="phone-col">
+                  <span className="lbl">WhatsApp Contact</span>
+                  <a href={`tel:${lead.phone}`} className="phone-tag">{lead.phone}</a>
                 </div>
               </div>
 
               {/* Editable Message Text Box */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <label htmlFor="wizard-msg-box" style={{ fontSize: '12px', textTransform: 'uppercase', color: 'var(--text-secondary)' }}>Message Copy (Editable):</label>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Tweak message specifically for this business if desired</span>
+              <div className="form-group" style={{ margin: 0 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                  <label htmlFor="wizard-msg-box">Personalized Copy (Edit on the fly):</label>
+                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Changes won't affect base template</span>
                 </div>
-                {compiledMsg ? (
-                  <textarea
-                    id="wizard-msg-box"
-                    rows="8"
-                    value={wizardCustomText}
-                    onChange={(e) => setWizardCustomText(e.target.value)}
-                    style={{
-                      background: 'rgba(15, 23, 42, 0.6)',
-                      border: '1px solid var(--border-color)',
-                      borderRadius: '8px',
-                      padding: '12px',
-                      fontFamily: 'inherit',
-                      fontSize: '13px',
-                      lineHeight: '1.5',
-                      resize: 'vertical'
-                    }}
-                  />
-                ) : (
-                  <div style={{ padding: '24px', border: '1px dashed var(--error)', color: 'var(--error)', background: 'rgba(239, 68, 68, 0.02)', borderRadius: '8px', textAlign: 'center', fontSize: '14px' }}>
-                    ⚠️ No campaign template configured for this category "{lead.category}". Please configure templates first.
-                  </div>
-                )}
+                <textarea
+                  id="wizard-msg-box"
+                  value={wizardCustomText}
+                  onChange={(e) => setWizardCustomText(e.target.value)}
+                  placeholder="Sales pitch will compile here..."
+                  className="wizard-textarea auto-resize-textarea"
+                  ref={(el) => {
+                    if (el) {
+                      el.style.height = 'auto';
+                      el.style.height = el.scrollHeight + 'px';
+                    }
+                  }}
+                />
               </div>
 
               {/* Action Buttons Row */}
-              <div style={{ display: 'flex', gap: '12px', marginTop: '12px', borderTop: '1px solid var(--border-color)', paddingTop: '20px' }}>
+              <div className="wizard-footer-actions">
                 <button
                   className="btn btn-secondary"
                   onClick={() => setIsWizardOpen(false)}
-                  style={{ padding: '12px 20px' }}
                 >
-                  Cancel
+                  Terminate Run
                 </button>
 
                 {!isMessageOpened ? (
@@ -1902,36 +1609,36 @@ export default function Home() {
                     <button
                       className="btn btn-secondary"
                       onClick={handleWizardSkip}
-                      style={{ padding: '12px 20px', marginLeft: 'auto' }}
+                      style={{ marginLeft: 'auto' }}
                     >
-                      Skip Lead
+                      Skip Contact
                     </button>
 
                     <button
                       className="btn"
-                      onClick={handleWizardSend}
-                      disabled={!compiledMsg}
-                      style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', display: 'flex', alignItems: 'center', gap: '8px' }}
+                      onClick={handleTriggerWhatsApp}
                     >
-                      {Icons.phone()} Send
+                      {Icons.phone()} Copy & Launch WhatsApp Chat
                     </button>
                   </>
                 ) : (
                   <>
+                    <span className="dispatch-verify-prompt" style={{ marginLeft: 'auto' }}>
+                      Did the message send successfully?
+                    </span>
                     <button
-                      className="btn-danger-outline"
-                      onClick={() => handleWizardSentStatus('Failed')}
-                      style={{ padding: '12px 20px', marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}
+                      className="btn btn-danger-outline"
+                      onClick={() => handleWizardSubmitResult('Failed')}
                     >
                       {Icons.x()} Failed
                     </button>
 
                     <button
                       className="btn"
-                      onClick={() => handleWizardSentStatus('Sent')}
-                      style={{ padding: '12px 24px', fontSize: '14px', fontWeight: '600', background: 'var(--success)', color: '#fff', display: 'flex', alignItems: 'center', gap: '8px' }}
+                      onClick={() => handleWizardSubmitResult('Sent')}
+                      style={{ background: 'var(--success)', color: '#fff' }}
                     >
-                      {Icons.check()} Sent
+                      {Icons.check()} Marked Sent
                     </button>
                   </>
                 )}
@@ -1942,23 +1649,31 @@ export default function Home() {
         );
       })()}
 
-      {/* Bottom Navigation for Mobile Outreach */}
+      {/* Bottom Navigation for Mobile View */}
       <nav className="bottom-nav">
         <div 
           className={`bottom-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
           onClick={() => setActiveTab('dashboard')}
         >
-          {Icons.dashboard("bottom-nav-icon")}
+          {Icons.dashboard()}
           <span>Dashboard</span>
         </div>
         <div 
           className={`bottom-nav-item ${activeTab === 'contacts' ? 'active' : ''}`}
           onClick={() => setActiveTab('contacts')}
         >
-          {Icons.contacts("bottom-nav-icon")}
-          <span>Contacts</span>
+          {Icons.contacts()}
+          <span>CRM</span>
+        </div>
+        <div 
+          className={`bottom-nav-item ${activeTab === 'whatsapp' ? 'active' : ''}`}
+          onClick={() => setActiveTab('whatsapp')}
+        >
+          {Icons.campaigns()}
+          <span>Outreach</span>
         </div>
       </nav>
+
     </div>
   );
 }
