@@ -541,6 +541,17 @@ export default function Home() {
     );
   }, [scrapeCategory, scrapeLocation, scraperHistory]);
 
+  const sortedHistory = useMemo(() => {
+    return [...scraperHistory].sort((a, b) => {
+      const catA = a.category.toLowerCase().trim();
+      const catB = b.category.toLowerCase().trim();
+      if (catA !== catB) {
+        return catA.localeCompare(catB);
+      }
+      return b.timestamp - a.timestamp; // newest first inside category
+    });
+  }, [scraperHistory]);
+
   // ----------------------------------------------------------------------------
   // Local CRM Database Handlers (State + LocalStorage)
   // ----------------------------------------------------------------------------
@@ -1019,7 +1030,7 @@ export default function Home() {
             <div className="responsive-grid">
               <div className="glass-card">
                 <h2 style={{ fontSize: '18px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                  {Icons.info()} Campaign Progress Chart
+                  Campaign Progress Chart
                 </h2>
                 <div className="bar-chart-container">
                   <div className="chart-bar-row">
@@ -1238,30 +1249,10 @@ export default function Home() {
 
             {/* Scraper History Section */}
             <div className="glass-card" style={{ marginTop: '24px' }}>
-              <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ marginBottom: '20px' }}>
                 <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
                   Past Scraper Runs ({scraperHistory.length})
                 </h2>
-                {scraperHistory.length > 0 && (
-                  <button 
-                    className="btn"
-                    onClick={handleClearHistory}
-                    style={{ 
-                      padding: '6px 12px', 
-                      fontSize: '12px', 
-                      display: 'flex', 
-                      alignItems: 'center', 
-                      gap: '6px',
-                      background: 'rgba(239, 68, 68, 0.1)',
-                      border: '1px solid rgba(239, 68, 68, 0.2)',
-                      color: '#f87171',
-                      cursor: 'pointer'
-                    }}
-                  >
-                    {Icons.trash("w-3.5 h-3.5")} Clear History
-                  </button>
-                )}
               </div>
 
               {scraperHistory.length === 0 ? (
@@ -1275,13 +1266,13 @@ export default function Home() {
                       <tr style={{ background: 'rgba(255, 255, 255, 0.01)' }}>
                         <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '20%', border: '1px solid var(--border-color)' }}>Category</th>
                         <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '35%', border: '1px solid var(--border-color)' }}>Location</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '20%', border: '1px solid var(--border-color)' }}>Date Scraped</th>
                         <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Saved Contacts</th>
-                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Searched Contacts</th>
-                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Actions</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '10%', border: '1px solid var(--border-color)' }}>Searched</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {scraperHistory.map((run) => (
+                      {sortedHistory.map((run) => (
                         <tr key={run.id}>
                           <td style={{ padding: '12px 16px', textTransform: 'capitalize', fontSize: '13px', border: '1px solid var(--border-color)' }}>
                             <span className="badge category-badge" style={{ background: 'rgba(99, 102, 241, 0.15)', color: '#818cf8', padding: '2px 8px', borderRadius: '4px', fontSize: '11px', fontWeight: '600' }}>
@@ -1289,29 +1280,11 @@ export default function Home() {
                             </span>
                           </td>
                           <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>{run.location}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--success)', fontWeight: '700', border: '1px solid var(--border-color)' }}>{run.saved}</td>
-                          <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--text-secondary)', border: '1px solid var(--border-color)' }}>{run.total || 0}</td>
-                          <td style={{ padding: '8px 16px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
-                            <button
-                              className="btn btn-secondary btn-sm"
-                              onClick={() => {
-                                setScrapeCategory(run.category);
-                                setScrapeLocation(run.location);
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                              }}
-                              style={{ 
-                                padding: '4px 8px', 
-                                fontSize: '11px', 
-                                display: 'inline-flex', 
-                                alignItems: 'center', 
-                                gap: '4px',
-                                cursor: 'pointer' 
-                              }}
-                              title="Load search query parameters into scraper form"
-                            >
-                              Use Query
-                            </button>
+                          <td style={{ padding: '12px 16px', fontSize: '12px', color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}>
+                            {new Date(run.timestamp).toLocaleDateString()}
                           </td>
+                          <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--success)', fontWeight: '700', border: '1px solid var(--border-color)' }}>{run.saved}</td>
+                          <td style={{ padding: '12px 16px', fontSize: '12px', textAlign: 'center', color: 'var(--text-secondary)', border: '1px solid var(--border-color)' }}>{run.total || 0}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -1662,7 +1635,7 @@ export default function Home() {
                 <span className="stat-value">{leads.filter(l => l.status === 'Pending' || l.status === 'Sent').length}</span>
               </div>
               <div className="stat-card success">
-                <span className="stat-label">Pending (Intros)</span>
+                <span className="stat-label">Pending Intros</span>
                 <span className="stat-value text-accent">{leads.filter(l => l.status === 'Pending').length}</span>
               </div>
               <div className="stat-card warning">

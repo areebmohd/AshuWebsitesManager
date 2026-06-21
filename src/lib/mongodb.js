@@ -1,29 +1,80 @@
 import { MongoClient } from 'mongodb';
 import dns from 'dns';
 
-// Prepend public DNS resolvers to handle SRV lookups on local systems
-try {
-  dns.setServers(['8.8.8.8', '1.1.1.1', ...dns.getServers()]);
-} catch (e) {
-  console.warn("Could not set DNS fallback inside mongodb client:", e);
-}
-
 const uri = process.env.MONGODB_URI;
 const options = {};
-
-let client;
-let clientPromise;
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Please add your Mongo URI to .env.local');
 }
 
+// Custom manual resolver to bypass c-ares DNS resolveSrv bugs on Windows/local networks
+async function getResolvedClient() {
+  if (!uri.startsWith('mongodb+srv://')) {
+    const client = new MongoClient(uri, options);
+    return client.connect();
+  }
+
+  return new Promise((resolve, reject) => {
+    const match = uri.match(/^mongodb\+srv:\/\/([^@]+@)?([^/?#]+)([^#]*)$/);
+    if (!match) {
+      const client = new MongoClient(uri, options);
+      return client.connect().then(resolve).catch(reject);
+    }
+
+    const auth = match[1] || '';
+    const srvHost = match[2];
+    const rest = match[3] || '';
+
+    const resolver = new dns.Resolver();
+    resolver.setServers(['8.8.8.8', '1.1.1.1']);
+
+    resolver.resolveSrv(`_mongodb._tcp.${srvHost}`, (srvErr, addresses) => {
+      if (srvErr) {
+        console.warn('Custom SRV lookup failed, falling back to standard driver resolution:', srvErr);
+        const client = new MongoClient(uri, options);
+        return client.connect().then(resolve).catch(reject);
+      }
+
+      resolver.resolveTxt(srvHost, (txtErr, records) => {
+        const txtOptions = !txtErr && records && records.length > 0
+          ? records[0].join('&')
+          : '';
+
+        const hostsList = addresses.map(addr => `${addr.name}:${addr.port}`).join(',');
+
+        let path = '';
+        let queryStr = '';
+        const pathMatch = rest.match(/^([^?]*)\??(.*)$/);
+        if (pathMatch) {
+          path = pathMatch[1] || '/';
+          queryStr = pathMatch[2] || '';
+        }
+
+        const allOptionsList = [];
+        if (txtOptions) allOptionsList.push(txtOptions);
+        if (queryStr) allOptionsList.push(queryStr);
+        if (!allOptionsList.some(o => o.includes('ssl='))) {
+          allOptionsList.push('ssl=true');
+        }
+
+        const mergedQuery = allOptionsList.length > 0 ? `?${allOptionsList.join('&')}` : '';
+        const resolvedUri = `mongodb://${auth}${hostsList}${path}${mergedQuery}`;
+
+        const client = new MongoClient(resolvedUri, options);
+        client.connect().then(resolve).catch(reject);
+      });
+    });
+  });
+}
+
+let clientPromise;
+
 if (process.env.NODE_ENV === 'development') {
   // In development mode, use a global variable so that the value
   // is preserved across module reloads caused by HMR (Hot Module Replacement).
   if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+    global._mongoClientPromise = getResolvedClient();
   }
   clientPromise = global._mongoClientPromise;
 } else {
@@ -31,14 +82,11 @@ if (process.env.NODE_ENV === 'development') {
   clientPromise = {
     then: function(onFulfilled, onRejected) {
       if (!global._mongoClientPromiseProd) {
-        client = new MongoClient(uri, options);
-        global._mongoClientPromiseProd = client.connect();
+        global._mongoClientPromiseProd = getResolvedClient();
       }
       return global._mongoClientPromiseProd.then(onFulfilled, onRejected);
     }
   };
 }
 
-// Export a module-scoped MongoClient promise. By doing this in a
-// separate module, the client can be shared across functions.
 export default clientPromise;
