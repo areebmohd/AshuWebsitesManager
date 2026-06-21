@@ -14,14 +14,16 @@ async function getResolvedClient() {
   
   if (isVercel || !uri.startsWith('mongodb+srv://')) {
     const client = new MongoClient(uri, options);
-    return client.connect();
+    await client.connect();
+    return client;
   }
 
   return new Promise((resolve, reject) => {
     const match = uri.match(/^mongodb\+srv:\/\/([^@]+@)?([^/?#]+)([^#]*)$/);
     if (!match) {
       const client = new MongoClient(uri, options);
-      return client.connect().then(resolve).catch(reject);
+      client.connect().then(() => resolve(client)).catch(reject);
+      return;
     }
 
     const auth = match[1] || '';
@@ -35,7 +37,8 @@ async function getResolvedClient() {
       if (srvErr) {
         console.warn('Custom SRV lookup failed, falling back to standard driver resolution:', srvErr);
         const client = new MongoClient(uri, options);
-        return client.connect().then(resolve).catch(reject);
+        client.connect().then(() => resolve(client)).catch(reject);
+        return;
       }
 
       resolver.resolveTxt(srvHost, (txtErr, records) => {
@@ -64,10 +67,31 @@ async function getResolvedClient() {
         const resolvedUri = `mongodb://${auth}${hostsList}${path}${mergedQuery}`;
 
         const client = new MongoClient(resolvedUri, options);
-        client.connect().then(resolve).catch(reject);
+        client.connect().then(() => resolve(client)).catch(reject);
       });
     });
   });
+}
+
+class LazyPromise extends Promise {
+  then(onFulfilled, onRejected) {
+    if (!global._mongoClientPromiseProd) {
+      global._mongoClientPromiseProd = getResolvedClient();
+    }
+    return global._mongoClientPromiseProd.then(onFulfilled, onRejected);
+  }
+  catch(onRejected) {
+    if (!global._mongoClientPromiseProd) {
+      global._mongoClientPromiseProd = getResolvedClient();
+    }
+    return global._mongoClientPromiseProd.catch(onRejected);
+  }
+  finally(onFinally) {
+    if (!global._mongoClientPromiseProd) {
+      global._mongoClientPromiseProd = getResolvedClient();
+    }
+    return global._mongoClientPromiseProd.finally(onFinally);
+  }
 }
 
 let clientPromise;
@@ -80,15 +104,8 @@ if (process.env.NODE_ENV === 'development') {
   }
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production mode, connect lazily using a Thenable to avoid connection attempts at build/import time.
-  clientPromise = {
-    then: function(onFulfilled, onRejected) {
-      if (!global._mongoClientPromiseProd) {
-        global._mongoClientPromiseProd = getResolvedClient();
-      }
-      return global._mongoClientPromiseProd.then(onFulfilled, onRejected);
-    }
-  };
+  // In production mode, connect lazily using a LazyPromise subclass to avoid connection attempts at build/import time.
+  clientPromise = new LazyPromise(() => {});
 }
 
 export default clientPromise;
