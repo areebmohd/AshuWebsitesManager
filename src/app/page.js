@@ -1104,7 +1104,7 @@ export default function Home() {
             </header>
 
             {/* Filter controls */}
-            <div className="glass-card">
+            <div className="glass-card crm-container-card">
               <div className="filter-bar">
                 <div className="filter-group flex-1">
                   <input
@@ -1185,15 +1185,22 @@ export default function Home() {
                             />
                           </td>
                           <td>
-                            <div className="business-name-row">
-                              <strong>{lead.name}</strong>
-                            </div>
                             {lead.url ? (
-                              <a href={lead.url} target="_blank" rel="noreferrer" className="location-txt-link" style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px', textDecoration: 'none' }}>
-                                {lead.location || 'Gurugram'}
+                              <a href={lead.url} target="_blank" rel="noreferrer" className="business-profile-link" style={{ textDecoration: 'none', display: 'block' }}>
+                                <div className="business-name-row">
+                                  <strong>{lead.name}</strong>
+                                </div>
+                                <span className="location-txt-link" style={{ display: 'block', fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                                  {lead.location || 'Gurugram'}
+                                </span>
                               </a>
                             ) : (
-                              <span className="location-txt">{lead.location || 'Gurugram'}</span>
+                              <>
+                                <div className="business-name-row">
+                                  <strong>{lead.name}</strong>
+                                </div>
+                                <span className="location-txt">{lead.location || 'Gurugram'}</span>
+                              </>
                             )}
                           </td>
                           <td>
@@ -1472,8 +1479,8 @@ export default function Home() {
                   <div className="form-group">
                     <label>Filter Campaign Message Type</label>
                     <select value={campaignType} onChange={(e) => setCampaignType(e.target.value)}>
-                      <option value="intro">Introductory Pitch (Unsent leads)</option>
-                      <option value="followup">Weekly Follow-up (Sent leads &gt; 7 days old)</option>
+                      <option value="intro">Introductory Pitch</option>
+                      <option value="followup">Weekly Follow-up</option>
                     </select>
                   </div>
 
@@ -1534,14 +1541,14 @@ export default function Home() {
               {/* Wizard Header Progress */}
               <div className="wizard-header">
                 <div>
-                  <h3>Guided Campaign Conveyor Belt</h3>
+                  <h3>Outreach Conveyor</h3>
                   <span className="wizard-meta">
-                    QUEUE TYPE: {wizardMessageType.toUpperCase()} | CATEGORY: {lead.category.toUpperCase()}
+                    TYPE: {wizardMessageType.toUpperCase()} | CATEGORY: {lead.category.toUpperCase()}
                   </span>
                 </div>
                 <div className="wizard-progress-counter">
                   <div className="counter-val">{currentCount} / {totalCount}</div>
-                  <span className="counter-lbl">Leads Processed</span>
+                  <span className="counter-lbl">Processed</span>
                 </div>
               </div>
 
@@ -1568,17 +1575,12 @@ export default function Home() {
                     <div className="location-row">{lead.location || 'Gurugram'}</div>
                   )}
                 </div>
-                <div className="phone-col">
-                  <span className="lbl">WhatsApp Contact</span>
-                  <a href={`tel:${lead.phone}`} className="phone-tag">{lead.phone}</a>
-                </div>
               </div>
 
               {/* Editable Message Text Box */}
               <div className="form-group" style={{ margin: 0 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                  <label htmlFor="wizard-msg-box">Personalized Copy (Edit on the fly):</label>
-                  <span style={{ fontSize: '11px', color: 'var(--text-muted)' }}>Changes won't affect base template</span>
+                  <label htmlFor="wizard-msg-box">Personalized Copy</label>
                 </div>
                 <textarea
                   id="wizard-msg-box"
@@ -1618,7 +1620,7 @@ export default function Home() {
                       className="btn"
                       onClick={handleTriggerWhatsApp}
                     >
-                      {Icons.phone()} Copy & Launch WhatsApp Chat
+                      {Icons.phone()} Send Message
                     </button>
                   </>
                 ) : (
