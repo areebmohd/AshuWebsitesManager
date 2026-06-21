@@ -10,7 +10,9 @@ if (!process.env.MONGODB_URI) {
 
 // Custom manual resolver to bypass c-ares DNS resolveSrv bugs on Windows/local networks
 async function getResolvedClient() {
-  if (!uri.startsWith('mongodb+srv://')) {
+  const isVercel = process.env.VERCEL === '1';
+  
+  if (isVercel || !uri.startsWith('mongodb+srv://')) {
     const client = new MongoClient(uri, options);
     return client.connect();
   }
