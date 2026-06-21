@@ -212,68 +212,192 @@ export default function Home() {
   // Server Socket Status
   const [isBackendOnline, setIsBackendOnline] = useState(false);
 
+  // Cloud Database Sync Status State
+  const [cloudSyncStatus, setCloudSyncStatus] = useState('connected'); // 'connected', 'syncing', 'error'
+  const isMigratingRef = useRef(false);
+
+  // Keep state refs updated to prevent stale closures in socket and lifecycle callbacks
+  const leadsRef = useRef([]);
+  useEffect(() => {
+    leadsRef.current = leads;
+  }, [leads]);
+
+  const scraperHistoryRef = useRef([]);
+  useEffect(() => {
+    scraperHistoryRef.current = scraperHistory;
+  }, [scraperHistory]);
+
+  const allTemplatesRef = useRef({ categories: {} });
+  useEffect(() => {
+    allTemplatesRef.current = allTemplates;
+  }, [allTemplates]);
+
+  const syncToServer = async (action, data) => {
+    setCloudSyncStatus('syncing');
+    try {
+      const res = await fetch('/api/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, data })
+      });
+      if (!res.ok) {
+        throw new Error(`Sync failed: ${res.statusText}`);
+      }
+      setCloudSyncStatus('connected');
+      return true;
+    } catch (err) {
+      console.error('Cloud sync error:', err);
+      setCloudSyncStatus('error');
+      return false;
+    }
+  };
+
+  const performMigration = async () => {
+    if (isMigratingRef.current) return;
+    isMigratingRef.current = true;
+    setCloudSyncStatus('syncing');
+
+    let currentLeads = [];
+    try {
+      const local = localStorage.getItem('ashu_leads');
+      if (local) {
+        currentLeads = JSON.parse(local);
+      } else {
+        const res = await fetch('/leads.json');
+        if (res.ok) {
+          currentLeads = await res.json();
+        }
+      }
+    } catch (e) {
+      console.error('Error reading local leads for migration:', e);
+    }
+
+    let currentTemplates = { categories: SEED_TEMPLATES };
+    try {
+      const local = localStorage.getItem('ashu_templates');
+      if (local) currentTemplates = JSON.parse(local);
+    } catch (e) {
+      console.error('Error reading local templates for migration:', e);
+    }
+
+    let currentHistory = SEED_SCRAPER_HISTORY;
+    try {
+      const local = localStorage.getItem('ashu_scraper_history');
+      if (local) currentHistory = JSON.parse(local);
+    } catch (e) {
+      console.error('Error reading local history for migration:', e);
+    }
+
+    setLeads(currentLeads);
+    setAllTemplates(currentTemplates);
+    setScraperHistory(currentHistory);
+
+    localStorage.setItem('ashu_leads', JSON.stringify(currentLeads));
+    localStorage.setItem('ashu_templates', JSON.stringify(currentTemplates));
+    localStorage.setItem('ashu_scraper_history', JSON.stringify(currentHistory));
+
+    try {
+      const successLeads = await syncToServer('bulk_add_leads', { leads: currentLeads });
+      const successTemplates = await syncToServer('update_templates', { templates: currentTemplates });
+      const successHistory = await syncToServer('bulk_add_history', { history: currentHistory });
+
+      if (successLeads && successTemplates && successHistory) {
+        setCloudSyncStatus('connected');
+      } else {
+        setCloudSyncStatus('error');
+      }
+    } catch (err) {
+      console.error('Migration failed:', err);
+      setCloudSyncStatus('error');
+    } finally {
+      isMigratingRef.current = false;
+    }
+  };
+
+  const handleRetrySync = async () => {
+    setCloudSyncStatus('syncing');
+    try {
+      const res = await fetch('/api/sync');
+      if (!res.ok) throw new Error('Failed to fetch from cloud');
+      const data = await res.json();
+      if (data.isInitialized) {
+        setLeads(data.leads || []);
+        localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
+
+        const templatesData = data.templates || { categories: SEED_TEMPLATES };
+        setAllTemplates(templatesData);
+        localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
+
+        setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
+        localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+
+        setCloudSyncStatus('connected');
+      } else {
+        await performMigration();
+      }
+    } catch (err) {
+      console.error('Retry sync failed:', err);
+      setCloudSyncStatus('error');
+    }
+  };
+
   // ----------------------------------------------------------------------------
   // Data Lifecycle (Synchronization & Migration)
   // ----------------------------------------------------------------------------
   useEffect(() => {
-    // 1. Load leads from localStorage, fallback to public/leads.json
-    const loadLeads = async () => {
+    // Load local storage fallbacks immediately for fast initial load
+    let initialLeads = [];
+    let initialTemplates = { categories: SEED_TEMPLATES };
+    let initialHistory = SEED_SCRAPER_HISTORY;
+
+    try {
+      const localL = localStorage.getItem('ashu_leads');
+      if (localL) initialLeads = JSON.parse(localL);
+
+      const localT = localStorage.getItem('ashu_templates');
+      if (localT) initialTemplates = JSON.parse(localT);
+
+      const localH = localStorage.getItem('ashu_scraper_history');
+      if (localH) initialHistory = JSON.parse(localH);
+    } catch (e) {
+      console.error('Error reading offline storage keys on mount:', e);
+    }
+
+    setLeads(initialLeads);
+    setAllTemplates(initialTemplates);
+    setScraperHistory(initialHistory);
+
+    // Pull from cloud MongoDB Atlas
+    const syncFromCloud = async () => {
+      setCloudSyncStatus('syncing');
       try {
-        const localLeads = localStorage.getItem('ashu_leads');
-        if (localLeads) {
-          setLeads(JSON.parse(localLeads));
+        const res = await fetch('/api/sync');
+        if (!res.ok) throw new Error('Failed to pull cloud database');
+        const data = await res.json();
+
+        if (data.isInitialized) {
+          setLeads(data.leads || []);
+          localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
+
+          const templatesData = data.templates || { categories: SEED_TEMPLATES };
+          setAllTemplates(templatesData);
+          localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
+
+          setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
+          localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+
+          setCloudSyncStatus('connected');
         } else {
-          const res = await fetch('/leads.json');
-          if (res.ok) {
-            const data = await res.json();
-            setLeads(data);
-            localStorage.setItem('ashu_leads', JSON.stringify(data));
-          } else {
-            setLeads([]);
-            localStorage.setItem('ashu_leads', JSON.stringify([]));
-          }
+          // Empty cloud database, initialize migration
+          await performMigration();
         }
       } catch (err) {
-        console.error('Error loading leads database:', err);
-        setLeads([]);
+        console.error('Initial cloud sync hydration error:', err);
+        setCloudSyncStatus('error');
       }
     };
 
-    // 2. Load templates from localStorage, fallback to seeding defaults
-    const loadTemplates = () => {
-      try {
-        const localTemplates = localStorage.getItem('ashu_templates');
-        if (localTemplates) {
-          setAllTemplates(JSON.parse(localTemplates));
-        } else {
-          const seeded = { categories: SEED_TEMPLATES };
-          setAllTemplates(seeded);
-          localStorage.setItem('ashu_templates', JSON.stringify(seeded));
-        }
-      } catch (err) {
-        console.error('Error loading templates:', err);
-      }
-    };
-
-    // 3. Load scraper history from localStorage
-    const loadScraperHistory = () => {
-      try {
-        const localHistory = localStorage.getItem('ashu_scraper_history');
-        const parsedHistory = localHistory ? JSON.parse(localHistory) : [];
-        if (parsedHistory && parsedHistory.length > 0) {
-          setScraperHistory(parsedHistory);
-        } else {
-          setScraperHistory(SEED_SCRAPER_HISTORY);
-          localStorage.setItem('ashu_scraper_history', JSON.stringify(SEED_SCRAPER_HISTORY));
-        }
-      } catch (err) {
-        console.error('Error loading scraper history:', err);
-      }
-    };
-
-    loadLeads();
-    loadTemplates();
-    loadScraperHistory();
+    syncFromCloud();
 
     // 3. Connect to backend websocket scraper
     const socket = io(API_BASE);
@@ -317,14 +441,16 @@ export default function Home() {
     });
 
     socket.on('lead_scraped', (newLead) => {
-      setLeads((prev) => {
-        // Prevent duplicates in real time
-        const cleanNewPhone = newLead.phone.replace(/[^0-9]/g, '');
-        if (prev.some((l) => l.phone.replace(/[^0-9]/g, '') === cleanNewPhone)) return prev;
-        const updated = [newLead, ...prev];
-        localStorage.setItem('ashu_leads', JSON.stringify(updated));
-        return updated;
-      });
+      // Prevent duplicates in real time using the updated leadsRef
+      const cleanNewPhone = newLead.phone.replace(/[^0-9]/g, '');
+      if (leadsRef.current.some((l) => l.phone.replace(/[^0-9]/g, '') === cleanNewPhone)) return;
+
+      const updated = [newLead, ...leadsRef.current];
+      setLeads(updated);
+      localStorage.setItem('ashu_leads', JSON.stringify(updated));
+      
+      // Push new lead to cloud Atlas DB
+      syncToServer('update_lead', { lead: newLead });
     });
 
     return () => {
@@ -370,36 +496,37 @@ export default function Home() {
     } else if (wasScrapingRef.current) {
       wasScrapingRef.current = false;
       
-      // Save history record
-      setScraperHistory((prevHistory) => {
-        // Prevent adding empty runs or runs where nothing was even scanned if it's aborted immediately
-        if (scraperStats.total === 0 && scraperStats.scanned === 0) return prevHistory;
+      // Prevent adding empty runs or runs where nothing was even scanned if it's aborted immediately
+      if (scraperStats.total === 0 && scraperStats.scanned === 0) return;
 
-        // Check if history already contains a run with exact same category and location within past 1 minute to prevent double recording
-        const isDuplicateRun = prevHistory.some(
-          (run) => 
-            run.category.toLowerCase().trim() === scrapeCategory.toLowerCase().trim() &&
-            run.location.toLowerCase().trim() === scrapeLocation.toLowerCase().trim() &&
-            (Date.now() - run.timestamp) < 60000
-        );
-        if (isDuplicateRun) return prevHistory;
+      // Check if history already contains a run with exact same category and location within past 1 minute to prevent double recording
+      const isDuplicateRun = scraperHistoryRef.current.some(
+        (run) => 
+          run.category.toLowerCase().trim() === scrapeCategory.toLowerCase().trim() &&
+          run.location.toLowerCase().trim() === scrapeLocation.toLowerCase().trim() &&
+          (Date.now() - run.timestamp) < 60000
+      );
+      if (isDuplicateRun) return;
 
-        const newRecord = {
-          id: Date.now().toString(),
-          category: scrapeCategory,
-          location: scrapeLocation,
-          timestamp: Date.now(),
-          saved: scraperStats.saved,
-          total: scraperStats.total,
-          skippedWebsite: scraperStats.skippedWebsite,
-          skippedLandline: scraperStats.skippedLandline,
-          skippedDuplicate: scraperStats.skippedDuplicate,
-          noPhone: scraperStats.noPhone
-        };
-        const updated = [newRecord, ...prevHistory];
-        localStorage.setItem('ashu_scraper_history', JSON.stringify(updated));
-        return updated;
-      });
+      const newRecord = {
+        id: Date.now().toString(),
+        category: scrapeCategory,
+        location: scrapeLocation,
+        timestamp: Date.now(),
+        saved: scraperStats.saved,
+        total: scraperStats.total,
+        skippedWebsite: scraperStats.skippedWebsite,
+        skippedLandline: scraperStats.skippedLandline,
+        skippedDuplicate: scraperStats.skippedDuplicate,
+        noPhone: scraperStats.noPhone
+      };
+
+      const updated = [newRecord, ...scraperHistoryRef.current];
+      setScraperHistory(updated);
+      localStorage.setItem('ashu_scraper_history', JSON.stringify(updated));
+      
+      // Sync history record to MongoDB
+      syncToServer('add_history', { run: newRecord });
     }
   }, [isScraping, scrapeCategory, scrapeLocation, scraperStats]);
 
@@ -418,6 +545,7 @@ export default function Home() {
   // Local CRM Database Handlers (State + LocalStorage)
   // ----------------------------------------------------------------------------
   const handleUpdateLeadStatus = (id, status, notes = undefined) => {
+    let updatedLead = null;
     const updated = leads.map((lead) => {
       if (lead.id === id) {
         const copy = { ...lead, status, updatedAt: new Date().toISOString() };
@@ -427,12 +555,18 @@ export default function Home() {
         if (notes !== undefined) {
           copy.notes = notes.trim();
         }
+        updatedLead = copy;
         return copy;
       }
       return lead;
     });
     setLeads(updated);
     localStorage.setItem('ashu_leads', JSON.stringify(updated));
+    
+    // Sync single changed lead to MongoDB Atlas
+    if (updatedLead) {
+      syncToServer('update_lead', { lead: updatedLead });
+    }
   };
 
 
@@ -518,6 +652,7 @@ export default function Home() {
 
     setAllTemplates(updated);
     localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    syncToServer('update_templates', { templates: updated });
     
     // Reset Form
     setTemplateCategory('');
@@ -547,6 +682,7 @@ export default function Home() {
     };
     setAllTemplates(updated);
     localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    syncToServer('update_templates', { templates: updated });
     setEditingCategory(null);
   };
 
@@ -558,7 +694,15 @@ export default function Home() {
     const updated = { ...allTemplates, categories: categoriesCopy };
     setAllTemplates(updated);
     localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    syncToServer('update_templates', { templates: updated });
     if (editingCategory === cat) setEditingCategory(null);
+  };
+
+  const handleClearHistory = async () => {
+    if (!confirm('Are you sure you want to clear all scraper runs from the history log? This cannot be undone.')) return;
+    setScraperHistory([]);
+    localStorage.setItem('ashu_scraper_history', JSON.stringify([]));
+    await syncToServer('clear_history', {});
   };
 
   // ----------------------------------------------------------------------------
@@ -791,6 +935,48 @@ export default function Home() {
           <span className="status-desc">
             {isBackendOnline ? 'Scraper active.' : 'Start backend server.'}
           </span>
+        </div>
+
+        {/* Cloud Database Sync Status */}
+        <div className="server-status-widget" style={{ marginTop: '12px' }}>
+          <div className="status-indicator-row">
+            <span className={`status-dot ${
+              cloudSyncStatus === 'connected' ? 'online' : 
+              cloudSyncStatus === 'syncing' ? 'syncing' : 'offline'
+            }`} />
+            <span className="status-label">
+              Database: {
+                cloudSyncStatus === 'connected' ? 'CONNECTED' : 
+                cloudSyncStatus === 'syncing' ? 'SYNCING...' : 'SYNC ERROR'
+              }
+            </span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+            <span className="status-desc">
+              {
+                cloudSyncStatus === 'connected' ? 'Cloud sync active.' : 
+                cloudSyncStatus === 'syncing' ? 'Updating Atlas...' : 'Database offline.'
+              }
+            </span>
+            {cloudSyncStatus === 'error' && (
+              <button 
+                onClick={handleRetrySync}
+                style={{ 
+                  background: 'rgba(239, 68, 68, 0.2)', 
+                  border: '1px solid #ef4444', 
+                  color: '#ef4444', 
+                  padding: '2px 8px', 
+                  borderRadius: '4px', 
+                  fontSize: '10px', 
+                  cursor: 'pointer',
+                  fontWeight: '600',
+                  lineHeight: '1.2'
+                }}
+              >
+                Retry
+              </button>
+            )}
+          </div>
         </div>
       </aside>
 
@@ -1052,11 +1238,30 @@ export default function Home() {
 
             {/* Scraper History Section */}
             <div className="glass-card" style={{ marginTop: '24px' }}>
-              <div style={{ marginBottom: '16px' }}>
+              <div style={{ marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <h2 style={{ fontSize: '18px', display: 'flex', alignItems: 'center', gap: '8px', margin: 0 }}>
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg>
                   Past Scraper Runs ({scraperHistory.length})
                 </h2>
+                {scraperHistory.length > 0 && (
+                  <button 
+                    className="btn"
+                    onClick={handleClearHistory}
+                    style={{ 
+                      padding: '6px 12px', 
+                      fontSize: '12px', 
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      gap: '6px',
+                      background: 'rgba(239, 68, 68, 0.1)',
+                      border: '1px solid rgba(239, 68, 68, 0.2)',
+                      color: '#f87171',
+                      cursor: 'pointer'
+                    }}
+                  >
+                    {Icons.trash("w-3.5 h-3.5")} Clear History
+                  </button>
+                )}
               </div>
 
               {scraperHistory.length === 0 ? (
@@ -1069,9 +1274,10 @@ export default function Home() {
                     <thead>
                       <tr style={{ background: 'rgba(255, 255, 255, 0.01)' }}>
                         <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '20%', border: '1px solid var(--border-color)' }}>Category</th>
-                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '40%', border: '1px solid var(--border-color)' }}>Location</th>
-                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '20%', border: '1px solid var(--border-color)' }}>Saved Contacts</th>
-                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '20%', border: '1px solid var(--border-color)' }}>Searched Contacts</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', width: '35%', border: '1px solid var(--border-color)' }}>Location</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Saved Contacts</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Searched Contacts</th>
+                        <th style={{ padding: '12px 16px', color: 'var(--text-secondary)', fontSize: '11px', textTransform: 'uppercase', fontWeight: '600', textAlign: 'center', width: '15%', border: '1px solid var(--border-color)' }}>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1085,6 +1291,27 @@ export default function Home() {
                           <td style={{ padding: '12px 16px', fontSize: '13px', fontWeight: '600', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}>{run.location}</td>
                           <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--success)', fontWeight: '700', border: '1px solid var(--border-color)' }}>{run.saved}</td>
                           <td style={{ padding: '12px 16px', fontSize: '13px', textAlign: 'center', color: 'var(--text-secondary)', border: '1px solid var(--border-color)' }}>{run.total || 0}</td>
+                          <td style={{ padding: '8px 16px', textAlign: 'center', border: '1px solid var(--border-color)' }}>
+                            <button
+                              className="btn btn-secondary btn-sm"
+                              onClick={() => {
+                                setScrapeCategory(run.category);
+                                setScrapeLocation(run.location);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                              }}
+                              style={{ 
+                                padding: '4px 8px', 
+                                fontSize: '11px', 
+                                display: 'inline-flex', 
+                                alignItems: 'center', 
+                                gap: '4px',
+                                cursor: 'pointer' 
+                              }}
+                              title="Load search query parameters into scraper form"
+                            >
+                              Use Query
+                            </button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
