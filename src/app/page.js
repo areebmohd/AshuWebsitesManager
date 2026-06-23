@@ -1006,9 +1006,17 @@ export default function Home() {
                 <span className="stat-label">Total Leads</span>
                 <span className="stat-value">{stats.total}</span>
               </div>
+              <div className="stat-card warning">
+                <span className="stat-label">Pending Contacts</span>
+                <span className="stat-value text-warning">{stats.pending}</span>
+              </div>
               <div className="stat-card success">
                 <span className="stat-label">Outreach Sent</span>
                 <span className="stat-value">{stats.sent}</span>
+              </div>
+              <div className="stat-card error">
+                <span className="stat-label">Failed Contacts</span>
+                <span className="stat-value text-error">{stats.failed}</span>
               </div>
               <div className="stat-card success">
                 <span className="stat-label">Leads Won</span>
@@ -1153,7 +1161,7 @@ export default function Home() {
                   marginTop: '16px'
                 }}>
                   <div>
-                    <strong>Already scraped before:</strong> You scraped {alreadyScrapedRun.saved} contacts of "{alreadyScrapedRun.category}" in "{alreadyScrapedRun.location}" on {new Date(alreadyScrapedRun.timestamp).toLocaleDateString()}.
+                    <strong>Already scraped before:</strong> You scraped {alreadyScrapedRun.saved} contacts of &quot;{alreadyScrapedRun.category}&quot; in &quot;{alreadyScrapedRun.location}&quot; on {new Date(alreadyScrapedRun.timestamp).toLocaleDateString()}.
                   </div>
                 </div>
               )}
@@ -1185,7 +1193,7 @@ export default function Home() {
               {(isScraping || scraperStats.total > 0) && (
                 <div className="scraper-progress-hud">
                   <h3 style={{ fontSize: '15px', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    {isScraping ? Icons.sync("animate-spin") : Icons.check("text-success")}
+                    {isScraping ? null : Icons.check("text-success")}
                     <span>{isScraping ? 'Active Maps Progress Monitor' : 'Scrape Run Summary'}</span>
                     {isScraping && <span className="pulse-indicator"></span>}
                   </h3>

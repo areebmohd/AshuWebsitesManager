@@ -285,7 +285,7 @@ a:hover {
 /* Grid Layouts */
 .grid-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
   margin-bottom: 36px;
 }
@@ -340,6 +340,26 @@ a:hover {
   font-weight: 700;
   font-family: var(--font-display);
   color: var(--text-primary);
+}
+
+.text-success {
+  color: var(--success) !important;
+}
+
+.text-error {
+  color: var(--error) !important;
+}
+
+.text-warning {
+  color: var(--warning) !important;
+}
+
+.text-accent {
+  color: var(--accent-primary) !important;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
 }
 
 /* Visual Distribution Progress Chart (Dashboard) */
