@@ -2,7 +2,7 @@ import express from 'express';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
-import { runScraper } from './scraper.js';
+import { runScraper, discoverMalls } from './scraper.js';
 
 const app = express();
 const httpServer = createServer(app);
@@ -46,7 +46,7 @@ function logProgress(message) {
 // Start Google Maps Scraping
 app.post('/api/scrape/start', async (req, res) => {
   const { category, location, scrollDepth, existingPhones } = req.body;
-  if (!category || !location) {
+  if (!category || !location || (Array.isArray(location) && location.length === 0)) {
     return res.status(400).json({ error: 'Category and Location are required' });
   }
 
@@ -78,6 +78,24 @@ app.post('/api/scrape/start', async (req, res) => {
   } finally {
     activeScraper = false;
     logProgress('[System] Scraping process idle.');
+  }
+});
+
+// Discover Shopping Malls & Markets
+app.post('/api/scrape/malls', async (req, res) => {
+  const { city } = req.body;
+  if (!city) {
+    return res.status(400).json({ error: 'City is required' });
+  }
+
+  logProgress(`[System] Discovery phase requested: finding shopping malls and markets in "${city}"...`);
+  
+  try {
+    const locations = await discoverMalls(city, (logMsg) => logProgress(logMsg));
+    res.json({ success: true, locations });
+  } catch (error) {
+    logProgress(`[Discovery Error] ${error.message}`);
+    res.status(500).json({ error: error.message });
   }
 });
 

@@ -53,42 +53,70 @@ const Icons = {
   )
 };
 
-const DEFAULT_INTRO = `Hey {{business_name}}! 🍔
+const DEFAULT_INTRO = `Hey {{business_name}}! 👋
 
-I noticed you have a great business listing on Google Maps in {{location}}, but you don't have a website to showcase your services and get direct orders/bookings.
+I noticed your business profile on Google Maps in {{location}}.
 
-Having your own website is essential to get direct clients without paying heavy middleman commissions. We can help you build a custom website starting at just ₹999! 🚀
+Since everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.
 
-If you are interested, we can send you some of our demo previews. Let us know if you'd like to check them out.`;
+We build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀
 
-const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 🍔
+Would you like me to send over a few demo previews to show you what we can do?`;
 
-Just following up on my previous message.
+const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 👋
 
-We can launch your premium custom website—complete with an easy dashboard to track all your clients—in just 2 days for only ₹999! 🚀
+Just following up to see if you received my previous message.
 
-If you'd be interested to see how it looks, we can share some demo previews with you. Let us know if you want to take a look!`;
+Since most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.
+
+Our team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀
+
+Would you like us to share a few design previews with you to show you what we can do?`;
 
 const SEED_TEMPLATES = {
+  "general": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your business profile on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.\n\nWe build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.\n\nOur team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nWould you like us to share a few design previews with you to show you what we can do?"
+  },
   "restaurants": {
-    "introTemplate": "Hey {{business_name}}! 🍔\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}, but you don't have a website to showcase your menu and get direct online orders.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders without paying heavy commissions to Swiggy/Zomato. We can help you build a custom website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some of our demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
-    "followupTemplate": "Hey {{business_name}}! 🍔\n\nJust following up on my previous message.\n\nSince everyone is moving online, we can launch your premium custom website—complete with an easy dashboard to track all your orders—in just 2 days for only ₹999! 🚀\n\nIf you'd be interested to see how it looks, we can share some demo previews with you. If you like what you see, we can create a custom site specifically for your business!"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders and avoid paying heavy commissions to Swiggy/Zomato.\n\nWe build custom ordering/menu websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a digital menu and ordering platform is crucial to attract local foodies and capture direct sales with zero middleman commission.\n\nWe can launch your premium custom restaurant website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few demo designs to see how it looks?"
   },
   "clinics": {
-    "introTemplate": "Hello {{business_name}}! 🩺\n\nI saw your medical clinic profile on Google Maps in {{location}}, but you don't have a website for patients to book appointments directly.\n\nHaving your own professional website is essential to manage appointments smoothly and build trust. We can help you build a custom booking website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some of our clinic website demo previews. If you like them, we can create your very own booking site! Let us know if you'd like to check them out.",
-    "followupTemplate": "Hello {{business_name}}! 🩺\n\nJust following up on my previous message.\n\nGive your patients a seamless way to book appointments while keeping your reception organized. We can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can send you some demo booking layouts. If you like them, we can set up your own clinic booking site!"
+    "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}.\n\nHaving your own professional website is essential to manage appointments smoothly, establish patient trust, and avoid paying booking platform commissions.\n\nWe build custom clinic booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hello {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nGive your patients a seamless way to book appointments while keeping your clinic reception organized and completely under your own brand.\n\nWe can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few layout previews to see how it works?"
   },
   "salons": {
-    "introTemplate": "Hey {{business_name}}! ✂️\n\nI saw your salon profile on Google Maps in {{location}}, but you don't have a website for direct client appointment booking.\n\nWe build custom booking websites for salons that let clients schedule appointments directly. We can set up a premium booking website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some salon website demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
-    "followupTemplate": "Hey {{business_name}}! ✂️\n\nJust following up on my previous message.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can share some demo scheduling pages. If you like what you see, we can build one specifically for your salon!"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}.\n\nHaving a website with direct appointment booking is crucial to fill your calendar, showcase hair/beauty styles, and build client trust without third-party fees.\n\nWe build premium salon booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a professional online booking portal is essential to attract new clients and manage schedules easily with zero platform fees.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nWould you like to take a look at a few demo scheduling pages we designed?"
   },
   "clothing shops": {
-    "introTemplate": "Hey {{business_name}}! 👗\n\nI saw your clothing shop listing on Google Maps in {{location}}, but you don't have a website to showcase your catalog and collection.\n\nWe build custom digital catalog websites for apparel shops that let customers browse your styles. We can help you build your custom catalog website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some boutique catalog demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
-    "followupTemplate": "Hey {{business_name}}! 👗\n\nJust following up on my previous message.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nIf you'd be interested, we can send you some demo catalogs to browse. If you like them, we can create a custom site for your clothing shop!"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing shop listing on Google Maps in {{location}}.\n\nHaving a digital catalog website is essential today to showcase your collections, attract local walk-ins, and secure direct sales without paying online marketplace commissions.\n\nWe build custom fashion catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a modern digital showroom is crucial for clothing boutiques to display new arrivals and drive foot traffic directly.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nWould you like us to share a few design previews to show you how it looks?"
   },
   "electronics shops": {
-    "introTemplate": "Hey {{business_name}}! ⚡\n\nI saw your electronics shop profile on Google Maps in {{location}}, but you don't have a website to showcase your inventory.\n\nWe build custom product catalog websites for electronics shops that let clients browse spec sheets and request quotes. We can build your premium catalog website starting at just ₹999! 🚀\n\nIf you are interested, we can send you some electronics shop demo previews. If you like them, we can create your very own site! Let us know if you'd like to check them out.",
-    "followupTemplate": "Hey {{business_name}}! ⚡\n\nJust following up on my previous message.\n\nWe can launch your digital catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nIf you'd be interested to see, we can share some demo shop layouts. If you like them, we can build a custom site for your business!"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}.\n\nHaving a digital showroom website is essential today to display specifications, handle quotation requests, and build client trust without third-party marketplace fees.\n\nWe build custom electronics catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a web catalog is crucial for electronics shops to showcase Spec Sheets, handle queries, and capture local sales directly.\n\nWe can launch your product catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few demo layouts to see how it works?"
+  },
+  "gyms & fitness": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your gym/fitness center profile on Google Maps in {{location}}.\n\nHaving a premium website is highly important nowadays to showcase your gym equipment, training programs, class schedules, and to get direct membership signups without any middleman platforms.\n\nWe build beautiful custom fitness websites and can design a professional site for your gym for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online schedule and booking portal is crucial for gyms to attract new members, build trust, and showcase client transformations directly.\n\nOur team designs custom, fast-loading fitness websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nWould you be open to checking out a few design previews to see how your gym's site could look?"
+  },
+  "jewelry shops": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your jewelry store profile on Google Maps in {{location}}.\n\nA premium digital catalog website is essential to showcase your beautiful collections, build brand trust, and attract high-end buyers without paying third-party commissions.\n\nWe design premium jewelry catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an elegant website is crucial to establish trust, show your latest jewelry designs, and secure direct clients directly.\n\nWe build gorgeous custom product showcase websites and can launch yours for just ₹999 within 2 days! 🚀\n\nWould you like to take a look at a few demo previews we designed for jewelry brands?"
+  },
+  "opticians & eyewear": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your optician/eyewear store listing on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to display your frames, book eye tests, and build trust in your optical store without relying on third-party aggregators.\n\nWe design custom eyewear catalog websites and can launch yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nA digital frames showroom and booking system is crucial for modern optical shops to attract local clients and increase sales.\n\nWe can build your premium custom optician website in just 2 days for only ₹999! 🚀\n\nWould you like us to share a few design previews with you to show you how it looks?"
+  },
+  "bakeries & cafes": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your bakery/cafe profile on Google Maps in {{location}}.\n\nHaving your own website is essential to showcase your fresh menu, accept direct cake orders, and avoid heavy third-party commissions from delivery apps.\n\nWe build premium custom cafe/bakery websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search for menus online first, having a modern website is crucial to build trust and get direct bakery orders with zero middleman fees.\n\nWe can launch your premium cafe menu and catalog website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few design previews to see how it looks?"
+  },
+  "furniture & decor": {
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your furniture/decor showroom listing on Google Maps in {{location}}.\n\nA professional digital showroom website is crucial to showcase your furniture designs, get direct inquiries, and establish trust with local buyers without middleman platforms.\n\nWe design premium catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online catalog is crucial for home decor and furniture stores to showcase collections, attract walk-ins, and build trust directly.\n\nWe can launch your premium custom furniture website in just 2 days for only ₹999! 🚀\n\nWould you like to take a look at a few demo previews we designed?"
   }
 };
 
@@ -155,6 +183,11 @@ const SEED_SCRAPER_HISTORY = [
   }
 ];
 
+const cleanLocationName = (loc) => {
+  if (!loc) return '';
+  return loc.split(',')[0].trim();
+};
+
 export default function Home() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [leads, setLeads] = useState([]);
@@ -176,9 +209,30 @@ export default function Home() {
     noPhone: 0
   });
 
+  const scraperStatsRef = useRef({
+    scanned: 0,
+    total: 0,
+    saved: 0,
+    skippedWebsite: 0,
+    skippedLandline: 0,
+    skippedDuplicate: 0,
+    noPhone: 0,
+    savedCategories: []
+  });
+
+  const sessionLeadsRef = useRef([]);
+
   const [scraperHistory, setScraperHistory] = useState([]);
 
-  const consoleEndRef = useRef(null);
+  // Premium Malls Discovery States
+  const [searchCity, setSearchCity] = useState('Gurugram');
+  const [discoveredMalls, setDiscoveredMalls] = useState([]);
+  const [loadedPremiumCity, setLoadedPremiumCity] = useState('');
+  const [isDiscovering, setIsDiscovering] = useState(false);
+  const [premiumHistory, setPremiumHistory] = useState([]);
+  const [lastScanResult, setLastScanResult] = useState(null);
+
+  const consoleBoxRef = useRef(null);
 
   // Contacts Tab State (Filters & Modal)
   const [searchQuery, setSearchQuery] = useState('');
@@ -273,7 +327,12 @@ export default function Home() {
     let currentTemplates = { categories: SEED_TEMPLATES };
     try {
       const local = localStorage.getItem('ashu_templates');
-      if (local) currentTemplates = JSON.parse(local);
+      if (local) {
+        const parsed = JSON.parse(local);
+        if (!parsed.categories) parsed.categories = {};
+        parsed.categories = { ...SEED_TEMPLATES, ...parsed.categories };
+        currentTemplates = parsed;
+      }
     } catch (e) {
       console.error('Error reading local templates for migration:', e);
     }
@@ -323,6 +382,8 @@ export default function Home() {
         localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
 
         const templatesData = data.templates || { categories: SEED_TEMPLATES };
+        if (!templatesData.categories) templatesData.categories = {};
+        templatesData.categories = { ...SEED_TEMPLATES, ...templatesData.categories };
         setAllTemplates(templatesData);
         localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
 
@@ -353,7 +414,12 @@ export default function Home() {
       if (localL) initialLeads = JSON.parse(localL);
 
       const localT = localStorage.getItem('ashu_templates');
-      if (localT) initialTemplates = JSON.parse(localT);
+      if (localT) {
+        const parsed = JSON.parse(localT);
+        if (!parsed.categories) parsed.categories = {};
+        parsed.categories = { ...SEED_TEMPLATES, ...parsed.categories };
+        initialTemplates = parsed;
+      }
 
       const localH = localStorage.getItem('ashu_scraper_history');
       if (localH) initialHistory = JSON.parse(localH);
@@ -364,6 +430,15 @@ export default function Home() {
     setLeads(initialLeads);
     setAllTemplates(initialTemplates);
     setScraperHistory(initialHistory);
+
+    let initialPremiumHistory = [];
+    try {
+      const localPH = localStorage.getItem('ashu_premium_history');
+      if (localPH) initialPremiumHistory = JSON.parse(localPH);
+    } catch(e) {
+      console.error('Error loading premium history from localStorage:', e);
+    }
+    setPremiumHistory(initialPremiumHistory);
 
     // Pull from cloud MongoDB Atlas
     const syncFromCloud = async () => {
@@ -378,6 +453,8 @@ export default function Home() {
           localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
 
           const templatesData = data.templates || { categories: SEED_TEMPLATES };
+          if (!templatesData.categories) templatesData.categories = {};
+          templatesData.categories = { ...SEED_TEMPLATES, ...templatesData.categories };
           setAllTemplates(templatesData);
           localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
 
@@ -415,21 +492,30 @@ export default function Home() {
       if (message.includes('Inspecting [')) {
         const match = message.match(/Inspecting \[(\d+)\/(\d+)\]/);
         if (match) {
+          const scanned = Number(match[1]);
+          const total = Number(match[2]);
+          scraperStatsRef.current.scanned = scanned;
+          scraperStatsRef.current.total = total;
           setScraperStats((prev) => ({
             ...prev,
-            scanned: Number(match[1]),
-            total: Number(match[2])
+            scanned,
+            total
           }));
         }
       } else if (message.includes('already has a website')) {
+        scraperStatsRef.current.skippedWebsite += 1;
         setScraperStats((prev) => ({ ...prev, skippedWebsite: prev.skippedWebsite + 1 }));
       } else if (message.includes('is not a mobile number')) {
+        scraperStatsRef.current.skippedLandline += 1;
         setScraperStats((prev) => ({ ...prev, skippedLandline: prev.skippedLandline + 1 }));
       } else if (message.includes('already exists in contacts database') || message.includes('Duplicate:')) {
+        scraperStatsRef.current.skippedDuplicate += 1;
         setScraperStats((prev) => ({ ...prev, skippedDuplicate: prev.skippedDuplicate + 1 }));
       } else if (message.includes('has no phone number listed')) {
+        scraperStatsRef.current.noPhone += 1;
         setScraperStats((prev) => ({ ...prev, noPhone: prev.noPhone + 1 }));
       } else if (message.includes('Lead Saved:') || message.includes('Lead Found:') || message.includes('savedCount')) {
+        scraperStatsRef.current.saved += 1;
         setScraperStats((prev) => ({ ...prev, saved: prev.saved + 1 }));
       }
 
@@ -442,6 +528,17 @@ export default function Home() {
       // Prevent duplicates in real time using the updated leadsRef
       const cleanNewPhone = newLead.phone.replace(/[^0-9]/g, '');
       if (leadsRef.current.some((l) => l.phone.replace(/[^0-9]/g, '') === cleanNewPhone)) return;
+
+      // Accumulate unique categories saved during this session
+      if (!scraperStatsRef.current.savedCategories) {
+        scraperStatsRef.current.savedCategories = [];
+      }
+      if (!scraperStatsRef.current.savedCategories.includes(newLead.category)) {
+        scraperStatsRef.current.savedCategories.push(newLead.category);
+      }
+
+      // Accumulate leads for this session to group by location and category on completion
+      sessionLeadsRef.current.push(newLead);
 
       const updated = [newLead, ...leadsRef.current];
       setLeads(updated);
@@ -458,8 +555,8 @@ export default function Home() {
 
   // Sync logs scroll
   useEffect(() => {
-    if (consoleEndRef.current) {
-      consoleEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (consoleBoxRef.current) {
+      consoleBoxRef.current.scrollTop = consoleBoxRef.current.scrollHeight;
     }
   }, [logs]);
 
@@ -494,41 +591,100 @@ export default function Home() {
     } else if (wasScrapingRef.current) {
       wasScrapingRef.current = false;
       
+      const finalStats = scraperStatsRef.current;
+      const sessionLeads = sessionLeadsRef.current || [];
+      
       // Prevent adding empty runs or runs where nothing was even scanned if it's aborted immediately
-      if (scraperStats.total === 0 && scraperStats.scanned === 0) return;
+      if (finalStats.total === 0 && finalStats.scanned === 0) return;
+
+      const newRecords = [];
+      const now = Date.now();
+
+      if (sessionLeads.length > 0) {
+        // Group leads by clean location and category
+        const groups = {};
+        sessionLeads.forEach((lead) => {
+          const loc = cleanLocationName(lead.location);
+          const cat = lead.category || 'general';
+          const key = `${loc}||${cat}`;
+          if (!groups[key]) {
+            groups[key] = {
+              location: loc,
+              category: cat,
+              saved: 0
+            };
+          }
+          groups[key].saved++;
+        });
+
+        const keys = Object.keys(groups);
+        const isSingleGroup = keys.length === 1;
+
+        keys.forEach((key, index) => {
+          const group = groups[key];
+          newRecords.push({
+            id: `${now}_${index}`,
+            category: group.category,
+            location: group.location,
+            timestamp: now,
+            saved: group.saved,
+            total: isSingleGroup ? finalStats.total : group.saved,
+            skippedWebsite: isSingleGroup ? finalStats.skippedWebsite : 0,
+            skippedLandline: isSingleGroup ? finalStats.skippedLandline : 0,
+            skippedDuplicate: isSingleGroup ? finalStats.skippedDuplicate : 0,
+            noPhone: isSingleGroup ? finalStats.noPhone : 0
+          });
+        });
+      } else {
+        // Fallback run if no leads were saved but listings were scanned
+        const finalCategoryText = scrapeCategory === 'all shops' ? 'general' : scrapeCategory;
+        
+        let finalLocationText;
+        if (discoveredMalls.length > 0 && scrapeLocation === 'all_malls') {
+          finalLocationText = cleanLocationName(discoveredMalls[0].name);
+        } else {
+          finalLocationText = cleanLocationName(scrapeLocation);
+        }
+
+        newRecords.push({
+          id: now.toString(),
+          category: finalCategoryText,
+          location: finalLocationText,
+          timestamp: now,
+          saved: finalStats.saved,
+          total: finalStats.total,
+          skippedWebsite: finalStats.skippedWebsite,
+          skippedLandline: finalStats.skippedLandline,
+          skippedDuplicate: finalStats.skippedDuplicate,
+          noPhone: finalStats.noPhone
+        });
+      }
 
       // Check if history already contains a run with exact same category and location within past 1 minute to prevent double recording
-      const isDuplicateRun = scraperHistoryRef.current.some(
-        (run) => 
-          run.category.toLowerCase().trim() === scrapeCategory.toLowerCase().trim() &&
-          run.location.toLowerCase().trim() === scrapeLocation.toLowerCase().trim() &&
-          (Date.now() - run.timestamp) < 60000
-      );
-      if (isDuplicateRun) return;
+      const nonDuplicateRecords = newRecords.filter(run => {
+        return !scraperHistoryRef.current.some(
+          (existing) => 
+            existing.category.toLowerCase().trim() === run.category.toLowerCase().trim() &&
+            existing.location.toLowerCase().trim() === run.location.toLowerCase().trim() &&
+            (Date.now() - existing.timestamp) < 60000
+        );
+      });
 
-      const newRecord = {
-        id: Date.now().toString(),
-        category: scrapeCategory,
-        location: scrapeLocation,
-        timestamp: Date.now(),
-        saved: scraperStats.saved,
-        total: scraperStats.total,
-        skippedWebsite: scraperStats.skippedWebsite,
-        skippedLandline: scraperStats.skippedLandline,
-        skippedDuplicate: scraperStats.skippedDuplicate,
-        noPhone: scraperStats.noPhone
-      };
+      if (nonDuplicateRecords.length === 0) return;
 
-      const updated = [newRecord, ...scraperHistoryRef.current];
+      const updated = [...nonDuplicateRecords, ...scraperHistoryRef.current];
       setScraperHistory(updated);
       localStorage.setItem('ashu_scraper_history', JSON.stringify(updated));
       
-      // Sync history record to MongoDB
-      syncToServer('add_history', { run: newRecord });
+      // Sync history records to MongoDB
+      nonDuplicateRecords.forEach(run => {
+        syncToServer('add_history', { run });
+      });
     }
-  }, [isScraping, scrapeCategory, scrapeLocation, scraperStats]);
+  }, [isScraping, scrapeCategory, scrapeLocation, discoveredMalls]);
 
   const alreadyScrapedRun = useMemo(() => {
+    if (discoveredMalls.length > 0 && scrapeLocation === 'all_malls') return null;
     if (!scrapeCategory || !scrapeLocation) return null;
     const catSearch = scrapeCategory.toLowerCase().trim();
     const locSearch = scrapeLocation.toLowerCase().trim();
@@ -537,16 +693,23 @@ export default function Home() {
         run.category.toLowerCase().trim() === catSearch &&
         run.location.toLowerCase().trim() === locSearch
     );
-  }, [scrapeCategory, scrapeLocation, scraperHistory]);
+  }, [scrapeCategory, scrapeLocation, scraperHistory, discoveredMalls]);
 
   const sortedHistory = useMemo(() => {
     return [...scraperHistory].sort((a, b) => {
-      const catA = a.category.toLowerCase().trim();
-      const catB = b.category.toLowerCase().trim();
+      const locA = (a.location || '').toLowerCase().trim();
+      const locB = (b.location || '').toLowerCase().trim();
+      if (locA !== locB) {
+        return locA.localeCompare(locB);
+      }
+      
+      const catA = (a.category || '').toLowerCase().trim();
+      const catB = (b.category || '').toLowerCase().trim();
       if (catA !== catB) {
         return catA.localeCompare(catB);
       }
-      return b.timestamp - a.timestamp; // newest first inside category
+      
+      return b.timestamp - a.timestamp;
     });
   }, [scraperHistory]);
 
@@ -583,28 +746,134 @@ export default function Home() {
   // ----------------------------------------------------------------------------
   // Scraper Actions
   // ----------------------------------------------------------------------------
+  const handleDiscoverMalls = async () => {
+    if (!isBackendOnline) {
+      alert('Backend scraping engine is offline. Please launch the backend server first.');
+      return;
+    }
+    if (!searchCity.trim()) {
+      alert('Please enter a city name to search for malls.');
+      return;
+    }
+
+    const cleanCity = searchCity.toLowerCase().trim();
+    const isAlreadySearched = premiumHistory.some(h => h.city.toLowerCase().trim() === cleanCity);
+    if (isAlreadySearched) {
+      if (!confirm(`"${searchCity}" is already in your Premium Locations history. Do you want to scan it again?`)) {
+        return;
+      }
+    }
+
+    setIsDiscovering(true);
+    setLogs([]);
+    setLastScanResult(null);
+    setLogs((prev) => [...prev, `[System] Initiating discovery of premium locations in "${searchCity}"...`]);
+
+    try {
+      const res = await fetch(`${API_BASE}/api/scrape/malls`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ city: searchCity })
+      });
+      
+      if (!res.ok) {
+        const err = await res.json();
+        setLogs((prev) => [...prev, `[Error] ${err.error || 'Failed to discover malls.'}`]);
+        setIsDiscovering(false);
+        return;
+      }
+
+      const data = await res.json();
+      if (data.success && data.locations) {
+        const newHistoryItem = {
+          id: 'prem_' + Date.now(),
+          city: searchCity.trim(),
+          timestamp: Date.now(),
+          locations: data.locations
+        };
+        
+        setPremiumHistory((prev) => {
+          const filtered = prev.filter(h => h.city.toLowerCase() !== searchCity.trim().toLowerCase());
+          const updated = [newHistoryItem, ...filtered];
+          localStorage.setItem('ashu_premium_history', JSON.stringify(updated));
+          return updated;
+        });
+
+        setLastScanResult({ 
+          city: searchCity.trim(), 
+          count: data.locations.length
+        });
+
+        setLogs((prev) => [
+          ...prev, 
+          `[System] Discovery complete. Found and saved ${data.locations.length} premium malls & markets in "${searchCity}".`
+        ]);
+      } else {
+        setLogs((prev) => [...prev, `[System] No locations returned.`]);
+      }
+    } catch (err) {
+      setLogs((prev) => [...prev, `[Error] Failed to connect: ${err.message}`]);
+    } finally {
+      setIsDiscovering(false);
+    }
+  };
+
   const handleStartScrape = async () => {
     if (!isBackendOnline) {
       alert('Backend scraping engine is offline. Please launch the backend server first.');
       return;
     }
-    if (!scrapeCategory || !scrapeLocation) {
-      alert('Please enter both a Category and Location to scrape.');
+
+    let targetLocation;
+    if (discoveredMalls.length > 0 && scrapeLocation === 'all_malls') {
+      targetLocation = discoveredMalls.map(m => {
+        const cleanAddress = m.address && m.address !== 'N/A' 
+          ? m.address.split('·')[0].trim() 
+          : '';
+        return cleanAddress ? `${m.name}, ${cleanAddress}` : m.name;
+      });
+    } else {
+      if (!scrapeLocation) {
+        alert('Please enter or select a Target Region Location.');
+        return;
+      }
+      // Check if a specific discovered mall is selected to append its sector/address
+      const matchedMall = discoveredMalls.find(m => m.name === scrapeLocation);
+      if (matchedMall) {
+        const cleanAddress = matchedMall.address && matchedMall.address !== 'N/A'
+          ? matchedMall.address.split('·')[0].trim()
+          : '';
+        targetLocation = cleanAddress ? `${matchedMall.name}, ${cleanAddress}` : matchedMall.name;
+      } else {
+        targetLocation = scrapeLocation;
+      }
+    }
+
+    if (!scrapeCategory) {
+      alert('Please enter a Business Keyword Category.');
       return;
     }
 
     setIsScraping(true);
     setLogs([]);
-    setScraperStats({
+    scraperStatsRef.current = {
       scanned: 0,
       total: 0,
       saved: 0,
       skippedWebsite: 0,
       skippedLandline: 0,
       skippedDuplicate: 0,
-      noPhone: 0
-    });
-    setLogs((prev) => [...prev, `[System] Search query requested: "${scrapeCategory} in ${scrapeLocation}"`]);
+      noPhone: 0,
+      savedCategories: []
+    };
+    setScraperStats(scraperStatsRef.current);
+    sessionLeadsRef.current = [];
+
+    const displayLocation = Array.isArray(targetLocation)
+      ? `${targetLocation.length} malls/markets`
+      : targetLocation;
+
+    setLogs((prev) => [...prev, `[System] Search query requested: "${scrapeCategory} in ${displayLocation}"`]);
 
     try {
       const res = await fetch(`${API_BASE}/api/scrape/start`, {
@@ -612,7 +881,7 @@ export default function Home() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
           category: scrapeCategory, 
-          location: scrapeLocation,
+          location: targetLocation,
           scrollDepth: Number(scrollDepth),
           existingPhones: leads.map(l => l.phone)
         })
@@ -848,7 +1117,19 @@ export default function Home() {
   }, [leads]);
 
   const configCategories = useMemo(() => {
-    const predefined = ['restaurants', 'salons', 'clinics', 'clothing shops', 'electronics shops'];
+    const predefined = [
+      'restaurants', 
+      'salons', 
+      'clinics', 
+      'clothing shops', 
+      'electronics shops',
+      'gyms & fitness',
+      'jewelry shops',
+      'opticians & eyewear',
+      'bakeries & cafes',
+      'furniture & decor',
+      'general'
+    ];
     const custom = allTemplates.categories ? Object.keys(allTemplates.categories) : [];
     return Array.from(new Set([...predefined, ...custom]));
   }, [allTemplates]);
@@ -1103,7 +1384,159 @@ export default function Home() {
               <p className="page-subtitle">Search listings on Google Maps and import leads</p>
             </header>
 
+            {/* Premium Mall & Market Locator Card */}
+            <div className="glass-card" style={{ marginBottom: '24px' }}>
+              <h2 style={{ fontSize: '18px', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Premium Location Scraper</span>
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '20px' }}>
+                Discover shopping malls, plazas, and high-street markets in a city or sector to target high-intent clients.
+              </p>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+                <input
+                  type="text"
+                  value={searchCity}
+                  onChange={(e) => setSearchCity(e.target.value)}
+                  disabled={isScraping || isDiscovering}
+                  placeholder="Enter City or Sector Name (e.g. Gurugram, Sector 15)"
+                  style={{ width: '320px' }}
+                />
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={handleDiscoverMalls}
+                  disabled={isScraping || isDiscovering}
+                  style={{ flexShrink: 0, padding: '10px 16px' }}
+                >
+                  {isDiscovering ? (
+                    <>
+                      {Icons.sync("animate-spin")} Scanning...
+                    </>
+                  ) : (
+                    'Find Malls & Markets'
+                  )}
+                </button>
+
+                {searchCity && premiumHistory.some(h => h.city.toLowerCase().trim() === searchCity.toLowerCase().trim()) && (
+                  <span style={{
+                    color: '#fbbf24',
+                    fontSize: '12px',
+                    marginLeft: '8px'
+                  }}>
+                    Note that &quot;{searchCity}&quot; has already been searched. You can load it directly from the history section below.
+                  </span>
+                )}
+
+                {lastScanResult && (
+                  <div style={{
+                    background: 'rgba(16, 185, 129, 0.04)',
+                    border: '1px solid rgba(16, 185, 129, 0.15)',
+                    borderRadius: '10px',
+                    padding: '10px 14px',
+                    color: 'var(--success)',
+                    fontSize: '12px',
+                    width: 'fit-content',
+                    marginTop: '8px'
+                  }}>
+                    Scanned <strong>{lastScanResult.city}</strong> and saved <strong>{lastScanResult.count} premium malls/markets</strong> to the list below.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Premium Locations History Card */}
+            <div className="glass-card" style={{ marginBottom: '24px' }}>
+              <h2 style={{ fontSize: '18px', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Premium Locations</span>
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '20px' }}>
+                History of all premium locations searched. Select and load a location's malls and markets into the Business Scraper below.
+              </p>
+
+              {premiumHistory.length === 0 ? (
+                <div style={{ padding: '16px', color: 'var(--text-muted)', fontSize: '13px', textAlign: 'center', background: 'rgba(255, 255, 255, 0.015)', border: '1px solid var(--border-color)', borderRadius: '10px' }}>
+                  No locations searched yet. Enter a city name above to discover local premium markets and malls!
+                </div>
+              ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', maxHeight: '250px', overflowY: 'auto' }}>
+                  {premiumHistory.map(item => (
+                    <div key={item.id} style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
+                      background: 'rgba(255, 255, 255, 0.015)',
+                      border: loadedPremiumCity === item.city ? '1px solid var(--success)' : '1px solid var(--border-color)',
+                      borderRadius: '10px',
+                      padding: '12px 16px'
+                    }}>
+                      <div style={{ flex: 1, marginRight: '16px' }}>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <strong style={{ fontSize: '14px', color: 'var(--text-primary)' }}>{item.city}</strong>
+                          {loadedPremiumCity === item.city && (
+                            <span style={{
+                              background: 'rgba(16, 185, 129, 0.15)',
+                              color: 'var(--success)',
+                              fontSize: '10px',
+                              padding: '2px 6px',
+                              borderRadius: '4px',
+                              fontWeight: '600'
+                            }}>
+                              Loaded
+                            </span>
+                          )}
+                        </div>
+                        <div style={{ fontSize: '12px', color: 'var(--text-muted)', marginTop: '2px' }}>
+                          {item.locations.length} malls & markets · Scanned on {new Date(item.timestamp).toLocaleDateString()}
+                        </div>
+                        <div style={{
+                          fontSize: '11px',
+                          color: 'var(--text-secondary)',
+                          marginTop: '4px',
+                          maxWidth: '450px',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          {item.locations.map(m => m.name).join(', ')}
+                        </div>
+                      </div>
+                      <div style={{ display: 'flex', gap: '8px', flexShrink: 0 }}>
+                        <button
+                          type="button"
+                          className="btn"
+                          onClick={() => {
+                            setDiscoveredMalls(item.locations);
+                            setScrapeLocation(item.locations.length > 0 ? item.locations[0].name : '');
+                            setLoadedPremiumCity(item.city);
+                          }}
+                          style={{
+                            padding: '6px 12px',
+                            fontSize: '11px',
+                            borderRadius: '6px',
+                            background: loadedPremiumCity === item.city ? 'rgba(16, 185, 129, 0.2)' : undefined,
+                            borderColor: loadedPremiumCity === item.city ? 'var(--success)' : undefined,
+                            color: loadedPremiumCity === item.city ? 'var(--success)' : undefined
+                          }}
+                        >
+                          {loadedPremiumCity === item.city ? 'Selected' : 'Select & Load'}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Business Scraper Card */}
             <div className="glass-card">
+              <h2 style={{ fontSize: '18px', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span>Business Scraper</span>
+              </h2>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '20px' }}>
+                Configure parameters and extract business details to build your contact list.
+              </p>
+
               <div className="form-row">
                 <div className="form-group">
                   <label htmlFor="category">Business Keyword Category</label>
@@ -1114,22 +1547,50 @@ export default function Home() {
                     disabled={isScraping}
                     style={{ textTransform: 'capitalize' }}
                   >
+                    <option value="all shops">All Shops (Auto-Categorize)</option>
                     {configCategories.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
                   </select>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group" style={{ flex: 2 }}>
                   <label htmlFor="location">Target Region Location</label>
-                  <input
-                    type="text"
-                    id="location"
-                    value={scrapeLocation}
-                    onChange={(e) => setScrapeLocation(e.target.value)}
-                    disabled={isScraping}
-                    placeholder="e.g. Sector 51 Gurugram"
-                  />
+                  {discoveredMalls.length > 0 ? (
+                    <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                      <select
+                        id="location"
+                        value={scrapeLocation}
+                        onChange={(e) => {
+                          if (e.target.value === 'custom_location') {
+                            setDiscoveredMalls([]);
+                            setScrapeLocation('');
+                            setLoadedPremiumCity('');
+                          } else {
+                            setScrapeLocation(e.target.value);
+                          }
+                        }}
+                        disabled={isScraping}
+                        style={{ width: '100%' }}
+                      >
+                        {discoveredMalls.map((mall) => (
+                          <option key={mall.name} value={mall.name}>
+                            {mall.name} ({mall.address.split('·')[0].trim()})
+                          </option>
+                        ))}
+                        <option value="custom_location">-- Switch to Custom Input Location --</option>
+                      </select>
+                    </div>
+                  ) : (
+                    <input
+                      type="text"
+                      id="location"
+                      value={scrapeLocation}
+                      onChange={(e) => setScrapeLocation(e.target.value)}
+                      disabled={isScraping}
+                      placeholder="e.g. Sector 51 Gurugram"
+                    />
+                  )}
                 </div>
               </div>
 
@@ -1243,11 +1704,10 @@ export default function Home() {
               {logs.length > 0 && (
                 <div style={{ marginTop: '24px' }}>
                   <h3 style={{ fontSize: '15px' }}>Live Crawler Socket Stream Logs</h3>
-                  <div className="console-box">
+                  <div className="console-box" ref={consoleBoxRef}>
                     {logs.map((log, index) => (
                       <div key={index}>{log}</div>
                     ))}
-                    <div ref={consoleEndRef} />
                   </div>
                 </div>
               )}

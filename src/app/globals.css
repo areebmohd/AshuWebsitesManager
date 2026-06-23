@@ -475,7 +475,7 @@ label {
   letter-spacing: 0.05em;
 }
 
-input, select, textarea {
+input, textarea {
   background: rgba(15, 23, 42, 0.4);
   border: 1px solid var(--border-color);
   border-radius: 12px;
@@ -487,10 +487,34 @@ input, select, textarea {
   width: 100%;
 }
 
+select {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 12px 40px 12px 16px;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 14px;
+  transition: all 0.2s ease;
+  width: 100%;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='2.5'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 16px;
+  cursor: pointer;
+}
+
 input:focus, select:focus, textarea:focus {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+select option {
+  background-color: #0b0f19;
+  color: #f8fafc;
 }
 
 textarea {
@@ -792,6 +816,8 @@ tr:hover td {
   padding: 4px 8px;
   border-radius: 6px;
   color: var(--text-secondary);
+  display: inline-block;
+  white-space: nowrap;
 }
 
 /* Badge Styled Select for Inline status changes */
@@ -805,14 +831,21 @@ tr:hover td {
 .badge-select {
   border: 1px solid transparent;
   border-radius: 9999px;
-  padding: 4px 8px;
+  padding: 4px 18px 4px 8px !important;
   font-size: 11px;
   font-weight: 700;
-  width: 95px;
+  width: 85px;
   cursor: pointer;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  text-align: center;
+  text-align: left;
+  
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8' stroke-width='3'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 6px center !important;
+  background-size: 8px !important;
 }
 
 .badge-select option {
@@ -858,9 +891,11 @@ tr:hover td {
 .badge-select:disabled {
   opacity: 0.85;
   cursor: not-allowed;
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--text-secondary);
-  border-color: var(--border-color);
+  background-image: none !important;
+  padding: 4px 6px !important;
+  width: 85px;
+  text-align: center;
+  text-align-last: center;
 }
 
 .badge-select.won:disabled {
