@@ -400,7 +400,6 @@ a:hover {
 .chart-bar-fill.sent { background: var(--accent-primary); }
 .chart-bar-fill.replied { background: var(--warning); }
 .chart-bar-fill.won { background: var(--success); }
-.chart-bar-fill.failed { background: var(--error); }
 .chart-bar-fill.lost { background: #f87171; }
 
 /* Quick Guide block styling */
@@ -866,12 +865,6 @@ tr:hover td {
   border-color: rgba(99, 102, 241, 0.25);
 }
 
-.badge-select.failed {
-  background: var(--error-glow);
-  color: #f87171;
-  border-color: rgba(239, 68, 68, 0.25);
-}
-
 .badge-select.replied {
   background: var(--success-glow);
   color: #34d399;
@@ -1207,7 +1200,6 @@ tr:hover td {
 }
 
 .badge-pill.sent { background: var(--accent-glow); color: #818cf8; }
-.badge-pill.failed { background: var(--error-glow); color: #f87171; }
 .badge-pill.replied { background: var(--success-glow); color: #34d399; }
 .badge-pill.won { background: var(--success); color: white; }
 .badge-pill.lost { background: var(--error); color: white; }

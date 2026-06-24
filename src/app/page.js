@@ -259,7 +259,6 @@ export default function Home() {
   const [wizardIndex, setWizardIndex] = useState(0);
   const [wizardMessageType, setWizardMessageType] = useState('intro');
   const [wizardCustomText, setWizardCustomText] = useState('');
-  const [isMessageOpened, setIsMessageOpened] = useState(false);
 
   // Server Socket Status
   const [isBackendOnline, setIsBackendOnline] = useState(false);
@@ -579,7 +578,6 @@ export default function Home() {
       const lead = wizardLeads[wizardIndex];
       const message = getCompiledMessage(lead, wizardMessageType);
       setWizardCustomText(message || '');
-      setIsMessageOpened(false);
     }
   }, [wizardIndex, wizardLeads, isWizardOpen]);
 
@@ -721,7 +719,7 @@ export default function Home() {
     const updated = leads.map((lead) => {
       if (lead.id === id) {
         const copy = { ...lead, status, updatedAt: new Date().toISOString() };
-        if (status === 'Sent' || status === 'Failed') {
+        if (status === 'Sent') {
           copy.lastSentDate = new Date().toISOString();
         }
         if (notes !== undefined) {
@@ -1060,16 +1058,16 @@ export default function Home() {
     }
 
     window.open(waUrl, '_blank');
-    setIsMessageOpened(true);
+    
+    // Automatically mark as Sent and advance
+    handleWizardSubmitResult('Sent');
   };
 
   const handleWizardSubmitResult = (status) => {
     const lead = wizardLeads[wizardIndex];
     if (!lead) return;
 
-    const notesMsg = status === 'Sent' 
-      ? `${wizardMessageType === 'intro' ? 'Intro' : 'Followup'} sent manually via Guided Campaign`
-      : 'WhatsApp number lookup failed or invalid JID';
+    const notesMsg = `${wizardMessageType === 'intro' ? 'Intro' : 'Followup'} sent manually via Guided Campaign`;
 
     handleUpdateLeadStatus(lead.id, status, notesMsg);
 
@@ -1106,7 +1104,6 @@ export default function Home() {
       won,
       lost,
       pending: leads.filter(l => l.status === 'Pending').length,
-      failed: leads.filter(l => l.status === 'Failed').length,
       conversionRate: total > 0 ? ((won / total) * 100).toFixed(1) : '0'
     };
   }, [leads]);
@@ -1154,7 +1151,7 @@ export default function Home() {
 
   const recentDispatches = useMemo(() => {
     return leads
-      .filter((l) => ['Sent', 'Failed'].includes(l.status) && l.lastSentDate)
+      .filter((l) => ['Sent'].includes(l.status) && l.lastSentDate)
       .sort((a, b) => new Date(b.lastSentDate) - new Date(a.lastSentDate))
       .slice(0, 4);
   }, [leads]);
@@ -1295,10 +1292,6 @@ export default function Home() {
                 <span className="stat-label">Outreach Sent</span>
                 <span className="stat-value">{stats.sent}</span>
               </div>
-              <div className="stat-card error">
-                <span className="stat-label">Failed Contacts</span>
-                <span className="stat-value text-error">{stats.failed}</span>
-              </div>
               <div className="stat-card success">
                 <span className="stat-label">Leads Won</span>
                 <span className="stat-value text-success">{stats.won}</span>
@@ -1330,12 +1323,6 @@ export default function Home() {
                     <span className="chart-bar-label">Sent ({stats.sent - stats.won - stats.lost})</span>
                     <div className="chart-bar-wrapper">
                       <div className="chart-bar-fill sent" style={{ width: `${stats.total > 0 ? ((stats.sent - stats.won - stats.lost) / stats.total) * 100 : 0}%` }} />
-                    </div>
-                  </div>
-                  <div className="chart-bar-row">
-                    <span className="chart-bar-label">Failed ({stats.failed})</span>
-                    <div className="chart-bar-wrapper">
-                      <div className="chart-bar-fill failed" style={{ width: `${stats.total > 0 ? (stats.failed / stats.total) * 100 : 0}%` }} />
                     </div>
                   </div>
                   <div className="chart-bar-row">
@@ -1798,7 +1785,6 @@ export default function Home() {
                       <option value="all">All</option>
                       <option value="Pending">Pending</option>
                       <option value="Sent">Sent</option>
-                      <option value="Failed">Failed</option>
                       <option value="Won">Won</option>
                       <option value="Lost">Lost</option>
                     </select>
@@ -1887,7 +1873,6 @@ export default function Home() {
                               >
                                 <option value="Pending">Pending</option>
                                 <option value="Sent">Sent</option>
-                                <option value="Failed">Failed</option>
                                 <option value="Won">Won</option>
                                 <option value="Lost">Lost</option>
                               </select>
@@ -2272,44 +2257,20 @@ export default function Home() {
                   Terminate Run
                 </button>
 
-                {!isMessageOpened ? (
-                  <>
-                    <button
-                      className="btn btn-secondary"
-                      onClick={handleWizardSkip}
-                      style={{ marginLeft: 'auto' }}
-                    >
-                      Skip Contact
-                    </button>
+                <button
+                  className="btn btn-secondary"
+                  onClick={handleWizardSkip}
+                  style={{ marginLeft: 'auto' }}
+                >
+                  Skip Contact
+                </button>
 
-                    <button
-                      className="btn"
-                      onClick={handleTriggerWhatsApp}
-                    >
-                      {Icons.phone()} Send Message
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <span className="dispatch-verify-prompt" style={{ marginLeft: 'auto' }}>
-                      Did the message send successfully?
-                    </span>
-                    <button
-                      className="btn btn-danger-outline"
-                      onClick={() => handleWizardSubmitResult('Failed')}
-                    >
-                      {Icons.x()} Failed
-                    </button>
-
-                    <button
-                      className="btn"
-                      onClick={() => handleWizardSubmitResult('Sent')}
-                      style={{ background: 'var(--success)', color: '#fff' }}
-                    >
-                      {Icons.check()} Marked Sent
-                    </button>
-                  </>
-                )}
+                <button
+                  className="btn"
+                  onClick={handleTriggerWhatsApp}
+                >
+                  {Icons.phone()} Send Message
+                </button>
               </div>
 
             </div>
