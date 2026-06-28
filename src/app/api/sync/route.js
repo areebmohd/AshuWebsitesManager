@@ -2,7 +2,7 @@ import clientPromise from '@/lib/mongodb';
 
 export const dynamic = 'force-dynamic';
 
-// GET: Fetch all CRM data (leads, templates, scraper history)
+// GET: Fetch all CRM data (leads, templates, scraper history, premium locations)
 export async function GET() {
   try {
     const client = await clientPromise;
@@ -12,17 +12,19 @@ export async function GET() {
     const leads = await db.collection('leads').find({}).toArray();
     const history = await db.collection('history').find({}).toArray();
     const templatesDoc = await db.collection('templates').findOne({ _id: 'global_templates' });
+    const premiumHistory = await db.collection('premium_history').find({}).toArray();
 
     const templates = templatesDoc ? templatesDoc.data : null;
 
     // Check if the database has ever been initialized with data
-    const isInitialized = leads.length > 0 || templates !== null || history.length > 0;
+    const isInitialized = leads.length > 0 || templates !== null || history.length > 0 || premiumHistory.length > 0;
 
     return Response.json({
       isInitialized,
       leads,
       templates,
-      history
+      history,
+      premiumHistory
     });
   } catch (error) {
     console.error('Error in GET /api/sync:', error);
@@ -125,6 +127,46 @@ export async function POST(request) {
 
       case 'clear_history': {
         await db.collection('history').deleteMany({});
+        break;
+      }
+
+      case 'add_premium_history': {
+        const { run } = data;
+        if (!run || !run.id) {
+          return Response.json({ error: 'Premium history run data with ID is required' }, { status: 400 });
+        }
+        const updateData = { ...run };
+        delete updateData._id;
+
+        await db.collection('premium_history').updateOne(
+          { id: run.id },
+          { $set: updateData },
+          { upsert: true }
+        );
+        break;
+      }
+
+      case 'bulk_add_premium_history': {
+        const { history } = data;
+        if (history && history.length > 0) {
+          const operations = history.map(h => {
+            const updateData = { ...h };
+            delete updateData._id;
+            return {
+              updateOne: {
+                filter: { id: h.id },
+                update: { $set: updateData },
+                upsert: true
+              }
+            };
+          });
+          await db.collection('premium_history').bulkWrite(operations);
+        }
+        break;
+      }
+
+      case 'clear_premium_history': {
+        await db.collection('premium_history').deleteMany({});
         break;
       }
 

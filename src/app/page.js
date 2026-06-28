@@ -303,6 +303,31 @@ export default function Home() {
     }
   };
 
+  const mergeAndSyncPremiumHistory = async (cloudPremium) => {
+    let localPremium = [];
+    try {
+      const localPH = localStorage.getItem('ashu_premium_history');
+      if (localPH) localPremium = JSON.parse(localPH);
+    } catch (e) {
+      console.error('Error loading local premium history for merging:', e);
+    }
+
+    const mergedPremium = [...cloudPremium];
+    const cloudIds = new Set(cloudPremium.map(item => item.id));
+    const newLocalItems = localPremium.filter(item => !cloudIds.has(item.id));
+
+    if (newLocalItems.length > 0) {
+      mergedPremium.push(...newLocalItems);
+      mergedPremium.sort((a, b) => b.timestamp - a.timestamp);
+      setPremiumHistory(mergedPremium);
+      localStorage.setItem('ashu_premium_history', JSON.stringify(mergedPremium));
+      await syncToServer('bulk_add_premium_history', { history: newLocalItems });
+    } else {
+      setPremiumHistory(cloudPremium);
+      localStorage.setItem('ashu_premium_history', JSON.stringify(cloudPremium));
+    }
+  };
+
   const performMigration = async () => {
     if (isMigratingRef.current) return;
     isMigratingRef.current = true;
@@ -344,20 +369,31 @@ export default function Home() {
       console.error('Error reading local history for migration:', e);
     }
 
+    let currentPremiumHistory = [];
+    try {
+      const local = localStorage.getItem('ashu_premium_history');
+      if (local) currentPremiumHistory = JSON.parse(local);
+    } catch (e) {
+      console.error('Error reading local premium history for migration:', e);
+    }
+
     setLeads(currentLeads);
     setAllTemplates(currentTemplates);
     setScraperHistory(currentHistory);
+    setPremiumHistory(currentPremiumHistory);
 
     localStorage.setItem('ashu_leads', JSON.stringify(currentLeads));
     localStorage.setItem('ashu_templates', JSON.stringify(currentTemplates));
     localStorage.setItem('ashu_scraper_history', JSON.stringify(currentHistory));
+    localStorage.setItem('ashu_premium_history', JSON.stringify(currentPremiumHistory));
 
     try {
       const successLeads = await syncToServer('bulk_add_leads', { leads: currentLeads });
       const successTemplates = await syncToServer('update_templates', { templates: currentTemplates });
       const successHistory = await syncToServer('bulk_add_history', { history: currentHistory });
+      const successPremium = await syncToServer('bulk_add_premium_history', { history: currentPremiumHistory });
 
-      if (successLeads && successTemplates && successHistory) {
+      if (successLeads && successTemplates && successHistory && successPremium) {
         setCloudSyncStatus('connected');
       } else {
         setCloudSyncStatus('error');
@@ -388,6 +424,8 @@ export default function Home() {
 
         setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
         localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+
+        await mergeAndSyncPremiumHistory(data.premiumHistory || []);
 
         setCloudSyncStatus('connected');
       } else {
@@ -459,6 +497,8 @@ export default function Home() {
 
           setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
           localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+
+          await mergeAndSyncPremiumHistory(data.premiumHistory || []);
 
           setCloudSyncStatus('connected');
         } else {
@@ -797,6 +837,9 @@ export default function Home() {
           return updated;
         });
 
+        // Sync to cloud database
+        syncToServer('add_premium_history', { run: newHistoryItem });
+
         setLastScanResult({ 
           city: searchCity.trim(), 
           count: data.locations.length
@@ -1089,12 +1132,25 @@ export default function Home() {
     }
   };
 
+  const handleTabClick = (tabName) => {
+    setActiveTab(tabName);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const appContainer = document.querySelector('.app-container');
+    if (appContainer) {
+      appContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    const mainContent = document.querySelector('.main-content');
+    if (mainContent) {
+      mainContent.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   // ----------------------------------------------------------------------------
   // Dashboard & Metrics State (Derived Computations)
   // ----------------------------------------------------------------------------
   const stats = useMemo(() => {
     const total = leads.length;
-    const sent = leads.filter((l) => ['Sent', 'Won', 'Lost'].includes(l.status)).length;
+    const sent = leads.filter((l) => l.status === 'Sent').length;
     const won = leads.filter((l) => l.status === 'Won').length;
     const lost = leads.filter((l) => l.status === 'Lost').length;
     
@@ -1320,9 +1376,9 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="chart-bar-row">
-                    <span className="chart-bar-label">Sent ({stats.sent - stats.won - stats.lost})</span>
+                    <span className="chart-bar-label">Sent ({stats.sent})</span>
                     <div className="chart-bar-wrapper">
-                      <div className="chart-bar-fill sent" style={{ width: `${stats.total > 0 ? ((stats.sent - stats.won - stats.lost) / stats.total) * 100 : 0}%` }} />
+                      <div className="chart-bar-fill sent" style={{ width: `${stats.total > 0 ? (stats.sent / stats.total) * 100 : 0}%` }} />
                     </div>
                   </div>
                   <div className="chart-bar-row">
@@ -1438,7 +1494,7 @@ export default function Home() {
                 <span>Premium Locations</span>
               </h2>
               <p style={{ color: 'var(--text-secondary)', fontSize: '13px', marginBottom: '20px' }}>
-                History of all premium locations searched. Select and load a location's malls and markets into the Business Scraper below.
+                History of all premium locations searched. Select and load a location&apos;s malls and markets into the Business Scraper below.
               </p>
 
               {premiumHistory.length === 0 ? (
@@ -2282,21 +2338,21 @@ export default function Home() {
       <nav className="bottom-nav">
         <div 
           className={`bottom-nav-item ${activeTab === 'dashboard' ? 'active' : ''}`}
-          onClick={() => setActiveTab('dashboard')}
+          onClick={() => handleTabClick('dashboard')}
         >
           {Icons.dashboard()}
           <span>Dashboard</span>
         </div>
         <div 
           className={`bottom-nav-item ${activeTab === 'contacts' ? 'active' : ''}`}
-          onClick={() => setActiveTab('contacts')}
+          onClick={() => handleTabClick('contacts')}
         >
           {Icons.contacts()}
           <span>CRM</span>
         </div>
         <div 
           className={`bottom-nav-item ${activeTab === 'whatsapp' ? 'active' : ''}`}
-          onClick={() => setActiveTab('whatsapp')}
+          onClick={() => handleTabClick('whatsapp')}
         >
           {Icons.campaigns()}
           <span>Outreach</span>
