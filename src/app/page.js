@@ -61,7 +61,7 @@ Since everyone searches online now, having a website is crucial to establish tru
 
 We build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀
 
-Would you like me to send over a few demo previews to show you what we can do?`;
+Please open the following link.`;
 
 const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 👋
 
@@ -71,52 +71,62 @@ Since most customers search online first, having a modern website is crucial to 
 
 Our team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀
 
-Would you like us to share a few design previews with you to show you what we can do?`;
+Please open the following link.`;
 
 const SEED_TEMPLATES = {
   "general": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your business profile on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.\n\nWe build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.\n\nOur team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nWould you like us to share a few design previews with you to show you what we can do?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your business profile on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.\n\nWe build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link.",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.\n\nOur team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nPlease open the following link."
   },
   "restaurants": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders and avoid paying heavy commissions to Swiggy/Zomato.\n\nWe build custom ordering/menu websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a digital menu and ordering platform is crucial to attract local foodies and capture direct sales with zero middleman commission.\n\nWe can launch your premium custom restaurant website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few demo designs to see how it looks?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders and avoid paying heavy commissions to Swiggy/Zomato.\n\nWe build custom ordering/menu websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a digital menu and ordering platform is crucial to attract local foodies and capture direct sales with zero middleman commission.\n\nWe can launch your premium custom restaurant website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://restodemo.xyz"
   },
   "clinics": {
-    "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}.\n\nHaving your own professional website is essential to manage appointments smoothly, establish patient trust, and avoid paying booking platform commissions.\n\nWe build custom clinic booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hello {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nGive your patients a seamless way to book appointments while keeping your clinic reception organized and completely under your own brand.\n\nWe can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few layout previews to see how it works?"
+    "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}.\n\nHaving your own professional website is essential to manage appointments smoothly, establish patient trust, and avoid paying booking platform commissions.\n\nWe build custom clinic booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hello {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nGive your patients a seamless way to book appointments while keeping your clinic reception organized and completely under your own brand.\n\nWe can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://clinicdemo.xyz"
   },
   "salons": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}.\n\nHaving a website with direct appointment booking is crucial to fill your calendar, showcase hair/beauty styles, and build client trust without third-party fees.\n\nWe build premium salon booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a professional online booking portal is essential to attract new clients and manage schedules easily with zero platform fees.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nWould you like to take a look at a few demo scheduling pages we designed?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}.\n\nHaving a website with direct appointment booking is crucial to fill your calendar, showcase hair/beauty styles, and build client trust without third-party fees.\n\nWe build premium salon booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a professional online booking portal is essential to attract new clients and manage schedules easily with zero platform fees.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://salondemo.xyz"
   },
   "clothing shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing shop listing on Google Maps in {{location}}.\n\nHaving a digital catalog website is essential today to showcase your collections, attract local walk-ins, and secure direct sales without paying online marketplace commissions.\n\nWe build custom fashion catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a modern digital showroom is crucial for clothing boutiques to display new arrivals and drive foot traffic directly.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nWould you like us to share a few design previews to show you how it looks?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing shop listing on Google Maps in {{location}}.\n\nHaving a digital catalog website is essential today to showcase your collections, attract local walk-ins, and secure direct sales without paying online marketplace commissions.\n\nWe build custom fashion catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a modern digital showroom is crucial for clothing boutiques to display new arrivals and drive foot traffic directly.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://clothingdemo.xyz"
   },
   "electronics shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}.\n\nHaving a digital showroom website is essential today to display specifications, handle quotation requests, and build client trust without third-party marketplace fees.\n\nWe build custom electronics catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a web catalog is crucial for electronics shops to showcase Spec Sheets, handle queries, and capture local sales directly.\n\nWe can launch your product catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few demo layouts to see how it works?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}.\n\nHaving a digital showroom website is essential today to display specifications, handle quotation requests, and build client trust without third-party marketplace fees.\n\nWe build custom electronics catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a web catalog is crucial for electronics shops to showcase Spec Sheets, handle queries, and capture local sales directly.\n\nWe can launch your product catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://electronicsdemo.xyz"
   },
   "gyms & fitness": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your gym/fitness center profile on Google Maps in {{location}}.\n\nHaving a premium website is highly important nowadays to showcase your gym equipment, training programs, class schedules, and to get direct membership signups without any middleman platforms.\n\nWe build beautiful custom fitness websites and can design a professional site for your gym for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online schedule and booking portal is crucial for gyms to attract new members, build trust, and showcase client transformations directly.\n\nOur team designs custom, fast-loading fitness websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nWould you be open to checking out a few design previews to see how your gym's site could look?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your gym/fitness center profile on Google Maps in {{location}}.\n\nHaving a premium website is highly important nowadays to showcase your gym equipment, training programs, class schedules, and to get direct membership signups without any middleman platforms.\n\nWe build beautiful custom fitness websites and can design a professional site for your gym for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online schedule and booking portal is crucial for gyms to attract new members, build trust, and showcase client transformations directly.\n\nOur team designs custom, fast-loading fitness websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://gymdemo.xyz"
   },
   "jewelry shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your jewelry store profile on Google Maps in {{location}}.\n\nA premium digital catalog website is essential to showcase your beautiful collections, build brand trust, and attract high-end buyers without paying third-party commissions.\n\nWe design premium jewelry catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an elegant website is crucial to establish trust, show your latest jewelry designs, and secure direct clients directly.\n\nWe build gorgeous custom product showcase websites and can launch yours for just ₹999 within 2 days! 🚀\n\nWould you like to take a look at a few demo previews we designed for jewelry brands?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your jewelry store profile on Google Maps in {{location}}.\n\nA premium digital catalog website is essential to showcase your beautiful collections, build brand trust, and attract high-end buyers without paying third-party commissions.\n\nWe design premium jewelry catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an elegant website is crucial to establish trust, show your latest jewelry designs, and secure direct clients directly.\n\nWe build gorgeous custom product showcase websites and can launch yours for just ₹999 within 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://jewelrydemo.xyz"
   },
   "opticians & eyewear": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your optician/eyewear store listing on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to display your frames, book eye tests, and build trust in your optical store without relying on third-party aggregators.\n\nWe design custom eyewear catalog websites and can launch yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nA digital frames showroom and booking system is crucial for modern optical shops to attract local clients and increase sales.\n\nWe can build your premium custom optician website in just 2 days for only ₹999! 🚀\n\nWould you like us to share a few design previews with you to show you how it looks?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your optician/eyewear store listing on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to display your frames, book eye tests, and build trust in your optical store without relying on third-party aggregators.\n\nWe design custom eyewear catalog websites and can launch yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nA digital frames showroom and booking system is crucial for modern optical shops to attract local clients and increase sales.\n\nWe can build your premium custom optician website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://eyeweardemo.xyz"
   },
   "bakeries & cafes": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your bakery/cafe profile on Google Maps in {{location}}.\n\nHaving your own website is essential to showcase your fresh menu, accept direct cake orders, and avoid heavy third-party commissions from delivery apps.\n\nWe build premium custom cafe/bakery websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search for menus online first, having a modern website is crucial to build trust and get direct bakery orders with zero middleman fees.\n\nWe can launch your premium cafe menu and catalog website in just 2 days for only ₹999! 🚀\n\nWould you be open to checking out a few design previews to see how it looks?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your bakery/cafe profile on Google Maps in {{location}}.\n\nHaving your own website is essential to showcase your fresh menu, accept direct cake orders, and avoid heavy third-party commissions from delivery apps.\n\nWe build premium custom cafe/bakery websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search for menus online first, having a modern website is crucial to build trust and get direct bakery orders with zero middleman fees.\n\nWe can launch your premium cafe menu and catalog website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://bakerydemo.xyz"
   },
   "furniture & decor": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your furniture/decor showroom listing on Google Maps in {{location}}.\n\nA professional digital showroom website is crucial to showcase your furniture designs, get direct inquiries, and establish trust with local buyers without middleman platforms.\n\nWe design premium catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nWould you like me to send over a few demo previews to show you what we can do?",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online catalog is crucial for home decor and furniture stores to showcase collections, attract walk-ins, and build trust directly.\n\nWe can launch your premium custom furniture website in just 2 days for only ₹999! 🚀\n\nWould you like to take a look at a few demo previews we designed?"
+    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your furniture/decor showroom listing on Google Maps in {{location}}.\n\nA professional digital showroom website is crucial to showcase your furniture designs, get direct inquiries, and establish trust with local buyers without middleman platforms.\n\nWe design premium catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online catalog is crucial for home decor and furniture stores to showcase collections, attract walk-ins, and build trust directly.\n\nWe can launch your premium custom furniture website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "demoLink": "https://furnituredemo.xyz"
   }
 };
 
@@ -183,6 +193,49 @@ const SEED_SCRAPER_HISTORY = [
   }
 ];
 
+const mergeTemplatesWithSeed = (loadedCategories) => {
+  const merged = {};
+  const loaded = loadedCategories || {};
+  for (const cat in SEED_TEMPLATES) {
+    merged[cat] = {
+      ...SEED_TEMPLATES[cat],
+      ...(loaded[cat] || {})
+    };
+  }
+  for (const cat in loaded) {
+    if (!merged[cat]) {
+      merged[cat] = loaded[cat];
+    }
+  }
+
+  // Programmatically upgrade templates of every category except general:
+  const newText = "Please open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}";
+  
+  const endRegex = /(?:If\s+you\s+are\s+interested|If\s+you'd\s+be\s+interested|Would\s+you\s+like|Would\s+you\s+be\s+open|Please\s+open\s+the\s+following\s+link|If\s+you'd\s+be\s+interested\s+to\s+see|Let\s+us\s+know\s+if\s+you'd\s+like)[\s\S]*$/i;
+
+  for (const cat in merged) {
+    const item = merged[cat];
+    if (cat === 'general') {
+      const generalReplacement = "Please open the following link.";
+      if (item.introTemplate) {
+        item.introTemplate = item.introTemplate.replace(endRegex, generalReplacement);
+      }
+      if (item.followupTemplate) {
+        item.followupTemplate = item.followupTemplate.replace(endRegex, generalReplacement);
+      }
+    } else {
+      if (item.introTemplate) {
+        item.introTemplate = item.introTemplate.replace(endRegex, newText);
+      }
+      if (item.followupTemplate) {
+        item.followupTemplate = item.followupTemplate.replace(endRegex, newText);
+      }
+    }
+  }
+
+  return merged;
+};
+
 const cleanLocationName = (loc) => {
   if (!loc) return '';
   return loc.split(',')[0].trim();
@@ -196,7 +249,7 @@ export default function Home() {
   // Scraper Tab State
   const [scrapeCategory, setScrapeCategory] = useState('restaurants');
   const [scrapeLocation, setScrapeLocation] = useState('Sector 51 Gurugram');
-  const [scrollDepth, setScrollDepth] = useState('15');
+  const [scrollDepth, setScrollDepth] = useState('35');
   const [isScraping, setIsScraping] = useState(false);
   const [logs, setLogs] = useState([]);
   const [scraperStats, setScraperStats] = useState({
@@ -248,6 +301,8 @@ export default function Home() {
   const [templateCategory, setTemplateCategory] = useState('');
   const [templateText, setTemplateText] = useState(DEFAULT_INTRO);
   const [followupText, setFollowupText] = useState(DEFAULT_FOLLOWUP);
+  const [templateDemoLink, setTemplateDemoLink] = useState('');
+  const [inlineDemoLink, setInlineDemoLink] = useState('');
 
   // WhatsApp Tab Campaign Queue Filter
   const [campaignCategory, setCampaignCategory] = useState('all');
@@ -353,8 +408,7 @@ export default function Home() {
       const local = localStorage.getItem('ashu_templates');
       if (local) {
         const parsed = JSON.parse(local);
-        if (!parsed.categories) parsed.categories = {};
-        parsed.categories = { ...SEED_TEMPLATES, ...parsed.categories };
+        parsed.categories = mergeTemplatesWithSeed(parsed.categories);
         currentTemplates = parsed;
       }
     } catch (e) {
@@ -417,10 +471,10 @@ export default function Home() {
         localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
 
         const templatesData = data.templates || { categories: SEED_TEMPLATES };
-        if (!templatesData.categories) templatesData.categories = {};
-        templatesData.categories = { ...SEED_TEMPLATES, ...templatesData.categories };
+        templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
         setAllTemplates(templatesData);
         localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
+        syncToServer('update_templates', { templates: templatesData });
 
         setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
         localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
@@ -453,8 +507,7 @@ export default function Home() {
       const localT = localStorage.getItem('ashu_templates');
       if (localT) {
         const parsed = JSON.parse(localT);
-        if (!parsed.categories) parsed.categories = {};
-        parsed.categories = { ...SEED_TEMPLATES, ...parsed.categories };
+        parsed.categories = mergeTemplatesWithSeed(parsed.categories);
         initialTemplates = parsed;
       }
 
@@ -490,10 +543,10 @@ export default function Home() {
           localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
 
           const templatesData = data.templates || { categories: SEED_TEMPLATES };
-          if (!templatesData.categories) templatesData.categories = {};
-          templatesData.categories = { ...SEED_TEMPLATES, ...templatesData.categories };
+          templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
           setAllTemplates(templatesData);
           localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
+          syncToServer('update_templates', { templates: templatesData });
 
           setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
           localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
@@ -639,40 +692,62 @@ export default function Home() {
       const now = Date.now();
 
       if (sessionLeads.length > 0) {
-        // Group leads by clean location and category
-        const groups = {};
-        sessionLeads.forEach((lead) => {
-          const loc = cleanLocationName(lead.location);
-          const cat = lead.category || 'general';
-          const key = `${loc}||${cat}`;
-          if (!groups[key]) {
-            groups[key] = {
-              location: loc,
-              category: cat,
-              saved: 0
-            };
+        if (scrapeCategory === 'all shops') {
+          // Record as a single unified run under "all shops" category
+          let finalLocationText;
+          if (discoveredMalls.length > 0 && scrapeLocation === 'all_malls') {
+            finalLocationText = cleanLocationName(discoveredMalls[0].name);
+          } else {
+            finalLocationText = cleanLocationName(scrapeLocation);
           }
-          groups[key].saved++;
-        });
-
-        const keys = Object.keys(groups);
-        const isSingleGroup = keys.length === 1;
-
-        keys.forEach((key, index) => {
-          const group = groups[key];
           newRecords.push({
-            id: `${now}_${index}`,
-            category: group.category,
-            location: group.location,
+            id: now.toString(),
+            category: 'all shops',
+            location: finalLocationText,
             timestamp: now,
-            saved: group.saved,
-            total: isSingleGroup ? finalStats.total : group.saved,
-            skippedWebsite: isSingleGroup ? finalStats.skippedWebsite : 0,
-            skippedLandline: isSingleGroup ? finalStats.skippedLandline : 0,
-            skippedDuplicate: isSingleGroup ? finalStats.skippedDuplicate : 0,
-            noPhone: isSingleGroup ? finalStats.noPhone : 0
+            saved: finalStats.saved,
+            total: finalStats.total,
+            skippedWebsite: finalStats.skippedWebsite,
+            skippedLandline: finalStats.skippedLandline,
+            skippedDuplicate: finalStats.skippedDuplicate,
+            noPhone: finalStats.noPhone
           });
-        });
+        } else {
+          // Group leads by clean location and category
+          const groups = {};
+          sessionLeads.forEach((lead) => {
+            const loc = cleanLocationName(lead.location);
+            const cat = lead.category || 'general';
+            const key = `${loc}||${cat}`;
+            if (!groups[key]) {
+              groups[key] = {
+                location: loc,
+                category: cat,
+                saved: 0
+              };
+            }
+            groups[key].saved++;
+          });
+
+          const keys = Object.keys(groups);
+          const isSingleGroup = keys.length === 1;
+
+          keys.forEach((key, index) => {
+            const group = groups[key];
+            newRecords.push({
+              id: `${now}_${index}`,
+              category: group.category,
+              location: group.location,
+              timestamp: now,
+              saved: group.saved,
+              total: isSingleGroup ? finalStats.total : group.saved,
+              skippedWebsite: isSingleGroup ? finalStats.skippedWebsite : 0,
+              skippedLandline: isSingleGroup ? finalStats.skippedLandline : 0,
+              skippedDuplicate: isSingleGroup ? finalStats.skippedDuplicate : 0,
+              noPhone: isSingleGroup ? finalStats.noPhone : 0
+            });
+          });
+        }
       } else {
         // Fallback run if no leads were saved but listings were scanned
         const finalCategoryText = scrapeCategory === 'all shops' ? 'general' : scrapeCategory;
@@ -964,7 +1039,8 @@ export default function Home() {
         ...allTemplates.categories,
         [cleanCat]: {
           introTemplate: templateText,
-          followupTemplate: followupText
+          followupTemplate: followupText,
+          demoLink: cleanCat !== 'general' ? templateDemoLink : ''
         }
       }
     };
@@ -977,6 +1053,7 @@ export default function Home() {
     setTemplateCategory('');
     setTemplateText(DEFAULT_INTRO);
     setFollowupText(DEFAULT_FOLLOWUP);
+    setTemplateDemoLink('');
     setIsCreateOpen(false);
   };
 
@@ -985,6 +1062,7 @@ export default function Home() {
     if (allTemplates.categories && allTemplates.categories[cat]) {
       setInlineIntroText(allTemplates.categories[cat].introTemplate || '');
       setInlineFollowupText(allTemplates.categories[cat].followupTemplate || '');
+      setInlineDemoLink(allTemplates.categories[cat].demoLink || '');
     }
   };
 
@@ -995,7 +1073,8 @@ export default function Home() {
         ...allTemplates.categories,
         [cat]: {
           introTemplate: inlineIntroText,
-          followupTemplate: inlineFollowupText
+          followupTemplate: inlineFollowupText,
+          demoLink: cat !== 'general' ? inlineDemoLink : ''
         }
       }
     };
@@ -1015,6 +1094,18 @@ export default function Home() {
     localStorage.setItem('ashu_templates', JSON.stringify(updated));
     syncToServer('update_templates', { templates: updated });
     if (editingCategory === cat) setEditingCategory(null);
+  };
+
+  const handleResetTemplatesToDefault = async () => {
+    if (!confirm('Are you sure you want to reset all outreach templates to defaults? This will restore the original templates and overwrite customized changes.')) return;
+    const updated = {
+      ...allTemplates,
+      categories: SEED_TEMPLATES
+    };
+    setAllTemplates(updated);
+    localStorage.setItem('ashu_templates', JSON.stringify(updated));
+    await syncToServer('update_templates', { templates: updated });
+    alert('Templates successfully reset to defaults!');
   };
 
   const handleClearHistory = async () => {
@@ -1045,10 +1136,17 @@ export default function Home() {
 
     if (!templateText) return '';
 
-    return templateText
+    let compiled = templateText
       .replace(/{{business_name}}/gi, lead.name)
       .replace(/{{category}}/gi, lead.category)
       .replace(/{{location}}/gi, lead.location || 'your area');
+
+    if (cat !== 'general') {
+      const demoLink = catTemplate ? catTemplate.demoLink : '';
+      compiled = compiled.replace(/{{demo_link}}/gi, demoLink || '');
+    }
+
+    return compiled;
   };
 
   const handleStartCampaign = (mode = 'filtered') => {
@@ -1998,8 +2096,21 @@ export default function Home() {
                         }
                       }}
                     />
-                    <span className="field-hint">Dynamic placeholders allowed: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}</span>
+                    <span className="field-hint">Dynamic placeholders allowed: {'{{business_name}}'}, {'{{category}}'}, {'{{location}}'}{templateCategory.toLowerCase().trim() !== 'general' && ", '{{demo_link}}'"}</span>
                   </div>
+
+                  {templateCategory.toLowerCase().trim() !== 'general' && (
+                    <div className="form-group">
+                      <label htmlFor="new-demo-link">Demo Site Link</label>
+                      <input 
+                        type="url" 
+                        id="new-demo-link" 
+                        value={templateDemoLink} 
+                        onChange={(e) => setTemplateDemoLink(e.target.value)} 
+                        placeholder="e.g. https://restodemo.xyz"
+                      />
+                    </div>
+                  )}
 
                   <div className="form-group">
                     <label htmlFor="followup-msg">Followup Template (Message sent after 7 days delay)</label>
@@ -2100,21 +2211,46 @@ export default function Home() {
                                   }}
                                 />
                               </div>
+                              {cat !== 'general' && (
+                                <div className="form-group">
+                                  <label>Demo Site Link:</label>
+                                  <input
+                                    type="url"
+                                    value={inlineDemoLink}
+                                    onChange={(e) => setInlineDemoLink(e.target.value)}
+                                    placeholder="e.g. https://restodemo.xyz"
+                                  />
+                                </div>
+                              )}
                             </div>
                           ) : (
-                            <div className="template-views-grid">
-                              <div className="template-view-col">
-                                <strong>Intro Message Preview:</strong>
-                                <div className="preview-bubble">
-                                  {config.introTemplate || '(Empty Template)'}
+                            <div>
+                              <div className="template-views-grid">
+                                <div className="template-view-col">
+                                  <strong>Intro Message Preview:</strong>
+                                  <div className="preview-bubble">
+                                    {config.introTemplate || '(Empty Template)'}
+                                  </div>
+                                </div>
+                                <div className="template-view-col">
+                                  <strong>Followup Message Preview:</strong>
+                                  <div className="preview-bubble">
+                                    {config.followupTemplate || '(Empty Template)'}
+                                  </div>
                                 </div>
                               </div>
-                              <div className="template-view-col">
-                                <strong>Followup Message Preview:</strong>
-                                <div className="preview-bubble">
-                                  {config.followupTemplate || '(Empty Template)'}
+                              {cat !== 'general' && (
+                                <div style={{ marginTop: '12px', fontSize: '13px', color: 'var(--text-secondary)' }}>
+                                  <strong>Demo Site Link: </strong>
+                                  {config.demoLink ? (
+                                    <a href={config.demoLink} target="_blank" rel="noreferrer" style={{ color: 'var(--text-accent)', textDecoration: 'none' }}>
+                                      {config.demoLink}
+                                    </a>
+                                  ) : (
+                                    <span style={{ color: 'var(--text-muted)' }}>(No demo link configured)</span>
+                                  )}
                                 </div>
-                              </div>
+                              )}
                             </div>
                           )}
                         </div>
