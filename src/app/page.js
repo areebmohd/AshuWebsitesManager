@@ -232,7 +232,7 @@ export default function Home() {
   // Scraper Tab State
   const [scrapeCategory, setScrapeCategory] = useState('restaurants');
   const [scrapeLocation, setScrapeLocation] = useState('Sector 51 Gurugram');
-  const [scrollDepth, setScrollDepth] = useState('35');
+  const [scrollDepth, setScrollDepth] = useState('15');
   const [isScraping, setIsScraping] = useState(false);
   const [logs, setLogs] = useState([]);
   const [scraperStats, setScraperStats] = useState({
