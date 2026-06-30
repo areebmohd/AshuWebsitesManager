@@ -805,11 +805,12 @@ export default function Home() {
     if (!scrapeCategory || !scrapeLocation) return null;
     const catSearch = scrapeCategory.toLowerCase().trim();
     const locSearch = scrapeLocation.toLowerCase().trim();
-    return scraperHistory.find(
-      (run) => 
-        run.category.toLowerCase().trim() === catSearch &&
-        run.location.toLowerCase().trim() === locSearch
-    );
+    return scraperHistory.find((run) => {
+      const runLoc = run.location.toLowerCase().trim();
+      const catMatch = run.category.toLowerCase().trim() === catSearch;
+      if (!catMatch) return false;
+      return runLoc === locSearch || runLoc.startsWith(locSearch);
+    });
   }, [scrapeCategory, scrapeLocation, scraperHistory, discoveredMalls]);
 
   const sortedHistory = useMemo(() => {
