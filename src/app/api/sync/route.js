@@ -80,6 +80,14 @@ export async function POST(request) {
         break;
       }
 
+      case 'delete_leads': {
+        const { ids } = data;
+        if (ids && ids.length > 0) {
+          await db.collection('leads').deleteMany({ id: { $in: ids } });
+        }
+        break;
+      }
+
       case 'update_templates': {
         const { templates } = data;
         await db.collection('templates').updateOne(

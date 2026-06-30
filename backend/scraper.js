@@ -9,7 +9,7 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
  */
 export function classifyCategory(rawCat) {
   const cat = (rawCat || '').toLowerCase().trim();
-  if (!cat) return 'general';
+  if (!cat) return 'restaurants';
 
   // Gyms & Fitness
   if (
@@ -39,18 +39,6 @@ export function classifyCategory(rawCat) {
     cat.includes('ornament')
   ) {
     return 'jewelry shops';
-  }
-
-  // Opticians & Eyewear
-  if (
-    cat.includes('optician') || 
-    cat.includes('optical') || 
-    cat.includes('eyewear') || 
-    cat.includes('glasses') || 
-    cat.includes('spectacles') ||
-    cat.includes('lens')
-  ) {
-    return 'opticians & eyewear';
   }
 
   // Electronics & Mobile Shops
@@ -164,7 +152,7 @@ export function classifyCategory(rawCat) {
     return 'furniture & decor';
   }
 
-  return 'general'; // Fallback category (uses general template)
+  return 'restaurants'; // Fallback category (uses restaurants template)
 }
 
 /**
@@ -173,7 +161,7 @@ export function classifyCategory(rawCat) {
  * @param {function} onLog - Callback for real-time progress logging
  * @returns {Promise<Array>} - Array of discovered locations
  */
-export async function discoverMalls(city, onLog) {
+export async function discoverMalls(city, onLog, checkCancelled) {
   onLog(`[Discoverer] Starting location search for malls/markets in: "${city}"`);
   let browser;
   try {
@@ -206,6 +194,10 @@ export async function discoverMalls(city, onLog) {
     let scrollCount = 0;
     const maxScrolls = 6;
     while (scrollCount < maxScrolls) {
+      if (checkCancelled && checkCancelled()) {
+        onLog('[Discoverer] Cancel signal received. Exiting scroll loop.');
+        break;
+      }
       const feedExists = await page.$(feedSelector);
       if (!feedExists) {
         await page.evaluate(() => window.scrollBy(0, 800));
@@ -219,6 +211,11 @@ export async function discoverMalls(city, onLog) {
       }
       await delay(1500);
       scrollCount++;
+    }
+
+    if (checkCancelled && checkCancelled()) {
+      onLog('[Discoverer] Cancel signal received. Aborting locations details extraction.');
+      return [];
     }
 
     onLog('[Discoverer] Extracting names and addresses of locations...');
@@ -332,12 +329,31 @@ export async function runScraper(category, location, options = {}, onLog, onLead
       onLog('[Scraper] Scrolling search results list to load items...');
       let scrollCount = 0;
       const maxScrolls = options.scrollDepth ? Number(options.scrollDepth) : 15;
+      let lastListingCount = 0;
+      let noChangeCount = 0;
 
       while (scrollCount < maxScrolls) {
         if (options.checkCancelled && options.checkCancelled()) {
           onLog('[Scraper] Stop signal received. Exiting scroll loop.');
           break;
         }
+
+        // Get current number of listing items in the DOM
+        const currentListingCount = await page.evaluate(() => {
+          return document.querySelectorAll('a[href*="/maps/place/"]').length;
+        });
+
+        if (currentListingCount > 0 && currentListingCount === lastListingCount) {
+          noChangeCount++;
+          if (noChangeCount >= 3) {
+            onLog(`[Scraper] End of list reached (found ${currentListingCount} items). Exiting scroll loop early.`);
+            break;
+          }
+        } else {
+          noChangeCount = 0;
+          lastListingCount = currentListingCount;
+        }
+
         const feedExists = await page.$(feedSelector);
         if (!feedExists) {
           onLog('[Scraper] Sidebar list not found. Scrolling page body instead...');
@@ -477,15 +493,16 @@ export async function runScraper(category, location, options = {}, onLog, onLead
                 onLog(`[Scraper] ℹ️ Website redirects to Google/Social (${finalUrl}). Treating as no real website.`);
                 details.hasWebsite = false;
                 details.notes = `Website redirects to Google/Social: ${details.websiteUrl}`;
-              } else if (!response.ok && response.status >= 400) {
-                onLog(`[Scraper] ⚠️ Website responded with status ${response.status}. Treating as broken.`);
+              } else if (!response.ok && response.status === 404) {
+                onLog(`[Scraper] ⚠️ Website responded with 404 (Not Found). Treating as broken.`);
                 details.hasWebsite = false;
-                details.notes = `Broken/Offline website (Status ${response.status}): ${details.websiteUrl}`;
+                details.notes = `Broken website (404): ${details.websiteUrl}`;
+              } else if (!response.ok) {
+                onLog(`[Scraper] ℹ️ Website check responded with code ${response.status}. Skipping lead since website is listed.`);
               }
             } catch (err) {
-              onLog(`[Scraper] ⚠️ Website check failed (${err.message}). Treating as broken.`);
-              details.hasWebsite = false;
-              details.notes = `Broken/Offline website: ${details.websiteUrl}`;
+              onLog(`[Scraper] ℹ️ Website check connection failed (${err.message}). Skipping lead since website is listed.`);
+              details.notes = `Website check connection failed: ${details.websiteUrl}`;
             }
           }
 

@@ -74,10 +74,6 @@ Our team designs custom, fast-loading websites, and we can set up your online pr
 Please open the following link.`;
 
 const SEED_TEMPLATES = {
-  "general": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your business profile on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.\n\nWe build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link.",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.\n\nOur team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nPlease open the following link."
-  },
   "restaurants": {
     "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders and avoid paying heavy commissions to Swiggy/Zomato.\n\nWe build custom ordering/menu websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
     "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a digital menu and ordering platform is crucial to attract local foodies and capture direct sales with zero middleman commission.\n\nWe can launch your premium custom restaurant website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
@@ -112,11 +108,6 @@ const SEED_TEMPLATES = {
     "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your jewelry store profile on Google Maps in {{location}}.\n\nA premium digital catalog website is essential to showcase your beautiful collections, build brand trust, and attract high-end buyers without paying third-party commissions.\n\nWe design premium jewelry catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
     "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an elegant website is crucial to establish trust, show your latest jewelry designs, and secure direct clients directly.\n\nWe build gorgeous custom product showcase websites and can launch yours for just ₹999 within 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
     "demoLink": "https://jewelrydemo.xyz"
-  },
-  "opticians & eyewear": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your optician/eyewear store listing on Google Maps in {{location}}.\n\nSince everyone searches online now, having a website is crucial to display your frames, book eye tests, and build trust in your optical store without relying on third-party aggregators.\n\nWe design custom eyewear catalog websites and can launch yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nA digital frames showroom and booking system is crucial for modern optical shops to attract local clients and increase sales.\n\nWe can build your premium custom optician website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "demoLink": "https://eyeweardemo.xyz"
   },
   "bakeries & cafes": {
     "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your bakery/cafe profile on Google Maps in {{location}}.\n\nHaving your own website is essential to showcase your fresh menu, accept direct cake orders, and avoid heavy third-party commissions from delivery apps.\n\nWe build premium custom cafe/bakery websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
@@ -197,39 +188,31 @@ const mergeTemplatesWithSeed = (loadedCategories) => {
   const merged = {};
   const loaded = loadedCategories || {};
   for (const cat in SEED_TEMPLATES) {
+    if (cat === 'general' || cat === 'opticians & eyewear') continue;
     merged[cat] = {
       ...SEED_TEMPLATES[cat],
       ...(loaded[cat] || {})
     };
   }
   for (const cat in loaded) {
+    if (cat === 'general' || cat === 'opticians & eyewear') continue;
     if (!merged[cat]) {
       merged[cat] = loaded[cat];
     }
   }
 
-  // Programmatically upgrade templates of every category except general:
+  // Programmatically upgrade templates of every category:
   const newText = "Please open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}";
   
   const endRegex = /(?:If\s+you\s+are\s+interested|If\s+you'd\s+be\s+interested|Would\s+you\s+like|Would\s+you\s+be\s+open|Please\s+open\s+the\s+following\s+link|If\s+you'd\s+be\s+interested\s+to\s+see|Let\s+us\s+know\s+if\s+you'd\s+like)[\s\S]*$/i;
 
   for (const cat in merged) {
     const item = merged[cat];
-    if (cat === 'general') {
-      const generalReplacement = "Please open the following link.";
-      if (item.introTemplate) {
-        item.introTemplate = item.introTemplate.replace(endRegex, generalReplacement);
-      }
-      if (item.followupTemplate) {
-        item.followupTemplate = item.followupTemplate.replace(endRegex, generalReplacement);
-      }
-    } else {
-      if (item.introTemplate) {
-        item.introTemplate = item.introTemplate.replace(endRegex, newText);
-      }
-      if (item.followupTemplate) {
-        item.followupTemplate = item.followupTemplate.replace(endRegex, newText);
-      }
+    if (item.introTemplate) {
+      item.introTemplate = item.introTemplate.replace(endRegex, newText);
+    }
+    if (item.followupTemplate) {
+      item.followupTemplate = item.followupTemplate.replace(endRegex, newText);
     }
   }
 
@@ -238,7 +221,7 @@ const mergeTemplatesWithSeed = (loadedCategories) => {
 
 const cleanLocationName = (loc) => {
   if (!loc) return '';
-  return loc.split(',')[0].trim();
+  return loc.trim();
 };
 
 export default function Home() {
@@ -282,6 +265,7 @@ export default function Home() {
   const [discoveredMalls, setDiscoveredMalls] = useState([]);
   const [loadedPremiumCity, setLoadedPremiumCity] = useState('');
   const [isDiscovering, setIsDiscovering] = useState(false);
+  const [isCancelling, setIsCancelling] = useState(false);
   const [premiumHistory, setPremiumHistory] = useState([]);
   const [lastScanResult, setLastScanResult] = useState(null);
 
@@ -392,11 +376,11 @@ export default function Home() {
     try {
       const local = localStorage.getItem('ashu_leads');
       if (local) {
-        currentLeads = JSON.parse(local);
+        currentLeads = JSON.parse(local).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
       } else {
         const res = await fetch('/leads.json');
         if (res.ok) {
-          currentLeads = await res.json();
+          currentLeads = (await res.json()).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
         }
       }
     } catch (e) {
@@ -418,7 +402,9 @@ export default function Home() {
     let currentHistory = SEED_SCRAPER_HISTORY;
     try {
       const local = localStorage.getItem('ashu_scraper_history');
-      if (local) currentHistory = JSON.parse(local);
+      if (local) {
+        currentHistory = JSON.parse(local).filter(h => h && h.category && h.category !== 'general' && h.category !== 'opticians & eyewear' && h.category !== 'all shops');
+      }
     } catch (e) {
       console.error('Error reading local history for migration:', e);
     }
@@ -467,8 +453,9 @@ export default function Home() {
       if (!res.ok) throw new Error('Failed to fetch from cloud');
       const data = await res.json();
       if (data.isInitialized) {
-        setLeads(data.leads || []);
-        localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
+        const filteredCloudLeads = (data.leads || []).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
+        setLeads(filteredCloudLeads);
+        localStorage.setItem('ashu_leads', JSON.stringify(filteredCloudLeads));
 
         const templatesData = data.templates || { categories: SEED_TEMPLATES };
         templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
@@ -476,8 +463,9 @@ export default function Home() {
         localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
         syncToServer('update_templates', { templates: templatesData });
 
-        setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
-        localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+        const filteredHistory = (data.history || SEED_SCRAPER_HISTORY).filter(h => h && h.category && h.category !== 'general' && h.category !== 'opticians & eyewear' && h.category !== 'all shops');
+        setScraperHistory(filteredHistory);
+        localStorage.setItem('ashu_scraper_history', JSON.stringify(filteredHistory));
 
         await mergeAndSyncPremiumHistory(data.premiumHistory || []);
 
@@ -495,6 +483,15 @@ export default function Home() {
   // Data Lifecycle (Synchronization & Migration)
   // ----------------------------------------------------------------------------
   useEffect(() => {
+    // One-time self-terminating migration cleanup for premium locations
+    const hasCleared = localStorage.getItem('ashu_premium_cleared_v2');
+    if (!hasCleared) {
+      localStorage.removeItem('ashu_premium_history');
+      localStorage.setItem('ashu_premium_cleared_v2', 'true');
+      setPremiumHistory([]);
+      syncToServer('clear_premium_history', {});
+    }
+
     // Load local storage fallbacks immediately for fast initial load
     let initialLeads = [];
     let initialTemplates = { categories: SEED_TEMPLATES };
@@ -502,7 +499,9 @@ export default function Home() {
 
     try {
       const localL = localStorage.getItem('ashu_leads');
-      if (localL) initialLeads = JSON.parse(localL);
+      if (localL) {
+        initialLeads = JSON.parse(localL).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
+      }
 
       const localT = localStorage.getItem('ashu_templates');
       if (localT) {
@@ -512,7 +511,9 @@ export default function Home() {
       }
 
       const localH = localStorage.getItem('ashu_scraper_history');
-      if (localH) initialHistory = JSON.parse(localH);
+      if (localH) {
+        initialHistory = JSON.parse(localH).filter(h => h && h.category && h.category !== 'general' && h.category !== 'opticians & eyewear' && h.category !== 'all shops');
+      }
     } catch (e) {
       console.error('Error reading offline storage keys on mount:', e);
     }
@@ -539,8 +540,9 @@ export default function Home() {
         const data = await res.json();
 
         if (data.isInitialized) {
-          setLeads(data.leads || []);
-          localStorage.setItem('ashu_leads', JSON.stringify(data.leads || []));
+          const filteredCloudLeads = (data.leads || []).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
+          setLeads(filteredCloudLeads);
+          localStorage.setItem('ashu_leads', JSON.stringify(filteredCloudLeads));
 
           const templatesData = data.templates || { categories: SEED_TEMPLATES };
           templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
@@ -548,8 +550,9 @@ export default function Home() {
           localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
           syncToServer('update_templates', { templates: templatesData });
 
-          setScraperHistory(data.history || SEED_SCRAPER_HISTORY);
-          localStorage.setItem('ashu_scraper_history', JSON.stringify(data.history || SEED_SCRAPER_HISTORY));
+          const filteredHistory = (data.history || SEED_SCRAPER_HISTORY).filter(h => h && h.category && h.category !== 'general' && h.category !== 'opticians & eyewear' && h.category !== 'all shops');
+          setScraperHistory(filteredHistory);
+          localStorage.setItem('ashu_scraper_history', JSON.stringify(filteredHistory));
 
           await mergeAndSyncPremiumHistory(data.premiumHistory || []);
 
@@ -613,6 +616,7 @@ export default function Home() {
 
       if (message.includes('Scraping session completed') || message.includes('Fatal error') || message.includes('Scraping process idle.')) {
         setIsScraping(false);
+        setIsCancelling(false);
       }
     });
 
@@ -717,7 +721,7 @@ export default function Home() {
           const groups = {};
           sessionLeads.forEach((lead) => {
             const loc = cleanLocationName(lead.location);
-            const cat = lead.category || 'general';
+            const cat = lead.category || 'restaurants';
             const key = `${loc}||${cat}`;
             if (!groups[key]) {
               groups[key] = {
@@ -750,7 +754,7 @@ export default function Home() {
         }
       } else {
         // Fallback run if no leads were saved but listings were scanned
-        const finalCategoryText = scrapeCategory === 'all shops' ? 'general' : scrapeCategory;
+        const finalCategoryText = scrapeCategory === 'all shops' ? 'restaurants' : scrapeCategory;
         
         let finalLocationText;
         if (discoveredMalls.length > 0 && scrapeLocation === 'all_malls') {
@@ -898,11 +902,32 @@ export default function Home() {
 
       const data = await res.json();
       if (data.success && data.locations) {
+        if (data.cancelled) {
+          setLogs((prev) => [
+            ...prev,
+            `[System] Discovery scan for "${searchCity}" was cancelled. Not saving to history.`
+          ]);
+          setIsDiscovering(false);
+          return;
+        }
+        // Append searchCity to location names if not already present
+        const modifiedLocations = data.locations.map(loc => {
+          const searchSuffix = `, ${searchCity.trim()}`;
+          let newName = loc.name;
+          if (!newName.toLowerCase().includes(searchCity.trim().toLowerCase())) {
+            newName = `${loc.name}${searchSuffix}`;
+          }
+          return {
+            ...loc,
+            name: newName
+          };
+        });
+
         const newHistoryItem = {
-          id: 'prem_' + Date.now(),
+          id: 'prem_' + searchCity.trim().toLowerCase().replace(/[^a-z0-9]/g, '_'),
           city: searchCity.trim(),
           timestamp: Date.now(),
-          locations: data.locations
+          locations: modifiedLocations
         };
         
         setPremiumHistory((prev) => {
@@ -931,6 +956,7 @@ export default function Home() {
       setLogs((prev) => [...prev, `[Error] Failed to connect: ${err.message}`]);
     } finally {
       setIsDiscovering(false);
+      setIsCancelling(false);
     }
   };
 
@@ -946,7 +972,10 @@ export default function Home() {
         const cleanAddress = m.address && m.address !== 'N/A' 
           ? m.address.split('·')[0].trim() 
           : '';
-        return cleanAddress ? `${m.name}, ${cleanAddress}` : m.name;
+        if (cleanAddress && !m.name.toLowerCase().includes(cleanAddress.toLowerCase())) {
+          return `${m.name}, ${cleanAddress}`;
+        }
+        return m.name;
       });
     } else {
       if (!scrapeLocation) {
@@ -959,7 +988,11 @@ export default function Home() {
         const cleanAddress = matchedMall.address && matchedMall.address !== 'N/A'
           ? matchedMall.address.split('·')[0].trim()
           : '';
-        targetLocation = cleanAddress ? `${matchedMall.name}, ${cleanAddress}` : matchedMall.name;
+        if (cleanAddress && !matchedMall.name.toLowerCase().includes(cleanAddress.toLowerCase())) {
+          targetLocation = `${matchedMall.name}, ${cleanAddress}`;
+        } else {
+          targetLocation = matchedMall.name;
+        }
       } else {
         targetLocation = scrapeLocation;
       }
@@ -1006,20 +1039,24 @@ export default function Home() {
         const err = await res.json();
         setLogs((prev) => [...prev, `[Error] ${err.error}`]);
         setIsScraping(false);
+        setIsCancelling(false);
       }
     } catch (err) {
       setLogs((prev) => [...prev, `[Error] Failed to connect: ${err.message}`]);
       setIsScraping(false);
+      setIsCancelling(false);
     }
   };
 
   const handleStopScrape = async () => {
-    if (!isScraping) return;
+    if (!isScraping && !isDiscovering) return;
     try {
+      setIsCancelling(true);
       setLogs((prev) => [...prev, `[System] Requesting cancel signal...`]);
       await fetch(`${API_BASE}/api/scrape/stop`, { method: 'POST' });
     } catch (err) {
-      setLogs((prev) => [...prev, `[Error] Failed to stop scraper: ${err.message}`]);
+      setLogs((prev) => [...prev, `[Error] Failed to stop process: ${err.message}`]);
+      setIsCancelling(false);
     }
   };
 
@@ -1251,12 +1288,14 @@ export default function Home() {
     const sent = leads.filter((l) => l.status === 'Sent').length;
     const won = leads.filter((l) => l.status === 'Won').length;
     const lost = leads.filter((l) => l.status === 'Lost').length;
+    const replied = leads.filter((l) => l.status === 'Replied').length;
     
     return {
       total,
       sent,
       won,
       lost,
+      replied,
       pending: leads.filter(l => l.status === 'Pending').length,
       conversionRate: total > 0 ? ((won / total) * 100).toFixed(1) : '0'
     };
@@ -1272,17 +1311,15 @@ export default function Home() {
       'restaurants', 
       'salons', 
       'clinics', 
+      'jewelry shops',
       'clothing shops', 
       'electronics shops',
       'gyms & fitness',
-      'jewelry shops',
-      'opticians & eyewear',
       'bakeries & cafes',
-      'furniture & decor',
-      'general'
+      'furniture & decor'
     ];
     const custom = allTemplates.categories ? Object.keys(allTemplates.categories) : [];
-    return Array.from(new Set([...predefined, ...custom]));
+    return Array.from(new Set([...predefined, ...custom])).filter(cat => cat.toLowerCase().trim() !== 'general' && cat.toLowerCase().trim() !== 'opticians & eyewear');
   }, [allTemplates]);
 
   const filteredLeads = useMemo(() => {
@@ -1446,6 +1483,10 @@ export default function Home() {
                 <span className="stat-label">Outreach Sent</span>
                 <span className="stat-value">{stats.sent}</span>
               </div>
+              <div className="stat-card replied">
+                <span className="stat-label">Replied Leads</span>
+                <span className="stat-value text-replied">{stats.replied}</span>
+              </div>
               <div className="stat-card success">
                 <span className="stat-label">Leads Won</span>
                 <span className="stat-value text-success">{stats.won}</span>
@@ -1477,6 +1518,12 @@ export default function Home() {
                     <span className="chart-bar-label">Sent ({stats.sent})</span>
                     <div className="chart-bar-wrapper">
                       <div className="chart-bar-fill sent" style={{ width: `${stats.total > 0 ? (stats.sent / stats.total) * 100 : 0}%` }} />
+                    </div>
+                  </div>
+                  <div className="chart-bar-row">
+                    <span className="chart-bar-label">Replied ({stats.replied})</span>
+                    <div className="chart-bar-wrapper">
+                      <div className="chart-bar-fill replied" style={{ width: `${stats.total > 0 ? (stats.replied / stats.total) * 100 : 0}%` }} />
                     </div>
                   </div>
                   <div className="chart-bar-row">
@@ -1558,6 +1605,18 @@ export default function Home() {
                     'Find Malls & Markets'
                   )}
                 </button>
+
+                {isDiscovering && (
+                  <button
+                    type="button"
+                    className="btn btn-secondary text-error"
+                    onClick={handleStopScrape}
+                    disabled={isCancelling}
+                    style={{ flexShrink: 0, padding: '10px 16px' }}
+                  >
+                    {isCancelling ? 'Cancelling...' : <>{Icons.x()} Cancel Scan</>}
+                  </button>
+                )}
 
                 {searchCity && premiumHistory.some(h => h.city.toLowerCase().trim() === searchCity.toLowerCase().trim()) && (
                   <span style={{
@@ -1648,7 +1707,7 @@ export default function Home() {
                           className="btn"
                           onClick={() => {
                             setDiscoveredMalls(item.locations);
-                            setScrapeLocation(item.locations.length > 0 ? item.locations[0].name : '');
+                            setScrapeLocation(item.locations && item.locations.length > 0 ? item.locations[0].name : '');
                             setLoadedPremiumCity(item.city);
                           }}
                           style={{
@@ -1688,7 +1747,6 @@ export default function Home() {
                     disabled={isScraping}
                     style={{ textTransform: 'capitalize' }}
                   >
-                    <option value="all shops">All Shops (Auto-Categorize)</option>
                     {configCategories.map((cat) => (
                       <option key={cat} value={cat}>{cat}</option>
                     ))}
@@ -1785,8 +1843,13 @@ export default function Home() {
                   )}
                 </button>
                 {isScraping && (
-                  <button className="btn btn-secondary" onClick={handleStopScrape} style={{ color: 'var(--error)', borderColor: 'rgba(239, 68, 68, 0.2)' }}>
-                    Stop Scraper
+                  <button 
+                    className="btn btn-secondary" 
+                    onClick={handleStopScrape} 
+                    disabled={isCancelling}
+                    style={{ color: 'var(--error)', borderColor: 'rgba(239, 68, 68, 0.2)' }}
+                  >
+                    {isCancelling ? 'Cancelling...' : 'Stop Scraper'}
                   </button>
                 )}
               </div>
@@ -1939,6 +2002,7 @@ export default function Home() {
                       <option value="all">All</option>
                       <option value="Pending">Pending</option>
                       <option value="Sent">Sent</option>
+                      <option value="Replied">Replied</option>
                       <option value="Won">Won</option>
                       <option value="Lost">Lost</option>
                     </select>
@@ -2027,6 +2091,7 @@ export default function Home() {
                               >
                                 <option value="Pending">Pending</option>
                                 <option value="Sent">Sent</option>
+                                <option value="Replied">Replied</option>
                                 <option value="Won">Won</option>
                                 <option value="Lost">Lost</option>
                               </select>

@@ -1871,3 +1871,12 @@ input[type="checkbox"]:checked {
 .auto-resize-textarea::-webkit-scrollbar {
   display: none !important;
 }
+
+/* Replied status styling custom mappings */
+.text-replied {
+  color: #34d399 !important;
+}
+
+.stat-card.replied::before {
+  background: #34d399;
+}

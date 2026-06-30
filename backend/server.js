@@ -23,6 +23,7 @@ const io = new Server(httpServer, {
 
 const PORT = 3001;
 let activeScraper = false;
+let activeDiscoverer = false;
 let scraperCancelled = false;
 
 // Socket.io Connection
@@ -88,25 +89,37 @@ app.post('/api/scrape/malls', async (req, res) => {
     return res.status(400).json({ error: 'City is required' });
   }
 
+  if (activeScraper || activeDiscoverer) {
+    return res.status(400).json({ error: 'Another scraper or discovery process is already running' });
+  }
+
+  activeDiscoverer = true;
+  scraperCancelled = false;
   logProgress(`[System] Discovery phase requested: finding shopping malls and markets in "${city}"...`);
   
   try {
-    const locations = await discoverMalls(city, (logMsg) => logProgress(logMsg));
-    res.json({ success: true, locations });
+    const locations = await discoverMalls(
+      city, 
+      (logMsg) => logProgress(logMsg),
+      () => scraperCancelled
+    );
+    res.json({ success: true, locations, cancelled: scraperCancelled });
   } catch (error) {
     logProgress(`[Discovery Error] ${error.message}`);
     res.status(500).json({ error: error.message });
+  } finally {
+    activeDiscoverer = false;
   }
 });
 
-// Stop Google Maps Scraping
+// Stop Google Maps Scraping or Discovery
 app.post('/api/scrape/stop', (req, res) => {
-  if (!activeScraper) {
-    return res.json({ message: 'Scraper is not running' });
+  if (!activeScraper && !activeDiscoverer) {
+    return res.json({ message: 'No active scraper or discovery process is running' });
   }
   scraperCancelled = true;
-  logProgress('[System] Cancel request received. Stopping scraper...');
-  res.json({ message: 'Scrape cancellation requested' });
+  logProgress('[System] Cancel request received. Stopping active process...');
+  res.json({ message: 'Cancellation requested' });
 });
 
 // Start the HTTP / Socket.io server
