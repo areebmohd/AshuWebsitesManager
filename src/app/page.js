@@ -55,68 +55,68 @@ const Icons = {
 
 const DEFAULT_INTRO = `Hey {{business_name}}! 👋
 
-I noticed your business profile on Google Maps in {{location}}.
+Aapka business profile dekha maine Google Maps par, kaafi sahi laga. Par notice kiya ki aapki koi website nahi hai {{location}} mein.
 
-Since everyone searches online now, having a website is crucial to establish trust, attract direct clients, and avoid heavy third-party middleman commissions.
+Aajkal sab kuch online search hota hai, toh ek custom website hone se business ka trust badhta hai aur direct customers aate hain.
 
-We build premium custom websites and can set up yours for just ₹999 in 2 days! 🚀
+Maine ek demo website banayi hai, check kijiye: {{demo_link}}
 
-Please open the following link.`;
+Agar aapko bhi apne business ke liye aisi simple and fast website chahiye, toh batana. Sirf ₹999 mein 2 din mein taiyar kar dunga!`;
 
 const DEFAULT_FOLLOWUP = `Hey {{business_name}}! 👋
 
-Just following up to see if you received my previous message.
+Umeed hai aap acche honge. Bas purane message ke baare mein follow up karna tha.
 
-Since most customers search online first, having a modern website is crucial to establish your brand, attract direct clients, and increase sales.
+Ek modern website hone se local area mein customers directly aap tak pahunch sakte hain.
 
-Our team designs custom, fast-loading websites, and we can set up your online presence for just ₹999 within 2 days! 🚀
+Maine jo demo website share ki thi, kya aapko check karne ka time mila? Ek baar check zaroor kijiye: {{demo_link}}
 
-Please open the following link.`;
+Agar thoda bhi interest ho toh bataiyega, ₹999 mein 2 din mein start kar denge!`;
 
 const SEED_TEMPLATES = {
   "restaurants": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed you have a great restaurant listing on Google Maps in {{location}}.\n\nSince everyone is ordering online now, having your own website is essential to get direct orders and avoid paying heavy commissions to Swiggy/Zomato.\n\nWe build custom ordering/menu websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a digital menu and ordering platform is crucial to attract local foodies and capture direct sales with zero middleman commission.\n\nWe can launch your premium custom restaurant website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nGoogle Maps par aapka restaurant kaafi sahi laga. Par notice kiya ki aapki koi personal ordering website nahi hai {{location}} mein.\n\nSwiggy/Zomato ko mota commission dene se accha hai ki aapki apni menu website ho jahan se customers direct order kar sakein.\n\nMaine ek demo website banayi hai, check kijiye: {{demo_link}}\n\nAgar aisi website apne restaurant ke liye chahiye, toh batana. Sirf ₹999 mein 2 din mein setup kar dunga!",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nBas follow up karna tha ki kya aapne pichla message dekha?\n\nApni digital menu website hone se direct orders lena aur local foodies ko attract karna bohot easy ho jata hai bina kisi middleman commission ke.\n\nDemo link ye raha: {{demo_link}}\n\nBataiyega agar aage badhna ho toh, 2 din mein live kar denge.",
     "demoLink": "https://restodemo.xyz"
   },
   "clinics": {
-    "introTemplate": "Hello {{business_name}}! 👋\n\nI saw your medical clinic profile on Google Maps in {{location}}.\n\nHaving your own professional website is essential to manage appointments smoothly, establish patient trust, and avoid paying booking platform commissions.\n\nWe build custom clinic booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hello {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nGive your patients a seamless way to book appointments while keeping your clinic reception organized and completely under your own brand.\n\nWe can launch your custom clinic-booking website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hello {{business_name}}! 👋\n\nAapke clinic ki profile Google Maps par dekhi. Par notice kiya ki aapki appointment booking ke liye koi website nahi hai {{location}} mein.\n\nApni professional website hone se patients ka trust badhta hai aur aap directly, bina kisi platform commission ke, appointments manage kar sakte hain.\n\nMaine ek clinic demo website banayi hai, check kijiye: {{demo_link}}\n\nAgar aap bhi aisi professional site chahte hain, toh batana. Sirf ₹999 mein 2 din mein setup kar dunga.",
+    "followupTemplate": "Hello {{business_name}}! 👋\n\nBas follow up karne ke liye message kiya. Kya aapne clinic demo website check karne ka mauka mila?\n\nAapke patients bina kisi hassle ke appointments book kar sakein aur clinic reception ka load kam ho jaye, isme website bohot kaam aayegi.\n\nDemo link: {{demo_link}}\n\nBatana agar ispe kaam karna ho, sirf ₹999 mein 2 din mein live ho jayegi.",
     "demoLink": "https://clinicdemo.xyz"
   },
   "salons": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your salon profile on Google Maps in {{location}}.\n\nHaving a website with direct appointment booking is crucial to fill your calendar, showcase hair/beauty styles, and build client trust without third-party fees.\n\nWe build premium salon booking websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a professional online booking portal is essential to attract new clients and manage schedules easily with zero platform fees.\n\nWe can build your salon's direct booking portal and services catalog in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nGoogle Maps par aapka salon profile dekha, kaafi accha setup hai! Par location {{location}} mein aapki booking website nahi mili.\n\nAgar customer online hi service select karke booking kar sake toh calendar manage karna aur styles showcase karna bohot easy ho jata.\n\nMaine ek demo salon website banayi hai, check kijiye: {{demo_link}}\n\nAgar pasand aaye toh mujhe message karna. Sirf ₹999 mein 2 din mein aapki custom salon site ready kar dunga.",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nBas follow up karne ke liye message kiya.\n\nApni custom salon site hone se new clients ko attract karna aur bookings manage karna bohot smoothly ho jata hai.\n\nAap demo link check kar lijiye: {{demo_link}}\n\nBataiyega agar aisi site banwani ho toh, 2 din mein complete kar denge.",
     "demoLink": "https://salondemo.xyz"
   },
   "clothing shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your clothing shop listing on Google Maps in {{location}}.\n\nHaving a digital catalog website is essential today to showcase your collections, attract local walk-ins, and secure direct sales without paying online marketplace commissions.\n\nWe build custom fashion catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a modern digital showroom is crucial for clothing boutiques to display new arrivals and drive foot traffic directly.\n\nWe can launch your digital shop catalog and ordering system in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nAapka clothing shop listing Google Maps par dekha, collection accha lag raha hai. Par notice kiya ki aapki koi catalog website nahi hai {{location}} mein.\n\nOnline digital catalog hone se customers store aane se pehle designs dekh sakte hain, jisse walk-in aur sales badhti hain.\n\nMaine ek demo catalog site banayi hai, check kijiye: {{demo_link}}\n\nAgar aapko bhi aisi digital shop website chahiye toh call ya WhatsApp ping kar dena. Sirf ₹999 mein 2 din mein bana dunga!",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nUmeed hai aap badhiya honge. Bas follow up karna tha ki demo catalog check karne ka time mila?\n\nApna new arrivals online dikhane aur walk-in foot traffic badhane ke liye digital catalog bohot mast rahega.\n\nLink: {{demo_link}}\n\nPasand aaye toh batana, 2 din mein set up kar denge.",
     "demoLink": "https://clothingdemo.xyz"
   },
   "electronics shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your electronics shop profile on Google Maps in {{location}}.\n\nHaving a digital showroom website is essential today to display specifications, handle quotation requests, and build client trust without third-party marketplace fees.\n\nWe build custom electronics catalog websites and can set up yours for just ₹999 in 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving a web catalog is crucial for electronics shops to showcase Spec Sheets, handle queries, and capture local sales directly.\n\nWe can launch your product catalog inventory system and quote request portal in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nGoogle Maps par aapki electronics shop ki profile dekhi, badhiya hai. Par notice kiya ki online specs ya pricing showcase karne ke liye website nahi hai {{location}} mein.\n\nWebsite par specs list hone se customer directly check karke aate hain aur local sales grow hoti hain.\n\nMaine ek demo catalog website banayi hai, check kijiye: {{demo_link}}\n\nAgar apne showroom ke liye aisi product catalog website chahiye, toh mujhe message kar dena. ₹999 mein 2 din mein ready kar dunga!",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nBas purane message ke baare mein follow up karna tha.\n\nCatalog check kiya kya aapne? Ye link hai: {{demo_link}}\n\nElectronics inventory aur specifications online dikhana customer trust ke liye kaafi important ho gaya hai aajkal.\n\nAgar interested ho toh zaroor batana.",
     "demoLink": "https://electronicsdemo.xyz"
   },
   "gyms & fitness": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your gym/fitness center profile on Google Maps in {{location}}.\n\nHaving a premium website is highly important nowadays to showcase your gym equipment, training programs, class schedules, and to get direct membership signups without any middleman platforms.\n\nWe build beautiful custom fitness websites and can design a professional site for your gym for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online schedule and booking portal is crucial for gyms to attract new members, build trust, and showcase client transformations directly.\n\nOur team designs custom, fast-loading fitness websites, and we can set up your online presence for just ₹999 within 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nGoogle Maps par aapka gym/fitness center dekha, kaafi heavy lag raha hai! Par {{location}} mein gym ki details aur plans showcase karne ke liye website nahi mili.\n\nApni site hone se training programs, batch timings aur plans online dekh kar log direct join kar sakte hain.\n\nMaine ek demo gym website banayi hai, check kijiye: {{demo_link}}\n\nAgar apne gym ke liye aisi professional website chahiye toh ping kijiyega. Sirf ₹999 mein 2 din mein ready ho jayegi!",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nUmeed hai sab badhiya hoga. Bas followup kar raha tha ki demo gym website check karne ka time mila?\n\nEquipment pics, reviews aur membership details online dikhane ke liye website sahi option hai.\n\nDemo link: {{demo_link}}\n\nBataiyega agar plans banwani ho, ₹999 mein 2 din mein ready kar denge.",
     "demoLink": "https://gymdemo.xyz"
   },
   "jewelry shops": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your jewelry store profile on Google Maps in {{location}}.\n\nA premium digital catalog website is essential to showcase your beautiful collections, build brand trust, and attract high-end buyers without paying third-party commissions.\n\nWe design premium jewelry catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an elegant website is crucial to establish trust, show your latest jewelry designs, and secure direct clients directly.\n\nWe build gorgeous custom product showcase websites and can launch yours for just ₹999 within 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nGoogle Maps par aapka jewelry showroom dekha, collections acche lag rahe hain. Par notice kiya ki collections online dikhane ke liye aapki website nahi hai {{location}} mein.\n\nPremium online catalog hone se customer trust badhta hai aur log designs online select karke visit karte hain.\n\nMaine ek demo jewelry showcase site banayi hai, check kijiye: {{demo_link}}\n\nAgar aap bhi apne store ke liye aisi website chahte hain, toh ping kijiye. ₹999 mein 2 din mein complete kar dunga.",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nUmeed hai aap acche honge. Bas purane message ke baare mein follow up karna tha.\n\nKya aapne demo link check kiya? Ye raha: {{demo_link}}\n\nJewelry designs aur customer trust online build karne ke liye professional web presence kaafi help karegi.\n\nBatana agar kaam start karna ho toh.",
     "demoLink": "https://jewelrydemo.xyz"
   },
   "bakeries & cafes": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI noticed your bakery/cafe profile on Google Maps in {{location}}.\n\nHaving your own website is essential to showcase your fresh menu, accept direct cake orders, and avoid heavy third-party commissions from delivery apps.\n\nWe build premium custom cafe/bakery websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nSince most customers search for menus online first, having a modern website is crucial to build trust and get direct bakery orders with zero middleman fees.\n\nWe can launch your premium cafe menu and catalog website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nAapki bakery/cafe ki profile Google Maps par dekhi, menu items badhiya hain! Par location {{location}} mein direct menu ya orders ke liye site nahi mili.\n\nApni website hone se direct cake orders aur customized orders accept karna simple ho jata hai aur delivery portals ka commission bhi bachta hai.\n\nMaine ek demo menu/ordering site banayi hai, check kijiye: {{demo_link}}\n\nAgar apne outlet ke liye aisi website chahiye, toh mujhe message kar dena. ₹999 mein 2 din mein setup ho jayegi.",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nBas follow up karna tha ki kya demo cafe/bakery site check karne ka time mila?\n\nAapka fresh menu online show karne aur direct orders ke liye ye bohot hi helpful rahegi.\n\nLink check kijiye: {{demo_link}}\n\nInterested hon toh batana, 2 din mein start kar denge!",
     "demoLink": "https://bakerydemo.xyz"
   },
   "furniture & decor": {
-    "introTemplate": "Hey {{business_name}}! 👋\n\nI saw your furniture/decor showroom listing on Google Maps in {{location}}.\n\nA professional digital showroom website is crucial to showcase your furniture designs, get direct inquiries, and establish trust with local buyers without middleman platforms.\n\nWe design premium catalog websites and can set up yours for just ₹999 in only 2 days! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
-    "followupTemplate": "Hey {{business_name}}! 👋\n\nJust following up to see if you received my previous message.\n\nHaving an online catalog is crucial for home decor and furniture stores to showcase collections, attract walk-ins, and build trust directly.\n\nWe can launch your premium custom furniture website in just 2 days for only ₹999! 🚀\n\nPlease open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}",
+    "introTemplate": "Hey {{business_name}}! 👋\n\nAapka furniture showroom Google Maps par dekha, designs acche hain. Par notice kiya ki models aur designs showcase karne ke liye website nahi hai {{location}} mein.\n\nDigital showroom website hone se local buyers easily catalog dekh sakte hain aur direct contact kar sakte hain.\n\nMaine ek furniture catalog demo website banayi hai, check kijiye: {{demo_link}}\n\nAgar apne showroom ke liye aisi site banwani ho toh message ya call batana. Sirf ₹999 mein 2 din mein launch kar dunga.",
+    "followupTemplate": "Hey {{business_name}}! 👋\n\nBas follow up karne ke liye ping kiya. Demo catalog dekh paye kya aap?\n\nYe raha link: {{demo_link}}\n\nStore designs ko digital showroom mein dikhana clients ko attract karne ka badhiya tareeqa hai.\n\nKuch interest ho toh batana, 2 din mein live kar denge.",
     "demoLink": "https://furnituredemo.xyz"
   }
 };
@@ -202,7 +202,7 @@ const mergeTemplatesWithSeed = (loadedCategories) => {
   }
 
   // Programmatically upgrade templates of every category:
-  const newText = "Please open the following link to check demo site. If you are interested then call or message anytime to get your own site! \n\n{{demo_link}}";
+  const newText = "Ek baar demo website link open karke dekh lijiye. Agar aapko bhi aisi site chahiye toh call ya message kar sakte hain! \n\n{{demo_link}}";
   
   const endRegex = /(?:If\s+you\s+are\s+interested|If\s+you'd\s+be\s+interested|Would\s+you\s+like|Would\s+you\s+be\s+open|Please\s+open\s+the\s+following\s+link|If\s+you'd\s+be\s+interested\s+to\s+see|Let\s+us\s+know\s+if\s+you'd\s+like)[\s\S]*$/i;
 
@@ -389,11 +389,15 @@ export default function Home() {
 
     let currentTemplates = { categories: SEED_TEMPLATES };
     try {
-      const local = localStorage.getItem('ashu_templates');
+      const hasHinglish = localStorage.getItem('ashu_templates_hinglish_v3');
+      const local = hasHinglish ? localStorage.getItem('ashu_templates') : null;
       if (local) {
         const parsed = JSON.parse(local);
         parsed.categories = mergeTemplatesWithSeed(parsed.categories);
         currentTemplates = parsed;
+      } else {
+        localStorage.setItem('ashu_templates_hinglish_v3', 'true');
+        localStorage.setItem('ashu_templates', JSON.stringify(currentTemplates));
       }
     } catch (e) {
       console.error('Error reading local templates for migration:', e);
@@ -457,8 +461,15 @@ export default function Home() {
         setLeads(filteredCloudLeads);
         localStorage.setItem('ashu_leads', JSON.stringify(filteredCloudLeads));
 
-        const templatesData = data.templates || { categories: SEED_TEMPLATES };
-        templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
+        const hasHinglish = localStorage.getItem('ashu_templates_hinglish_v3');
+        let templatesData;
+        if (!hasHinglish) {
+          templatesData = { categories: SEED_TEMPLATES };
+          localStorage.setItem('ashu_templates_hinglish_v3', 'true');
+        } else {
+          templatesData = data.templates || { categories: SEED_TEMPLATES };
+          templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
+        }
         setAllTemplates(templatesData);
         localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
         syncToServer('update_templates', { templates: templatesData });
@@ -492,6 +503,11 @@ export default function Home() {
       syncToServer('clear_premium_history', {});
     }
 
+    const hasHinglish = localStorage.getItem('ashu_templates_hinglish_v3');
+    if (!hasHinglish) {
+      localStorage.removeItem('ashu_templates');
+    }
+
     // Load local storage fallbacks immediately for fast initial load
     let initialLeads = [];
     let initialTemplates = { categories: SEED_TEMPLATES };
@@ -503,13 +519,12 @@ export default function Home() {
         initialLeads = JSON.parse(localL).filter(l => l && l.category && l.category.toLowerCase().trim() !== 'general' && l.category.toLowerCase().trim() !== 'opticians & eyewear');
       }
 
-      const localT = localStorage.getItem('ashu_templates');
+      const localT = hasHinglish ? localStorage.getItem('ashu_templates') : null;
       if (localT) {
         const parsed = JSON.parse(localT);
         parsed.categories = mergeTemplatesWithSeed(parsed.categories);
         initialTemplates = parsed;
       }
-
       const localH = localStorage.getItem('ashu_scraper_history');
       if (localH) {
         initialHistory = JSON.parse(localH).filter(h => h && h.category && h.category !== 'general' && h.category !== 'opticians & eyewear' && h.category !== 'all shops');
@@ -544,8 +559,14 @@ export default function Home() {
           setLeads(filteredCloudLeads);
           localStorage.setItem('ashu_leads', JSON.stringify(filteredCloudLeads));
 
-          const templatesData = data.templates || { categories: SEED_TEMPLATES };
-          templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
+          let templatesData;
+          if (!hasHinglish) {
+            templatesData = { categories: SEED_TEMPLATES };
+            localStorage.setItem('ashu_templates_hinglish_v3', 'true');
+          } else {
+            templatesData = data.templates || { categories: SEED_TEMPLATES };
+            templatesData.categories = mergeTemplatesWithSeed(templatesData.categories);
+          }
           setAllTemplates(templatesData);
           localStorage.setItem('ashu_templates', JSON.stringify(templatesData));
           syncToServer('update_templates', { templates: templatesData });
